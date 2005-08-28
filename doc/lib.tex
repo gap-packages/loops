@@ -1,0 +1,209 @@
+\Chapter{Libraries of small loops}
+
+\label{lib}
+Libraries of small loops form an integral part of {\LOOPS}. We describe them
+here.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{A typical library}
+
+A library named <my Library> is stored in file `data/mylibrary.tbl', and the
+corresponding data structure is named `my_library_data'.
+
+The array `my_library_data' consists of three lists
+\beginlist%unordered
+\item{$\circ$}
+    `my_library_data[ 1 ]' is a list of orders for which there is at
+    least one loop in the library,
+\item{$\circ$}
+    `my_library_data[ 2 ][ k ]' is the number of loops of order
+    `my_library_data[ 1 ][ k ]' in the library,
+\item{$\circ$}
+    `my_library_data[ 3 ][ s ]' contains data necessary to produce the
+    $s$th loop in the library.
+\endlist
+The format of `my_library_data[ 3 ]' depends on the particular library and is
+not standardized in any way.
+
+The user can retrieve the $m$th loop of order $n$ from library named <my
+Library> according to the template
+
+\>MyLibraryLoop( <n>, <m> ) F
+
+It is also possible to obtain the same loop with
+
+\>LibraryLoop( <name>, <n>, <m> ) F
+
+where <name> is the name of the library.
+
+For example, when the library is called <left Bol>, the corresponding data file
+is called `data/leftbol.tbl', the corresponding data structure is named
+`left_bol_data', and the $m$th left Bol loop of order $n$ is obtained via
+
+\){LeftBolLoop( <n>, <m> )}
+
+or via
+
+\){LibraryLoop(\"left Bol\", <n>, <m> )}
+
+We are now going to describe the individual libraries in detail. A brief
+information about the library named <name> can also be obtained in {\LOOPS}
+with
+
+\>DisplayLibraryInfo( <name> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Left Bol loops}
+
+The library named <left Bol> contains all $6$ nonassociative left Bol loops of
+order $8$. Following the general pattern, the $m$th nonassociative left Bol
+loop of order $n$ is obtained by
+
+\>LeftBolLoop( <n>, <m> ) F
+
+We intend to enlarge this library significantly in future versions of {\LOOPS},
+when the classification of small Bol loops is completed.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Small Moufang loops}
+
+The library named <Moufang> contains all nonassociative Moufang loops of order
+less than $64$, and additional $4262$ nonassociative Moufang loops of order
+$64$. It is possible that there are no other nonassociative Moufang loops of
+order $64$ than those contained in the library.
+
+The $m$th nonassociative Moufang loop of order $n$ is obtained by
+
+\>MoufangLoop( <n>, <m> ) F
+
+For $n\le 63$, our catalog numbers coincide with those of Goodaire et al.
+\cite{Goodaire}.
+
+The extent of the library is summarized below:
+
+$$
+\matrix{
+    {\rm order}&12&16&20&24&28&32&36&40&42&44&48&52&54&56&60&64\cr
+    {\rm loops\ in\ the\ libary}&1 &5 &1 &5 &1 &71&4 &5 &1 &1 &51&1 &2 &4 &5 &4262
+}
+$$
+
+The <octonion loop>
+%
+\index{octonion loop}
+%
+\index{octonions} of order $16$ (i.e., the
+multiplication loop of the $\pm$ basis elements in the $8$-dimensional standard
+real octonion algebra) is `MoufangLoop( 16, 3 )'.
+
+Since we would like to know if there are additional nonassociative Moufang
+loops of order $64$, we have implemented the function
+
+\>IsomorphismTypeOfMoufangLoop( <L> ) F
+
+If $L$ is a Moufang loop cataloged in {\LOOPS} as the $m$th Moufang loop of
+order $n$, the function returns $[[n,m],p]$, where $p$ is a permutation of
+$[1,\dots,n]$ that is an isomorphism from $L$ to the cataloged copy of $L$. If
+$n=64$ and $L$ is Moufang loop not cataloged in {\LOOPS}, the user is prompted
+to contact the authors of {\LOOPS}.
+
+In order to speed up the function `IsomorphismTypeOfMoufangLoop', we have
+precalculated and stored in the data file `data\\moufang_discriminators.tbl' the
+discriminators of all Moufang loops in the library. The file is rather large
+(850 KB), and took about 20 minutes to precalculate. You can delete the file if
+you will not use `IsomorphismTypeOfMoufangLoop'.
+
+\beginexample
+gap> D := DirectProduct( MoufangLoop( 16, 2 ), CyclicGroup( 2 ) );
+<loop of order 32>
+gap> IsomorphismTypeOfMoufangLoop( D );
+[ [ 32, 2 ], (2,3,12,20,11,29,23,13,30,31,28,27,22,15,32,18,10,19,16,24,14,
+    25,21,8,7,6,9,17,5) ]
+\endexample
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Steiner loops}
+
+Here is how the libary <Steiner> is described within {\LOOPS}:
+
+\beginexample
+gap> DisplayLibraryInfo( "Steiner" );
+The library contains all nonassociative Steiner loops of order less or equal to 16.
+It also contains the associative Steiner loops of order 4 and 8.
+------
+Extent of the library:
+   1 loop of order 4
+   1 loop of order 8
+   1 loop of order 10
+   2 loops of order 14
+   80 loops of order 16
+true
+\endexample
+
+The $m$th Steiner loop of order $n$ is obtained by
+
+\>SteinerLoop( <n>, <m> ) F
+
+Our catalog numbers coincide with those of Colbourn and Rosa \cite{CR}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{CC-loops}
+
+By results of Kunen \cite{Kunen}, for every odd prime $p$ there are
+precisely 3 nonassociative conjugacy closed loops\index{conjugacy closed loop}
+of order $p^2$. Cs\accent127org\H{o} and Dr\'apal \cite{CD} described these 3 loops
+by multiplicative formulas on $\Z_{p^2}$ and $\Z_p \times \Z_p$.
+
+*Case $m = 1$:* Let $k$ be the smallest positive integer relatively prime to $p$
+and such that $k$ is a square modulo $p$ (i.e., $k=1$). Define multiplication
+on $\Z_{p^2}$ by $x\cdot y = x + y + kpx^2y$.
+
+*Case $m = 2$:* Let $k$ be the smallest positive integer relatively prime to $p$
+and such that $k$ is not a square modulo $p$. Define multiplication on
+$\Z_{p^2}$ by $x\cdot y = x + y + kpx^2y$.
+
+*Case $m = 3$:* Define multiplication on $\Z_p \times \Z_p$ by
+$(x,a)(y,b) = (x+y, a+b+x^2y )$.
+
+Moreover, Wilson \cite{Wilson} constructed a nonassociative CC-loop of order
+$2p$ for every odd prime p, and Kunen \cite{Kunen} showed that there are no
+other nonassociative CC-loops of this order. Here is the construction:
+
+Let $N$ be an additive cyclic group of order $n>2$, $N = \langle 1\rangle$.
+Let $G$ be the additive cyclic group of order $2$. Define multiplication on
+$L = G \times N$ as follows:
+$$
+\matrix{
+    (0,m)(0,n) = ( 0, m + n ),&(0,m)(1,n) = ( 1, -m + n ),\cr
+    (1,m)(0,n) = ( 1, m + n ),&(1,m)(1,n) = ( 0, 1 - m + n ).
+}
+$$
+
+The CC-loops described above can be obtained by
+
+\>CCLoop( <n>, <m> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Paige loops}
+
+<Paige loops>\index{Paige loop} are nonassociative finite simple
+Moufang loops. By \cite{Li}, there is precisely one Paige loop for every finite
+field ${\rm{GF}}(q)$.
+
+The library named <Paige> contains the smallest nonassociative simple Moufang
+loop
+
+\>PaigeLoop( <2> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Interesting loops}
+
+The library named <interesting> contains some loops that are
+illustrative for the theory of loops. At this point, the library contains a
+nonassociative loop of order $5$, a nonassociative nilpotent loop of order $6$,
+a nonMoufang left Bol loop of order $16$, and the loop of
+sedenions\index{sedenions} of order $32$ (sedenions generalize octonions).
+
+The loops are obtained with
+
+\>InterestingLoop( <n>, <m> ) F

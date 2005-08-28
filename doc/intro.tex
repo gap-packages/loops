@@ -1,0 +1,60 @@
+\Chapter{Introduction}
+
+{\LOOPS} is a package for \package{GAP4} whose purpose is to:
+\beginlist%unordered
+\item{$\circ$}
+    provide researchers in nonassociative algebra with a powerful computational tool
+    concerning finite loops and quasigroups,
+\item{$\circ$}
+    extend {\GAP} toward the realm of nonassociative structures.
+\endlist
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Installation}
+
+We assume that you have \package{GAP 4.4} or newer installed on your computer.
+Download the {\LOOPS} package from the distribution website
+
+\URL{http://www.math.du.edu/loops}
+
+and unpack the downloaded file into the `pkg' subfolder of your {\GAP} folder.
+
+After this step, there should be a subfolder `loops' in your `pkg' folder. The
+package {\LOOPS} can then be loaded to {\GAP} anytime by calling
+\begintt
+LoadPackage("loops");
+\endtt
+If you wish to load {\LOOPS} automatically while starting {\GAP}, open the file
+`loops/PackageInfo.g', and change `Autoload:=false' to
+`Autoload:=true' in the file.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Documentation}
+
+The documentation is available is several formats: \TeX, pdf, dvi, pdf, html,
+and as an online help in {\GAP}. All these formats have been obtained directly
+from the master {\TeX} documentation file. Consequently, the different formats
+of the documentation differ only in their appearance, not in contents.
+
+The documentation can be found in the `doc' folder of {\LOOPS} and also at the
+{\LOOPS} distribution website.
+
+The online {\GAP} help is available upon installing {\LOOPS}, and can be
+accessed in the usual way, i.e., upon typing `?'<command>, {\GAP} displays the
+section of the {\LOOPS} manual containing information about <command>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Test files}
+
+Test files conforming to the {\GAP} standards are provided for {\LOOPS}. They
+can be found in the folder `tst' and run in the usual way.
+
+The file `testall.g' runs all tests for {\LOOPS} with the exception of the test
+`mouflib.tst'. The test `mouflib.tst' builds all Moufang loops contained in the
+library of {\LOOPS}, and runs for about 10 minutes.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Feedback}
+
+We welcome all comments and suggestions on {\LOOPS}, especially those
+concerning the future development of the package. You can contact us by e-mail.

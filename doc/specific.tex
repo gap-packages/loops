@@ -1,0 +1,117 @@
+\Chapter{Specific methods}
+
+This chapter describes methods od {\LOOPS} that apply to some special loops,
+mostly Moufang loops.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Moufang modifications}
+
+Ale\v{s} Dr\'apal discovered two prominent families of extensions of Moufang
+loops. These extensions can be used to obtain many, perhaps all, nonassociative
+Moufang loops of order at most $64$. We call these two constructions
+<Moufang modifications>
+%
+\index{Moufang modifications}
+%
+. The library of Moufang loops included with
+{\LOOPS} is based on Moufang modifications. We describe the two modifications
+briefly here. See \cite{DV} for details.
+
+Assume that $L$ is a Moufang loop with normal subloop $S$ such that $L/S$ is a
+cyclic group of order $2m$. Let $h\in S\cap Z(L)$. Let $\alpha$ be a generator
+of $L/S$ and write $L = \bigcup_{i\in M} \alpha^i$, where $M=\{-m+1$, $\dots$,
+$m\}$. Let $\sigma:\Z\to M$ be defined by $\sigma(i)=0$ if $i\in M$,
+$\sigma(i)=1$ if $i>m$, and $\sigma(i)=-1$ if $i\<-m+1$. Introduce a new
+multiplication $\ast$ on $L$ defined by
+$$
+    x\ast y = xyh^{\sigma(i+j)},
+$$
+where $x\in \alpha^i$, $y\in\alpha^j$, $i\in M$, $j\in M$. Then $(L,\ast)$ is a
+Moufang loop, a <cyclic modification>
+%
+\index{cyclic modification}
+%
+ of $L$.
+
+When $L$, $S$, $\alpha$, $h$ are as above and when $a$ is any element of
+$\alpha$, the corresponding cyclic modification is obtained via
+
+\>LoopByCyclicModification( <L>, <S>, <a>, <h> ) F
+
+Now assume that $L$ is a Moufang loop with normal subloop $S$ such that $L/S$
+is a dihedral group of order $4m$, with $m\ge 1$. Let $M$ and $\sigma$ be
+defined as in the cyclic case. Let $\beta$, $\gamma\in L/S$ be two involutions
+of $L/S$ such that $\alpha=\beta\gamma$ generates a cyclic subgroup of $L/S$ of
+order $2m$. Let $e\in\beta$ and $f\in\gamma$ be arbitrary. Then $L$ can be
+written as a disjoint union $L=\bigcup_{i\in M}(\alpha^i\cup e\alpha^i)$, and
+also $L=\bigcup_{i\in M}(\alpha^i\cup \alpha^if$. Let $G_0=\bigcup_{i\in
+M}\alpha^i$, and $G_1=L\setminus G_0$. Let $h\in S\cap N(L)\cap Z(G_0)$.
+Introduce a new multiplication $\ast$ on $L$ defined by
+$$
+    x\ast y = xyh^{(-1)^r\sigma(i+j)},
+$$
+where $x\in\alpha^i\cup e\alpha^i$, $y\in\alpha^j\cup \alpha^jf$, $i\in M$,
+$j\in M$, $y\in G_r$, $r\in\{0,1\}$. Then $(L,\ast)$ is a Moufang loop, a
+<dihedral modification>
+%
+\index{dihedral modification}
+%
+ of $L$.
+
+When $L$, $S$, $e$, $f$ and $h$ are as above, the corresponding dihedral
+modification is obtained via
+
+\>LoopByDihedralModification( <L>, <S>, <e>, <f>, <h> ) F
+
+In order to apply the cyclic and dihedral modifications, it is beneficial to
+have access to a class of nonassociative Moufang loops. The following
+construction is due to Chein:
+
+Let $G$ be a group. Let $\overline{G}=\{\overline{g};\;g\in G\}$ be a set of
+new elements. Define multiplication $\ast$ on $L=G\cup \overline{G}$ by
+$$
+    g\ast h = gh,\ g\ast\overline{h}=\overline{hg},\
+    \overline{g}\ast h = \overline{gh^{-1}},\
+    \overline{g}\ast \overline{h}=h^{-1}g,
+$$
+where $g$, $h\in G$. Then $L=M(G,2)$ is a Moufang loop that is nonassociative
+if and only if $G$ is nonabelian.
+
+The loop $M(G,2)$ can be obtained from a finite group $G$ with
+
+\>LoopMG2( <G> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Triality for Moufang loops}
+
+Let $G$ be a group and $\sigma$, $\rho$ be automorphisms of $G$, satisfying
+$\sigma^2 = \rho^3 = (\sigma \rho)^2 = 1$. We write the automorphisms of a
+group as exponents and $[g,\sigma]$ for $g^{-1}g^\sigma$. We say that the
+triple $(G,\rho,\sigma)$ is a <group with triality>
+%
+\index{group with triality}
+%
+ if $[g, \sigma]
+[g,\sigma]^\rho [g,\sigma]^{\rho^2} =1$ holds for all $g \in G$. It is known
+that one can associate a group with triality $(G,\rho,\sigma)$ in a canonical
+way with a Moufang loop $L$. See \cite{NV} for more details.
+
+For any Moufang loop $L$, we can calculate the triality group as a permutation
+group acting on $3|L|$ points. If the multiplication group of $L$ is
+polycyclic, then we can also represent the triality group as a pc group. In
+both cases, the automorphisms $\sigma$ and $\rho$ are in the same family as the
+elements of $G$.
+
+Given a Moufang loop $L$, the function
+
+\>TrialityPermGroup( <L> ) F
+
+returns a record [$G$, $\rho$, $\sigma$], where $G$ is the group with triality
+associated with $L$, and $\rho$, $\sigma$ are the corresponding triality
+automorphisms.
+
+The function
+
+\>TrialityPcGroup( <L> ) F
+
+differs from `TrialityPermGroup' only in that $G$ is returned as a pc group.

@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%W  manual.tex      LOOPS documentation     Gabor P. Nagy / Petr Vojtechovsky
+%%
+%H  @(#)$Id: manual.tex,v 1.0.0 2005/09/05 gap Exp $
+%%
+%Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
+%Y                        P. Vojtechovsky (University of Denver, USA)
+
+\input gapmacro
+
+% change dimension of page
+%\pageheight=15cm
+
+% custom definitions
+
+\Package{LOOPS}
+\BeginningOfBook{loops}
+  \TitlePage{
+    \centerline{\titlefont LOOPS}\bigskip                   % Package name
+    \centerline{\secfont Version 1.0.0}\bigskip\bigskip\bigskip
+    \centerline{\titlefont Computing with quasigroups}\medskip
+    \centerline{\titlefont and loops in GAP}\bigskip\bigskip\bigskip
+    \vfill
+    \centerline{\secfont G\'abor P. Nagy}\medskip           % Author 1
+    \centerline{Department of Mathematics}\medskip          % Affiliation 1
+    \centerline{University of Szeged}\medskip
+    \centerline{email: nagyg@math.u-szeged.hu}              % Email address 1
+    \bigskip\bigskip
+    \centerline{\secfont Petr Vojt\v{e}chovsk\'y}\medskip   % Author 2
+    \centerline{Department of Mathematics}\medskip          % Affiliation 2
+    \centerline{University of Denver}\medskip
+    \centerline{email: petr@math.du.edu}                    % Email address 2
+    \bigskip\bigskip\bigskip\vfill
+    \centerline{\secfont{\Month\ \Day,} \Year}
+  }
+  \TableOfContents
+  \FrontMatter
+    %\Input{copyright}          %PERHAPS ADD LATER
+    %\Input{thanks}             %PERHAPS ADD LATER
+  \Chapters
+    \Input{intro}               % Chapter 1: Introduction
+    \Input{mathback}            % Chapter 2: Mathematical background
+    \Input{how}                 % Chapter 3: How the package works
+    \Input{basic}               % Chapter 4: Basic methods and attributes
+    \Input{perm}                % Chapter 5: Some methods based on permutation groups
+    \Input{testprop}            % Chapter 6: Testing properties of quasigroups and loops
+    \Input{specific}            % Chapter 7: Specific methods
+    \Input{lib}                 % Chapter 8: Libraries of small loops
+  \Appendices
+    \Input{files}               % Appendix A: Files
+    \Input{filters}             % Appendix B: Filters built into the package
+  \Bibliography
+  \Index
+\EndOfBook
