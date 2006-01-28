@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # Preparations
-package_name="loops-1.0.0"
+package_name="loops-1.1.0"
 package_dep="/Raktar/LOOPS_Packages"
-nagyg_maths="/home/nagyg/Maths/2005"
+nagyg_maths="/home/nagyg/Maths/2006"
 
 rm -f $package_dep/$package_name-win.zip
 rm -f $package_dep/$package_name.tar.gz

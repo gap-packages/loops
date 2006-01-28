@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples of loops   G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: examples.gi, v 0.9995 2005/07/22 gap Exp $
+#H  @(#)$Id: examples.gi, v 1.1.0 2006/02/02 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

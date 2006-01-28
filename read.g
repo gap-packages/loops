@@ -2,7 +2,7 @@
 ##
 #A  read.g                  loops                G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: read.g, v 1.0.0 2005/08/28 gap Exp $
+#H  @(#)$Id: read.g, v 1.1.0 2006/01/28 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

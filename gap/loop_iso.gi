@@ -2,7 +2,7 @@
 ##
 #W  loop_iso.gi   Isomorphisms of loops          G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gi, v 1.0.0 2005/08/28 gap Exp $
+#H  @(#)$Id: loop_iso.gi, v 1.1.0 2006/02/02 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -33,17 +33,23 @@ function( L )
     # Calculating invariants.
     if not IsPowerAssociative( L ) then 
         # not power associative loop, hence crude discriminator
+        # Element x asks: Am I neutral element? 
+        # PROG: This is needed to make sure that the neutral element will be in a block by itself.
+        I := List( [1..n], i -> [false, 0, 0, 0 ] );
+        I[1] := [true, 0, 0, 0];
         # Element x asks: Am I an involution?
-        I := List( [1..n], i -> [ T[ i ][ i ] = 1, 0, 0 ] );
+        for i in [1..8] do
+            I[ i ][ 2 ] := T[ i ][ i ] = 1;
+        od;
         # Element x asks: How many times am I a square?
         for i in [1..n] do
             j := T[ i ][ i ];
-            I[ j ][ 2 ] := I[ j ][ 2 ] + 1;
+            I[ j ][ 3 ] := I[ j ][ 3 ] + 1;
         od;
         # Element x asks: With how many elements do I commute?
         for i in [1..n] do
             for j in [1..n] do if T[ i ][ j ] = T[ j ][ i ] then 
-                I[ i ][ 3 ] := I[ i ][ 3 ] + 1; 
+                I[ i ][ 4 ] := I[ i ][ 4 ] + 1; 
             fi; od;
         od;
     else    
@@ -406,4 +412,3 @@ function( L )
     return "As of August 2005, this Moufang loop appears to be new. Please contact Petr Vojtechovsky at petr@math.du.edu";
     
 end);
-

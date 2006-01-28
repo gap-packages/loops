@@ -1,5 +1,5 @@
 #! /bin/bash
-cd /home/nagyg/Maths/2005/pkg/loops/doc
+cd /home/nagyg/Maths/2006/pkg/loops/doc
 rm -f manual.aux manual.dvi \
     manual.idx manual.ilg   \
     manual.ind manual.lab   \

@@ -147,7 +147,7 @@ In order to be compatible with {\GAP}'s terminology, we also support the synonym
 for `IsLeftDistributive' and `IsRightDistributive'. respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Loops of Bol-Moufang type and related properties}
+\Section{Loops of Bol-Moufang type}
 
 Following \cite{Fe} and \cite{PV}, a variety of loops is said to be of
 <Bol-Moufang type>\index{loops of Bol-Moufang type} if it is defined by a
@@ -306,6 +306,25 @@ gap> [ IsAssociative( L ), L ];
 The analogous terminology for quasigroups of Bol-Moufang type is not
 standard yet, and hence is not supported in {\LOOPS}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Power alternative loops}
+
+A loop is <left power alternative>\index{left power alternative
+loop} if it is power associative and $x^n(x^m y) = x^{n+m}y$ for
+every $x$, $y$ and all integers $n$, $m$. Similarly, a loop is
+<right power alternative>\index{right power alternative loop} if
+it is power associative and $(xy^n)y^m = xy^{n+m}$ for all $x$,
+$y$ and all integers $n$, $m$. A loop that is both left and right
+power alternative is said to be <power alternative>\index{power
+alternative loop}.
+
+Left power alternative loops are left alternative and have the
+left inverse property. Left Bol loops and LC-loops are left power
+alternative.
+
+\>IsLeftPowerAlternative( <L> ) P
+\>IsRightPowerAlternative( <L> ) P
+\>IsPowerAlternative( <L> ) P
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Conjugacy closed loops and related properties}

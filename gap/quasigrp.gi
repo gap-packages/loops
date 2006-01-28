@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gi      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gi, v 1.0.0 2005/08/28 gap Exp $
+#H  @(#)$Id: quasigrp.gi, v 1.1.0 2006/01/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -683,6 +683,57 @@ function( x, ly )
     return List( ly, y -> LeftDivision(x, y) ); 
 end );
 
+#############################################################################
+##  
+#O  LeftDivisionCayleyTable( Q ) 
+##    
+##  Returns the Cayley table for the operation x\y of the quasigroup <Q>.
+
+InstallMethod( LeftDivisionCayleyTable, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    # This would be slow using LeftDivision.
+    # Must take care of the fact that entries in ct are not necessarily 1..n
+    local n, ct, pos_in_Q, pos_in_parent, i, t, j;
+    n := Size( Q );
+    ct := CayleyTable( Q );
+    pos_in_Q := 0*[ 1..Size( Parent( Q ) ) ];
+    pos_in_parent := PosInParent( Q );
+    for i in pos_in_parent do 
+        pos_in_Q[ i ] := Position( pos_in_parent, i );
+    od;
+    t := List( [1..n], i -> 0*[1..n] );
+    for i in [1..n] do for j in [1..n] do
+        t[ i ][ pos_in_Q[ ct[ i ][ j ] ] ] := pos_in_parent[ j ];
+    od; od;
+    return t;
+end );    
+
+#############################################################################
+##  
+#O  RightDivisionCayleyTable( Q ) 
+##    
+##  Returns the Cayley table for the operation x/y of the quasigroup <Q>.
+
+InstallMethod( RightDivisionCayleyTable, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    # This would be slow using RightDivision.
+    # Must take care of the fact that entries in ct are not necessarily 1..n
+    local n, ct, pos_in_Q, pos_in_parent, i, t, j;
+    n := Size( Q );
+    ct := CayleyTable( Q );
+    pos_in_Q := 0*[ 1..Size( Parent( Q ) ) ];
+    pos_in_parent := PosInParent( Q );
+    for i in pos_in_parent do 
+        pos_in_Q[ i ] := Position( pos_in_parent, i );
+    od;
+    t := List( [1..n], i -> 0*[1..n] );
+    for i in [1..n] do for j in [1..n] do
+        t[ pos_in_Q[ ct[ i ][ j ] ] ][ j ] := pos_in_parent[ i ];
+    od; od;
+    return t;
+end );    
 
 #############################################################################
 ##  POWERS AND INVERSES
@@ -704,13 +755,23 @@ function( x )
     return F!.set[ 1 ];
 end );
 
-## y = LeftInverse( x ) if yx = 1. Note (1/x)x = 1.
+#############################################################################
+##
+#A  LeftInverse( <x> )
+##
+##  If <x> is a loop element, returns the left inverse of <x>
+
 InstallMethod( LeftInverse, "for loop elements",
     [ IsLoopElement ],
     x -> RightDivision( One( x ), x ) 
 );
 
-## y = RightInverse( x ) if xy = 1. Note x(1\x) = 1.
+#############################################################################
+##
+#A  RightInverse( <x> )
+##
+##  If <x> is a loop element, returns the left inverse of <x>
+
 InstallMethod( RightInverse, "for loop elements",
     [ IsLoopElement ],
     x -> LeftDivision( x, One( x ) ) 
@@ -1411,13 +1472,10 @@ end);
 InstallOtherMethod( AssociatorSubloop, "for Loop",
     [ IsLoop ],
 function( L )
-    # BETTER ALGORITHM LATER?
-    local x, y, z, A;
-    A := [];
-    for x in L do for y in L do for z in L do
-        AddSet( A, Associator( x, y, z ) );
-    od; od; od;
-    return Subloop( L, A );
+    local LeftInn, gens;
+    LeftInn := LeftInnerMappingGroup( L );
+    gens := List( L, x-> LeftDivision( x, Orbit( LeftInn, x ) ) );
+    return NormalClosure( L, Union( gens ) ); 
 end);
 
 #############################################################################
@@ -1428,7 +1486,6 @@ end);
 
 # implies
 InstallTrueMethod( IsExtraLoop, IsAssociative and IsLoop );
-InstallTrueMethod( IsDiassociative, IsAssociative and IsLoop );
 
 #############################################################################
 ##  
@@ -1441,20 +1498,6 @@ InstallOtherMethod( IsCommutative, "for quasigroup",
 function( Q )
     return LeftSection( Q ) = RightSection( Q );
 end );
-
-# implies (left property <-> right property)
-InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and IsCommutative );
-InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and IsCommutative );
-InstallTrueMethod( IsMoufangLoop, IsRightBolLoop and IsCommutative );
-InstallTrueMethod( IsMoufangLoop, IsLeftBolLoop and IsCommutative );
-InstallTrueMethod( IsMoufangLoop, IsRightBruckLoop and IsCommutative );
-InstallTrueMethod( IsMoufangLoop, IsLeftBruckLoop and IsCommutative );
-InstallTrueMethod( IsRightNuclearSquareLoop, IsLeftNuclearSquareLoop and IsCommutative );
-InstallTrueMethod( IsLeftNuclearSquareLoop, IsRightNuclearSquareLoop and IsCommutative );
-InstallTrueMethod( HasAutomorphicInverseProperty, HasAntiautomorphicInverseProperty and IsCommutative );
-InstallTrueMethod( HasAntiautomorphicInverseProperty, HasAutomorphicInverseProperty and IsCommutative );
-InstallTrueMethod( IsAlternative, IsLeftAlternative and IsCommutative );
-InstallTrueMethod( IsAlternative, IsRightAlternative and IsCommutative );
 
 #############################################################################
 ##  
@@ -1486,8 +1529,7 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsPowerAssociative, IsDiassociative );
-InstallTrueMethod( IsAlternative, IsDiassociative );
+InstallTrueMethod( IsPowerAlternative, IsDiassociative );
 InstallTrueMethod( IsFlexible, IsDiassociative );
 
 #############################################################################
@@ -1577,21 +1619,28 @@ InstallMethod( HasAntiautomorphicInverseProperty, "for loop",
     [ IsLoop ], 
 function( L )
     return ForAll( L, x -> ForAll( L, y -> 
-        LeftInverse( x*y ) = LeftInverse( y )*LeftInverse( y ) ) );
+        LeftInverse( x*y ) = LeftInverse( y )*LeftInverse( x ) ) );
 end );
 
 # implies and is implied by (for inverse properties)
+InstallTrueMethod( HasAntiautomorphicInverseProperty, HasAutomorphicInverseProperty and IsCommutative );
+InstallTrueMethod( HasAutomorphicInverseProperty, HasAntiautomorphicInverseProperty and IsCommutative );
 InstallTrueMethod( HasLeftInverseProperty, HasInverseProperty );
 InstallTrueMethod( HasRightInverseProperty, HasInverseProperty );
 InstallTrueMethod( HasWeakInverseProperty, HasInverseProperty );
 InstallTrueMethod( HasAntiautomorphicInverseProperty, HasInverseProperty );
 InstallTrueMethod( HasTwosidedInverses, HasAntiautomorphicInverseProperty );
+InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and IsCommutative );
+InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and IsCommutative );
 InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasRightInverseProperty );
 InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasWeakInverseProperty );
 InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and HasWeakInverseProperty );
 InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasAntiautomorphicInverseProperty );
 InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and HasAntiautomorphicInverseProperty );
 InstallTrueMethod( HasInverseProperty, HasWeakInverseProperty and HasAntiautomorphicInverseProperty );
+InstallTrueMethod( HasTwosidedInverses, HasLeftInverseProperty );
+InstallTrueMethod( HasTwosidedInverses, HasRightInverseProperty );
+InstallTrueMethod( HasTwosidedInverses, IsFlexible and IsLoop );
 
 
 #############################################################################
@@ -1716,7 +1765,7 @@ function( Q )
 end );
 
 #############################################################################
-##  LOOPS OF BOL-MOUFANG TYPE AND RELATED PROPERTIES
+##  LOOPS OF BOL-MOUFANG
 ##  -------------------------------------------------------------------------
 
 #############################################################################
@@ -1733,7 +1782,6 @@ end );
 
 # implies
 InstallTrueMethod( IsMoufangLoop, IsExtraLoop );
-InstallTrueMethod( IsNuclearSquareLoop, IsExtraLoop );
 InstallTrueMethod( IsCLoop, IsExtraLoop );
 
 # is implied by
@@ -1756,7 +1804,6 @@ end );
 # implies
 InstallTrueMethod( IsLeftBolLoop, IsMoufangLoop );
 InstallTrueMethod( IsRightBolLoop, IsMoufangLoop );
-InstallTrueMethod( IsFlexible, IsMoufangLoop );
 InstallTrueMethod( IsDiassociative, IsMoufangLoop );
 
 # is implied by
@@ -1777,6 +1824,7 @@ end );
 # implies
 InstallTrueMethod( IsLCLoop, IsCLoop );
 InstallTrueMethod( IsRCLoop, IsCLoop );
+InstallTrueMethod( IsDiassociative, IsCLoop and IsFlexible);
 
 # is implied by
 InstallTrueMethod( IsCLoop, IsLCLoop and IsRCLoop );
@@ -1795,8 +1843,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftAlternative, IsLeftBolLoop );
-InstallTrueMethod( HasTwosidedInverses, IsLeftBolLoop );
+InstallTrueMethod( IsRightBolLoop, IsLeftBolLoop and IsCommutative );
+InstallTrueMethod( IsLeftPowerAlternative, IsLeftBolLoop );
 
 #############################################################################
 ##  
@@ -1812,8 +1860,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsRightAlternative, IsRightBolLoop );
-InstallTrueMethod( HasTwosidedInverses, IsRightBolLoop );
+InstallTrueMethod( IsLeftBolLoop, IsRightBolLoop and IsCommutative );
+InstallTrueMethod( IsRightPowerAlternative, IsRightBolLoop );
 
 #############################################################################
 ##  
@@ -1829,10 +1877,10 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftAlternative, IsLCLoop );
+InstallTrueMethod( IsLeftPowerAlternative, IsLCLoop );
 InstallTrueMethod( IsLeftNuclearSquareLoop, IsLCLoop );
 InstallTrueMethod( IsMiddleNuclearSquareLoop, IsLCLoop );
-InstallTrueMethod( IsPowerAssociative, IsLCLoop );
+InstallTrueMethod( IsRCLoop, IsLCLoop and IsCommutative );
 
 #############################################################################
 ##  
@@ -1848,10 +1896,10 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsRightAlternative, IsRCLoop );
+InstallTrueMethod( IsRightPowerAlternative, IsRCLoop );
 InstallTrueMethod( IsRightNuclearSquareLoop, IsRCLoop );
 InstallTrueMethod( IsMiddleNuclearSquareLoop, IsRCLoop );
-InstallTrueMethod( IsPowerAssociative, IsRCLoop );
+InstallTrueMethod( IsLCLoop, IsRCLoop and IsCommutative );
 
 #############################################################################
 ##  
@@ -1864,6 +1912,9 @@ InstallMethod( IsLeftNuclearSquareLoop, "for loop",
 function( L )
     return ForAll( L, x -> x^2 in LeftNucleus( L ) );
 end );
+
+#implies
+InstallTrueMethod( IsRightNuclearSquareLoop, IsLeftNuclearSquareLoop and IsCommutative );
 
 #############################################################################
 ##  
@@ -1888,6 +1939,9 @@ InstallMethod( IsRightNuclearSquareLoop, "for loop",
 function( L )
     return ForAll( L, x -> x^2 in RightNucleus( L ) );
 end );
+
+# implies
+InstallTrueMethod( IsLeftNuclearSquareLoop, IsRightNuclearSquareLoop and IsCommutative );
 
 #############################################################################
 ##  
@@ -1926,6 +1980,9 @@ function( Q )
     return ForAll( [1..Size( Q )], i -> LS[ i ] * RS[ i ] = RS[ i ] * LS[ i ] );
 end );
 
+# is implied by
+InstallTrueMethod( IsFlexible, IsCommutative );
+
 #############################################################################
 ##  
 #P  IsLeftAlternative( Q ) 
@@ -1938,6 +1995,9 @@ function( Q )
    return ForAll( LeftSection( Q ), a -> a*a in LeftSection( Q ) );
 end );
 
+# implies
+InstallTrueMethod( IsRightAlternative, IsLeftAlternative and IsCommutative );
+
 #############################################################################
 ##  
 #P  IsRightAlternative( Q ) 
@@ -1949,6 +2009,9 @@ InstallMethod( IsRightAlternative, "for quasigroup",
 function( Q )
     return ForAll( RightSection( Q ), a -> a*a in RightSection( Q ) );
 end );
+
+# implies 
+InstallTrueMethod( IsLeftAlternative, IsRightAlternative and IsCommutative );
 
 #############################################################################
 ##  
@@ -1970,6 +2033,76 @@ InstallTrueMethod( IsRightAlternative, IsAlternative );
 InstallTrueMethod( IsAlternative, IsLeftAlternative and IsRightAlternative );
 
 #############################################################################
+##  POWER ALTERNATIVE LOOPS
+##  -------------------------------------------------------------------------
+
+#############################################################################
+##  
+#P  IsLeftPowerAlternative( L ) 
+##     
+##  Returns true if <L> is a left power alternative loop.
+
+InstallMethod( IsLeftPowerAlternative, "for loop", 
+    [ IsLoop ],
+function( L )
+    local i, M;
+    if Size( L ) = 1 then return true; fi;
+    for i in [ 2..Size( L )] do
+        M := Subloop( L, [ Elements( L )[ i ] ]);
+        if not Size( RelativeLeftMultiplicationGroup( L, M ) ) = Size( M ) then
+            return false; 
+        fi;
+    od;
+    return true;
+end );
+
+# implies
+InstallTrueMethod( IsLeftAlternative, IsLeftPowerAlternative );
+InstallTrueMethod( HasLeftInverseProperty, IsLeftPowerAlternative );
+InstallTrueMethod( IsPowerAssociative, IsLeftPowerAlternative );
+
+#############################################################################
+##  
+#P  IsRightPowerAlternative( L ) 
+##     
+##  Returns true if <L> is a right power alternative loop.
+
+InstallMethod( IsRightPowerAlternative, "for loop", 
+    [ IsLoop ],
+function( L )
+    local i, M;
+    if Size( L ) = 1 then return true; fi;
+    for i in [ 2..Size( L ) ] do
+        M := Subloop( L, [ Elements( L )[ i ] ] );
+        if not Size( RelativeRightMultiplicationGroup( L, M ) ) = Size( M ) then 
+            return false; 
+        fi;
+    od;
+    return true;
+end );
+
+# implies
+InstallTrueMethod( IsRightAlternative, IsRightPowerAlternative );
+InstallTrueMethod( HasRightInverseProperty, IsRightPowerAlternative );
+InstallTrueMethod( IsPowerAssociative, IsRightPowerAlternative );
+
+#############################################################################
+##  
+#P  IsPowerAlternative( L ) 
+##     
+##  Returns true if <L> is a power alternative loop.
+
+InstallMethod( IsPowerAlternative, "for loop", 
+    [ IsLoop ],
+function( L )
+    return ( IsLeftPowerAlternative( L ) and IsRightPowerAlternative( L ) );
+end );
+
+# implies
+InstallTrueMethod( IsLeftPowerAlternative, IsPowerAlternative );
+InstallTrueMethod( IsRightPowerAlternative, IsPowerAlternative );
+
+#############################################################################
 ##  CC-LOOPS AND RELATED PROPERTIES
 ##  -------------------------------------------------------------------------
 
@@ -1986,6 +2119,10 @@ function( L )
         ForAll( LeftSection( L ), b -> b*a*b^(-1) in LeftSection( L ) ) );
 end );
 
+# implies
+InstallTrueMethod( IsAssociative, IsLCCLoop and IsCommutative );
+InstallTrueMethod( IsExtraLoop, IsLCCLoop and IsMoufangLoop );
+
 #############################################################################
 ##  
 #P  IsRCCLoop( L ) 
@@ -1998,6 +2135,10 @@ function( L )
     return ForAll( RightSection( L ), a -> 
         ForAll( RightSection( L ), b -> b*a*b^(-1) in RightSection( L ) ) );
 end );
+
+# implies
+InstallTrueMethod( IsAssociative, IsRCCLoop and IsCommutative );
+InstallTrueMethod( IsExtraLoop, IsRCCLoop and IsMoufangLoop );
 
 #############################################################################
 ##  
@@ -2056,6 +2197,7 @@ end );
 # implies 
 InstallTrueMethod( HasAutomorphicInverseProperty, IsLeftBruckLoop );
 InstallTrueMethod( IsLeftBolLoop, IsLeftBruckLoop );
+InstallTrueMethod( IsRightBruckLoop, IsLeftBruckLoop and IsCommutative );
 
 # is implied by
 InstallTrueMethod( IsLeftBruckLoop, IsLeftBolLoop and HasAutomorphicInverseProperty );
@@ -2075,6 +2217,7 @@ end );
 # implies 
 InstallTrueMethod( HasAutomorphicInverseProperty, IsRightBruckLoop );
 InstallTrueMethod( IsRightBolLoop, IsRightBruckLoop );
+InstallTrueMethod( IsLeftBruckLoop, IsRightBruckLoop and IsCommutative );
 
 # is implied by
 InstallTrueMethod( IsRightBruckLoop, IsRightBolLoop and HasAutomorphicInverseProperty );
@@ -2094,7 +2237,7 @@ end );
 
 # implies
 InstallTrueMethod( IsCommutative, IsSteinerLoop );
-InstallTrueMethod( HasInverseProperty, IsSteinerLoop );
+InstallTrueMethod( IsCLoop, IsSteinerLoop );
 
 #############################################################################
 ##  NORMALITY

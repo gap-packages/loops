@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gd      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gd, v 1.0.0 2005/8/28 gap Exp $
+#H  @(#)$Id: quasigrp.gd, v 1.1.0 2006/1/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -89,14 +89,16 @@ DeclareOperation( "LeftDivision",
     [ IsQuasigroupElement, IsQuasigroupElement ] );
 DeclareOperation( "RightDivision", 
     [ IsQuasigroupElement, IsQuasigroupElement ] );
+DeclareOperation( "LeftDivisionCayleyTable", [ IsQuasigroup ] );
+DeclareOperation( "RightDivisionCayleyTable", [ IsQuasigroup ] );    
 
 #############################################################################
 ##  POWERS AND INVERSES
 ##  -------------------------------------------------------------------------
 
 DeclareAttribute( "One", IsLoopElement );
-DeclareOperation( "LeftInverse", [ IsLoopElement ] );
-DeclareOperation( "RightInverse", [ IsLoopElement ] );
+DeclareAttribute( "RightInverse", IsLoopElement );
+DeclareAttribute( "LeftInverse", IsLoopElement );
 
 #############################################################################
 ##  ASSOCIATORS AND COMMUTATORS
@@ -220,7 +222,7 @@ DeclareProperty( "IsEntropic", IsQuasigroup );
 DeclareSynonymAttr( "IsMedial", IsEntropic );
 
 #############################################################################
-##  LOOPS OF BOL-MOUFANG TYPE AND RELATED PROPERTIES
+##  LOOPS OF BOL-MOUFANG TYPE
 ##  -------------------------------------------------------------------------
 
 DeclareProperty( "IsExtraLoop", IsLoop );
@@ -238,6 +240,14 @@ DeclareProperty( "IsFlexible", IsQuasigroup );
 DeclareProperty( "IsLeftAlternative", IsQuasigroup );
 DeclareProperty( "IsRightAlternative", IsQuasigroup );
 DeclareProperty( "IsAlternative", IsQuasigroup );
+
+#############################################################################
+##  POWER ALTERNATIVE LOOPS
+##  -------------------------------------------------------------------------
+
+DeclareProperty( "IsLeftPowerAlternative", IsLoop );
+DeclareProperty( "IsRightPowerAlternative", IsLoop );
+DeclareProperty( "IsPowerAlternative", IsLoop );
 
 #############################################################################
 ##  CC-LOOPS AND RELATED PROPERTIES
