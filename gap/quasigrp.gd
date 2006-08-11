@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gd      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gd, v 1.1.0 2006/1/28 gap Exp $
+#H  @(#)$Id: quasigrp.gd, v 1.2.0 2006/7/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -168,6 +168,7 @@ DeclareOperation( "Subquasigroup", [ IsQuasigroup, IsList ] );
 DeclareOperation( "Subloop", [ IsLoop, IsList ] );
 DeclareOperation( "IsSubquasigroup", [ IsQuasigroup, IsQuasigroup ] );
 DeclareOperation( "IsSubloop", [ IsLoop, IsLoop ] );
+DeclareOperation( "AllSubloops", [ IsLoop ] );
 
 #############################################################################
 ##  NUCLEUS, COMMUTANT, CENTER

@@ -74,10 +74,16 @@ of the respective elements in the parent quasigroup (loop).
 
 The following two operations test if a quasigroup (loop) $S$ is a subquasigroup
 (subloop) of a quasigroup $Q$. They return `true' if and only if $Q$ and $S$
-have the same parent, and if $S$ is closed under multiplication in $Q$.
+have the same parent, and if $S$ is a subset of $Q$.
 
 \>IsSubquasigroup( <Q>, <S> ) O
 \>IsSubloop( <Q>, <S> ) O
+
+The operation
+
+\>AllSubloops( <L> ) O
+
+returns a list of all subloops of the loop $L$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Translations and sections}
@@ -392,6 +398,14 @@ If an isomorphism exists, it is returned as a permutation $p$ of $1$, $\dots$,
 $|L|$, where $i^p=j$ means that the $i$th element of $L$ is mapped onto the
 $j$th element of $M$. This is true even if $L$ or $M$ are not their own
 parents.
+
+Since one frequently needs to filter a list of loops up to isomorphism, we
+support
+
+\>LoopsUpToIsomorphism( <ls> ) O
+
+Given a list $ls$ of loops, the operation returns a sublist of $ls$ containing
+one loop from each isomorphism class of loops present in $ls$.
 
 The attribute
 

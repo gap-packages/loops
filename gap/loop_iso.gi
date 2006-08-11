@@ -2,7 +2,7 @@
 ##
 #W  loop_iso.gi   Isomorphisms of loops          G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gi, v 1.1.0 2006/02/02 gap Exp $
+#H  @(#)$Id: loop_iso.gi, v 1.2.1 2006/08/11 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -38,7 +38,7 @@ function( L )
         I := List( [1..n], i -> [false, 0, 0, 0 ] );
         I[1] := [true, 0, 0, 0];
         # Element x asks: Am I an involution?
-        for i in [1..8] do
+        for i in [1..n] do
             I[ i ][ 2 ] := T[ i ][ i ] = 1;
         od;
         # Element x asks: How many times am I a square?
@@ -291,6 +291,40 @@ function( L, M )
 end);
 
 #############################################################################
+##  
+#O  LoopsUpToIsomorphism( ls ) 
+##
+##  Given a list <ls> of loops, returns a sublist of <ls> consisting
+##  of represenatives of isomorphism classes of <ls>.
+
+InstallMethod( LoopsUpToIsomorphism, "for a list of loops",
+    [ IsList ],
+function( ls )
+    local loops, L, D, G, with_same_D, is_new_loop, K;
+    # making sure only loops are on the list
+    if not IsEmpty( Filtered( ls, x -> not IsLoop( x ) ) ) then
+        Error("<arg1> must be a list of loops");
+    fi;        
+    loops := [];
+    for L in ls do
+        D := Discriminator( L );
+        G := EfficientGenerators( L, D );
+        # will be testing only loops with the same discriminator
+        with_same_D := Filtered( loops, K -> AreEqualDiscriminators( K[2], D ) );
+        is_new_loop := true;
+        for K in with_same_D do
+            if not IsomorphismLoopsNC( L, G, D, K[1], K[2] ) = fail then
+                is_new_loop := false;
+                break;
+            fi;
+        od;
+        if is_new_loop then Add( loops, [ L, D ] ); fi;
+    od;
+    # returning only loops, not their discriminators
+    return List( loops, L -> L[1] );
+end);
+
+#############################################################################
 ##  AUTOMORPHISMS AND AUTOMORPHISM GROUPS
 ##  -------------------------------------------------------------------------
 
@@ -395,20 +429,18 @@ function( L )
     if not L = Parent( L ) then L := LoopByCayleyTable( CayleyTable( L ) ); fi;     
     D := Discriminator( L );
     EG := EfficientGenerators( L, D );
-    if IsEmpty(moufang_discriminators) then
-        ReadPkg( "loops", "data/moufang_discriminators.tbl");
+    if n in [1..64] then
+        if IsEmpty(moufang_discriminators) then
+            ReadPkg( "loops", "data/moufang_discriminators.tbl");
+        fi;
+    
+        p := Position( moufang_discriminators, D[1] );
+        if not p = fail then
+            for data in moufang_loops_by_discriminators[ p ] do
+                M := MoufangLoop( data[1], data[2] );
+                iso := IsomorphismLoopsNC( L, EG, D, M, Discriminator( M ) );
+                if not iso = fail then return [data, iso]; fi;
+            od;
+        fi;
     fi;
-    
-    p := Position( moufang_discriminators, D[1] );
-    if not p = fail then
-        for data in moufang_loops_by_discriminators[ p ] do
-            M := MoufangLoop( data[1], data[2] );
-            iso := IsomorphismLoopsNC( L, EG, D, M, Discriminator( M ) );
-            if not iso = fail then return [data, iso]; fi;
-        od;
-    fi;
-    
-    #no match found
-    return "As of August 2005, this Moufang loop appears to be new. Please contact Petr Vojtechovsky at petr@math.du.edu";
-    
 end);

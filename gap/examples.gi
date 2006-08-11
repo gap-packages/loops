@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples of loops   G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: examples.gi, v 1.1.0 2006/02/02 gap Exp $
+#H  @(#)$Id: examples.gi, v 1.2.1 2006/08/08 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -50,7 +50,7 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     if name = "left Bol" then
         s := "The library contains all left Bol loops of order 8 \nthat are not Moufang.";
     elif name = "Moufang" then
-        s := "The library contains all nonassociative Moufang loops \nof order less than 64, and 4262 nonassociative Moufang \nloops of order 64.";
+        s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81.";
     elif name = "Paige" then
         s := "The library contains the smallest nonassociative finite \nsimple Moufang loop.";
     elif name = "Steiner" then
@@ -97,17 +97,42 @@ end);
 
 #############################################################################
 ##  
-#F  ActivateMoufangLoop( pos ) 
+#F  ActivateMoufangLoop( pos, n ) 
 ##    
 ##  Auxiliary function for activating Moufang loops from the database.
-##  <pos> is the position of the loop in the database.
+##  <pos> is the position of the loop in the database. 
+##  <n> is the order of the loops
 
-ActivateMoufangLoop := function( pos )
+ActivateMoufangLoop := function( pos, n )
 
-    local d, parent_pos, parent, S, a, h, e, f, G;
-
+    local d, parent_pos, parent, S, a, h, e, f, G, ret, x, row, y, b, c, z;
+    
     d := moufang_data[ 3 ][ pos ]; #data
-
+    
+    # order 81 is different from all other implemented orders
+    if n = 81 then 
+        # extension of a group of order 27 by GF(3)
+        # REDO WHEN EXTENSIONS ARE IMPLEMENTED IN LOOPS
+        # making the string d into list of entries 0, 1, 2
+        d := List( d, char -> Position( "012", char ) - 1 );
+        # all are extensions of the same group
+        G := AsLoop( SmallGroup(27,5) ); 
+        ret := [];
+        # constructing the multiplication table
+        for x in [1..27] do for a in [0..2] do
+            row := [];
+            for y in [1..27] do for b in [0..2] do
+                c := CayleyTable( G )[ x ][ y ];
+                z := (a + b + d[ (x-1)*27 + y ] ) mod 3;
+                Add( row, (c-1)*3 + z + 1 );
+            od; od;
+            Add( ret, row );
+        od; od;
+        # returning the loop corresponding to the multiplication table 
+        return LoopByCayleyTable( ret );
+    fi;
+    
+    # all other orders
     if d[ 1 ] > 0 then # must activate parent first
         #determine position of parent
         parent_pos := pos - 1;
@@ -115,7 +140,7 @@ ActivateMoufangLoop := function( pos )
             parent_pos := parent_pos - 1;
         od;
         parent_pos := parent_pos + d[ 1 ] - 1;
-        parent := ActivateMoufangLoop( parent_pos  );
+        parent := ActivateMoufangLoop( parent_pos, 0  ); # order not important
 
         if d[ 2 ] = "C" then #cyclic modification
             S := List( d[ 3 ], i -> Elements( parent )[ i ] );
@@ -313,7 +338,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     #F  PosInDB( m ) 
     ##  
     ##  Auxiliary function. Returns the position of the <m>th loop of order <n>
-    ##  in the datanase. Note that <n> is assigned specified globally.
+    ##  in the datanase. Note that <n> is specified globally.
     PosInDB := function( m )
         local p;
         for p in [1 .. pos_n - 1] do
@@ -328,7 +353,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         SetIsLeftBolLoop( loop, true );
     elif name = "Moufang" then
         # renaming loops so that they agree with Goodaire's classification
-        PG := List([1..64], i->());
+        PG := List([1..81], i->());
         PG[16] :=   (2,5,3,4);
         PG[24] :=   (1,3,4)(2,5);
         PG[32] :=   (1,4,61,7,64,31,19,44,3,51,24,46,22,49,65,9,50,39,41,2,63,27,57,14,5,55,13,69,32,58,17,53,15)
@@ -342,7 +367,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         PG[60] :=   (1,2);
         m_inv := m^Inverse( PG[ n ] );
         # activating the loop
-        loop := ActivateMoufangLoop( PosInDB( m_inv ) );
+        loop := ActivateMoufangLoop( PosInDB( m_inv ), n );
         SetIsMoufangLoop( loop, true );
     elif name = "Paige" then
         loop := LoopByCayleyTable( lib[ 3 ][ 1 ] ); #only one loop there at this point

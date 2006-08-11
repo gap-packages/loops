@@ -68,23 +68,22 @@ when the classification of small Bol loops is completed.
 \Section{Small Moufang loops}
 
 The library named <Moufang> contains all nonassociative Moufang loops of order
-less than $64$, and additional $4262$ nonassociative Moufang loops of order
-$64$. It is possible that there are no other nonassociative Moufang loops of
-order $64$ than those contained in the library.
+$n\le 64$ and $n=81$.
 
 The $m$th nonassociative Moufang loop of order $n$ is obtained by
 
 \>MoufangLoop( <n>, <m> ) F
 
 For $n\le 63$, our catalog numbers coincide with those of Goodaire et al.
-\cite{Goodaire}.
+\cite{Goodaire}. The classification of Moufang loops of order $64$ and $81$ was
+carried in \cite{NagyVojtM64}.
 
 The extent of the library is summarized below:
 
 $$
 \matrix{
-    {\rm order}&12&16&20&24&28&32&36&40&42&44&48&52&54&56&60&64\cr
-    {\rm loops\ in\ the\ libary}&1 &5 &1 &5 &1 &71&4 &5 &1 &1 &51&1 &2 &4 &5 &4262
+    {\rm order}&12&16&20&24&28&32&36&40&42&44&48&52&54&56&60&64&81\cr
+    {\rm loops\ in\ the\ libary}&1 &5 &1 &5 &1 &71&4 &5 &1 &1 &51&1 &2 &4 &5 &4262& 5
 }
 $$
 
@@ -96,22 +95,24 @@ The <octonion loop>
 multiplication loop of the $\pm$ basis elements in the $8$-dimensional standard
 real octonion algebra) is `MoufangLoop( 16, 3 )'.
 
-Since we would like to know if there are additional nonassociative Moufang
-loops of order $64$, we have implemented the function
+Although the classification of Moufang loops of order $64$ is now completed, we
+still support
 
-\>IsomorphismTypeOfMoufangLoop( <L> ) F
+\>IsomorphismTypeOfMoufangLoop( <L> ) O
 
-If $L$ is a Moufang loop cataloged in {\LOOPS} as the $m$th Moufang loop of
-order $n$, the function returns $[[n,m],p]$, where $p$ is a permutation of
-$[1,\dots,n]$ that is an isomorphism from $L$ to the cataloged copy of $L$. If
-$n=64$ and $L$ is Moufang loop not cataloged in {\LOOPS}, the user is prompted
-to contact the authors of {\LOOPS}.
+If $L$ is a Moufang loop of order at most $64$, cataloged in {\LOOPS} as the
+$m$th Moufang loop of order $n$, the function returns $[[n,m],p]$, where $p$ is
+a permutation of $[1,\dots,n]$ that is an isomorphism from $L$ to the cataloged
+copy of $L$.
 
 In order to speed up the function `IsomorphismTypeOfMoufangLoop', we have
 precalculated and stored in the data file `data\\moufang_discriminators.tbl' the
 discriminators of all Moufang loops in the library. The file is rather large
 (850 KB), and took about 20 minutes to precalculate. You can delete the file if
 you will not use `IsomorphismTypeOfMoufangLoop'.
+
+We expect to reorganize the Moufang libraries and probably depreciate the
+operation `IsomorphismTypeOfMoufangLoop' in the near future.
 
 \beginexample
 gap> D := DirectProduct( MoufangLoop( 16, 2 ), CyclicGroup( 2 ) );
