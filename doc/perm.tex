@@ -85,6 +85,24 @@ The operation
 
 returns a list of all subloops of the loop $L$.
 
+Let $S$ be a subloop of $L$. The list of all right cosets\index{coset} of $S$
+in $L$ is obtained via
+
+\>RightCosets( <L>, <S> ) F
+
+The coset $S$ is listed first, and the elements of each coset are ordered in
+the same way as elements of $S$, i.e., if $S = [s_1,\dots,s_m]$ then
+$Sx=[s_1x$, $\dots$, $s_mx]$.
+
+When $S$ is a subloop of $L$, the right transversal\index{transversal} of $S$
+with respect to $L$ is a subset of $L$ containing one element from each right
+coset of $S$ in $L$. It is obtained by
+
+\>RightTransversal( <L>, <S> ) O
+
+and it returns the first element from each right coset obtained by
+`RightCosets(L,S)'.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Translations and sections}
 
@@ -416,6 +434,26 @@ permutations as in the case of `IsomorphismLoops'.
 
 Since two isomorphisms differ by an automorphism, all isomorphisms can be
 obtained by the above two functions.
+
+While dealing with Cayley tables, it is often useful to rename or reorder the
+elements without changing the isomorphism type. When $Q$ is a quasigroup of
+size $n$ and $p$ is a permutation of $\{1,\dots,n\}$,
+
+\>IsomorphicCopyByPerm( Q, p )
+
+returns quasigroup $(Q,\circ)$ such that $p(xy) = p(x)\circ p(y)$, i.e.,
+$x\circ y = p( p^{-1}(x)p^{-1}(y))$. When $Q$ is a declared loop, a loop is
+returned. Consequently, when $Q$ is a declared loop and $p(1) = k\ne 1$, then
+$p$ is first replaced by $p\circ (1,k)$, to make sure that the Cayley table is
+normalized.
+
+When $S$ is a normal subloop of $L$,
+
+\>IsomorphicCopyByNormalSubloop( L, S )
+
+returns an isomorphic copy of $L$ in which the elements are ordered according
+to the right cosets of $S$. In particular, the Cayley table of $S$ will appear
+in the top left corner of the Cayley table of the resulting loop.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{How are isomorphisms computed}

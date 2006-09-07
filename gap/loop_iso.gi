@@ -2,7 +2,7 @@
 ##
 #W  loop_iso.gi   Isomorphisms of loops          G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gi, v 1.2.1 2006/08/11 gap Exp $
+#H  @(#)$Id: loop_iso.gi, v 1.2.2 2006/09/7 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -323,6 +323,51 @@ function( ls )
     # returning only loops, not their discriminators
     return List( loops, L -> L[1] );
 end);
+
+#############################################################################
+##  
+#O  IsomorphicCopyByPerm( Q, p ) 
+##
+##  Given a quasigroup <Q> of order n and a permutation <p> of [1..n], returns
+##  the quasigroup (Q,*) such that p(xy) = p(x)*p(y).
+
+InstallMethod( IsomorphicCopyByPerm, "for a loop and permutation",
+    [ IsQuasigroup, IsPerm ],
+function( Q, p )
+    local n, i, j, ct, inv_p;
+    # if Q is a loop and 1^p > 1, must normalize
+    if (IsLoop( Q ) and (not 1^p = 1)) then 
+        p := p * (1, 1^p );
+    fi;        
+    inv_p := Inverse( p );
+    n := Size( Q );
+    ct := List([1..n], i-> [1..n]);
+    for i in [1..n] do for j in [1..n] do
+        ct[i][j] := ( CayleyTable( Q )[ i^inv_p ][ j^inv_p ] )^p;
+    od; od;
+    if IsLoop( Q ) then return LoopByCayleyTable( ct ); fi;
+    return QuasigroupByCayleyTable( ct );
+end);
+
+#############################################################################
+##  
+#O  IsomorphicCopyByNormalSubloop( L, S ) 
+##
+##  Given a loop <L> and its normal subloop <S>, it returns an isomorphic 
+##  copy of <L> with elements reordered according to right cosests of S
+
+InstallMethod( IsomorphicCopyByNormalSubloop, "for two loops",
+    [ IsLoop, IsLoop ],
+function( L, S )
+    local p;
+    if not IsNormal( L, S ) then 
+        Error( "LOOPS: <2> must be a normal subloop of <1>");
+    fi;
+    p := Inverse( PermList( PosInParent( Concatenation( RightCosets( L, S ) ) ) ) );
+    return IsomorphicCopyByPerm( L, p );
+end);
+
+
 
 #############################################################################
 ##  AUTOMORPHISMS AND AUTOMORPHISM GROUPS

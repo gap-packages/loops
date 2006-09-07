@@ -2,7 +2,7 @@
 ##
 #W  loop_iso.gd      Isomorphisms of loops      G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gd, v 1.2.1 2006/8/11 gap Exp $
+#H  @(#)$Id: loop_iso.gd, v 1.2.2 2006/9/7 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -19,6 +19,8 @@ DeclareOperation( "AreEqualDiscriminators", [ IsList, IsList ] );
 ##  -------------------------------------------------------------------------
 DeclareOperation( "IsomorphismLoops", [ IsLoop, IsLoop ] );
 DeclareOperation( "LoopsUpToIsomorphism", [ IsList ] );
+DeclareOperation( "IsomorphicCopyByPerm", [ IsQuasigroup, IsPerm ] );
+DeclareOperation( "IsomorphicCopyByNormalSubloop", [ IsLoop, IsLoop ] );
 
 #############################################################################
 ##  AUTOMORPHISMS AND AUTOMORPHISM GROUPS

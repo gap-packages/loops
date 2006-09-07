@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gi      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gi, v 1.1.0 2006/01/28 gap Exp $
+#H  @(#)$Id: quasigrp.gi, v 1.2.2 2006/09/06 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -390,17 +390,10 @@ function( M )
     fi;
     # quasigroup with neutral element
     p := Position( M, e );
-    ct := CayleyTable( M );
-    if p = 1 then return LoopByCayleyTable( ct ); fi;
-    # p>1
-    p := (1,p); #isomorphism 
-    n := Size( M );
-    new_ct := List( [1..n] , i->[1..n]);
-    for i in [1..n] do for j in [1..n] do
-        # isomorphic copy via p. Note that p = p^-1
-        new_ct[ i ][ j ] := (ct[ i^p ][ j^  p ])^p;
-    od; od;
-    return LoopByCayleyTable( new_ct );
+    if p>1 then
+        M := IsomorphicCopyByPerm( M, (1,p) );  # in loop_iso.gd
+    fi;    
+    return LoopByCayleyTable( CayleyTable( M ) );
 end );
  
 #############################################################################
@@ -499,8 +492,8 @@ function( list, dummy )
     # at least 2 loops, don't want to use recursion.
     # We make sure that all Cayley tables are canonical.
     for s in [1..n] do 
-	loop_list[ s ] := LoopByCayleyTable( CanonicalCayleyTable( CayleyTable( loop_list[ s ] ) ) );
-    od;	
+    loop_list[ s ] := LoopByCayleyTable( CanonicalCayleyTable( CayleyTable( loop_list[ s ] ) ) );
+    od; 
     for s in [2..n] do
         nL := Size( loop_list[ 1 ] );
         nM := Size( loop_list[ s ] );
@@ -1382,33 +1375,33 @@ function( L )
       New := [];   #subloops generated in this round
       for A in Last do          
          Out := Difference( Elements( L ), Elements( A ) );
-	 while not IsEmpty(Out) do
+     while not IsEmpty(Out) do
             x := Out[ 1 ];
             Out := Difference( Out, [ x ] );
             B := Subloop( L, Union( Elements( A ), [ x ] ) );
             if not B in New and not B in All then
-	       Add( New, B );   # new subloop found
+           Add( New, B );   # new subloop found
             fi;
             #attempting to reduce the number of elements to be checked. This is critical for speed.
-	    if Size( B ) <= 3*Size( A ) then
-               # A is maximal in B	
-	       Out := Difference( Out, Elements( B ) );
+        if Size( B ) <= 3*Size( A ) then
+               # A is maximal in B  
+           Out := Difference( Out, Elements( B ) );
             fi;
             coprime_powers := [ 1 ];
-	    if IsPowerAssociative( L ) then
-	       n := Order( x );
-	       coprime_powers := Filtered( [1..n], m -> Gcd(m,n) = 1 );
+        if IsPowerAssociative( L ) then
+           n := Order( x );
+           coprime_powers := Filtered( [1..n], m -> Gcd(m,n) = 1 );
             fi;
-	    if HasLeftInverseProperty( L ) then
-	       for m in coprime_powers do
-	          Out := Difference( Out, Elements(A)*(x^m) );
-	       od;
-	    fi;
-	    if HasRightInverseProperty( L ) then
-	       for m in coprime_powers do
-	          Out := Difference( Out, (x^m)*Elements(A) );
-	       od;
-	    fi;
+        if HasLeftInverseProperty( L ) then
+           for m in coprime_powers do
+              Out := Difference( Out, Elements(A)*(x^m) );
+           od;
+        fi;
+        if HasRightInverseProperty( L ) then
+           for m in coprime_powers do
+              Out := Difference( Out, (x^m)*Elements(A) );
+           od;
+        fi;
          od;
       od;
    until IsEmpty( New );
@@ -1419,6 +1412,44 @@ function( L )
 
 end);
 
+#############################################################################
+##
+#O  RightCosetsNC( L, S )
+##
+##  Returns a list of duplicate-free right cosets S*u, for u in L.
+
+# (PROG) RightCosets(L,S) is implemented as a global function in GAP. It 
+# checks if S is a subset of L and then calls operation RightCosetsNC. 
+# LeftCosets is not implemented in GAP.
+InstallOtherMethod( RightCosetsNC, "for two loops",
+    [ IsLoop, IsLoop ],
+function( L, S )
+    local R, cosets, p, last_coset;
+    if not IsSubloop( L, S ) then
+        Error( "LOOPS: <2> must be a subloop of <1>" );
+    fi;
+    R := RightSection( L );
+    cosets := [];
+    while not IsEmpty( R ) do
+        p := R[1];
+        last_coset := List( S, x -> x^p );
+        R := Filtered( R, r -> not One(L)^r in last_coset );
+        Add(cosets, last_coset);
+    od;
+    return cosets;
+end);
+
+#############################################################################
+##
+#O  RightTransversal( L, S )
+##
+##  Returns a right transversal for the subloop S of loop L.
+
+InstallMethod( RightTransversal, "for two loops",
+    [ IsLoop, IsLoop ],
+function( L, S )
+    return List( RightCosetsNC( L, S ), x -> x[1] );
+end);
 
 #############################################################################
 ##  NUCLEUS, COMMUTANT, CENTER

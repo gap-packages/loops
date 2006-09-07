@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gd      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gd, v 1.2.0 2006/7/23 gap Exp $
+#H  @(#)$Id: quasigrp.gd, v 1.2.2 2006/9/6 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -161,7 +161,7 @@ DeclareAttribute( "RightInnerMappingGroup", IsLoop );
 ##  SUBQUASIGROUPS AND SUBLOOPS
 ##  -------------------------------------------------------------------------
 
-DeclareOperation( "PosInParent", [ IsCollection ] );
+DeclareOperation( "PosInParent", [ IsCollection ] ); 
 # Position already declared in GAP
 DeclareOperation( "SubquasigroupNC", [ IsQuasigroup, IsSet ] );
 DeclareOperation( "Subquasigroup", [ IsQuasigroup, IsList ] ); 
@@ -169,6 +169,8 @@ DeclareOperation( "Subloop", [ IsLoop, IsList ] );
 DeclareOperation( "IsSubquasigroup", [ IsQuasigroup, IsQuasigroup ] );
 DeclareOperation( "IsSubloop", [ IsLoop, IsLoop ] );
 DeclareOperation( "AllSubloops", [ IsLoop ] );
+# RightCosets already declared in GAP
+DeclareOperation( "RightTransversal", [ IsLoop, IsLoop ] );
 
 #############################################################################
 ##  NUCLEUS, COMMUTANT, CENTER
