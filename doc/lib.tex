@@ -1,8 +1,8 @@
 \Chapter{Libraries of small loops}
 
-\label{lib}
-Libraries of small loops form an integral part of {\LOOPS}. We describe them
-here.
+\label{lib} Libraries of small loops form an integral part of {\LOOPS}. Loops
+in libraries are stored up to isomorphism or up to isotopism. Then name of a
+library up to isotopism starts with <itp>.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{A typical library}
@@ -185,6 +185,14 @@ The CC-loops described above can be obtained by
 \>CCLoop( <n>, <m> ) F
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Small loops}
+
+The library named <small> contains all nonassociative loops of order 5 and 6.
+There are 5 and 107 such loops, respectively. The loops are obtained by
+
+\>SmallLoop( <n>, <m> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Paige loops}
 
 <Paige loops>\index{Paige loop} are nonassociative finite simple
@@ -208,3 +216,42 @@ sedenions\index{sedenions} of order $32$ (sedenions generalize octonions).
 The loops are obtained with
 
 \>InterestingLoop( <n>, <m> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Libraries of loops up to isotopism}
+
+For some of the above libraries we also provide the corresponding library of
+loops up to isotopism. Given a library named <lib>, the corresponding library
+up to isotopism is name <itp lib>, and the loops can be retrieved by the
+template function `ItpLibLoop( n, m )'. Here is an example:
+
+\beginexample
+gap> SmallLoop( 6, 14 );
+<small loop 6/14>
+gap> ItpSmallLoop( 6, 14 );
+<small loop 6/42>
+gap> LibraryLoop( "itp small", 6, 14 );
+<small loop 6/42>
+\endexample
+
+Note that loops up to isotopism form a subset of the corresponding library of
+loops up to isomorphism. For instance, the above example shows that the $14$th
+small loop of order $6$ up to isotopism is in fact the $42$nd small loop of
+order $6$ up to isomorphism.
+
+Here is the list of all supported libraries up to isotopism and their extent,
+as displayed by \LOOPS:
+
+\beginexample
+gap> DisplayLibraryInfo("itp small");
+The library contains all nonassociative loops of order less than 7 up to
+isotopism.
+------
+Extent of the library:
+   1 loop of order 5
+   20 loops of order 6
+\endexample
+
+And here are the corresponding retrieving functions:
+
+\>ItpSmallLoop( n, m ) O

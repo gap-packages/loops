@@ -36,8 +36,9 @@ if the positions are meant among the elements of $Q$, or among the elements of
 $P$. Since it requires no calculation to obtain `x![1]', <we always use the
 position of an element in its parent quasigroup>. In this way, many attributes
 of a quasigroup, including its Cayley table, are permanently tied to its
-parent. It is now obvious why we have not insisted on Cayley tables of
-quasigroups to cover the entire interval $1$, $\dots$, $m$, for some $m$.
+parent. It is now clear why we have not insisted that Cayley tables of
+quasigroups must have entries covering the entire interval $1$, $\dots$, $m$,
+for some $m$.
 
 When $S$ is a list of quasigroup elements, not necessarily from the same
 quasigroup, the operation
@@ -101,22 +102,22 @@ coset of $S$ in $L$. It is obtained by
 \>RightTransversal( <L>, <S> ) O
 
 and it returns the first element from each right coset obtained by
-`RightCosets(L,S)'.
+`RightCosets( <L>, <S> )'.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Translations and sections}
 
 When $x$ is an element of a quasigroup $Q$, the left translation $L_x$ is a
 permutation of $Q$. In {\LOOPS}, all permutations associated with quasigroups
-and their elements are permutations in the sense of ${\GAP}$, i.e., bijections
-of some interval $1$, $\dots$, $n$. Moreover, following our convention, the
+and their elements are permutations in the sense of \GAP, i.e., bijections of
+some interval $1$, $\dots$, $n$. Moreover, following our convention, the
 numerical entries of the permutation point to the positions among elements of
 `Parent( <Q> )', not $Q$.
 
 The left and right translations by $x$ in $Q$ are obtained by
 
 \>LeftTranslation( <Q>, <x> ) O
-\>RightTranslation( <Q>, x ) O
+\>RightTranslation( <Q>, <x> ) O
 
 The following two attributes calculate the left and right section of a
 quasigroup $Q$:
@@ -147,9 +148,9 @@ gap> CayleyTable( S );
 gap> LeftSection( S );
 [ (), (1,3,5), (1,5,3) ]
 gap> [ HasCayleyTable( S ), Parent( S ) = M ];
-[ true, true]
+[ true, true ]
 gap> L := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );
-[ l1, l2, l3]
+[ l1, l2, l3 ]
 gap> [ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];
 [ true, true, false ]
 gap> LeftSection( L );
@@ -474,3 +475,26 @@ have identical discriminators, they may or may not be isomorphic. The operation
 \>AreEqualDiscriminators( <D1>, <D2> ) O
 
 returns `true' if the discriminators $D1$, $D2$ are equal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Isotopisms}
+
+The package contains a slow method for testing if two loops are isotopic:
+
+\>IsotopismLoops( <K>, <L> ) O
+
+It returns `fail' if $K$, $2$ are not isotopic, else it returns an isotopism as
+a triple of bijections on $\{1,\dots,|K|\}$.
+
+The method works as follows: It is well known that if a loop $K$ is isotopic to
+a loop $L$ then there exist a principal loop isotope $P$ of $K$ such that $P$
+is isomorphic to $L$. The algorithm first finds all principal isotopes of $K$,
+then filters them up to isomorphism, and then checks if any of them is
+isomorphic to $L$. This is rather slow already for small orders, say $30$.
+
+The function
+
+\>LoopsUpToIsotopism( <ls> ) O
+
+filters the list $ls$ in a way similar to `LoopsUpToIsomorphism', but using
+isotopism as the underlying equivalence relation.

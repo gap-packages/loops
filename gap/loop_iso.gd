@@ -1,8 +1,8 @@
-############################################################################
+#############################################################################
 ##
-#W  loop_iso.gd      Isomorphisms of loops      G. P. Nagy / P. Vojtechovsky
+#W  loop_iso.gd    Isomorphisms & isotopisms of loops     Nagy / Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gd, v 1.2.2 2006/9/7 gap Exp $
+#H  @(#)$Id: loop_iso.gd, v 1.3.0 2007/01/27 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -41,3 +41,9 @@ DeclareOperation( "IsomorphismTypeOfMoufangLoop", [ IsLoop ] );
 # SublistPosition
 # ExtendIsomorphism
 # AutomorphismsFixingSet
+
+#############################################################################
+##  ISOTOPISM OF LOOPS
+##  ------------------------------------------------------------------------
+DeclareOperation( "IsotopismLoops", [ IsLoop, IsLoop ] );
+DeclareOperation( "LoopsUpToIsotopism", [ IsList ] );

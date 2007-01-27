@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gi      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gi, v 1.2.2 2006/09/06 gap Exp $
+#H  @(#)$Id: quasigrp.gi, v 1.3.0 2007/01/27 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -58,7 +58,8 @@ end );
 ## Returns a Cayley table isomorphic to <ls>, in which the entries of ls
 ## have been replaced by numerical values 1, ..., n in the following way:
 ## Let e_1 < ... < e_n be all distinct entries of ls. Then e_i is renamed
-## to i.
+## to i. In particular, when {e_1,...e_n} = {1,...,n}, the operation
+## does nothing.
 
 InstallMethod( CanonicalCayleyTable, "for matrix",
     [ IsMatrix ],
@@ -334,8 +335,10 @@ end);
 ##  
 #O  PrincipalLoopIsotope( Q, f, g ) 
 ##    
-##  Given a quasigroup Q and elements f, g of Q, returns the principal
-##  loop isotope of Q with respect to f, g.
+##  Let Q be a quasigroup and f, g elements of Q.
+##  Define new operation on Q by x+y = R^{-1}(g)(x) * L^{-1}(f)(y).
+##  Then (Q,+) is a loop with neutral element f*g.
+##  We return isomorphic copy of (Q,+) via the isomorphism (1,f*g).
 
 InstallMethod( PrincipalLoopIsotope, 
     "for quasigroup and two quasigroup elements",
@@ -353,17 +356,13 @@ function( Q, f, g )
     for i in [1..n] do for j in [1..n] do
         ct[ i ][ j ] := CayleyTable( Q )[ i^R ][ j^L ];
     od; od;
-    
-    # must make sure that the neutral element f*g is labelled as 1
-    p := Position( Q, f*g );
-    if p > 1 then #renaming the elements inside the table
-        for i in [1..n] do for j in [1..n] do 
-            if ct[ i ][ j ] = 1 then ct[ i ][ j ] := p;
-            elif ct[ i ][ j ] = p then ct[ i ][ j ] := 1;
-            fi;
-        od; od;
-    fi;
-    return LoopByCayleyTable( NormalizedQuasigroupTable( ct ) );
+    # the neutral element of ct is now f*g. We apply isomorphism (1, f*g).
+    p := Position(Q, f*g);
+    if p>1 then
+        p := (1, p); # note that p is its own inverse
+        ct := List([1..n], i-> List([1..n], j -> ( ct[ i^p ][ j^p ] )^p ) );
+    fi;        
+    return LoopByCayleyTable( ct );
 end);    
 
 #############################################################################
@@ -375,7 +374,7 @@ end);
 InstallMethod( AsLoop, "for magma",
     [ IsMagma ],
 function( M )
-    local n, e, p, ct, new_ct, i, j;
+    local e, p, ct;
     if IsLoop( M ) then return M; fi;
     if IsGroup( M ) then 
         return LoopByCayleyTable( MultiplicationTable( Elements( M ) ) );
@@ -391,9 +390,14 @@ function( M )
     # quasigroup with neutral element
     p := Position( M, e );
     if p>1 then
-        M := IsomorphicCopyByPerm( M, (1,p) );  # in loop_iso.gd
-    fi;    
-    return LoopByCayleyTable( CayleyTable( M ) );
+        p := (1,p); # note that p is its own inverse
+        ct := List([1..Size(M)], i-> List([1..Size(M)], j -> 
+            ( CayleyTable( M )[ i^p ][ j^p ] )^p 
+        ) );
+    else 
+        ct := CayleyTable( M );
+    fi;        
+    return LoopByCayleyTable( ct );
 end );
  
 #############################################################################
@@ -1285,10 +1289,14 @@ function( Q, gens )
         pos_gens := ShallowCopy( gens );
         gens := Elements( Parent( Q ) ){ gens };
     fi;
-    transl := Union( LeftSection( Parent( Q ) ){ pos_gens }, 
-        RightSection( Parent( Q ) ){ pos_gens } );
-    relmultgr := Subgroup( MultiplicationGroup( Parent( Q ) ), transl );
-    pos_of_elms := Set( Orbits( relmultgr, pos_gens )[ 1 ] );
+    # P.V. ... must iterate this
+    pos_of_elms := [];
+    while pos_gens<>pos_of_elms do
+        pos_of_elms := pos_gens;
+        transl := Union( LeftSection( Parent( Q ) ){ pos_gens }, RightSection( Parent( Q ) ){ pos_gens } );
+        relmultgr := Subgroup( MultiplicationGroup( Parent( Q ) ), transl );
+        pos_gens := Set( Orbits( relmultgr, pos_gens )[ 1 ] );
+    od;        
     subqg := SubquasigroupNC( Parent( Q ), pos_of_elms );
     if IsLoop( Q ) and Size( Q ) > 1 then 
         SetGeneratorsOfMagma( subqg, Difference( gens, [ One( Q ) ] ) );

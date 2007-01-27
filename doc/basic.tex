@@ -77,7 +77,7 @@ quasigroup tables in the latter way. The rather general operation
 
 \>CanonicalCayleyTable( <T> ) O
 
-takes any Cayley table $T$ with distinct entries $x_1\<\cdots\<x_m$, and
+takes any Cayley table $T$ with distinct entries $x_1\<\cdots\<x_n$, and
 returns a Cayley table in which $x_i$ has been replaced by $i$.
 
 The operation
@@ -225,7 +225,7 @@ And here are the needed ${\LOOPS}$ commands:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Conversions}
 
-As we have already briefly mentioned, we provide operations that convert
+As we have already mentioned, \LOOPS\ contains operations that convert
 between magmas, quasigroups, loops and groups, provided such conversions are
 possible.
 
@@ -233,6 +233,17 @@ If $M$ is a declared magma that happens to be a quasigroup, the corresponding
 quasigroup is returned via
 
 \>AsQuasigroup( <M> ) O
+
+Given a quasigroup $M$ and two of its elements $f$, $g$, the principal loop
+isotope $x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)$ turns $(M,\circ)$ into a loop
+with neutral element $f\cdot g$ (see Section "Homomorphisms and homotopisms").
+Since loops in \LOOPS\ have to have neutral element labelled as $1$, the
+function
+
+\>PrincipalLoopIsotope( <M>, <f>, <g> )
+
+returns an isomorphic copy of the principal isotope $(M,\circ)$ via the
+transposition $(1,f\cdot g)$.
 
 If $M$ is a magma that happens to be a quasigroup, the operation
 
@@ -245,21 +256,15 @@ returns a loop $L$ as follows:
     then $L$ is an isomorphic copy of $M$ via the transposition $(e,f)$,
 \item{$\circ$}
     if $M$ does not posses a neutral element, $L$ is returned as
-    `PrincipalLoopIsotope( <M>, <M.1>, <M.1> )'.
+    `PrincipalLoopIsotope( <M>, <M.1>, <M.1> )'
 \endlist
-Here,
 
-\>PrincipalLoopIsotope( <Q>, <f>, <g> ) O
+One could obtain a loop from $M$ in yet another way, by normalizing the Cayley
+table of $M$. These three approaches can result in nonisomorphic loops in
+general.
 
-is the principal isotope of a quasigroup $Q$ using elements $f$, $g$ of $Q$, as
-explained in Section "Homomorphisms and homotopisms".
-
-Of course, one can obtain a loop from $M$ in different ways, for instance by
-normalizing the Cayley table of $M$. The three approaches mentioned here can
-result in different loops in general.
-
-When $M$ is a declared magma that happens to be a group, then the corresponding
-group is returned by
+Finally, when $M$ is a declared magma that happens to be a group, then the
+corresponding group is returned by
 
 \>AsGroup( <M> ) A
 
@@ -302,7 +307,7 @@ of $Q$:
 \Section{Basic attributes}
 
 We associate many attributes with quasigroups in order to speed up computation.
-This section lists the basic attributes of quasigroups and loops.
+This section lists some basic attributes of quasigroups and loops.
 
 The list of elements of a quasigroup $Q$ is obtained by the usual command
 
@@ -332,8 +337,7 @@ When $L$ is a <power-associative loop>
 %
 \index{power-associative loop}
 %
-, i.e., the orders of elements are
-well-defined in $L$, the <exponent>
+, i.e., the powers of elements are well-defined in $L$, the <exponent>
 %
 \index{exponent}
 %
@@ -454,17 +458,18 @@ $xx^\rho=1$. If $x^\lambda=x^\rho$, we call $x^{-1}=x^\lambda=x^\rho$ the
 \>RightInverse( <x> ) O
 \>Inverse( <x> ) O
 
-The following examples illustrates the usage of arithmetic operations.
-`MoufangLoop' will be explained in Chapter "Libraries of small loops". In this
-example, `M.i' coincides with `Elements( M )[ i ]'.
+The following examples illustrates the concept of inverses for a given loop $M$
+in which $M.i$ coincides with the $i$th element:
 
 \beginexample
-gap> M := MoufangLoop( 12, 1 );; x := M.2;
-l2
-gap> [ x * M.3, x^2, x^(-1), Inverse( x ) ];
-[ l4, l1, l2, l2 ]
-gap> One( M ) = LeftDivision( x, x );
-true
+gap> CayleyTable( M );
+[ [ 1, 2, 3, 4, 5 ],
+  [ 2, 1, 4, 5, 3 ],
+  [ 3, 4, 5, 1, 2 ],
+  [ 4, 5, 2, 3, 1 ],
+  [ 5, 3, 1, 2, 4 ] ]
+gap> [ LeftInverse( M.3 ), RightInverse( M.3 ), Inverse( M.3 ) ];
+[ l5, l4, fail ]
 \endexample
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -504,4 +509,4 @@ containing at most $\log_2{n}$ elements. When $Q$ is a quasigroup
 
 returns a generating set $\{q_0$, $\dots$, $q_m\}$ of $Q$ such that
 $Q_0=\emptyset$, $Q_m=Q$, $Q_i=\langle q_1$, $\dots$, $q_i \rangle$, $q_{i+1}$
-is the largest element of $Q\setminus Q_i$.
+is the least element of $Q\setminus Q_i$.

@@ -1,6 +1,6 @@
 #############################################################################
 ##
-#W  loop_iso.gi   Isomorphisms of loops          G. P. Nagy / P. Vojtechovsky
+#W  loop_iso.gi    Isomorphisms & isotopisms of loops     Nagy / Vojtechovsky
 ##  
 #H  @(#)$Id: loop_iso.gi, v 1.2.2 2006/09/7 gap Exp $
 ##  
@@ -227,7 +227,7 @@ ExtendIsomorphism := function( f, L, GenL, DisL, M, DisM )
     local x, possible_images, y, g;
     f := ExtendHomomorphismByClosingSource( f, L, M );
     if f = fail or Length( f[ 2 ] ) > Length( f[ 3 ] ) then return fail; fi;
-    if IsEmpty( GenL ) then return f; fi; #isomorphism found
+    if Length( f[ 2 ] ) = Length( L ) then return f; fi; #isomorphism found
     
     x := GenL[ 1 ];
     GenL := List( [ 2..Length( GenL ) ], i -> GenL[ i ] ); 
@@ -328,23 +328,23 @@ end);
 ##  
 #O  IsomorphicCopyByPerm( Q, p ) 
 ##
-##  Given a quasigroup <Q> of order n and a permutation <p> of [1..n], returns
+##  If <Q> is a quasigroup of order n and <p> a permutation of [1..n], returns
 ##  the quasigroup (Q,*) such that p(xy) = p(x)*p(y).
+##  If <Q> is a loop, p is first composed with (1,1^p) to make sure
+##  that the neutral element of (Q,*) remains 1.
 
-InstallMethod( IsomorphicCopyByPerm, "for a loop and permutation",
+InstallMethod( IsomorphicCopyByPerm, "for a quasigroup and permutation",
     [ IsQuasigroup, IsPerm ],
 function( Q, p )
-    local n, i, j, ct, inv_p;
+    local ct, inv_p;
     # if Q is a loop and 1^p > 1, must normalize
     if (IsLoop( Q ) and (not 1^p = 1)) then 
         p := p * (1, 1^p );
     fi;        
     inv_p := Inverse( p );
-    n := Size( Q );
-    ct := List([1..n], i-> [1..n]);
-    for i in [1..n] do for j in [1..n] do
-        ct[i][j] := ( CayleyTable( Q )[ i^inv_p ][ j^inv_p ] )^p;
-    od; od;
+    ct := List([1..Size(Q)], i-> List([1..Size(Q)], j -> 
+        ( CayleyTable( Q )[ i^inv_p ][ j^inv_p ] )^p 
+    ) );
     if IsLoop( Q ) then return LoopByCayleyTable( ct ); fi;
     return QuasigroupByCayleyTable( ct );
 end);
@@ -488,4 +488,109 @@ function( L )
             od;
         fi;
     fi;
+end);
+
+#############################################################################
+##  ISOTOPISM OF LOOPS
+##  ------------------------------------------------------------------------
+
+#############################################################################
+##  
+#O  IsotopismLoops( L1, L2 ) 
+##
+##  If L1, L2 are isotopic loops, returns true, else fail.
+
+# (MATH) First we calculate all principal loop isotopes of L1 of the form
+# PrincipalLoopIsotope(L1, f, g), where f, g, are elements of L1. 
+# Then we filter these up to isomorphism. If L2 is isotopic to L1, then
+# L2 is isomorphic to one of these principal isotopes.
+
+InstallMethod( IsotopismLoops, "for two loops",
+    [ IsLoop, IsLoop ],
+function( L1, L2 )
+    local istps, fg, f, g, L, phi, pos, alpha, beta, gamma, p;
+    
+    # make all loops canonical to be able to calculate isotopisms
+    if not L1 = Parent( L1 ) then L1 := LoopByCayleyTable( CayleyTable( L1 ) ); fi;
+    if not L2 = Parent( L2 ) then L2 := LoopByCayleyTable( CayleyTable( L2 ) ); fi;
+    
+    # first testing for isotopic invariants
+    if not Size(L1)=Size(L2) then return fail; fi;
+    if IsomorphismLoops( Center(L1), Center(L2) ) = fail then return fail; fi;
+    if IsomorphismLoops( LeftNucleus(L1), LeftNucleus(L2) ) = fail then return fail; fi;
+    if IsomorphismLoops( RightNucleus(L1), RightNucleus(L2) ) = fail then return fail; fi;
+    if IsomorphismLoops( MiddleNucleus(L1), MiddleNucleus(L2) ) = fail then return fail; fi;
+    # we could test for isomorphism among multiplication groups and inner mapping group, too
+    if not Size(MultiplicationGroup(L1)) = Size(MultiplicationGroup(L2)) then return fail; fi;
+    if not Size(InnerMappingGroup(L1)) = Size(InnerMappingGroup(L2)) then return fail; fi;
+    
+    # now trying to construct an isotopism
+    istps := [];
+    fg := [];
+    for f in L1 do for g in L1 do 
+        Add(istps, PrincipalLoopIsotope( L1, f, g ));
+        Add(fg, [ f, g ] );
+    od; od;
+    for L in LoopsUpToIsomorphism( istps ) do 
+        phi := IsomorphismLoops( L, L2 );
+        if not phi = fail then 
+            # must reconstruct the isotopism (alpha, beta, gamma)
+            # first figure out what f and g were
+            pos := Position( istps, L );
+            f := fg[ pos ][ 1 ]; 
+            g := fg[ pos ][ 2 ];
+            alpha := Inverse( RightTranslation( L1, g ) );
+            beta := Inverse( LeftTranslation( L1, f ) );
+            # we also applied an isomorphism (1,f*g) inside PrincipalLoopIsotope           
+            p := Position( L1, f*g );
+            gamma := ();
+            if p > 1 then
+                alpha := alpha * (1,p);
+                beta := beta * (1,p);
+                gamma := gamma * (1,p);
+            fi;
+            # finally, we apply the isomorphism phi
+            alpha := alpha * phi;
+            beta := beta * phi;
+            gamma := gamma * phi;
+            return [ alpha, beta, gamma ];
+        fi; 
+    od;            
+    return fail;
+end);
+
+
+#############################################################################
+##  
+#O  LoopsUpToIsotopism( ls ) 
+##
+##  Given a list <ls> of loops, returns a sublist of <ls> consisting
+##  of represenatives of isotopism classes of <ls>. VERY SLOW!
+
+InstallMethod( LoopsUpToIsotopism, "for a list of loops",
+    [ IsList ],
+function( ls )
+    local loops, L, is_new_loop, K, M, istps, f, g;
+    # making sure only loops are on the list
+    if not IsEmpty( Filtered( ls, x -> not IsLoop( x ) ) ) then
+        Error("<arg1> must be a list of loops");
+    fi;        
+    loops := [];
+    for L in ls do
+        is_new_loop := true;
+        # find all principal isotopes of L up to isomorphism
+        istps := [];
+        for f in L do for g in L do 
+            Add(istps, PrincipalLoopIsotope( L, f, g ) );
+        od; od;
+        istps := LoopsUpToIsomorphism(istps);
+        # check if any is isomorphic to a found loop        
+        for K in loops do for M in istps do
+            if not IsomorphismLoops( K, M ) = fail then 
+                is_new_loop := false; break;
+            fi; 
+        od; od;
+        if is_new_loop then Add( loops, L ); fi;
+    od;
+    return loops;
 end);

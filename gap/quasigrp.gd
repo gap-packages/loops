@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gd      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gd, v 1.2.2 2006/9/6 gap Exp $
+#H  @(#)$Id: quasigrp.gd, v 1.3.0 2007/01/27 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

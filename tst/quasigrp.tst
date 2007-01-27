@@ -1,14 +1,14 @@
 #############################################################################
 ##
-#W  quasigr.tst   Testing core functions         G. P. Nagy / P. Vojtechovsky
+#W  quasigrp.tst   Testing core functions        G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: quasigr.tst, v 0.9996 2005/8/22 gap Exp $
+#H  @(#)$Id: quasigrp.tst, v 0.9996 2005/8/22 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
-gap> START_TEST("LOOPS, quasigr: testing core functions");
+gap> START_TEST("LOOPS, quasigrp: testing core functions");
 
 # TESTING VIEW AND PRINT MODE, AND LATIN SQUARE FUNCTIONS
 

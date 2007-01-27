@@ -2,7 +2,7 @@
 ##
 #A  banner.g                loops                G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: banner.g, v 1.2.2 2006/09/06 gap Exp $
+#H  @(#)$Id: banner.g, v 1.3.0 2007/01/27 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -10,11 +10,11 @@
 
 if not QUIET and BANNER then
 Print(
-"    ############################################################\n",
-"    ##                                                        ##\n",
-"    ##   LOOPS: Computing with quasigroups and loops in GAP   ##\n",
-"    ##                     version 1.2.2                      ##\n",
-"    ##          Gabor P. Nagy and Petr Vojtechovsky           ##\n",
-"    ##                                                        ##\n",
-"    ############################################################\n\n");
+"    ======================================================\n",
+"      LOOPS: Computing with quasigroups and loops in GAP  \n",
+"                        version 1.3.0                     \n",
+"             Gabor P. Nagy and Petr Vojtechovsky          \n",
+"    ------------------------------------------------------\n",
+"     contact:  nagyg@math.u-szeged.hu or petr@math.du.edu \n",
+"    ======================================================\n\n");
 fi;

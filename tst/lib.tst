@@ -2,7 +2,7 @@
 ##
 #W  lib.tst   Testing libraries of loops         G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: lib.tst, v 0.9996 2005/8/22 gap Exp $
+#H  @(#)$Id: lib.tst, v 1.3.0 2007/01/27 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -114,5 +114,34 @@ gap> CCLoop(25,1); CCLoop(49,2); CCLoop(121,3); CCLoop(14,1);
 <CC loop 49/2>
 <CC loop 121/3>
 <CC loop 14/1>
+
+# SMALL LOOPS
+
+gap> DisplayLibraryInfo("small");
+The library contains all nonassocaitive loops of order less than 7.
+------
+Extent of the library:
+   5 loops of order 5
+   107 loops of order 6
+true
+
+gap> SmallLoop( 5, 3 ); SmallLoop( 6, 12 );
+<small loop 5/3>
+<small loop 6/12>
+
+# ITP SMALL LOOPS
+
+gap> DisplayLibraryInfo("itp small");
+The library contains all nonassociative loops of order less than 7 up to isoto\
+pism.
+------
+Extent of the library:
+   1 loop of order 5
+   20 loops of order 6
+true
+
+gap> ItpSmallLoop( 5, 1 ); ItpSmallLoop( 6, 14 );
+<small loop 5/1>
+<small loop 6/42>
 
 gap> STOP_TEST( "lib.tst", 10000000 );

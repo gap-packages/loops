@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples of loops   G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: examples.gi, v 1.2.1 2006/08/08 gap Exp $
+#H  @(#)$Id: examples.gi, v 1.3.0 2007/01/27 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -12,12 +12,17 @@
 ##  READING DATA
 ##  -------------------------------------------------------------------------
 
+# up to isomorphism
 ReadPkg("loops", "data/leftbol.tbl");       # left Bol loops
 ReadPkg("loops", "data/moufang.tbl");       # Moufang loops
 ReadPkg("loops", "data/paige.tbl");         # Paige loops
 ReadPkg("loops", "data/steiner.tbl");       # Steiner loops
 ReadPkg("loops", "data/cc.tbl");            # CC-loops
+ReadPkg("loops", "data/small.tbl");         # small loops
 ReadPkg("loops", "data/interesting.tbl");   # interesting loops
+
+# up to isotopism
+ReadPkg("loops", "data/itp_small.tbl");     # small loops up to isotopism
 
 #############################################################################
 ##  DISPLAYING INFORMATION ABOUT A LIBRARY
@@ -30,12 +35,16 @@ ReadPkg("loops", "data/interesting.tbl");   # interesting loops
 ##  Auxiliary. Returns the library corresponding to <name>.
 
 LibraryByName := function( name )
+    #up to isomorphism
     if name = "left Bol" then return left_bol_data; 
     elif name = "Moufang" then return moufang_data;
     elif name = "Paige" then return paige_data;
     elif name = "Steiner" then return steiner_data;
     elif name = "CC" then return cc_data;
+    elif name = "small" then return small_data;
     elif name = "interesting" then return interesting_data;
+    #up to isotopism
+    elif name = "itp small" then return itp_small_data;
     fi;
 end;
 
@@ -47,6 +56,7 @@ end;
 
 InstallGlobalFunction( DisplayLibraryInfo, function( name )
     local s, lib, k;
+    # up to isomorphism
     if name = "left Bol" then
         s := "The library contains all left Bol loops of order 8 \nthat are not Moufang.";
     elif name = "Moufang" then
@@ -57,14 +67,18 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
         s := "The library contains all nonassociative Steiner loops \nof order less or equal to 16. It also contains the \nassociative Steiner loops of order 4 and 8.";
     elif name = "CC" then
         s := "The library contains all nonassociative CC-loops \nof order p^2 and 2*p for any odd prime p.\nThere are precisely 3 such loops of order p^2,\nand precisely 1 such loop of order 2*p.";
+    elif name = "small" then
+        s := "The library contains all nonassocaitive loops of order less than 7.";
     elif name = "interesting" then
         s := "The library contains a few interesting loops.";
+    # up to isotopism
+    elif name = "itp small" then
+        s := "The library contains all nonassociative loops of order less than 7 up to isotopism.";
     else
     Error( 
         Concatenation(
         "The admissible names for loop libraries are: \n",
-        "[ \"left Bol\", \"Moufang\", \"Paige\", \"Steiner\", \"CC\", ",
-        "\"interesting\" ]."
+        "[ \"left Bol\", \"Moufang\", \"Paige\", \"Steiner\", \"CC\", \"small\", \"small itp\", \"interesting\" ]."
         )
         );
     fi;
@@ -280,7 +294,32 @@ ActivateCCLoop := function( n, m )
         od; od; od; od; 
     fi;
     return LoopByCayleyTable( T );
+end;
+
+#############################################################################
+##  
+#F  ActivateSmallLoop( s, n ) 
+##    
+##  Activates small loop of order n from the database of small loops.
+##  The loop is representes by string s that corresponds to the entries
+##  in the Cayley table, not including the first row and the first column.
+
+ActivateSmallLoop := function( s, n )
+    local T, i, j, pos;
+
+    #creating the multiplication table
+    T := List( [1..n], i->[1..n] );
+    for i in [1..n] do T[i][1] := i; T[1][i] := i; od;
+    pos := 1;
+    for i in [2..n] do for j in [2..n] do
+        T[i][j] := Position( "123456789", s[pos] );
+        pos := pos + 1;
+    od; od;
+
+    return LoopByCayleyTable( T );
 end;        
+
+# no need to activate loops up to isotopism
 
 #############################################################################
 ##  READING LOOPS FROM THE LIBRARY - GENERIC METHOD
@@ -348,6 +387,8 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     end;
     
     # activating the desired loop (treat cases separately below)
+    
+    # up to isomorphism
     if name = "left Bol" then 
         loop := LoopByCayleyTable( lib[ 3 ][ m ] );
         SetIsLeftBolLoop( loop, true );
@@ -378,9 +419,14 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     elif name = "CC" then
         loop := ActivateCCLoop( n, m );
         SetIsCCLoop( loop, true );
+    elif name = "small" then
+        loop := ActivateSmallLoop( lib[ 3 ][ n - 4 ][ m ], n );
     elif name = "interesting" then
         loop := LoopByCayleyTable( lib[ 3 ][ PosInDB( m ) ][ 1 ] );
         SetName( loop, lib[ 3 ][ PosInDB( m ) ][ 2 ] );
+    # up to isotopism        
+    elif name = "itp small" then
+        return LibraryLoop( "small", n, lib[ 3 ][ n-4 ][ m ] );
     fi;
     
     # setting the name
@@ -469,6 +515,20 @@ InstallGlobalFunction( CCLoop, function( n, m )
 end);
 
 #############################################################################
+##  SMALL LOOPS
+##  ------------------------------------------------------------------------
+
+#############################################################################
+##  
+#F  SmallLoop( n, m ) 
+##    
+##  mth small loop of order n
+
+InstallGlobalFunction( SmallLoop, function( n, m )
+    return LibraryLoop( "small", n, m );
+end);
+
+#############################################################################
 ##  INTERESTING LOOPS
 ##  ------------------------------------------------------------------------
 
@@ -480,4 +540,18 @@ end);
 
 InstallGlobalFunction( InterestingLoop, function( n, m )
     return LibraryLoop( "interesting", n, m );
+end);
+
+#############################################################################
+##  ITP SMALL LOOPS
+##  ------------------------------------------------------------------------
+
+#############################################################################
+##  
+#F  ItpSmallLoop( n, m ) 
+##    
+##  mth small loop of order n up to isotopism
+
+InstallGlobalFunction( ItpSmallLoop, function( n, m )
+    return LibraryLoop( "itp small", n, m );
 end);
