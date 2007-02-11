@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples of loops   G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: examples.gi, v 1.3.0 2007/01/27 gap Exp $
+#H  @(#)$Id: examples.gi, v 1.4.0 2007/02/11 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -58,7 +58,7 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     local s, lib, k;
     # up to isomorphism
     if name = "left Bol" then
-        s := "The library contains all left Bol loops of order 8 \nthat are not Moufang.";
+        s := "The library contains all nonassociative left Bol loops of order less than 17, \nincluding Moufang loops.";
     elif name = "Moufang" then
         s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81.";
     elif name = "Paige" then
@@ -108,6 +108,70 @@ end);
 ##  When the data in the database is encoded in some way, we usually
 ##  retrieve the loop via function ActivateXLoop, where X is the name 
 ##  of the class.
+
+#############################################################################
+##  
+#F  ActivateLeftBolLoop( pos ) 
+##    
+##  Retrieves the <pos>th left Bol loop of order <n>.
+##  The position <pos> is precalculated via PosInDB (see below).
+
+ActivateLeftBolLoop := function( pos )
+
+    local ct_encode, ct_decode, rep_pos, ct, perm;
+   
+    #############################################################################
+    ##  
+    #F  ct_encode( ct ) 
+    #F  ct_decode( str )
+    ##    
+    ##  Auxiliary routines for encoding and decoding of Cayley tables up to 
+    ##  order 92, using characters instead of numbers.
+    
+    ct_encode:=function(ct) # up to size of 92
+        local n,i,j,ret;
+        n:=Length(ct);
+        ret:="";
+        for i in [2..n] do for j in [2..n] do
+            Add(ret, CHAR_INT(ct[i][j]+34));
+        od; od;
+        return ret;
+    end;
+    
+    ct_decode:=function(str) # up to size of 92
+        local n,pos,ret,i,j;
+        n:=Sqrt(Length(str))+1;
+        pos:=1;
+        ret:=[[1..n]];
+        for i in [2..n] do
+            ret[i]:=[i];
+            for j in [2..n] do
+                ret[i][j]:=INT_CHAR(str[pos])-34;
+                pos:=pos+1;
+            od;
+        od;
+        return ret;
+    end;
+
+    # the left Bol loop activation
+    
+    rep_pos := pos;
+    # searching for a Cayley table on which the loop is based
+    while not IsString( left_bol_data[ 3 ][ rep_pos ] ) do 
+        rep_pos := rep_pos - 1;
+    od;
+    if rep_pos = pos then
+        # loop given by encoded Cayley table
+        ct := ct_decode( left_bol_data[ 3 ][ pos ] );
+    else
+        # loop given as an isotope of another loop
+        ct := ct_decode( left_bol_data[ 3 ][ rep_pos ] );
+        perm := PermList( ct[ left_bol_data[ 3 ][ pos ] ] );
+        ct := Set( List( ct, row -> OnTuples( row, perm^-1 ) ) );
+    fi;
+    return LoopByCayleyTable( ct );
+    
+end;
 
 #############################################################################
 ##  
@@ -377,7 +441,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     #F  PosInDB( m ) 
     ##  
     ##  Auxiliary function. Returns the position of the <m>th loop of order <n>
-    ##  in the datanase. Note that <n> is specified globally.
+    ##  in the database. Note that <n> is specified globally.
     PosInDB := function( m )
         local p;
         for p in [1 .. pos_n - 1] do
@@ -390,7 +454,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     
     # up to isomorphism
     if name = "left Bol" then 
-        loop := LoopByCayleyTable( lib[ 3 ][ m ] );
+        loop := ActivateLeftBolLoop( PosInDB( m ) );
         SetIsLeftBolLoop( loop, true );
     elif name = "Moufang" then
         # renaming loops so that they agree with Goodaire's classification
