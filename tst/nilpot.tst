@@ -2,7 +2,7 @@
 ##
 #W  nilpot.tst   Testing nilpotency              G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: nilpot.tst, v 0.99 2004/10/10 gap Exp $
+#H  @(#)$Id: nilpot.tst, v 1.5.0 2007/04/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -21,15 +21,15 @@ gap> L := LoopByCayleyTable(
 gap> Center(L);
 <associative loop of order 2>
 gap> LeftNucleus(L);
-<loop of order 2>
+<associative loop of order 2>
 gap> RightNucleus(L); 
-<loop of order 4>
+<associative loop of order 4>
 gap> IsNilpotent(L);
 true
 gap> NilpotencyClassOfLoop(L);
 2
 gap> IsomorphismLoops(L,LeftBolLoop(8,2));
-()
+(3,5,6,8,4,7)
 
 # NILPOTENCY FOR MOUFANG LOOPS
 

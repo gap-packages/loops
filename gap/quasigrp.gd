@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gd      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gd, v 1.3.0 2007/01/27 gap Exp $
+#H  @(#)$Id: quasigrp.gd, v 1.5.0 2007/03/29 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -58,6 +58,15 @@ DeclareSynonym( "SetLoopElmName", SetQuasigroupElmName );
 
 DeclareOperation( "QuasigroupFromFile", [ IsString, IsString ] );
 DeclareOperation( "LoopFromFile", [ IsString, IsString ] );
+
+#############################################################################
+##  CREATING QUASIGROUPS AND LOOPS BY SECTIONS
+##  -------------------------------------------------------------------------
+
+DeclareOperation("QuasigroupByLeftSection", [ IsCollection ] );
+DeclareOperation("LoopByLeftSection", [ IsCollection ] );
+# There are also versions of QuasigroupByLeftSection and LoopByLeftSection 
+# for [ IsGroup, IsMultiplicativeElementCollection ]
 
 #############################################################################
 ##  CONVERSIONS
@@ -156,6 +165,9 @@ DeclareOperation( "RelativeMultiplicationGroup",
 DeclareAttribute( "InnerMappingGroup", IsLoop );
 DeclareAttribute( "LeftInnerMappingGroup", IsLoop );
 DeclareAttribute( "RightInnerMappingGroup", IsLoop );
+DeclareOperation( "LeftInnerMapping", [ IsLoop, IsLoopElement, IsLoopElement ] );
+DeclareOperation( "RightInnerMapping", [ IsLoop, IsLoopElement, IsLoopElement ] );
+DeclareOperation( "MiddleInnerMapping", [ IsLoop, IsLoopElement ] );
 
 #############################################################################
 ##  SUBQUASIGROUPS AND SUBLOOPS

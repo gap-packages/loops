@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gi      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gi, v 1.3.0 2007/01/27 gap Exp $
+#H  @(#)$Id: quasigrp.gi, v 1.5.0 2007/03/29 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -25,12 +25,12 @@ function( ls )
     local first_row;
     # checking rows
     first_row := Set( ls[ 1 ] );
-    if not Length( first_row ) = Length( ls[ 1 ] ) then return fail; fi;
+    if not Length( first_row ) = Length( ls[ 1 ] ) then return false; fi;
     if ForAll( ls, row -> Set( row ) = first_row ) = false then return false; fi;
     # checking columns
     ls := TransposedMat( ls );
     first_row := Set( ls[ 1 ] );
-    if not Length( first_row ) = Length( ls[ 1 ] ) then return fail; fi;
+    if not Length( first_row ) = Length( ls[ 1 ] ) then return false; fi;
     if ForAll( ls, row -> Set( row ) = first_row ) = false then return false; fi;
     return true;
 end );
@@ -306,6 +306,111 @@ InstallMethod( LoopFromFile, "for string and string",
 function( filename, replace )
     return LoopByCayleyTable(  ReadCayleyTableFromFile( filename, replace ) );
 end );
+
+#############################################################################
+##  CREATING QUASIGROUPS AND LOOPS BY SECTIONS
+##  -------------------------------------------------------------------------
+
+#############################################################################
+##  
+#O  QuasigroupByLeftSection( sect ) 
+## 
+##  Returns the quasigroup whose left section is the list of permutations
+##  <sect>.
+
+InstallMethod( QuasigroupByLeftSection, 
+    "for a set of left translation maps",
+    [ IsPermCollection ],
+function( sect )
+    local   s, n, ct;
+    n := Length( sect );
+    ct := []; # future Cayley table
+    for s in sect do
+        if s=() or Maximum( MovedPoints( s ) ) <= n then 
+            Add( ct, Permuted( [1..n], s^(-1) ) );
+        else
+            Error( "LOOPS: <1> is not a left section of a quasigroup." );
+        fi;
+    od;
+    if not IsQuasigroupTable( ct ) then
+        Error( "LOOPS: <1> is not a left section of a quasigroup.");
+    fi;
+    return QuasigroupByCayleyTable( ct );
+end);
+
+#############################################################################
+##  
+#O  LoopByLeftSection( sect ) 
+## 
+##  Returns the loop whose left section is the list of permutations <sect>. 
+##  Since the order of translations in <sect> is determined by their 
+##  image of the neutral element 1, we disregard the order.
+
+InstallMethod( LoopByLeftSection, 
+    "for a set of left translation maps",
+    [ IsPermCollection ],
+function( sect )
+    # THE FOLLOWING CODE WOULD SUFFICE IF IT WERE NOT FOR A BUG IN GAP.
+    #if not () in sect then Error("LOOPS: <1> is not a left section of a loop."); fi;
+    #return LoopByCayleyTable( Set( CayleyTable( QuasigroupByLeftSection( sect ) ) ) );
+    # INSTEAD, WE HAVE TO DO THIS
+    local   s, n, ct;
+    n := Length( sect );
+    ct := []; # future Cayley table
+    for s in sect do
+        if s=() or Maximum( MovedPoints( s ) ) <= n then 
+            Add( ct, Permuted( [1..n], s^(-1) ) );
+        else
+            Error( "LOOPS: <1> is not a left section of a loop." );
+        fi;
+    od;
+    ct := Set( ct );
+    if not IsLoopTable( ct ) then
+        Error( "LOOPS: <1> is not a left section of a loop.");
+    fi;
+    return LoopByCayleyTable( ct );
+end);
+
+#############################################################################
+##  
+#O  QuasigroupByLeftSection( H, T ) 
+## 
+##  If <T> is a left transversal to a subgroup <H> in the group G = <T><H>,
+##  returns the quasigroup on [ tH; t in T ] defined by  tH*t'H = (tt')H.
+##  Note that the outcome depends on T iff H is not normal in G.
+
+InstallOtherMethod( QuasigroupByLeftSection, 
+    "for a subgroup and left transversal",
+    [ IsGroup, IsMultiplicativeElementCollection ], 
+function( H, T )
+    local elmH, leftCosets, ct;
+    elmH := Elements( H );
+    leftCosets := List( T, t -> Set( t * elmH ) );
+    ct := List( T, t -> List( T, s ->
+        Position( leftCosets, Set( t * s * elmH ) )
+    ) );
+    return QuasigroupByCayleyTable( ct );
+end);
+    
+    
+#############################################################################
+##  
+#O  LoopByLeftSection( H, T ) 
+## 
+##  Like QuasigroupByLeftSection( H, T ) but returns a loop.
+
+InstallOtherMethod( LoopByLeftSection, 
+    "for a subgroup and left transversal",
+    [ IsGroup, IsMultiplicativeElementCollection ], 
+function( H, T )
+    local elmH, leftCosets, ct;
+    elmH := Elements( H );
+    leftCosets := List( T, t -> Set( t * elmH ) );
+    ct := List( T, t -> List( T, s ->
+        Position( leftCosets, Set( t * s * elmH ) )
+    ) );
+    return LoopByCayleyTable( ct );
+end);
 
 #############################################################################
 ##  CONVERSIONS
@@ -1205,6 +1310,57 @@ function( L )
     return Stabilizer( RightMultiplicationGroup( L ), 1 );
 end);
 
+#############################################################################
+##  
+#O  LeftInnerMapping( L, x, y ) 
+##    
+##  Let <x>, <y> be elements of a loop <L>. Returns the left inner mapping
+##  determined by <x>, <y>, i.e., the mapping L(yx)^(-1) L(y) L(x) 
+##  (composing from the right).
+
+InstallMethod( LeftInnerMapping, "for loop and two loop elements",
+    [ IsLoop, IsLoopElement, IsLoopElement ],
+function( L, x, y ) 
+    if (not x in L) or (not y in L) then
+        Error( "LOOPS: <2> and <3> must be elements of the loop <1>.");
+    fi;
+    return  LeftTranslation( L, x ) * LeftTranslation( L, y ) * LeftTranslation( L, y*x )^(-1);
+end);
+
+#############################################################################
+##  
+#O  RightInnerMapping( L, x, y ) 
+##    
+##  Let <x>, <y> be elements of a loop <L>. Returns the right inner mapping
+##  determined by <x>, <y>, i.e., the mapping R(xy)^(-1) R(y) R(x)
+##  (composing from the right).
+
+InstallMethod( RightInnerMapping, "for loop and two loop elements",
+    [ IsLoop, IsLoopElement, IsLoopElement ],
+function( L, x, y ) 
+    if (not x in L) or (not y in L) then
+        Error( "LOOPS: <2> and <3> must be elements of the loop <1>.");
+    fi;
+    return RightTranslation( L, x ) * RightTranslation( L, y ) * RightTranslation( L, x*y )^(-1);
+end);
+
+#############################################################################
+##  
+#O  MiddleInnerMapping( L, x ) 
+##    
+##  Let <x> be an element of a loop <L>. Returns the middle inner mapping
+##  determined by <x>, i.e., the mapping R(x)^(1) L(x)
+##  (composing from the right).
+
+InstallMethod( MiddleInnerMapping, "for loop and a loop elements",
+    [ IsLoop, IsLoopElement ],
+function( L, x ) 
+    if not x in L then
+        Error( "LOOP: <2> must be an element of the loop <1>.");
+    fi;
+    return LeftTranslation( L, x ) * RightTranslation( L, x )^(-1);
+end);
+
 
 #############################################################################
 ##  SUBQUASIGROUPS AND SUBLOOPS
@@ -1478,8 +1634,13 @@ function( Q )
     e := Elements( Q );
     S := Filtered( [ 1..n ], i -> ForAll( [ 1..n ], j ->  
         LS[ j ]*LS[ i ] = LS[ Position( e, e[ i ]*e[ j ] ) ] ) );
-    if IsLoop( Q ) then return Subloop( Q, Elements( Q ){ S } ); fi;
-    return Subquasigroup( Q, Elements( Q ){ S } );
+    if IsLoop( Q ) then 
+        S := Subloop( Q, Elements( Q ){ S } );
+        SetIsAssociative( S, true );
+    else 
+        S := Subquasigroup( Q, Elements( Q ){ S } );
+    fi;
+    return S;
 end);
 
 #############################################################################
@@ -1497,8 +1658,13 @@ function( Q )
     e := Elements( Q );
     S := Filtered( [ 1..n ], i -> ForAll( [ 1..n ], j -> 
         LS[ i ]*LS[ j ] = LS[ Position( e, e[ j ]*e[ i ] ) ] ) );
-    if IsLoop( Q ) then return Subloop( Q, Elements( Q ){ S } ); fi;
-    return Subquasigroup( Q, Elements( Q ){ S } );    
+    if IsLoop( Q ) then 
+        S := Subloop( Q, Elements( Q ){ S } );
+        SetIsAssociative( S, true );
+    else 
+        S := Subquasigroup( Q, Elements( Q ){ S } );
+    fi;
+    return S;
 end);
 
 #############################################################################
@@ -1516,8 +1682,13 @@ function( Q )
     e := Elements( Q );
     S := Filtered( [ 1..n ], i -> ForAll( [ 1..n ], j ->  
         RS[ j ]*RS[ i ] = RS[ Position( e, e[ j ]*e[ i ] ) ] ) );
-    if IsLoop( Q ) then return Subloop( Q, Elements( Q ){ S } ); fi;
-    return Subquasigroup( Q, Elements( Q ){ S } );
+    if IsLoop( Q ) then 
+        S := Subloop( Q, Elements( Q ){ S } );
+        SetIsAssociative( S, true );
+    else 
+        S := Subquasigroup( Q, Elements( Q ){ S } );
+    fi;
+    return S;
 end);
 
 #############################################################################
@@ -1529,11 +1700,16 @@ end);
 InstallMethod( Nuc, "for quasigroup",
     [ IsQuasigroup ],
 function( Q )
-    local N;
+    local N, S;
     N := Intersection( Elements( LeftNucleus( Q ) ), 
         Elements( RightNucleus( Q ) ), Elements( MiddleNucleus( Q ) ) );
-    if IsLoop( Q ) then return Subloop( Q, N ); fi;
-    return Subquasigroup( Q, N );
+    if IsLoop( Q ) then 
+        S := Subloop( Q, N );
+        SetIsAssociative( S, true );
+    else 
+        S := Subquasigroup( Q, N );
+    fi;
+    return S;
 end);
 
 #############################################################################
@@ -1592,7 +1768,22 @@ end);
 ##  ASSOCIATIVITY, COMMUTATIVITY AND GENERALIZATIONS
 ##  -------------------------------------------------------------------------
 
-# IsAssociative already implemented for magmas.
+# (PROG) IsAssociative is already implemented for magmas, but we provide 
+# a new method (from version 1.5.0) based on sections. This new method is 
+# much faster for groups, and a bit slower for nonassociative loops.
+
+InstallOtherMethod( IsAssociative, "for quasigroup",
+    [ IsQuasigroup ], 0, 
+function( Q )
+    local sLS, x, y;
+    sLS := Set( LeftSection( Q ) );
+    for x in LeftSection( Q ) do
+        for y in LeftSection( Q ) do
+            if not x*y in sLS then return false; fi;
+        od;
+    od;
+    return true;
+end);
 
 # implies
 InstallTrueMethod( IsExtraLoop, IsAssociative and IsLoop );

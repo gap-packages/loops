@@ -1,4 +1,4 @@
-\Chapter{Some methods based on permutation groups}
+\Chapter{Methods based on permutation groups}
 
 Most calculations in the {\LOOPS} package are delegated to groups, taking
 advantage of the various permutations and permutation groups associated with
@@ -249,8 +249,9 @@ Then the <nucleus>
 %
 \index{nucleus}
 %
- $N(Q)$ of $Q$ is the intersection of the three nuclei.
-These nuclei are calculated in {\LOOPS} as follows:
+$N(Q)$ of $Q$ is the intersection of the three nuclei.
+
+The nuclei are calculated in {\LOOPS} as follows:
 
 \>LeftNucleus( <Q> ) A
 \>MiddleNucleus( <Q> ) A
@@ -267,7 +268,8 @@ these synonyms of `Nuc':
 \>NucleusOfQuasigroup( <Q> ) A
 
 Since all nuclei are subquasigroups of $Q$, they are returned as subquasigroups
-(resp. subloops).
+(resp. subloops). When $Q$ is a loop then all nuclei are in fact groups, and
+they are returned as associative loops.
 
 The <commutant>
 %
@@ -278,8 +280,11 @@ for every $y\in Q\}$. It is also known under the name <Moufang center>
 %
 \index{Moufang center}
 %
-.
-It is obtained via
+and <centrum>
+%
+\index{centrum}
+%
+. It is obtained via
 
 \>Commutant( <Q> ) A
 
@@ -287,6 +292,8 @@ The center $Z(Q)$ is defined as the intersection of $C(Q)$ and $N(Q)$, and it
 is obtained via
 
 \>Center( <Q> ) A
+
+It is a subgroup of $<Q>$ and is therefore returned as an associative loop.
 
 Finally, the <associator subloop>
 %

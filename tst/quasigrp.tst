@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.tst   Testing core functions        G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: quasigrp.tst, v 0.9996 2005/8/22 gap Exp $
+#H  @(#)$Id: quasigrp.tst, v 1.5.0 2007/04/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -124,6 +124,18 @@ gap> Size( MultiplicationGroup( L ) );
 2592
 gap> Size( InnerMappingGroup( L ) );
 216
+
+# TESTING LOOP BY LEFT SECTION
+
+gap> H := Group( (1,2,3,4), (5,6), (6,7) );;
+gap> T:= List( Group((1,2), (1,2,3,4)), x -> x^(-1)*x^(1,5)(2,6)(3,7)(4,8));;
+gap> L := LoopByLeftSection( H, T );
+<loop of order 24>
+gap> LeftSection( L );;
+gap> QuasigroupByLeftSection( last );
+<quasigroup of order 24>
+gap> LoopByLeftSection( last2 );
+<loop of order 24>
 
 # TESTING SUBQUASIGROUPS AND SUBLOOPS
 

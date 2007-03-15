@@ -2,7 +2,7 @@
 ##
 #W  loop_iso.gi    Isomorphisms & isotopisms of loops     Nagy / Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gi, v 1.2.2 2006/09/7 gap Exp $
+#H  @(#)$Id: loop_iso.gi, v 1.5.0 2007/03/21 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -336,14 +336,15 @@ end);
 InstallMethod( IsomorphicCopyByPerm, "for a quasigroup and permutation",
     [ IsQuasigroup, IsPerm ],
 function( Q, p )
-    local ct, inv_p;
+    local ctQ, ct, inv_p;
+    ctQ := CanonicalCayleyTable( CayleyTable( Q ) );
     # if Q is a loop and 1^p > 1, must normalize
     if (IsLoop( Q ) and (not 1^p = 1)) then 
         p := p * (1, 1^p );
     fi;        
     inv_p := Inverse( p );
     ct := List([1..Size(Q)], i-> List([1..Size(Q)], j -> 
-        ( CayleyTable( Q )[ i^inv_p ][ j^inv_p ] )^p 
+        ( ctQ[ i^inv_p ][ j^inv_p ] )^p 
     ) );
     if IsLoop( Q ) then return LoopByCayleyTable( ct ); fi;
     return QuasigroupByCayleyTable( ct );
@@ -363,7 +364,8 @@ function( L, S )
     if not IsNormal( L, S ) then 
         Error( "LOOPS: <2> must be a normal subloop of <1>");
     fi;
-    p := Inverse( PermList( PosInParent( Concatenation( RightCosets( L, S ) ) ) ) );
+    # (PROG) SortingPerm is used rather than PermList since L is not necessarily canonical
+    p := Inverse( SortingPerm( PosInParent( Concatenation( RightCosets( L, S ) ) ) ) );
     return IsomorphicCopyByPerm( L, p );
 end);
 

@@ -25,6 +25,9 @@ ReadPkg("loops", "gap/examples.gi");
 # isomorphisms and automorphisms
 ReadPkg("loops", "gap/loop_iso.gi"); 
 
+# extensions
+ReadPkg("loops", "gap/extensions.gi");
+
 # triality groups of Moufang loops
 ReadPkg("loops", "gap/triality.gi"); 
 

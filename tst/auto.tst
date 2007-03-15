@@ -2,7 +2,7 @@
 ##
 #W  auto.tst   Testing automorphisms             G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: auto.tst, v 1.3.0 2007/01/27 gap Exp $
+#H  @(#)$Id: auto.tst, v 1.5.0 2007/03/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -19,7 +19,7 @@ gap> AutomorphismGroup( MoufangLoop( 64, 1235 ) );
 gap> Size( last );
 512
 gap> AutomorphismGroup( LeftBolLoop( 8, 1 ) );
-Group([ (3,6)(4,5), (2,4)(5,7), (2,5)(4,7), (2,7)(4,5) ])
+Group([ (5,8)(6,7), (2,3)(6,7), (2,6)(3,7), (2,7)(3,6) ])
 gap> Size( AutomorphismGroup( SteinerLoop( 16, 77 ) ) );
 3
 

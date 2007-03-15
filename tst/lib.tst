@@ -2,7 +2,7 @@
 ##
 #W  lib.tst   Testing libraries of loops         G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: lib.tst, v 1.3.0 2007/01/27 gap Exp $
+#H  @(#)$Id: lib.tst, v 1.5.0 2007/04/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -37,16 +37,19 @@ gap> for i in [1..t] do
 # LEFT BOL LOOPS
 
 gap> DisplayLibraryInfo( "left Bol" );
-The library contains all left Bol loops of order 8 
-that are not Moufang.
+The library contains all nonassociative left Bol loops of order less than 17,
+including Moufang loops.
 ------
 Extent of the library:
    6 loops of order 8
+   1 loop of order 12
+   2 loops of order 15
+   2038 loops of order 16
 true
 
 # number of orders implemented in the library
 gap> t := Length( left_bol_data[ 1 ] );
-1
+4
 
 # testing loops  
 gap> for i in [1..t] do
