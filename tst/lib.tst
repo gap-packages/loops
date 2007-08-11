@@ -2,13 +2,13 @@
 ##
 #W  lib.tst   Testing libraries of loops         G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: lib.tst, v 1.5.0 2007/04/06 gap Exp $
+#H  @(#)$Id: lib.tst, v 1.9.0 2007/08/11 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
-gap> START_TEST("LOOPS, lib: testing all librairies except Moufang");
+gap> START_TEST("LOOPS, lib: testing all libraries except Moufang");
 
 # INTERESTING LOOPS
 
@@ -146,5 +146,22 @@ true
 gap> ItpSmallLoop( 5, 1 ); ItpSmallLoop( 6, 14 );
 <small loop 5/1>
 <small loop 6/42>
+
+# CODE LOOPS
+
+gap> DisplayLibraryInfo("code");
+The library contains all nonasscoiative even code loops
+of order less than 65.
+------
+Extent of the library:
+   5 loops of order 16
+   16 loops of order 32
+   80 loops of order 64
+true
+
+gap> CodeLoop( 16, 3 );
+<Moufang loop 16/3>
+gap> CodeLoop( 64, 80 );
+<Moufang loop 64/4247>
 
 gap> STOP_TEST( "lib.tst", 10000000 );

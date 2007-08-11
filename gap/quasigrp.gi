@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gi      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gi, v 1.5.0 2007/03/29 gap Exp $
+#H  @(#)$Id: quasigrp.gi, v 1.9.0 2007/08/06 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -312,6 +312,35 @@ end );
 ##  -------------------------------------------------------------------------
 
 #############################################################################
+##
+#O  CayleyTableByPerms( perms )
+## 
+##  Given a set <perms> of n permutations of an n-element set X, returns
+##  n by n Cayley table ct such that ct[i][j] = X[j]^perms[i].
+##  The operation is safe only if at most one permutation of <perms> is 
+##  is the identity permutation, and all other permutations of <perms>
+##  move all points of X.
+
+InstallMethod( CayleyTableByPerms,
+    "for a list of permutations",
+    [ IsPermCollection ],
+function( perms )
+    local n, pts, max;
+    n := Length( perms );
+    if n=1 then 
+        return [ [ 1 ] ];
+    fi;
+    # one of perms[ 1 ], perms[ 2 ] must move all points
+    pts := MovedPoints( perms[ 2 ] );
+    if pts = [] then 
+        pts := MovedPoints( perms[ 1 ] );
+    fi;
+    max := Maximum( pts );
+    # we permute the whole interval [1..max] and then keep only those coordinates corresponding to pts
+    return List( perms, p -> Permuted( [1..max], p^(-1) ){ pts } );
+end);
+
+#############################################################################
 ##  
 #O  QuasigroupByLeftSection( sect ) 
 ## 
@@ -322,20 +351,7 @@ InstallMethod( QuasigroupByLeftSection,
     "for a set of left translation maps",
     [ IsPermCollection ],
 function( sect )
-    local   s, n, ct;
-    n := Length( sect );
-    ct := []; # future Cayley table
-    for s in sect do
-        if s=() or Maximum( MovedPoints( s ) ) <= n then 
-            Add( ct, Permuted( [1..n], s^(-1) ) );
-        else
-            Error( "LOOPS: <1> is not a left section of a quasigroup." );
-        fi;
-    od;
-    if not IsQuasigroupTable( ct ) then
-        Error( "LOOPS: <1> is not a left section of a quasigroup.");
-    fi;
-    return QuasigroupByCayleyTable( ct );
+    return QuasigroupByCayleyTable( CayleyTableByPerms( sect ) );
 end);
 
 #############################################################################
@@ -350,66 +366,91 @@ InstallMethod( LoopByLeftSection,
     "for a set of left translation maps",
     [ IsPermCollection ],
 function( sect )
-    # THE FOLLOWING CODE WOULD SUFFICE IF IT WERE NOT FOR A BUG IN GAP.
-    #if not () in sect then Error("LOOPS: <1> is not a left section of a loop."); fi;
-    #return LoopByCayleyTable( Set( CayleyTable( QuasigroupByLeftSection( sect ) ) ) );
-    # INSTEAD, WE HAVE TO DO THIS
-    local   s, n, ct;
-    n := Length( sect );
-    ct := []; # future Cayley table
-    for s in sect do
-        if s=() or Maximum( MovedPoints( s ) ) <= n then 
-            Add( ct, Permuted( [1..n], s^(-1) ) );
-        else
-            Error( "LOOPS: <1> is not a left section of a loop." );
+    return LoopByCayleyTable( Set ( CayleyTableByPerms( sect ) ) );
+end);
+
+#############################################################################
+##  
+#O  QuasigroupByRightSection( sect ) 
+## 
+##  Returns the quasigroup whose right section is the list of permutations
+##  <sect>.
+
+InstallMethod( QuasigroupByRightSection, 
+    "for a set of left translation maps",
+    [ IsPermCollection ],
+function( sect )
+    return QuasigroupByCayleyTable( TransposedMat ( CayleyTableByPerms( sect ) ) );
+end);
+
+#############################################################################
+##  
+#O  LoopByRightSection( sect ) 
+## 
+##  Returns the loop whose right section is the list of permutations <sect>. 
+##  Since the order of translations in <sect> is determined by their 
+##  image of the neutral element 1, we disregard the order.
+
+InstallMethod( LoopByRightSection, 
+    "for a set of left translation maps",
+    [ IsPermCollection ],
+function( sect )
+    return LoopByCayleyTable( TransposedMat ( Set ( CayleyTableByPerms( sect ) ) ) );
+end);
+
+#############################################################################
+##
+#O  CayleyTableByRightSection( G, H, T )
+## 
+##  Auxiliary operation.
+##  If <T> is a left right transversal to a subgroup <H> if the group <G>,
+##  returns the multiplication table defined by  tH*t'H = (tt')H.
+
+CayleyTableByRightSection := function( G, H, T )
+    local act, nT, actT, i, p, ct;
+    # act = action of G on right cosest G/H
+    act := ActionHomomorphism( G, RightCosets( G, H ), OnRight );
+    nT := Length( T );
+    # actT = permutations on G/H induced by elements of T
+    actT := [1..nT];
+    for i in [1..nT] do
+        actT[ i ] := T[ i ]^act;
+    od;
+    # the order of right cosets determined by T might not agree with the default order of right cosets ...
+    p := PermList( List( [1..nT], i -> 1^actT[ i ] ) ); 
+    ct := List( [1..nT], i -> ListPerm( p * actT[ i ] * p^(-1) ) );
+    for i in [1..nT] do 
+        if ct[ i ] = [] then # this can happen since ListPerm( () ) = []
+            ct[ i ] := [1..nT];
         fi;
     od;
-    ct := Set( ct );
-    if not IsLoopTable( ct ) then
-        Error( "LOOPS: <1> is not a left section of a loop.");
-    fi;
-    return LoopByCayleyTable( ct );
-end);
+    return TransposedMat( ct );
+end;
 
 #############################################################################
 ##  
-#O  QuasigroupByLeftSection( H, T ) 
+#O  QuasigroupByRightSection( G, H, T ) 
 ## 
-##  If <T> is a left transversal to a subgroup <H> in the group G = <T><H>,
-##  returns the quasigroup on [ tH; t in T ] defined by  tH*t'H = (tt')H.
-##  Note that the outcome depends on T iff H is not normal in G.
-
-InstallOtherMethod( QuasigroupByLeftSection, 
-    "for a subgroup and left transversal",
-    [ IsGroup, IsMultiplicativeElementCollection ], 
-function( H, T )
-    local elmH, leftCosets, ct;
-    elmH := Elements( H );
-    leftCosets := List( T, t -> Set( t * elmH ) );
-    ct := List( T, t -> List( T, s ->
-        Position( leftCosets, Set( t * s * elmH ) )
-    ) );
-    return QuasigroupByCayleyTable( ct );
+##  See CayleyTableByRightSection
+ 
+InstallOtherMethod( QuasigroupByRightSection, 
+    "for a group, a subgroup and right transversal",
+    [ IsGroup, IsGroup, IsMultiplicativeElementCollection ], 
+function( G, H, T )
+    return QuasigroupByCayleyTable( CayleyTableByRightSection( G, H, T ) );
 end);
-    
-    
+   
 #############################################################################
 ##  
-#O  LoopByLeftSection( H, T ) 
+#O  LoopByRightSection( G, H, T ) 
 ## 
-##  Like QuasigroupByLeftSection( H, T ) but returns a loop.
+##  See CayleyTableByRigthSection
 
-InstallOtherMethod( LoopByLeftSection, 
-    "for a subgroup and left transversal",
-    [ IsGroup, IsMultiplicativeElementCollection ], 
-function( H, T )
-    local elmH, leftCosets, ct;
-    elmH := Elements( H );
-    leftCosets := List( T, t -> Set( t * elmH ) );
-    ct := List( T, t -> List( T, s ->
-        Position( leftCosets, Set( t * s * elmH ) )
-    ) );
-    return LoopByCayleyTable( ct );
+InstallOtherMethod( LoopByRightSection, 
+    "for a group, a subgroup and right transversal",
+    [ IsGroup, IsGroup, IsMultiplicativeElementCollection ], 
+function( G, H, T )
+    return LoopByCayleyTable( CayleyTableByRightSection( G, H, T ) );
 end);
 
 #############################################################################
@@ -1273,6 +1314,57 @@ end);
 
 #############################################################################
 ##  
+#O  LeftInnerMapping( L, x, y ) 
+##    
+##  Returns the left inner mapping of loop <L> determined by elements 
+##  <x>, <y>, i.e., the mapping L(x,y) = L_{yx}^{-1} L_y L_x, where we compose
+##  mappings from right to left.
+
+InstallMethod( LeftInnerMapping, "for loop and a loop elements",
+    [ IsLoop, IsLoopElement, IsLoopElement ],
+function( L, x, y ) 
+    if not (x in L and y in L) then
+        Error( "LOOPS: <2>, <3> must be elements of the loop <1>.");
+    fi;
+    return LeftTranslation( L, x ) * LeftTranslation( L, y ) * LeftTranslation( L, y*x )^(-1);
+end);
+
+#############################################################################
+##  
+#O  MiddleInnerMapping( L, x ) 
+##    
+##  Let <x> be an element of a loop <L>. Returns the middle inner mapping
+##  determined by <x>, i.e., the mapping L(x)^{-1} R(x), where we compose
+##  mappings from right to left.
+
+InstallMethod( MiddleInnerMapping, "for loop and a loop elements",
+    [ IsLoop, IsLoopElement ],
+function( L, x ) 
+    if not x in L then
+        Error( "LOOPS: <2> must be an element of the loop <1>.");
+    fi;
+    return RightTranslation( L, x ) * LeftTranslation( L, x )^(-1);
+end);
+
+#############################################################################
+##  
+#O  RightInnerMapping( L, x, y ) 
+##    
+##  Returns the right inner mapping of loop <L> determined by elements 
+##  <x>, <y>, i.e., the mapping R(x,y) = R_{xy}^{-1} R_y R_x, where we compose
+##  mappings from right to left.
+
+InstallMethod( RightInnerMapping, "for loop and a loop elements",
+    [ IsLoop, IsLoopElement, IsLoopElement ],
+function( L, x, y ) 
+    if not (x in L and y in L) then
+        Error( "LOOPS: <2>, <3> must be elements of the loop <1>.");
+    fi;
+    return RightTranslation( L, x ) * RightTranslation( L, y ) * RightTranslation( L, x*y )^(-1);
+end);
+
+#############################################################################
+##  
 #A  InnerMappingGroup( L ) 
 ##     
 ##  Returns the inner mapping group of a loop <L>, i.e., the subgroup
@@ -1298,6 +1390,18 @@ function( L )
 end);
 
 #############################################################################
+## 
+#A  MiddleInnerMappingGroup( L )
+##
+##  returns the middle inner mapping group of a loop <L>
+
+InstallMethod( MiddleInnerMappingGroup, "for loop",
+   [ IsLoop ],
+function( L )
+   return Group( List( L, x -> MiddleInnerMapping( L, x ) ) );
+end);
+
+#############################################################################
 ##  
 #A  RightInnerMappingGroup( L ) 
 ##     
@@ -1309,58 +1413,6 @@ InstallMethod( RightInnerMappingGroup, "for loop",
 function( L )
     return Stabilizer( RightMultiplicationGroup( L ), 1 );
 end);
-
-#############################################################################
-##  
-#O  LeftInnerMapping( L, x, y ) 
-##    
-##  Let <x>, <y> be elements of a loop <L>. Returns the left inner mapping
-##  determined by <x>, <y>, i.e., the mapping L(yx)^(-1) L(y) L(x) 
-##  (composing from the right).
-
-InstallMethod( LeftInnerMapping, "for loop and two loop elements",
-    [ IsLoop, IsLoopElement, IsLoopElement ],
-function( L, x, y ) 
-    if (not x in L) or (not y in L) then
-        Error( "LOOPS: <2> and <3> must be elements of the loop <1>.");
-    fi;
-    return  LeftTranslation( L, x ) * LeftTranslation( L, y ) * LeftTranslation( L, y*x )^(-1);
-end);
-
-#############################################################################
-##  
-#O  RightInnerMapping( L, x, y ) 
-##    
-##  Let <x>, <y> be elements of a loop <L>. Returns the right inner mapping
-##  determined by <x>, <y>, i.e., the mapping R(xy)^(-1) R(y) R(x)
-##  (composing from the right).
-
-InstallMethod( RightInnerMapping, "for loop and two loop elements",
-    [ IsLoop, IsLoopElement, IsLoopElement ],
-function( L, x, y ) 
-    if (not x in L) or (not y in L) then
-        Error( "LOOPS: <2> and <3> must be elements of the loop <1>.");
-    fi;
-    return RightTranslation( L, x ) * RightTranslation( L, y ) * RightTranslation( L, x*y )^(-1);
-end);
-
-#############################################################################
-##  
-#O  MiddleInnerMapping( L, x ) 
-##    
-##  Let <x> be an element of a loop <L>. Returns the middle inner mapping
-##  determined by <x>, i.e., the mapping R(x)^(1) L(x)
-##  (composing from the right).
-
-InstallMethod( MiddleInnerMapping, "for loop and a loop elements",
-    [ IsLoop, IsLoopElement ],
-function( L, x ) 
-    if not x in L then
-        Error( "LOOP: <2> must be an element of the loop <1>.");
-    fi;
-    return LeftTranslation( L, x ) * RightTranslation( L, x )^(-1);
-end);
-
 
 #############################################################################
 ##  SUBQUASIGROUPS AND SUBLOOPS
@@ -2485,6 +2537,42 @@ InstallTrueMethod( IsOsbornLoop, IsCCLoop );
 
 #############################################################################
 ##  
+#P  IsCodeLoop( L ) 
+##     
+##  Returns true if <L> is an even code loop.
+
+InstallMethod( IsCodeLoop, "for loop",
+    [ IsLoop ],
+function( L )
+    # even code loops are precisely Moufang 2-loops with Frattini subloop of order 1, 2
+    return Set( Factors( Size( L ) ) ) = [ 2 ] 
+        and IsMoufangLoop( L ) 
+        and Size( FrattiniSubloop( L ) ) in [1, 2];
+end );
+
+# implies
+InstallTrueMethod( IsExtraLoop, IsCodeLoop );
+InstallTrueMethod( IsCCLoop, IsCodeLoop );
+
+#############################################################################
+##  
+#P  IsSteinerLoop( L ) 
+##     
+##  Returns true if <L> is a Steiner loop.
+
+InstallMethod( IsSteinerLoop, "for loop",
+    [ IsLoop ],
+function( L )
+    # Steiner loops are inverse property loops of exponent at most 2.
+    return HasInverseProperty( L ) and Exponent( L )<=2;
+end );
+
+# implies
+InstallTrueMethod( IsCommutative, IsSteinerLoop );
+InstallTrueMethod( IsCLoop, IsSteinerLoop );
+
+#############################################################################
+##  
 #P  IsLeftBruckLoop( L ) 
 ##     
 ##  Returns true if <L> is a left Bruck loop.
@@ -2524,21 +2612,87 @@ InstallTrueMethod( IsLeftBruckLoop, IsRightBruckLoop and IsCommutative );
 InstallTrueMethod( IsRightBruckLoop, IsRightBolLoop and HasAutomorphicInverseProperty );
 
 #############################################################################
-##  
-#P  IsSteinerLoop( L ) 
-##     
-##  Returns true if <L> is a Steiner loop.
+## 
+#P  IsLeftALoop( L )
+##
+##  Returns true if <L> is a left A-loop, that is if
+##  all left inner mappings are automorphisms of <L>.
 
-InstallMethod( IsSteinerLoop, "for loop",
-    [ IsLoop ],
+InstallMethod( IsLeftALoop, "for loop",
+   [ IsLoop ],
 function( L )
-    # Steiner loops are inverse property loops of exponent at most 2.
-    return HasInverseProperty( L ) and Exponent( L )<=2;
-end );
+   local gens;
+   gens := GeneratorsOfGroup( LeftInnerMappingGroup( L ) );
+   return ForAll(gens, f -> ForAll(L, x -> ForAll(L, y -> (x * y)^f = x^f * y^f )));
+end);
 
-# implies
-InstallTrueMethod( IsCommutative, IsSteinerLoop );
-InstallTrueMethod( IsCLoop, IsSteinerLoop );
+#############################################################################
+## 
+#P  IsRightALoop( L )
+##
+##  Returns true if <L> is a right A-loop, that is if
+##  all right inner mappings are automorphisms of <L>.
+
+InstallMethod( IsRightALoop, "for loop",
+   [ IsLoop ],
+function( L )
+   local gens;
+   gens := GeneratorsOfGroup( RightInnerMappingGroup( L ) );
+   return ForAll(gens, f -> ForAll(L, x -> ForAll(L, y -> (x * y)^f = x^f * y^f )));
+end);
+
+#############################################################################
+## 
+#P  IsMiddleALoop( L )
+##
+##  Returns true if <L> is a middle A-loop, that is if
+##  all middle inner mappings (conjugations) are automorphisms of <L>.
+
+InstallMethod( IsMiddleALoop, "for loop",
+   [ IsLoop ],
+function( L )
+   local gens;
+   gens := GeneratorsOfGroup( MiddleInnerMappingGroup( L ) );
+   return ForAll(gens, f -> ForAll(L, x -> ForAll(L, y -> (x * y)^f = x^f * y^f )));
+end);
+
+#############################################################################
+## 
+#P  IsALoop( L )
+##
+##  Returns true if <L> is an A-loop, that is if
+##  all inner mappings are automorphisms of <L>.
+
+InstallMethod( IsALoop, "for loop",
+   [ IsLoop ],
+function( Q )
+   return IsLeftALoop(Q) and IsRightALoop(Q) and IsMiddleALoop(Q);
+end);   
+   
+# implies   
+InstallTrueMethod( IsLeftALoop, IsALoop );
+InstallTrueMethod( IsRightALoop, IsALoop );
+InstallTrueMethod( IsMiddleALoop, IsALoop );
+InstallTrueMethod( IsMiddleALoop, IsCommutative );
+InstallTrueMethod( IsALoop, IsLeftALoop and IsCommutative );
+InstallTrueMethod( IsALoop, IsRightALoop and IsCommutative );
+InstallTrueMethod( IsLeftALoop, IsRightALoop and HasAntiautomorphicInverseProperty );
+InstallTrueMethod( IsRightALoop, IsLeftALoop and HasAntiautomorphicInverseProperty );
+InstallTrueMethod( IsFlexible, IsMiddleALoop );
+InstallTrueMethod( HasAntiautomorphicInverseProperty, IsFlexible and IsLeftALoop );
+InstallTrueMethod( HasAntiautomorphicInverseProperty, IsFlexible and IsRightALoop );
+InstallTrueMethod( IsMoufangLoop, IsALoop and IsLeftAlternative );
+InstallTrueMethod( IsMoufangLoop, IsALoop and IsRightAlternative );
+InstallTrueMethod( IsMoufangLoop, IsALoop and HasLeftInverseProperty );
+InstallTrueMethod( IsMoufangLoop, IsALoop and HasRightInverseProperty );
+InstallTrueMethod( IsMoufangLoop, IsALoop and HasWeakInverseProperty ); 
+   
+# is implied by   
+InstallTrueMethod( IsLeftALoop, IsLeftBruckLoop );
+InstallTrueMethod( IsLeftALoop, IsLCCLoop );
+InstallTrueMethod( IsRightALoop, IsRightBruckLoop );
+InstallTrueMethod( IsRightALoop, IsRCCLoop );
+InstallTrueMethod( IsALoop, IsCommutative and IsMoufangLoop );
 
 #############################################################################
 ##  NORMALITY

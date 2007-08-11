@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.tst   Testing core functions        G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: quasigrp.tst, v 1.5.0 2007/04/06 gap Exp $
+#H  @(#)$Id: quasigrp.tst, v 1.9.0 2007/08/11 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -124,18 +124,39 @@ gap> Size( MultiplicationGroup( L ) );
 2592
 gap> Size( InnerMappingGroup( L ) );
 216
+gap> MiddleInnerMappingGroup( L );
+<permutation group with 12 generators>
 
 # TESTING LOOP BY LEFT SECTION
 
-gap> H := Group( (1,2,3,4), (5,6), (6,7) );;
-gap> T:= List( Group((1,2), (1,2,3,4)), x -> x^(-1)*x^(1,5)(2,6)(3,7)(4,8));;
-gap> L := LoopByLeftSection( H, T );
-<loop of order 24>
-gap> LeftSection( L );;
-gap> QuasigroupByLeftSection( last );
-<quasigroup of order 24>
-gap> LoopByLeftSection( last2 );
-<loop of order 24>
+gap> Shift := function( p )
+>       local ls;
+>       ls := ListPerm( p );
+>       ls := Concatenation( [1,2,3,4,5], List( ls, x -> x + 5 ) );
+>       return PermList( ls );
+> end;
+function( p ) ... end
+gap> A := AlternatingGroup( 5 );
+Alt( [ 1 .. 5 ] )
+gap> G := DirectProduct( A, A );
+Group([ (1,2,3,4,5), (3,4,5), (6,7,8,9,10), (8,9,10) ])
+gap> H := Subgroup( G, [ (1,2,3), (2,3,4), (6,7,8,9,10) ] );
+Group([ (1,2,3), (2,3,4), (6,7,8,9,10) ])
+gap> T := List( A, x -> x * Shift(x)^(-1) );;
+gap> L := LoopByRightSection( G, H, T );
+<loop of order 60>
+
+gap> S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;
+gap> LoopByLeftSection( LeftSection( S ) );
+<loop of order 3>
+gap> LoopByRightSection( RightSection( S ) );
+<loop of order 3>
+gap> QuasigroupByLeftSection( LeftSection( S ) );
+<quasigroup of order 3>
+gap> QuasigroupByRightSection( RightSection( S ) );
+<quasigroup of order 3>
+gap> CayleyTableByPerms( LeftSection( S ) );
+[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
 
 # TESTING SUBQUASIGROUPS AND SUBLOOPS
 
@@ -290,6 +311,17 @@ true
 gap> IsRightKLoop( B );
 false
 gap> IsSteinerLoop( B );
+false
+
+# TESTING A-LOOPS
+
+gap> IsLeftALoop( B );
+true
+gap> IsRightALoop( B );
+true
+gap> IsMiddleALoop( B );
+false
+gap> IsALoop( B );
 false
 
 # TESTING NORMALITY

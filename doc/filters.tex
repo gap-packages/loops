@@ -10,6 +10,8 @@ the property on the left is implied by the property (properties) on the right.
 
 \begintt
 ( IsExtraLoop, IsAssociative and IsLoop )
+( IsExtraLoop, IsCodeLoop )
+( IsCCLoop, IsCodeLoop )
 ( HasTwosidedInverses, IsPowerAssociative )
 ( IsPowerAlternative, IsDiassociative )
 ( IsFlexible, IsDiassociative )
@@ -96,7 +98,25 @@ the property on the left is implied by the property (properties) on the right.
 ( IsRightBruckLoop, IsRightBolLoop and HasAutomorphicInverseProperty )
 ( IsCommutative, IsSteinerLoop )
 ( IsCLoop, IsSteinerLoop )
-
-
-
+( IsLeftALoop, IsALoop )
+( IsRightALoop, IsALoop )
+( IsMiddleALoop, IsALoop )
+( IsMiddleALoop, IsCommutative )
+( IsALoop, IsLeftALoop and IsCommutative )
+( IsALoop, IsRightALoop and IsCommutative )
+( IsLeftALoop, IsRightALoop and HasAntiautomorphicInverseProperty )
+( IsRightALoop, IsLeftALoop and HasAntiautomorphicInverseProperty )
+( IsFlexible, IsMiddleALoop )
+( HasAntiautomorphicInverseProperty, IsFlexible and IsLeftALoop )
+( HasAntiautomorphicInverseProperty, IsFlexible and IsRightALoop )
+( IsMoufangLoop, IsALoop and IsLeftAlternative )
+( IsMoufangLoop, IsALoop and IsRightAlternative )
+( IsMoufangLoop, IsALoop and HasLeftInverseProperty )
+( IsMoufangLoop, IsALoop and HasRightInverseProperty )
+( IsMoufangLoop, IsALoop and HasWeakInverseProperty )
+( IsLeftALoop, IsLeftBruckLoop )
+( IsLeftALoop, IsLCCLoop )
+( IsRightALoop, IsRightBruckLoop )
+( IsRightALoop, IsRCCLoop )
+( IsALoop, IsCommutative and IsMoufangLoop )
 \endtt

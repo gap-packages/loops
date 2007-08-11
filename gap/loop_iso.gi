@@ -2,7 +2,7 @@
 ##
 #W  loop_iso.gi    Isomorphisms & isotopisms of loops     Nagy / Vojtechovsky
 ##  
-#H  @(#)$Id: loop_iso.gi, v 1.5.0 2007/03/21 gap Exp $
+#H  @(#)$Id: loop_iso.gi, v 1.5.1 2007/04/19 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -33,24 +33,34 @@ function( L )
     # Calculating invariants.
     if not IsPowerAssociative( L ) then 
         # not power associative loop, hence crude discriminator
-        # Element x asks: Am I neutral element? 
+        # Element x asks: Am I neutral element? (Cost: linear)
         # PROG: This is needed to make sure that the neutral element will be in a block by itself.
-        I := List( [1..n], i -> [false, 0, 0, 0 ] );
-        I[1] := [true, 0, 0, 0];
-        # Element x asks: Am I an involution?
+        I := List( [1..n], i -> [false, 0, 0, 0, 0, 0 ] );
+        I[1] := [true, 0, 0, 0, 0, 0 ];
+        # Element x asks: Am I an involution? (Cost: linear)
         for i in [1..n] do
             I[ i ][ 2 ] := T[ i ][ i ] = 1;
         od;
-        # Element x asks: How many times am I a square?
+        # Element x asks: How many times am I a square? (Cost: linear)
         for i in [1..n] do
             j := T[ i ][ i ];
             I[ j ][ 3 ] := I[ j ][ 3 ] + 1;
         od;
-        # Element x asks: With how many elements do I commute?
+        # Element x asks: With how many elements do I commute? (Cost: quadratic)
         for i in [1..n] do
             for j in [1..n] do if T[ i ][ j ] = T[ j ][ i ] then 
                 I[ i ][ 4 ] := I[ i ][ 4 ] + 1; 
             fi; od;
+        od;
+        # Element x asks: For how many elements y is (x*x)*y = x*(x*y)? (Cost: quadratic)
+        for i in [1..n] do
+            for j in [1..n] do if T[ T[ i ][ i ] ][ j ] = T[ i ][ T[ i ][ j ] ] then
+                I[ i ][ 5 ] := I[ i ][ 5 ] + 1;
+            fi; od;
+        od;
+        # Element x asks: is it true that (x*x)*x = x*(x*x)? (Cost: linear)
+        for i in [1..n] do
+            I[ i ][ 6 ] :=  T[ T[ i ][ i ] ][ i ] = T[ i ][ T[ i ][ i ] ];
         od;
     else    
         #power associative loop, hence refined discriminator

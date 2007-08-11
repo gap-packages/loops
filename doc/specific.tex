@@ -7,15 +7,11 @@ special loops, mostly Moufang loops.
 \Section{Moufang modifications}
 
 Ale\v{s} Dr\'apal discovered two prominent families of extensions of Moufang
-loops. These extensions can be used to obtain many, perhaps all, nonassociative
-Moufang loops of order at most $64$. We call these two constructions
-<Moufang modifications>
-%
-\index{Moufang modifications}
-%
-. The library of Moufang loops included with
-{\LOOPS} is based on Moufang modifications. We describe the two modifications
-briefly here. See \cite{DV} for details.
+loops. It turns out that these extensions can be used to obtain all
+nonassociative Moufang loops of order at most $64$. We call these two
+constructions <Moufang modifications>\index{Moufang modifications}. The library
+of Moufang loops included with {\LOOPS} is based on Moufang modifications. We
+describe the two modifications briefly here. See \cite{DrVo} for details.
 
 Assume that $L$ is a Moufang loop with normal subloop $S$ such that $L/S$ is a
 cyclic group of order $2m$. Let $h\in S\cap Z(L)$. Let $\alpha$ be a generator
@@ -27,11 +23,7 @@ $$
     x\ast y = xyh^{\sigma(i+j)},
 $$
 where $x\in \alpha^i$, $y\in\alpha^j$, $i\in M$, $j\in M$. Then $(L,\ast)$ is a
-Moufang loop, a <cyclic modification>
-%
-\index{cyclic modification}
-%
- of $L$.
+Moufang loop, a <cyclic modification>\index{cyclic modification} of $L$.
 
 When $L$, $S$, $\alpha$, $h$ are as above and when $a$ is any element of
 $\alpha$, the corresponding cyclic modification is obtained via
@@ -52,11 +44,7 @@ $$
 $$
 where $x\in\alpha^i\cup e\alpha^i$, $y\in\alpha^j\cup \alpha^jf$, $i\in M$,
 $j\in M$, $y\in G_r$, $r\in\{0,1\}$. Then $(L,\ast)$ is a Moufang loop, a
-<dihedral modification>
-%
-\index{dihedral modification}
-%
- of $L$.
+<dihedral modification>\index{dihedral modification} of $L$.
 
 When $L$, $S$, $e$, $f$ and $h$ are as above, the corresponding dihedral
 modification is obtained via
@@ -87,14 +75,11 @@ The loop $M(G,2)$ can be obtained from a finite group $G$ with
 Let $G$ be a group and $\sigma$, $\rho$ be automorphisms of $G$, satisfying
 $\sigma^2 = \rho^3 = (\sigma \rho)^2 = 1$. We write the automorphisms of a
 group as exponents and $[g,\sigma]$ for $g^{-1}g^\sigma$. We say that the
-triple $(G,\rho,\sigma)$ is a <group with triality>
-%
-\index{group with triality}
-%
- if $[g, \sigma]
-[g,\sigma]^\rho [g,\sigma]^{\rho^2} =1$ holds for all $g \in G$. It is known
-that one can associate a group with triality $(G,\rho,\sigma)$ in a canonical
-way with a Moufang loop $L$. See \cite{NV} for more details.
+triple $(G,\rho,\sigma)$ is a <group with triality>\index{group with triality}
+if $[g, \sigma] [g,\sigma]^\rho [g,\sigma]^{\rho^2} =1$ holds for all $g \in
+G$. It is known that one can associate a group with triality $(G,\rho,\sigma)$
+in a canonical way with a Moufang loop $L$. See \cite{NaVo2003} for more
+details.
 
 For any Moufang loop $L$, we can calculate the triality group as a permutation
 group acting on $3|L|$ points. If the multiplication group of $L$ is

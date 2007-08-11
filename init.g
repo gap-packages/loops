@@ -2,7 +2,7 @@
 ##
 #A  init.g                  loops                G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: init.g, v 1.5.0 2007/03/15 gap Exp $
+#H  @(#)$Id: init.g, v 1.9.0 2007/08/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -11,7 +11,7 @@
 #############################################################################
 ##  DECLARING PACKAGE
 ##  -------------------------------------------------------------------------
-DeclareAutoPackage("loops", "1.5.0", ReturnTrue);
+DeclareAutoPackage("loops", "1.9.0", ReturnTrue);
 
 #############################################################################
 ##  BANNER

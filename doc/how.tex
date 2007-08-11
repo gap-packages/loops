@@ -31,8 +31,8 @@ subquasigroup of another quasigroup).
 Consequently, <the package is intended primarily for quasigroups and loops of
 small order>, say up to $1000$.
 
-The categories `IsQuasigroupElement', `IsLoopElement', `IsQuasigroup', and
-`IsLoop' are declared in {\LOOPS} as follows:
+The {\GAP} categories `IsQuasigroupElement', `IsLoopElement', `IsQuasigroup',
+and `IsLoop' are declared in {\LOOPS} as follows:
 
 \begintt
 DeclareCategory( "IsQuasigroupElement", IsMultiplicativeElement );
@@ -53,10 +53,10 @@ DeclareCategory( "IsLoop", IsQuasigroup and
 \Section{Conversions between magmas, quasigroups, loops and groups}
 
 Whether an object is considered a quasigroup or a loop is a matter of
-declaration in {\LOOPS}. A declared loop is considered to be a quasigroup,
-however, a declared quasigroup is <not> considered to be a loop, even if it
-accidentally possesses a neutral element. It is possible to convert a
-quasigroup $Q$ (with or without a neutral element) to a loop using
+declaration in {\LOOPS}. While a declared loop is also a quasigroup, a declared
+quasigroup is <not> recognized as a loop, even if it accidentally possesses a
+neutral element. It is possible to convert a quasigroup $Q$ (with or without a
+neutral element) to a loop using
 
 \>AsLoop( <Q> ) O
 
@@ -99,16 +99,16 @@ table once the left translations of $Q$ are known.
 *Example 2:* This example shows how properties of loops can be translated into
 properties of translations in a way that requires some theory.
 
-A left Bol loop is a loop satisfying $x(y(xz)) = (x(yx))z$. We claim (without
-proof) that a loop $L$ is left Bol if and only if $L_xL_yL_x$ is a left
-translation for every $x$, $y\in L$.
+A left Bol loop\index{Bol loop} is a loop satisfying $x(y(xz)) = (x(yx))z$. We
+claim (without proof) that a loop $L$ is left Bol if and only if $L_xL_yL_x$ is
+a left translation for every $x$, $y\in L$.
 
 *Example 3:* This example shows that many properties of loops become purely
 group-theoretical once they are expresses in terms of translations.
 
-A loop is simple if it has no nontrivial congruences. Then it is easy to see
-that a loop is simple if and only if its multiplication group is a primitive
-permutation group.
+A loop is simple\index{simple loop} if it has no nontrivial congruences. Then
+it is easy to see that a loop is simple if and only if its multiplication group
+is a primitive permutation group.
 
 \medskip
 

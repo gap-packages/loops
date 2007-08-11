@@ -1,7 +1,7 @@
 \Chapter{Libraries of small loops}
 
 \label{lib} Libraries of small loops form an integral part of {\LOOPS}. Loops
-in libraries are stored up to isomorphism or up to isotopism. Then name of a
+in libraries are stored up to isomorphism or up to isotopism. The name of a
 library up to isotopism starts with <itp>.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -10,7 +10,7 @@ library up to isotopism starts with <itp>.
 A library named <my Library> is stored in file `data/mylibrary.tbl', and the
 corresponding data structure is named `my_library_data'.
 
-The array `my_library_data' consists of three lists
+In most cases, the array `my_library_data' consists of three lists
 \beginlist%unordered
 \item{$\circ$}
     `my_library_data[ 1 ]' is a list of orders for which there is at
@@ -59,8 +59,8 @@ The library named <left Bol> contains all nonassociative left Bol loops of
 order less than $17$, including Moufang loops. There are $6$ such loops of
 order $8$, $1$ of order $12$, $2$ of order $15$, and $2038$ of order $16$. (The
 classification of left Bol loops of order $16$ was first accomplished by
-Moorhouse \cite{Moorhouse}. Our library was generated independently, and agrees
-with Moorhouse's results.)
+Moorhouse \cite{Mo}. Our library was generated independently, and agrees with
+Moorhouse's results.)
 
 Following the general pattern, the $m$th nonassociative left Bol loop of order
 $n$ is obtained by
@@ -68,7 +68,7 @@ $n$ is obtained by
 \>LeftBolLoop( <n>, <m> ) F
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Section{Small Moufang loops}
+\Section{Moufang loops}
 
 The library named <Moufang> contains all nonassociative Moufang loops of order
 $n\le 64$ and $n=81$.
@@ -78,8 +78,8 @@ The $m$th nonassociative Moufang loop of order $n$ is obtained by
 \>MoufangLoop( <n>, <m> ) F
 
 For $n\le 63$, our catalog numbers coincide with those of Goodaire et al.
-\cite{Goodaire}. The classification of Moufang loops of order $64$ and $81$ was
-carried in \cite{NagyVojtM64}.
+\cite{Go}. The classification of Moufang loops of order $64$ and $81$ was
+carried out in \cite{NaVo2007}.
 
 The extent of the library is summarized below:
 
@@ -126,6 +126,18 @@ gap> IsomorphismTypeOfMoufangLoop( D );
 \endexample
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Code loops}
+
+The library named <code> contains all nonassociative code loops of order less
+than $65$. There are $5$ such loops of order $16$, $16$ of order $32$, and $80$
+of order $64$, all Moufang. The library merely points to the corresponding
+Moufang loops. See \cite{NaVo2007} for a classification of small code loops.
+
+The $m$th nonassociative code loop of order $n$ is obtained by
+
+\>CodeLoop( <n>, <m> ) F
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Steiner loops}
 
 Here is how the libary <Steiner> is described within {\LOOPS}:
@@ -148,15 +160,15 @@ The $m$th Steiner loop of order $n$ is obtained by
 
 \>SteinerLoop( <n>, <m> ) F
 
-Our catalog numbers coincide with those of Colbourn and Rosa \cite{CR}.
+Our catalog numbers coincide with those of Colbourn and Rosa \cite{CoRo}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{CC-loops}
 
-By results of Kunen \cite{Kunen}, for every odd prime $p$ there are
-precisely 3 nonassociative conjugacy closed loops\index{conjugacy closed loop}
-of order $p^2$. Cs\accent127org\H{o} and Dr\'apal \cite{CD} described these 3 loops
-by multiplicative formulas on $\Z_{p^2}$ and $\Z_p \times \Z_p$.
+By results of Kunen \cite{Ku}, for every odd prime $p$ there are precisely 3
+nonassociative conjugacy closed loops\index{conjugacy closed loop} of order
+$p^2$. Cs\accent127org\H{o} and Dr\'apal \cite{CsDr} described these 3 loops by
+multiplicative formulas on $\Z_{p^2}$ and $\Z_p \times \Z_p$.
 
 *Case $m = 1$:* Let $k$ be the smallest positive integer relatively prime to $p$
 and such that $k$ is a square modulo $p$ (i.e., $k=1$). Define multiplication
@@ -169,9 +181,9 @@ $\Z_{p^2}$ by $x\cdot y = x + y + kpx^2y$.
 *Case $m = 3$:* Define multiplication on $\Z_p \times \Z_p$ by
 $(x,a)(y,b) = (x+y, a+b+x^2y )$.
 
-Moreover, Wilson \cite{Wilson} constructed a nonassociative CC-loop of order
-$2p$ for every odd prime p, and Kunen \cite{Kunen} showed that there are no
-other nonassociative CC-loops of this order. Here is the construction:
+Moreover, Wilson \cite{Wi} constructed a nonassociative CC-loop of order $2p$
+for every odd prime p, and Kunen \cite{Ku} showed that there are no other
+nonassociative CC-loops of this order. Here is the construction:
 
 Let $N$ be an additive cyclic group of order $n>2$, $N = \langle 1\rangle$.
 Let $G$ be the additive cyclic group of order $2$. Define multiplication on
@@ -223,10 +235,16 @@ The loops are obtained with
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Libraries of loops up to isotopism}
 
-For some of the above libraries we also provide the corresponding library of
-loops up to isotopism. Given a library named <lib>, the corresponding library
-up to isotopism is name <itp lib>, and the loops can be retrieved by the
-template function `ItpLibLoop( n, m )'. Here is an example:
+For the library <small> we also provide the corresponding library of loops up
+to isotopism.
+
+In general, given a library named <lib>, the corresponding library up to
+isotopism is named <itp lib>, and the loops can be retrieved by the template
+function `ItpLibLoop( n, m )'. Thus we have
+
+\>ItpSmallLoop( n, m ) O
+
+Here is an example:
 
 \beginexample
 gap> SmallLoop( 6, 14 );
@@ -254,7 +272,3 @@ Extent of the library:
    1 loop of order 5
    20 loops of order 6
 \endexample
-
-And here are the corresponding retrieving functions:
-
-\>ItpSmallLoop( n, m ) O

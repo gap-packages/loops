@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples of loops   G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: examples.gi, v 1.4.0 2007/02/11 gap Exp $
+#H  @(#)$Id: examples.gi, v 1.5.1 2007/06/27 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -16,6 +16,7 @@
 ReadPkg("loops", "data/leftbol.tbl");       # left Bol loops
 ReadPkg("loops", "data/moufang.tbl");       # Moufang loops
 ReadPkg("loops", "data/paige.tbl");         # Paige loops
+ReadPkg("loops", "data/code.tbl");          # code loops
 ReadPkg("loops", "data/steiner.tbl");       # Steiner loops
 ReadPkg("loops", "data/cc.tbl");            # CC-loops
 ReadPkg("loops", "data/small.tbl");         # small loops
@@ -39,6 +40,7 @@ LibraryByName := function( name )
     if name = "left Bol" then return left_bol_data; 
     elif name = "Moufang" then return moufang_data;
     elif name = "Paige" then return paige_data;
+    elif name = "code" then return code_data;
     elif name = "Steiner" then return steiner_data;
     elif name = "CC" then return cc_data;
     elif name = "small" then return small_data;
@@ -63,6 +65,8 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
         s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81.";
     elif name = "Paige" then
         s := "The library contains the smallest nonassociative finite \nsimple Moufang loop.";
+    elif name = "code" then
+        s := "The library contains all nonasscoiative even code loops \nof order less than 65.";
     elif name = "Steiner" then
         s := "The library contains all nonassociative Steiner loops \nof order less or equal to 16. It also contains the \nassociative Steiner loops of order 4 and 8.";
     elif name = "CC" then
@@ -75,12 +79,11 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     elif name = "itp small" then
         s := "The library contains all nonassociative loops of order less than 7 up to isotopism.";
     else
-    Error( 
-        Concatenation(
-        "The admissible names for loop libraries are: \n",
-        "[ \"left Bol\", \"Moufang\", \"Paige\", \"Steiner\", \"CC\", \"small\", \"small itp\", \"interesting\" ]."
-        )
-        );
+        Info( InfoWarning, 1, Concatenation(
+            "The admissible names for loop libraries are: \n",
+            "[ \"left Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"small\", \"small itp\", \"interesting\" ]."
+        ) );
+        return fail;
     fi;
     
     s := Concatenation( s, "\n------\nExtent of the library:" );
@@ -477,6 +480,9 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     elif name = "Paige" then
         loop := LoopByCayleyTable( lib[ 3 ][ 1 ] ); #only one loop there at this point
         SetIsMoufangLoop( loop, true );
+    elif name = "code" then
+        loop := LibraryLoop( "Moufang", n, lib[ 3 ][ pos_n ][ m ] ); 
+        SetIsCodeLoop( loop, true );
     elif name = "Steiner" then
         loop := ActivateSteinerLoop( PosInDB( m ), n );
         SetIsSteinerLoop( loop, true );
@@ -503,10 +509,6 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
 end);
 
 #############################################################################
-##  SMALL BOL LOOPS
-##  -------------------------------------------------------------------------
-
-#############################################################################
 ##  
 #F  LeftBolLoop( n, m ) 
 ##    
@@ -515,10 +517,6 @@ end);
 InstallGlobalFunction( LeftBolLoop, function( n, m )
     return LibraryLoop( "left Bol", n, m );
 end);
-
-#############################################################################
-##  SMALL MOUFANG LOOPS
-##  ------------------------------------------------------------------------
 
 # This will be used later to check if moufang_discriminators 
 # have been activated
@@ -529,15 +527,11 @@ moufang_loops_by_discriminators := [];
 ##  
 #F  MoufangLoop( n, m ) 
 ##    
-##  mth proper Moufang loop of order n
+##  mth nonassociative Moufang loop of order n
 
 InstallGlobalFunction( MoufangLoop, function( n, m )
     return LibraryLoop( "Moufang", n, m );
 end);
-
-#############################################################################
-##  SMALL PAIGE LOOPS
-##  ------------------------------------------------------------------------
 
 #############################################################################
 ##  
@@ -551,8 +545,14 @@ InstallGlobalFunction( PaigeLoop, function( q )
 end);
 
 #############################################################################
-##  SMALL STEINER LOOPS
-##  ------------------------------------------------------------------------
+##  
+#F  CodeLoop( n, m ) 
+##    
+##  mth nonassoicative code loop of order n
+
+InstallGlobalFunction( CodeLoop, function( n, m )
+    return LibraryLoop( "code", n, m );
+end);
 
 #############################################################################
 ##  
@@ -565,10 +565,6 @@ InstallGlobalFunction( SteinerLoop, function( n, m )
 end);
 
 #############################################################################
-##  CC-LOOPS OF ORDER p^2 AND 2*p FOR ODD PRIME p
-##  ------------------------------------------------------------------------
-
-#############################################################################
 ##  
 #F  CCLoop( n, m ) 
 ##    
@@ -577,10 +573,6 @@ end);
 InstallGlobalFunction( CCLoop, function( n, m )
     return LibraryLoop( "CC", n, m );
 end);
-
-#############################################################################
-##  SMALL LOOPS
-##  ------------------------------------------------------------------------
 
 #############################################################################
 ##  
@@ -593,10 +585,6 @@ InstallGlobalFunction( SmallLoop, function( n, m )
 end);
 
 #############################################################################
-##  INTERESTING LOOPS
-##  ------------------------------------------------------------------------
-
-#############################################################################
 ##  
 #F  InterestingLoop( n, m ) 
 ##    
@@ -605,10 +593,6 @@ end);
 InstallGlobalFunction( InterestingLoop, function( n, m )
     return LibraryLoop( "interesting", n, m );
 end);
-
-#############################################################################
-##  ITP SMALL LOOPS
-##  ------------------------------------------------------------------------
 
 #############################################################################
 ##  

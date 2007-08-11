@@ -2,7 +2,7 @@
 ##
 #W  quasigrp.gd      Basic methods for q & l     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: quasigrp.gd, v 1.5.0 2007/03/29 gap Exp $
+#H  @(#)$Id: quasigrp.gd, v 1.9.0 2007/08/06 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -63,10 +63,13 @@ DeclareOperation( "LoopFromFile", [ IsString, IsString ] );
 ##  CREATING QUASIGROUPS AND LOOPS BY SECTIONS
 ##  -------------------------------------------------------------------------
 
-DeclareOperation("QuasigroupByLeftSection", [ IsCollection ] );
-DeclareOperation("LoopByLeftSection", [ IsCollection ] );
-# There are also versions of QuasigroupByLeftSection and LoopByLeftSection 
-# for [ IsGroup, IsMultiplicativeElementCollection ]
+DeclareOperation( "CayleyTableByPerms", [ IsPermCollection ] );
+DeclareOperation( "QuasigroupByLeftSection", [ IsPermCollection ] );
+DeclareOperation( "LoopByLeftSection", [ IsPermCollection ] );
+DeclareOperation( "QuasigroupByRightSection", [ IsPermCollection ] );
+DeclareOperation( "LoopByRightSection", [ IsPermCollection ] );
+# There are also versions of QuasigroupByRightSection and LoopByRightSection 
+# for [ IsGroup, IsGroup, IsMultiplicativeElementCollection ]
 
 #############################################################################
 ##  CONVERSIONS
@@ -161,13 +164,14 @@ DeclareOperation( "RelativeMultiplicationGroup",
 #############################################################################
 ##  INNER MAPPING GROUPS
 ##  -------------------------------------------------------------------------
- 
-DeclareAttribute( "InnerMappingGroup", IsLoop );
-DeclareAttribute( "LeftInnerMappingGroup", IsLoop );
-DeclareAttribute( "RightInnerMappingGroup", IsLoop );
+
 DeclareOperation( "LeftInnerMapping", [ IsLoop, IsLoopElement, IsLoopElement ] );
 DeclareOperation( "RightInnerMapping", [ IsLoop, IsLoopElement, IsLoopElement ] );
 DeclareOperation( "MiddleInnerMapping", [ IsLoop, IsLoopElement ] );
+DeclareAttribute( "InnerMappingGroup", IsLoop );
+DeclareAttribute( "LeftInnerMappingGroup", IsLoop );
+DeclareAttribute( "MiddleInnerMappingGroup", IsLoop );
+DeclareAttribute( "RightInnerMappingGroup", IsLoop );
 
 #############################################################################
 ##  SUBQUASIGROUPS AND SUBLOOPS
@@ -277,11 +281,16 @@ DeclareProperty( "IsOsbornLoop", IsLoop );
 ##  ADDITIONAL VARIETIES OF LOOPS
 ##  -------------------------------------------------------------------------
 
+DeclareProperty( "IsCodeLoop", IsLoop );
 DeclareProperty( "IsSteinerLoop", IsLoop );
 DeclareProperty( "IsLeftBruckLoop", IsLoop );
 DeclareSynonymAttr( "IsLeftKLoop", IsLeftBruckLoop );
 DeclareProperty( "IsRightBruckLoop", IsLoop );
 DeclareSynonymAttr( "IsRightKLoop", IsRightBruckLoop );
+DeclareProperty( "IsALoop", IsLoop );
+DeclareProperty( "IsLeftALoop", IsLoop );
+DeclareProperty( "IsMiddleALoop", IsLoop );
+DeclareProperty( "IsRightALoop", IsLoop );
 
 #############################################################################
 ##  NORMALITY

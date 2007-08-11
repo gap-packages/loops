@@ -7,27 +7,13 @@ In this chapter we describe several ways in which quasigroups and loops can be c
 
 Let $X=\{x_1,\dots,x_n\}$ be a set and $\cdot$ a binary operation on $X$. Then
 an $n$ by $n$ array with rows and columns bordered by $x_1$, $\dots$, $x_n$, in
-this order, is a <Cayley table>
-%
-\index{Cayley table}
-%
-, or a <multiplication table>
-%
-\index{multiplication table}
-%
- of
-$\cdot$, if the entry in the row $x_i$ and column $x_j$ is $x_i\cdot x_j$.
+this order, is a <Cayley table>\index{Cayley table}, or a <multiplication
+table>\index{multiplication table} of $\cdot$, if the entry in the row $x_i$
+and column $x_j$ is $x_i\cdot x_j$.
 
-A Cayley table is a <quasigroup table>
-%
-\index{quasigroup table}
-%
- if it is a <Latin square>
-%
-\index{Latin square}
-%
-,
-i.e., if every entry $x_i$ appears in every column and every row exactly once.
+A Cayley table is a <quasigroup table>\index{quasigroup table} if it is a
+<Latin square>\index{Latin square}, i.e., if every entry $x_i$ appears in every
+column and every row exactly once.
 
 An annoying feature of quasigroup tables in practice is that they are often not
 bordered, and it is up to the reader to figure out what is meant. Throughout
@@ -39,13 +25,9 @@ not assume that the distinct entries $x_1$, $\dots$, $x_n$ form the interval
 $1$, $\dots$, $n$. The significance of this observation will become clear in
 Chapter "Methods based on permutation groups".
 
-Finally, we say that a quasigroup table is a <loop table>
-%
-\index{loop table}
-%
- if the first row
-and the first column are the same, and if the entries in the first row are
-ordered in an ascending fashion.
+Finally, we say that a quasigroup table is a <loop table>\index{loop table} if
+the first row and the first column are the same, and if the entries in the
+first row are ordered in an ascending fashion.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Testing Cayley tables}
@@ -80,7 +62,7 @@ returns a Cayley table in which $x_i$ has been replaced by $i$.
 
 The operation
 
-\>NormalizedQuasigroupTable( <T> )
+\>NormalizedQuasigroupTable( <T> ) O
 
 makes a quasigroup table $T$ into a loop table by:
 \beginlist%unordered
@@ -91,8 +73,6 @@ makes a quasigroup table $T$ into a loop table by:
 \item{$\circ$} and then permuting the rows of $T$ so that the first column
     reads $1$, $\dots$, $n$.
 \endlist
-
-Here is an example for methods concerning Cayley tables:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Creating quasigroups and loops manually}
@@ -238,35 +218,88 @@ And here are the needed ${\LOOPS}$ commands:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Creating quasigroups and loops by sections}
 
-Let $G$ be a group, $H$ a subgroup, and $T$ a left transversal to $H$ in $G$.
-Then the operation $\circ$ defined on the left cosets $Q = \{tH;\;t\in T\}$ by
-$tH\circ t'H = (tt')H$ turns $Q$ into a quasigroup. In fact, every quasigroup
-$Q$ can be obtained in this way (let $G={\rm{Mlt}}(Q)$, $H={\rm{LMlt}}(Q)$ and
-$T=\{L_x;\;x\in Q\}$).
+Let $P$ be a set of $n$ permutations of an $n$-element set $X$. If at most one
+permutation of $P$ is the identity permutation, and if all other permutations of $P$ move
+all points of $X$, the operation
+
+\>CayleyTableByPerms( <P> ) O
+
+returns an $n\times n$ Cayley table $C$ such that `C[i][j] = X[j]^P[i]'.
+
+In particular, if $P$ is the left section of a quasigroup $Q$, the above
+operation returns the multiplication table of $Q$.
+
+If $P$ is a set of permutations corresponding to the left
+translations of a quasigroup (or loop) $Q$, the operation
+
+\>QuasigroupByLeftSection( <P> ) O
+\>LoopByLeftSection( <P> ) O
+
+returns the corresponding quasigroup (or loop). The order of permutations in
+$P$ is important in the quasigroup case, but it is disregarded in the loop
+case, since the order of rows in the corresponding multiplication table is
+determined by the presence of the neutral element.
+
+Analogously, we define
+
+\>QuasigroupByRightSection( <P> ) O
+\>LoopByRightSection( <P> ) O
+
+Here is an example:
+
+\beginexample
+gap> S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;
+gap> ls := LeftSection( S );
+[ (), (1,3,5), (1,5,3) ]
+gap> CayleyTableByPerms( ls );
+[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
+gap> CayleyTable( LoopByLeftSection( ls ) );
+[ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ]
+\endexample
+
+Let $G$ be a group, $H$ a subgroup, and $T$ a right
+transversal\index{transversal} to $H$ in $G$. Then the operation $\circ$
+defined on the right cosets $Q = \{Ht;\;t\in T\}$ by $Ht\circ Ht' = H(tt')$
+turns $Q$ into a quasigroup if and only if $T$ is a right transversal to all
+conjugates $g^{-1}Hg$ of $H$ in $G$. In fact, every quasigroup $Q$ can be
+obtained in this way (let $G={\rm{Mlt}}(Q)$, $H={\rm{RMlt}}(Q)$ and
+$T=\{R_x;\;x\in Q\}$).
 
 The resulting quasigroup (or loop) is returned via
 
-\>QuasigroupByLeftSection( <H>, <T> ) O
-\>LoopByLeftSection( <H>, <T> ) O
+\>QuasigroupByRightSection( <G>, <H>, <T> ) O
+\>LoopByRightSection( <G>, <H>, <T> ) O
 
-The following example is more important than it looks (see \cite{NagyBol}):
+We do not support the dual operations for left sections since, by default,
+actions in {\GAP} act on the right.
+
+To demonstrate `LoopByRightSection', let us recall a construction due to Nagy \cite{Na}:
+
+Let $X$ be a simple group with subgroups $Y_0$, $Y_1$ such that $Y_0\cap Y_1=1$
+and $X=Y_0Y_1$. Let $G=X\times X$ and $H=Y_0\times Y_1$. Then $T =
+\{(x,x^{-1});\; x\in X\}$ is a right transversal of $H$ in $G$, and the
+corresponding loop is a simple (right) Bol loop.\index{simple Bol loop}
+
+The next example illustrates this construction with $X=A_5$, $Y_0=A_4$, and
+$Y_1 = \langle(1,2,3,4,5)\rangle$.
 
 \beginexample
-gap> H := Group( (1,2,3,4), (5,6), (6,7) );;
-gap> T:= List( Group((1,2), (1,2,3,4)), x -> x^(-1)*x^(1,5)(2,6)(3,7)(4,8));;
-gap> L := LoopByLeftSection( H, T );
-<loop of order 24>
-gap> [ IsLeftBolLoop( L ), IsMoufangLoop( L ), IsSimple( L ) ];
-[ true, false, true ]
+gap> Shift := function( p ) # shifts permutation "up" by 5
+>       local ls;
+>       ls := ListPerm( p );
+>       ls := Concatenation( [1,2,3,4,5], List( ls, x -> x + 5 ) );
+>       return PermList( ls );
+> end;
+function( p ) ... end
+gap> A := AlternatingGroup( 5 );;
+gap> G := DirectProduct( A, A );;
+gap> H := Subgroup( G, [ (1,2,3), (2,3,4), (6,7,8,9,10) ] );;
+gap> T := List( A, x -> x * Shift(x)^(-1) );;
+gap> L := LoopByRightSection( G, H, T );
+<loop of order 60>
+gap> [ IsRightBolLoop( L ), IsSimple( L ), IsMoufangLoop( L ) ];
+[ true, true, false ]
 \endexample
-
-In the above setting, each element $t$ of $T$ determines a permutation of $Q$,
-a left translation by $t$. More generally, if $S$ is a list of permutations
-that correspond to all left translations in a quasigroup or a loop $Q$, the
-quasigroup or loop $Q$ is returned by
-
-\>QuasigroupByLeftSection( <S> ) O
-\>LoopByLeftSection( <S> ) O
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Creating quasigroups and loops by extensions}
@@ -350,7 +383,8 @@ corresponding group is returned by
 
 Note that the conversions work in both directions, not just toward more special
 structures. Thus, if $G$ is a declared group, then `AsLoop( <G> )' returns the
-corresponding loop, for instance.
+corresponding loop, for instance. Use the `AsLoop' command to apply methods of
+{\LOOPS} to groups.
 
 Also see `IsomorphicCopyByPerm'.
 
