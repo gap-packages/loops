@@ -1,8 +1,8 @@
 #############################################################################
 ##
-#W  loop_iso.gi    Isomorphisms & isotopisms of loops     Nagy / Vojtechovsky
+#W  iso.gi  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: loop_iso.gi, v 1.5.1 2007/04/19 gap Exp $
+#H  @(#)$Id: iso.gi, v 2.0.0 2008/02/20 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -24,7 +24,7 @@
 InstallMethod( Discriminator, "for loop",
     [ IsLoop ],
 function( L )
-    local n, T, I, i, j, k, ebo, c, J, counter, A, P, B, FrequencySet;
+    local n, T, I, i, j, ebo, c, J, counter, A, P, B, FrequencySet;
     
     # making sure loop table is canonical
     if L = Parent( L ) then T := CayleyTable( L );
@@ -65,14 +65,16 @@ function( L )
     else    
         #power associative loop, hence refined discriminator
         # Element x asks: What is my order?
-        I := List( L, x -> [Order(x), 0, 0] );
-        # Element x asks: How many times am I a square, a fourth power?
+        I := List( L, x -> [Order(x), 0, 0, 0, 0, false] );
+        # Element x asks: How many times am I a square, third power, fourth power?
         for i in [1..n] do
             j := T[ i ][ i ];
             I[ j ][ 2 ] := I[ j ][ 2 ] + 1;
-            k := T[ j ][ j ];
-            I[ k ][ 3 ] := I[ k ][ 3 ] + 1;
-        od;
+            j := T[ i ][ j ];
+            I[ j ][ 3 ] := I[ j ][ 3 ] + 1;
+            j := T[ i ][ j ];
+            I[ j ][ 4 ] := I[ j ][ 4 ] + 1;
+        od; 
         # Element x asks: With how many elements of given order do I commute?
         ebo := List( [1..n], i -> []); # elements by order
         for i in [1..n] do Add( ebo[ I[ i ][ 1 ] ], i ); od;
@@ -86,7 +88,11 @@ function( L )
                 fi; od;
                 Add( c, counter );
             od;
-            I[i][4] := c;
+            I[i][5] := c;
+        od;
+        # Element x asks: Am I central?
+        for i in [1..n] do
+            I[ i ][ 6 ] := Elements( L )[ i ] in Center( L );
         od;
     fi; # All invariants have been calculated at this point.
     
@@ -449,57 +455,6 @@ function( L )
     
     if IsEmpty( A ) then return Group( () ); fi; # no notrivial automorphism
     return Group( List( A, p -> SortingPerm( p ) ) );
-end);
-
-#############################################################################
-##  ISOMORPHISM TYPE OF MOUFANG LOOP
-##  ------------------------------------------------------------------------
-
-# (PROG) assumes that moufang_data, moufang_discriminators and 
-# moufang_loops_by_discriminators are precalculated, but not necessarily bound
-
-#############################################################################
-##  
-#O  IsomorphismTypeOfMoufangLoop( L ) 
-##
-##  Returns the isomorphism type of Moufang loop <L> in the form
-##  [n,m], where n=Size(L) and m is the catalog number of <L> in the 
-##  library of Moufang loops. See documentation for more details.
-
-InstallMethod( IsomorphismTypeOfMoufangLoop, "for loop",
-    [ IsLoop ],
-function( L )
-    local n, D, EG, p, data, M, iso;
-
-    if not IsMoufangLoop( L ) then 
-        Error("LOOPS: <1> must be a Moufang loop.");
-    fi;
-    if IsAssociative( L ) then 
-        Error("LOOPS: <1> is a group.");
-    fi;
-    n := Size(L);
-    if not n in [1..64] then
-        Error("LOOPS: Isomorphism type is supported only for Moufang loops of order 1..64.");
-    fi;
-    
-    # making sure that L has canonical Cayley table
-    if not L = Parent( L ) then L := LoopByCayleyTable( CayleyTable( L ) ); fi;     
-    D := Discriminator( L );
-    EG := EfficientGenerators( L, D );
-    if n in [1..64] then
-        if IsEmpty(moufang_discriminators) then
-            ReadPkg( "loops", "data/moufang_discriminators.tbl");
-        fi;
-    
-        p := Position( moufang_discriminators, D[1] );
-        if not p = fail then
-            for data in moufang_loops_by_discriminators[ p ] do
-                M := MoufangLoop( data[1], data[2] );
-                iso := IsomorphismLoopsNC( L, EG, D, M, Discriminator( M ) );
-                if not iso = fail then return [data, iso]; fi;
-            od;
-        fi;
-    fi;
 end);
 
 #############################################################################

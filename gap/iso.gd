@@ -1,8 +1,8 @@
 #############################################################################
 ##
-#W  loop_iso.gd    Isomorphisms & isotopisms of loops     Nagy / Vojtechovsky
+#W  iso.gd  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: loop_iso.gd, v 1.3.0 2007/01/27 gap Exp $
+#H  @(#)$Id: iso.gd, v 2.0.0 2008/03/07 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -27,11 +27,6 @@ DeclareOperation( "IsomorphicCopyByNormalSubloop", [ IsLoop, IsLoop ] );
 ##  -------------------------------------------------------------------------
 
 # AutomorphismGroup already declared for groups
-
-#############################################################################
-##  ISOMORPHISM TYPE OF MOUFANG LOOP
-##  ------------------------------------------------------------------------
-DeclareOperation( "IsomorphismTypeOfMoufangLoop", [ IsLoop ] );
 
 # There are several function in this package that we do not wish to make 
 # global, namely:

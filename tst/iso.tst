@@ -1,14 +1,14 @@
 #############################################################################
 ##
-#W  auto.tst   Testing automorphisms             G. P. Nagy / P. Vojtechovsky
+#W  iso.tst   Testing isomorphisms             G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: auto.tst, v 1.5.0 2007/03/06 gap Exp $
+#H  @(#)$Id: iso.tst, v 2.0.0 2008/03/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
-gap> START_TEST("LOOPS, auto: testing automorphism groups");
+gap> START_TEST("LOOPS, iso: testing isomorphisms");
 
 # TESTING AUTOMORPHISM GROUPS
 
@@ -25,15 +25,14 @@ gap> Size( AutomorphismGroup( SteinerLoop( 16, 77 ) ) );
 
 # TESTING ISOMORPHISMS
 
-gap> DirectProduct( MoufangLoop( 32, 5 ), Group( (1,2) ) );;
-gap> IsomorphismTypeOfMoufangLoop( last );
-[ [ 64, 19 ], (6,7,8,9,11,14,20,36,15,23,40,22,51,35,13,18,34,10,12,17,33)(16,
-    27,46,30,52,47,31,63,55,53,48,32,64,59,58,44,28,60,49,38,19,45,29,61,50,
-    42,25,56,54,39,21,37)(24,41)(26,57,43) ]
+gap> Q := DirectProduct( MoufangLoop( 32, 5 ) );;
+gap> Qp := IsomorphicCopyByPerm( Q, (2,3,4)(17,20) );;
+gap> IsomorphismLoops( Q, Qp );
+(2,3,4)(18,23)(19,25)(21,27)(22,28)(24,30)(26,31)(29,32)
 
 # TESTING ISOTOPISMS
 
 gap> IsotopismLoops( SmallLoop( 5, 1 ), SmallLoop( 5, 4 ) );    
 [ (3,5,4), (1,2), (1,2) ]
 
-gap> STOP_TEST( "auto.tst", 10000000 );
+gap> STOP_TEST( "iso.tst", 10000000 );

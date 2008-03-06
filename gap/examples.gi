@@ -1,8 +1,8 @@
 #############################################################################
 ##
-#W  examples.gi              Examples of loops   G. P. Nagy / P. Vojtechovsky
+#W  examples.gi              Examples [loops]
 ##  
-#H  @(#)$Id: examples.gi, v 1.5.1 2007/06/27 gap Exp $
+#H  @(#)$Id: examples.gi, v 2.0.0 2008/01/21 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -517,11 +517,6 @@ end);
 InstallGlobalFunction( LeftBolLoop, function( n, m )
     return LibraryLoop( "left Bol", n, m );
 end);
-
-# This will be used later to check if moufang_discriminators 
-# have been activated
-moufang_discriminators := [];
-moufang_loops_by_discriminators := [];
 
 #############################################################################
 ##  

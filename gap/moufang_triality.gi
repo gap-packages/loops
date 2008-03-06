@@ -1,8 +1,8 @@
 #############################################################################
 ##
-#W  triality.gi     Triality of Moufang loops    G. P. Nagy / P. Vojtechovsky
+#W  moufang_triality.gi     Triality of Moufang loops [loops]
 ##  
-#H  @(#)$Id: triality.gi, v 0.9996 2005/8/22 gap Exp $
+#H  @(#)$Id: moufang_triality.gi, v 2.0.0 2008/01/21 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

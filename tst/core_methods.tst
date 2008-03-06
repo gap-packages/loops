@@ -1,14 +1,14 @@
 #############################################################################
 ##
-#W  quasigrp.tst   Testing core functions        G. P. Nagy / P. Vojtechovsky
+#W  core_methods.tst   Testing core methods      G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: quasigrp.tst, v 1.9.0 2007/08/11 gap Exp $
+#H  @(#)$Id: core_methods.tst, v 2.0.0 2008/03/06 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
-gap> START_TEST("LOOPS, quasigrp: testing core functions");
+gap> START_TEST("LOOPS, core_methods: testing core methods");
 
 # TESTING VIEW AND PRINT MODE, AND LATIN SQUARE FUNCTIONS
 
@@ -369,4 +369,4 @@ gap> FrattiniSubloop( L );
 gap> FrattinifactorSize( L );
 8
 
-gap> STOP_TEST( "quasigr.tst", 10000000 );
+gap> STOP_TEST( "core_methods.tst", 10000000 );

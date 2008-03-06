@@ -1,7 +1,22 @@
 \Chapter{Specific methods}
 
-This chapter describes methods of {\LOOPS} that apply to some
-special loops, mostly Moufang loops.
+This chapter describes methods of {\LOOPS} that apply to some special loops,
+mostly Bol and Moufang loops.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Core methods for Bol loops}
+
+Let $L$ be a left Bol loop\index{left Bol loop} such that the mapping $x\mapsto
+x^2$ is a permutation of $L$. Define a new operation $*$ on $L$ by $x*y
+=(x(y^2x))^{1/2}$. Then Bruck showed that $(L,*)$ is a left Bruck loop, called
+the <assoicated left Bruck loop>.\index{associated left Bruck loop}. (In fact,
+Bruck used the isomorphic operation $x*y = x^{1/2}(yx^{1/2})$ instead. Our
+approach is more natural, since the associated left Bruck loop to a left Bruck
+loop $L$ is identical to $L$ then.) The associated left Bruck loop of $L$ is
+returned via
+
+\>AssoicatedLeftBruckLoop( <L> ) A
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Moufang modifications}

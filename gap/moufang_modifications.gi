@@ -1,8 +1,8 @@
 #############################################################################
 ##
-#W  moufang_modifications.gi   Moufang modif.    G. P. Nagy / P. Vojtechovsky
+#W  moufang_modifications.gi   Moufang modifications [loops]
 ##  
-#H  @(#)$Id: moufang_modifications.gi, v 1.1.0 2006/02/02 gap Exp $
+#H  @(#)$Id: moufang_modifications.gi, v 2.0.0 2008/01/21 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

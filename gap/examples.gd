@@ -1,8 +1,8 @@
 #############################################################################
 ##
-#W  examples.gd           Examples of loops      G. P. Nagy / P. Vojtechovsky
+#W  examples.gd           Examples [loops]
 ##  
-#H  @(#)$Id: examples.gd, v 1.5.1 2007/06/27 gap Exp $
+#H  @(#)$Id: examples.gd, v 2.0.0 2008/01/21 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
