@@ -90,13 +90,9 @@ $$
 }
 $$
 
-The <octonion loop>
-%
-\index{octonion loop}
-%
-\index{octonions} of order $16$ (i.e., the
-multiplication loop of the $\pm$ basis elements in the $8$-dimensional standard
-real octonion algebra) is `MoufangLoop( 16, 3 )'.
+The <octonion loop>\index{octonion loop}\index{loop!octonion} of order $16$
+(i.e., the multiplication loop of the $\pm$ basis elements in the
+$8$-dimensional standard real octonion algebra) is `MoufangLoop( 16, 3 )'.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Code loops}
@@ -139,9 +135,10 @@ Our catalog numbers coincide with those of Colbourn and Rosa \cite{CoRo}.
 \Section{CC-loops}
 
 By results of Kunen \cite{Ku}, for every odd prime $p$ there are precisely 3
-nonassociative conjugacy closed loops\index{conjugacy closed loop} of order
-$p^2$. Cs\accent127org\H{o} and Dr\'apal \cite{CsDr} described these 3 loops by
-multiplicative formulas on $\Z_{p^2}$ and $\Z_p \times \Z_p$.
+nonassociative conjugacy closed loops\index{conjugacy closed
+loop}\index{loop!conjugacy closed} of order $p^2$. Cs\accent127org\H{o} and
+Dr\'apal \cite{CsDr} described these 3 loops by multiplicative formulas on
+$\Z_{p^2}$ and $\Z_p \times \Z_p$.
 
 *Case $m = 1$:* Let $k$ be the smallest positive integer relatively prime to $p$
 and such that $k$ is a square modulo $p$ (i.e., $k=1$). Define multiplication
@@ -183,9 +180,9 @@ There are 5 and 107 such loops, respectively. The loops are obtained by
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Paige loops}
 
-<Paige loops>\index{Paige loop} are nonassociative finite simple
-Moufang loops. By \cite{Li}, there is precisely one Paige loop for every finite
-field ${\rm{GF}}(q)$.
+<Paige loops>\index{Paige loop}\index{loop!Paige} are nonassociative finite
+simple Moufang loops. By \cite{Li}, there is precisely one Paige loop for every
+finite field ${\rm{GF}}(q)$.
 
 The library named <Paige> contains the smallest nonassociative simple Moufang
 loop
@@ -193,13 +190,27 @@ loop
 \>PaigeLoop( <2> ) F
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Nilpotent loops}
+
+The library named <nilpotent> contains all nonassociative nilpotent loops of
+order less than 12, up to isomorphism. There are $2$ nonassociative nilpotent
+loops of order $6$, $134$ of order $8$, $8$ of order $9$ and $1043$ of order
+$10$. They are obtained as usual with
+
+\>NilpotentLoop( <n>, <m> ) F
+
+See \cite{DaVo} for more on enumeration of nilpotent loops. For instance, there
+are $2623755$ nilpotent loops of order $12$, and $123794003928541545927226368$
+nilpotent loops of order $22$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Interesting loops}
 
-The library named <interesting> contains some loops that are
-illustrative for the theory of loops. At this point, the library contains a
-nonassociative loop of order $5$, a nonassociative nilpotent loop of order $6$,
-a nonMoufang left Bol loop of order $16$, and the loop of
-sedenions\index{sedenions} of order $32$ (sedenions generalize octonions).
+The library named <interesting> contains some loops that are illustrative for
+the theory of loops. At this point, the library contains a nonassociative loop
+of order $5$, a nonassociative nilpotent loop of order $6$, a nonMoufang left
+Bol loop of order $16$, and the loop of sedenions\index{sedenion
+loop}\index{loop!sedenion} of order $32$ (sedenions generalize octonions).
 
 The loops are obtained with
 

@@ -21,7 +21,7 @@ gap> Q := QuasigroupByCayleyTable( T );
 <quasigroup of order 2>
 gap> Elements( Q );
 [ q1, q2 ]
-gap> L := AsLoop( Q );
+gap> L := IntoLoop( Q );
 <loop of order 2>
 gap> Elements( L );
 [ l1, l2 ]
@@ -30,15 +30,15 @@ l1
 
 # TESTING MORE CONVERSION FUNCTIONS
 
-gap> G := AsGroup( Q );
+gap> G := IntoGroup( Q );
 Group([ (), (1,2) ])
-gap> G := AsGroup( L );
+gap> G := IntoGroup( L );
 Group([ (), (1,2) ])
-gap> AsQuasigroup( G );
+gap> IntoQuasigroup( G );
 <quasigroup of order 2>
-gap> AsLoop( G );
+gap> IntoLoop( G );
 <loop of order 2>
-gap> AsLoop( Group( (1,2,3), (1,2), (1,4) ) );
+gap> IntoLoop( Group( (1,2,3), (1,2), (1,4) ) );
 <loop of order 24>
 gap> PrincipalLoopIsotope( Q, Elements(Q)[1], Elements(Q)[1] );
 <loop of order 2>
@@ -157,6 +157,21 @@ gap> QuasigroupByRightSection( RightSection( S ) );
 <quasigroup of order 3>
 gap> CayleyTableByPerms( LeftSection( S ) );
 [ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
+
+# TESTING RANDOM QUASIGROUPS AND LOOPS
+
+gap> RandomQuasigroup( 10 );
+<quasigroup of order 10>
+gap> RandomQuasigroup( 10, 100 );
+<quasigroup of order 10>
+gap> RandomLoop( 11 );
+<loop of order 11>
+gap> RandomLoop( 30, 1000 );
+<loop of order 30>
+gap> RandomNilpotentLoop( [2, 3, 5] );
+<loop of order 30>
+gap> RandomNilpotentLoop( [2, CyclicGroup(3), 6] );
+<loop of order 36>
 
 # TESTING SUBQUASIGROUPS AND SUBLOOPS
 

@@ -21,9 +21,10 @@ commutative:
 \>IsAssociative( <Q> ) P
 \>IsCommutative( <Q> ) P
 
-A loop $L$ is said to be <power-associative>\index{power-associative loop}
-(resp.\ <diassociative>\index{diassociative loop}) if every monogenic subloop
-of $L$ (resp. every $2$-generated subloop of $L$) is a group.
+A loop $L$ is said to be <power associative>\index{power
+associative!loop}\index{loop!power associative} (resp.\
+<diassociative>\index{diassociative loop}\index{loop!diassociative}) if every
+monogenic subloop of $L$ (resp. every $2$-generated subloop of $L$) is a group.
 
 \>IsPowerAssociative( <L> ) P
 \>IsDiassociative( <L> ) P
@@ -31,32 +32,32 @@ of $L$ (resp. every $2$-generated subloop of $L$) is a group.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Inverse properties}
 
-A loop $L$ has the <left inverse property>\index{left inverse property} if
+A loop $L$ has the <left inverse property>\index{inverse property!left} if
 $x^\lambda(xy)=y$ for every $x$, $y\in L$, where $x^\lambda$ is the left
-inverse of $x$. Dually, $L$ has the <right inverse property>\index{right
-inverse property} if $(yx)x^\rho=y$ for every $x$, $y\in L$, where $x^\rho$ is
+inverse of $x$. Dually, $L$ has the <right inverse property>\index{inverse
+property!right} if $(yx)x^\rho=y$ for every $x$, $y\in L$, where $x^\rho$ is
 the right inverse of $x$. If $L$ has both the left and right inverse
 properties, it has the <inverse property>\index{inverse property}. We say that
-$L$ has <two-sided inverses>\index{two-sided inverses loop} if
-$x^\lambda=x^\rho$ for every $x\in L$.
+$L$ has <two-sided inverses>\index{inverse!two-sided} if $x^\lambda=x^\rho$ for
+every $x\in L$.
 
 \>HasLeftInverseProperty( <L> ) P
 \>HasRightInverseProperty( <L> ) P
 \>HasInverseProperty( <L> ) P
 \>HasTwosidedInverses( <L> ) P
 
-A loop has the <weak inverse property>\index{weak inverse property} if
+A loop has the <weak inverse property>\index{inverse property!weak} if
 $(xy)^\lambda x = y^\lambda$. Equivalently, a loop has the weak inverse
 property if $x(yx)^\rho = y^\rho$.
 
 \>HasWeakInverseProperty( <L> ) P
 
 According to \cite{Ar}, a loop $L$ has the <automorphic inverse
-property>\index{automorphic inverse property} if $(xy)^\lambda = x^\lambda
+property>\index{inverse property!automorphic} if $(xy)^\lambda = x^\lambda
 y^\lambda$, or, equivalently, $(xy)^\rho = x^\rho y^\rho$. (In particular, when
 $L$ has two-sided inverses and the automorphic inverse property, it satisfies
 $(xy)^{-1}=x^{-1}y^{-1}$.) Similarly, $L$ has the <antiautomorphic inverse
-property>\index{antiautomorphic inverse property} if $(xy)^\lambda=y^\lambda
+property>\index{inverse property!antiautomorphic} if $(xy)^\lambda=y^\lambda
 x^\lambda$, or, equivalently, $(xy)^\rho = y^\rho x^\rho$.
 
 \>HasAutomorphicInverseProperty( <L> ) P
@@ -80,32 +81,36 @@ implemented in {\LOOPS}:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Some properties of quasigroups}
 
-A quasigroup $Q$ is <semisymmetric>\index{semisymmetric quasigroup} if
-$(xy)x=y$ for every $x$, $y\in Q$. Equivalently, $Q$ is semisymmetric if
-$x(yx)=y$ for every $x$, $y\in Q$. A semisymmetric commutative quasigroup is
-known as <totally symmetric>\index{totally symmetric quasigroup}. Totally
-symmetric quasigroups are precisely quasigroups satisfying $xy=x\backslash y =
-x/y$.
+A quasigroup $Q$ is <semisymmetric>\index{semisymmetric
+quasigroup}\index{quasigroup!semisymmetric} if $(xy)x=y$ for every $x$, $y\in
+Q$. Equivalently, $Q$ is semisymmetric if $x(yx)=y$ for every $x$, $y\in Q$. A
+semisymmetric commutative quasigroup is known as <totally
+symmetric>\index{totally symmetric quasigroup}\index{quasigroup!totally
+symmetric}. Totally symmetric quasigroups are precisely quasigroups satisfying
+$xy=x\backslash y = x/y$.
 
 \>IsSemisymmetric( <Q> ) P
 \>IsTotallySymmetric( <Q> ) P
 
-A quasigroup $Q$ is <idempotent>\index{idempotent quasigroup} if $x^2=x$ for
-every $x\in Q$. Idempotent totally symmetric quasigroups are known as <Steiner
-quasigroups>\index{Steiner quasigroup}. A quasigroup $Q$ is
-<unipotent>\index{unipotent quasigroup} if $x^2=y^2$ for every $x$, $y\in Q$.
+A quasigroup $Q$ is <idempotent>\index{idempotent
+quasigroup}\index{quasigroup!idempotent} if $x^2=x$ for every $x\in Q$.
+Idempotent totally symmetric quasigroups are known as <Steiner
+quasigroups>\index{Steiner!quasigroup}\index{quasigroup!Steiner}. A quasigroup
+$Q$ is <unipotent>\index{unipotent quasigroup}\index{quasigroup!unipotent} if
+$x^2=y^2$ for every $x$, $y\in Q$.
 
 \>IsIdempotent( <Q> ) P
 \>IsSteinerQuasigroup( <Q> ) P
 \>IsUnipotent( <Q> ) P
 
-A quasigroup is <left distributive>\index{left distributive quasigroup} if it
-satisfies $x(yz)=(xy)(xz)$. Similarly, it is <right distributive>\index{right
-distributive quasigroup} if it satisfies $(xy)z=(xz)(yz)$. A <distributive
-quasigroup>\index{distributive quasigroup} is a quasigroup that is both left
+A quasigroup is <left distributive>\index{distributive quasigroup!left} if it
+satisfies $x(yz)=(xy)(xz)$. Similarly, it is <right
+distributive>\index{distributive quasigroup!right} if it satisfies
+$(xy)z=(xz)(yz)$. A <distributive quasigroup>\index{distributive
+quasigroup}\index{quasigroup!distributive} is a quasigroup that is both left
 and right distributive. A quasigroup is called <entropic>\index{entropic
-quasigroup} or <medial>\index{medial quasigroup} if it satisfies
-$(xy)(zw)=(xz)(yw)$.
+quasigroup}\index{quasigroup!entropic} or <medial>\index{medial
+quasigroup}\index{quasigroup!medial} if it satisfies $(xy)(zw)=(xz)(yw)$.
 
 \>IsLeftDistributive( <Q> ) P
 \>IsRightDistributive( <Q> ) P
@@ -124,9 +129,9 @@ for `IsLeftDistributive' and `IsRightDistributive' respectively.
 \Section{Loops of Bol-Moufang type}
 
 Following \cite{Fe} and \cite{PhVo}, a variety of loops is said to be of
-<Bol-Moufang type>\index{loops of Bol-Moufang type} if it is defined by a
-single <identity of Bol-Moufang type>\index{identity of Bol-Moufang type},
-i.e., by an identity that:
+<Bol-Moufang type>\index{loop!of Bol-Moufang type} if it is defined by a single
+<identity of Bol-Moufang type>\index{identity of Bol-Moufang type}, i.e., by an
+identity that:
 \beginlist%unordered
 \item{$\circ$}
     contains the same $3$ variables on both sides,
@@ -139,37 +144,37 @@ It is proved in \cite{PhVo} that there are $13$ varieties of nonassociative loop
 of Bol-Moufang type. These are:
 \beginlist%unordered
 \item{$\circ$}
-    <left alternative loops>\index{left alternative loop}, defined by $x(xy) = (xx)y$,
+    <left alternative loops>\index{alternative loop!left}, defined by $x(xy) = (xx)y$,
 \item{$\circ$}
-    <right alternative loops>\index{right alternative loop}, defined by $x(yy) = (xy)y$,
+    <right alternative loops>\index{alternative loop!right}, defined by $x(yy) = (xy)y$,
 \item{$\circ$}
-    <left nuclear square loops>\index{left nuclear square loop}, defined by $(xx)(yz) = ((xx)y)z$,
+    <left nuclear square loops>\index{nuclear square loop!left}, defined by $(xx)(yz) = ((xx)y)z$,
 \item{$\circ$}
-    <middle nuclear square loops>\index{middle nuclear square loop}, defined by $x((yy)z) = (x(yy))z$,
+    <middle nuclear square loops>\index{nuclear square loop!middle}, defined by $x((yy)z) = (x(yy))z$,
 \item{$\circ$}
-    <right nuclear square loops>\index{right nuclear square loop}, defined by $x(y(zz)) = (xy)(zz)$,
+    <right nuclear square loops>\index{nuclear square loop!right}, defined by $x(y(zz)) = (xy)(zz)$,
 \item{$\circ$}
-    <flexible loops>\index{flexible loop}, defined by $x(yx) = (xy)x$,
+    <flexible loops>\index{flexible loop}\index{loop!flexible}, defined by $x(yx) = (xy)x$,
 \item{$\circ$}
-    <left Bol loops>\index{left Bol loop}, defined by $x(y(xz)) = (x(yz))x$,
+    <left Bol loops>\index{Bol loop!left}\index{loop!Bol}, defined by $x(y(xz)) = (x(yx))z$,
     always left alternative,
 \item{$\circ$}
-    <right Bol loops>\index{right Bol loop}, defined by $x((yz)y) = ((xy)z)y$,
+    <right Bol loops>\index{Bol loop!right}, defined by $x((yz)y) = ((xy)z)y$,
     always right alternative,
 \item{$\circ$}
-    <LC-loops>\index{LC-loop}, defined by $(xx)(yz) = (x(xy))z$,
+    <LC-loops>\index{LC-loop}\index{loop!LC}, defined by $(xx)(yz) = (x(xy))z$,
     always left alternative, left and middle nuclear square,
 \item{$\circ$}
-    <RC-loops>\index{RC-loop}, defined by $x((yz)z) = (xy)(zz)$,
+    <RC-loops>\index{RC-loop}\index{loop!RC}, defined by $x((yz)z) = (xy)(zz)$,
     always right alternative, right and middle nuclear square,
 \item{$\circ$}
-    <Moufang loops>\index{Moufang loop}, defined by $(xy)(zx) = (x(yz))x$,
+    <Moufang loops>\index{Moufang loop}\index{loop!Moufang}, defined by $(xy)(zx) = (x(yz))x$,
     always flexible, left and right Bol,
 \item{$\circ$}
-    <C-loops>\index{C-loop}, defined by $x(y(yz)) = ((xy)y)z$,
+    <C-loops>\index{C-loop}\index{loop!C}, defined by $x(y(yz)) = ((xy)y)z$,
     always LC and RC,
 \item{$\circ$}
-    <extra loops>\index{extra loop}, defined by $x(y(zx)) = ((xy)z)x$,
+    <extra loops>\index{extra loop}\index{loop!extra}, defined by $x(y(zx)) = ((xy)z)x$,
     always Moufang and C.
 \endlist
 Note that although some of the defining identities are not of Bol-Moufang type,
@@ -177,9 +182,10 @@ they are equivalent to a Bol-Moufang identity. Moreover, many varieties are
 defined in several ways, by equivalent identities of Bol-Moufang type.
 
 There are several varieties related to loops of Bol-Moufang type. A loop is
-said to be <alternative>\index{alternative loop} if it is both left and
-right alternative, and <nuclear square>\index{nuclear square loop} if it is left,
-middle and right nuclear square.
+said to be <alternative>\index{alternative loop}\index{loop!alternative} if it
+is both left and right alternative, and <nuclear square>\index{nuclear square
+loop}\index{loop!nuclear square} if it is left, middle and right nuclear
+square.
 
 Here are the corresponding {\LOOPS} commands (argument $L$ indicates that the
 property applies only to loops, argument $Q$ indicates that the property
@@ -228,14 +234,13 @@ standard yet, and hence is not supported in {\LOOPS}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Power alternative loops}
 
-A loop is <left power alternative>\index{left power alternative
-loop} if it is power associative and $x^n(x^m y) = x^{n+m}y$ for
-every $x$, $y$ and all integers $n$, $m$. Similarly, a loop is
-<right power alternative>\index{right power alternative loop} if
-it is power associative and $(xy^n)y^m = xy^{n+m}$ for all $x$,
-$y$ and all integers $n$, $m$. A loop that is both left and right
-power alternative is said to be <power alternative>\index{power
-alternative loop}.
+A loop is <left power alternative>\index{power alternative loop!left} if it is
+power associative and $x^n(x^m y) = x^{n+m}y$ for every $x$, $y$ and all
+integers $n$, $m$. Similarly, a loop is <right power alternative>\index{power
+alternative loop!right} if it is power associative and $(xy^n)y^m = xy^{n+m}$
+for all $x$, $y$ and all integers $n$, $m$. A loop that is both left and right
+power alternative is said to be <power alternative>\index{power alternative
+loop}\index{loop!power alternative}.
 
 Left power alternative loops are left alternative and have the
 left inverse property. Left Bol loops and LC-loops are left power
@@ -248,12 +253,12 @@ alternative.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Conjugacy closed loops and related properties}
 
-\noindent A loop is <left> (resp.\ <right>) <conjugacy closed>\index{left
-conjugacy closed loop}\index{right conjugacy closed loop} if its left (resp.\
-right) translations are closed under conjugation. A loop that is both left and
-right conjugacy closed is called <conjugacy closed>\index{conjugacy closed
-loop}. It is common to refer to these loops as LCC-, RCC-, CC-loops,
-respectively.
+\noindent A loop is <left> (resp.\ <right>) <conjugacy closed>\index{conjugacy
+closed loop!left}\index{conjugacy closed loop!right} if its left (resp.\ right)
+translations are closed under conjugation. A loop that is both left and right
+conjugacy closed is called <conjugacy closed>\index{conjugacy closed
+loop}\index{loop!conjugacy closed}. It is common to refer to these loops as
+LCC-, RCC-, CC-loops, respectively.
 
 \>IsLCCLoop( <L> ) P
 \>IsRCCLoop( <L> ) P
@@ -261,29 +266,30 @@ respectively.
 
 The equivalence LCC $+$ RCC $=$ CC is built into {\LOOPS}.
 
-A loop is <Osborn>\index{Osborn loop} if it satisfies $x(yz\cdot
-x)=(x^\lambda\backslash y)(zx)$, where $x^\lambda$ is the left inverse of $x$. Both
-Moufang loops and CC-loops are Osborn.
+A loop is <Osborn>\index{Osborn loop}\index{loop!Osborn} if it satisfies
+$x(yz\cdot x)=(x^\lambda\backslash y)(zx)$, where $x^\lambda$ is the left
+inverse of $x$. Both Moufang loops and CC-loops are Osborn.
 
 \>IsOsbornLoop( <L> ) P
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Additional varieties of loops}
 
-An <(even) code loop>\index{code loop} is a Moufang $2$-loop with Frattini subloop
-of order $1$ or $2$. Code loops are extra and conjugacy closed.
+An <(even) code loop>\index{code loop}\index{loop!code} is a Moufang $2$-loop
+with Frattini subloop of order $1$ or $2$. Code loops are extra and conjugacy
+closed.
 
 \>IsCodeLoop( <L> ) P
 
-<Steiner loop>\index{Steiner loop} is an inverse property loop of exponent $2$.
-Steiner loops are commutative.
+<Steiner loop>\index{Steiner!loop}\index{loop!Steiner} is an inverse property
+loop of exponent $2$. Steiner loops are commutative.
 
 \>IsSteinerLoop( <L> ) P
 
-A left (resp. right) Bol loop with the automorphic inverse property
-is known as <left> (resp. <right>) <Bruck loop>\index{left Bruck
-loop}\index{right Bruck loop}. Bruck loops are also known as
-<K-loops>\index{K-loop}.
+A left (resp. right) Bol loop with the automorphic inverse property is known as
+<left> (resp. <right>) <Bruck loop>\index{Bruck loop!left}\index{Bruck
+loop!right}\index{Bruck loop}\index{loop!Bruck}. Bruck loops are also known as
+<K-loops>\index{K-loop}\index{loop!K}.
 
 \>IsLeftBruckLoop( <L> ) P
 \>IsLeftKLoop( <L> ) P
@@ -292,10 +298,10 @@ loop}\index{right Bruck loop}. Bruck loops are also known as
 
 A loop whose all left (resp. middle, right) inner mappings are automorphisms is
 called a <left> (resp. <middle>, <right>)
-<A-loop>\index{left A-loop}\index{middle A-loop}\index{right A-loop}. A loop whose every
-inner mapping is an automorphism is known as an <A-loop>\index{A-loop}.
-Diassociative A-loops are Moufang by \cite{KiKuPh}. See the built-in filters for
-additional properties of A-loops.
+<A-loop>\index{A-loop!left}\index{A-loop!middle}\index{A-loop!right}. A loop
+whose every inner mapping is an automorphism is known as an
+<A-loop>\index{A-loop}\index{loop!A}. Diassociative A-loops are Moufang by
+\cite{KiKuPh}. See the built-in filters for additional properties of A-loops.
 
 
 \>IsLeftALoop( <L> ) P

@@ -52,30 +52,37 @@ DeclareCategory( "IsLoop", IsQuasigroup and
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Conversions between magmas, quasigroups, loops and groups}
 
-Whether an object is considered a quasigroup or a loop is a matter of
-declaration in {\LOOPS}. While a declared loop is also a quasigroup, a declared
-quasigroup is <not> recognized as a loop, even if it accidentally possesses a
-neutral element. It is possible to convert a quasigroup $Q$ (with or without a
-neutral element) to a loop using
-
-\>AsLoop( <Q> ) O
-
-As we have seen above, the category `IsQuasigroup' is declared in {\LOOPS} so
-that it is contained in the category `IsMagma'. All standard {\GAP} commands
+Whether an object is considered a magma, quasigroup, loop or group is a matter
+of declaration in {\LOOPS}. Loops are automatically quasigroups, and both
+groups and quasigroups are automatically magmas. All standard {\GAP} commands
 for magmas are therefore available for quasigroups and loops, too.
 
-Although groups are quasigroups mathematically, they are not treated as
-quasigroups in {\LOOPS}. If you wish to apply methods of {\LOOPS} to groups,
-apply one of the conversions
+In {\GAP}, functions of the type `AsSomething(<X>)' convert the domain <X> into
+`Something', if possible, without changing the underlying domain <X>. For
+example, if <X> is declared as magma but is associative and has neutral element
+and inverses, `AsGroup( <X> )' returns the corresponding group with the
+underlying domain <X>.
 
-\>AsQuasigroup( <G> ) O
-\>AsLoop( <G> ) O
+We have opted for a more general kind of conversions in {\LOOPS} (starting with
+version 2.1.0), using functions of the type `IntoSomething(<X>)'. The two main
+features that distinguish `IntoSomething' from `AsSomething' are:
 
-to the group $G$. These conversions fail when $G$ is infinite and will exhaust
-all available memory when $G$ is huge.
+\beginlist%unordered
+\item{$\circ$}
+    The function `IntoSomething( <X> )' does not necessarily return the same
+    domain as <X>. The reason is that <X> can be a group, for instance, defined on
+    one of many possible domains, while `IntoLoop( <X> )' must result in a loop,
+    and hence be defined on a subset of some interval `[1,..,n]' (see Section
+    "About Cayley tables").
+\item{$\circ$}
+    In some special situations, the function `IntoSomething( <X> )' allows to
+    convert <X> into `Something' even though <X> does not have all the properties
+    of `Something'. For instance, every quasigroup is isotopic to a loop, so it
+    makes sense to allow conversions of the type `IntoLoop( <Q> )' even if the
+    quasigroup <Q> does not posses a neutral element.
+\endlist
 
-For much more information on conversions, see Section "Conversions".
-
+Details of all conversions in {\LOOPS} can be found in Section "Conversions".
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Calculating with quasigroups}
@@ -99,16 +106,16 @@ table once the left translations of $Q$ are known.
 *Example 2:* This example shows how properties of loops can be translated into
 properties of translations in a way that requires some theory.
 
-A left Bol loop\index{Bol loop} is a loop satisfying $x(y(xz)) = (x(yx))z$. We
-claim (without proof) that a loop $L$ is left Bol if and only if $L_xL_yL_x$ is
-a left translation for every $x$, $y\in L$.
+A left Bol loop\index{Bol loop}\index{loop!Bol} is a loop satisfying $x(y(xz))
+= (x(yx))z$. We claim (without proof) that a loop $L$ is left Bol if and only
+if $L_xL_yL_x$ is a left translation for every $x$, $y\in L$.
 
 *Example 3:* This example shows that many properties of loops become purely
 group-theoretical once they are expresses in terms of translations.
 
-A loop is simple\index{simple loop} if it has no nontrivial congruences. Then
-it is easy to see that a loop is simple if and only if its multiplication group
-is a primitive permutation group.
+A loop is simple\index{simple loop}\index{loop!simple} if it has no nontrivial
+congruences. Then it is easy to see that a loop is simple if and only if its
+multiplication group is a primitive permutation group.
 
 \medskip
 

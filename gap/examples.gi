@@ -21,6 +21,7 @@ ReadPkg("loops", "data/steiner.tbl");       # Steiner loops
 ReadPkg("loops", "data/cc.tbl");            # CC-loops
 ReadPkg("loops", "data/small.tbl");         # small loops
 ReadPkg("loops", "data/interesting.tbl");   # interesting loops
+ReadPkg("loops", "data/nilpotent.tbl");     # nilpotent loops
 
 # up to isotopism
 ReadPkg("loops", "data/itp_small.tbl");     # small loops up to isotopism
@@ -45,6 +46,7 @@ LibraryByName := function( name )
     elif name = "CC" then return cc_data;
     elif name = "small" then return small_data;
     elif name = "interesting" then return interesting_data;
+    elif name = "nilpotent" then return nilpotent_data;
     #up to isotopism
     elif name = "itp small" then return itp_small_data;
     fi;
@@ -75,13 +77,15 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
         s := "The library contains all nonassocaitive loops of order less than 7.";
     elif name = "interesting" then
         s := "The library contains a few interesting loops.";
+    elif name = "nilpotent" then
+        s := "The library contains all nonassociative nilpotent loops \nof order less than 12.";
     # up to isotopism
     elif name = "itp small" then
         s := "The library contains all nonassociative loops of order less than 7 up to isotopism.";
     else
         Info( InfoWarning, 1, Concatenation(
             "The admissible names for loop libraries are: \n",
-            "[ \"left Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"small\", \"small itp\", \"interesting\" ]."
+            "[ \"left Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"small\", \"itp small\", \"interesting\", \"nilpotent\" ]."
         ) );
         return fail;
     fi;
@@ -197,7 +201,7 @@ ActivateMoufangLoop := function( pos, n )
         # making the string d into list of entries 0, 1, 2
         d := List( d, char -> Position( "012", char ) - 1 );
         # all are extensions of the same group
-        G := AsLoop( SmallGroup(27,5) ); 
+        G := IntoLoop( SmallGroup(27,5) ); 
         ret := [];
         # constructing the multiplication table
         for x in [1..27] do for a in [0..2] do
@@ -384,7 +388,67 @@ ActivateSmallLoop := function( s, n )
     od; od;
 
     return LoopByCayleyTable( T );
-end;        
+end;     
+
+#############################################################################
+##  
+#F  ActivateNilpotentLoop( data ) 
+##    
+##  Activates the nilpotent loop based on data = [ K, F, t ], where
+##  K determines a central (normal) subloop,
+##  F determines the factor loop, 
+##  t determines the cocycle.
+##  Understanding K and F:
+##      If the value of K or F is in [2,3,4,5], it is the cyclic group of order V.
+##      If the value of K or F is 0, it is the Klein group.
+##  Understanding t:
+##      The cocycle is mapping from F x F to K. Let f = |F|. Let k = |K|.
+##      The value t corresponds to a (f-1)x(f-1) array of values in [0..k-1].
+##      It is represented by a single integer in base k, with the least 
+##      significant digit in the first row and first column, then following
+##      the rows.
+##      Once t is decoded into a (f-1)x(f-1) array, 1 is added to all entries.
+##      Then a first row and forst column of all ones is added to t,
+##      resulting in a f x f array.
+##  The loop is then obtained via LoopByExtension( K, F, phi, t), where
+##  phi is trivial.
+
+ActivateNilpotentLoop := function( data )
+    local K, F, f, k, t, theta, i, j, phi;
+    
+    # preparing normal subloop and factor loop
+    if data[ 1 ] = 0 then 
+        K := IntoLoop( Group( (1,2),(3,4) ) ); 
+    else
+        K := IntoLoop( CyclicGroup( data[ 1 ] ) );
+    fi;
+    if data[ 2 ] = 0 then 
+        F := IntoLoop( Group( (1,2),(3,4) ) );
+    else
+        F := IntoLoop( CyclicGroup( data[ 2 ] ) );    
+    fi;
+    
+    # preparing cocycle
+    f := Size( F );
+    k := Size( K );
+    t := data[ 3 ];
+    theta := List( [1..f], i->[1..f] );
+    for i in [2..f] do
+        theta[ 1 ][ i ] := 1;
+    od;
+    for i in [2..f] do for j in [2..f] do
+        theta[ i ][ j ] := t mod k;
+        t := (t - theta[i][j])/k;
+        theta[ i ][ j ] := theta[ i ][ j ] + 1;
+    od; od;
+    
+    # preparing trivial action
+    phi := List([1..f], i -> () );
+    
+    # constructing the loop
+    return LoopByExtension( K, F, phi, theta );
+
+end;      
 
 # no need to activate loops up to isotopism
 
@@ -494,6 +558,8 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     elif name = "interesting" then
         loop := LoopByCayleyTable( lib[ 3 ][ PosInDB( m ) ][ 1 ] );
         SetName( loop, lib[ 3 ][ PosInDB( m ) ][ 2 ] );
+    elif name = "nilpotent" then
+        loop := ActivateNilpotentLoop( lib[ 3 ][ PosInDB( m ) ] );
     # up to isotopism        
     elif name = "itp small" then
         return LibraryLoop( "small", n, lib[ 3 ][ n-4 ][ m ] );
@@ -587,6 +653,16 @@ end);
 
 InstallGlobalFunction( InterestingLoop, function( n, m )
     return LibraryLoop( "interesting", n, m );
+end);
+
+#############################################################################
+##  
+#F  NilpotentLoop( n, m ) 
+##    
+##  <m>th nilpotent loop of order <n>
+
+InstallGlobalFunction( NilpotentLoop, function( n, m )
+    return LibraryLoop( "nilpotent", n, m );
 end);
 
 #############################################################################

@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gi  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: creation.gi, v 2.0.0 2008/01/21 gap Exp $
+#H  @(#)$Id: creation.gi, v 2.1.0 2008/12/08 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -474,21 +474,22 @@ end);
 
 #############################################################################
 ##
-#O  AsQuasigroup( M )
+#O  IntoQuasigroup( M )
 ##
 ##  Given a magma, returns the corresponding quasigroup, if possible.
 
-InstallMethod( AsQuasigroup, "for magma",
+InstallMethod( IntoQuasigroup, "for magma",
     [ IsMagma ],
 function( M )
     local ct;
-    if IsQuasigroup( M ) then return M; fi;
-    if IsGroup( M ) then
-        return QuasigroupByCayleyTable( MultiplicationTable( Elements( M ) ) );
+    if IsQuasigroup( M ) then # leave quasigroups and loops intact
+        return M;
     fi;
-    # magma, not a quasigroup
+    # magma, not necessarily a quasigroup
     ct := MultiplicationTable( Elements( M ) );
-    if IsQuasigroupTable( ct ) then return QuasigroupByCayleyTable( ct ); fi;
+    if IsQuasigroupTable( ct ) then 
+        return QuasigroupByCayleyTable( ct );
+    fi;
     return fail;
 end);
 
@@ -528,27 +529,28 @@ end);
 
 #############################################################################
 ##
-#O  AsLoop( M )
+#O  IntoLoop( M )
 ##
 ##  Given a magma, returns the corresponding loop, if possible.
 
-InstallMethod( AsLoop, "for magma",
+InstallMethod( IntoLoop, "for magma",
     [ IsMagma ],
 function( M )
     local e, p, ct;
-    if IsLoop( M ) then return M; fi;
-    if IsGroup( M ) then
-        return LoopByCayleyTable( MultiplicationTable( Elements( M ) ) );
+    if IsLoop( M ) then # loops are left intact
+        return M;
+    fi; 
+    # magma, not necessarily a loop
+    M := IntoQuasigroup( M );
+    if M = fail then
+        return fail;
     fi;
-    # magma, not a loop
-    M := AsQuasigroup( M );
-    if M = fail then return fail; fi;
-    # quasigroup
+    # quasigroup, not necesarily a loop
     e := MultiplicativeNeutralElement( M );
-    if e = fail then # no neutral element
+    if e = fail then # no neutral element, use principal isotope
         return PrincipalLoopIsotope( M, Elements( M )[ 1 ], Elements( M )[ 1 ] );
     fi;
-    # quasigroup with neutral element
+    # quasigroup with neutral element, i.e., a loop
     p := Position( M, e );
     if p>1 then
         p := (1,p); # note that p is its own inverse
@@ -563,20 +565,24 @@ end );
 
 #############################################################################
 ##
-#A  AsGroup( M )
+#O  IntoGroup( M )
 ##
-##  Given a magma, returns the corresponding group, if possible.
+##  Given a magma <M>, returns the corresponding group, if possible.
 
-InstallOtherMethod( AsGroup,
+InstallOtherMethod( IntoGroup, "for magma",
     [ IsMagma ],
 function( M )
-    if IsGroup( M ) then return M; fi;
-    M := AsLoop( M );
-    if (not M = fail) and IsAssociative( M ) then
-        return RightMultiplicationGroup( M );
+    if IsGroup( M ) then # groups are left intact
+        return M;
     fi;
-    return fail;
-end );
+    # magma, not necessarily a group
+    M := IntoLoop( M );
+    if M=fail or (not IsAssociative( M ) ) then
+        return fail;
+    fi;
+    # group
+    return RightMultiplicationGroup( M );
+end); 
 
 #############################################################################
 ##  PRODUCTS OF LOOPS
@@ -648,7 +654,7 @@ function( list, dummy )
     loop_list := Filtered( list, G -> IsLoop( G ) );
     if not IsEmpty( group_list ) then   # some groups on the list
         group_product := DirectProductOp( group_list, group_list[ 1 ] );
-        Add( loop_list, AsLoop( group_product ) );
+        Add( loop_list, IntoLoop( group_product ) );
     fi;
 
     # now only loops are on the list

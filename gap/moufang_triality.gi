@@ -19,7 +19,7 @@ InstallGlobalFunction( TrialityPermGroup, function( L )
     local AA, BB, L_inv, i, trg_perm, trrho, trsigma;
     
 
-    if IsGroup( L ) then L:=AsLoop( L ); fi;
+    if IsGroup( L ) then L:=IntoLoop( L ); fi;
     
     if not( IsMoufangLoop( L ) ) then
         Error( "The loop has to be Moufang!" );

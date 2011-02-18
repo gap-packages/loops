@@ -2,7 +2,7 @@
 ##
 #W  classes.gi  Testing properties/varieties [loops]
 ##
-#H  @(#)$Id: classes.gi, v 2.0.0 2008/01/21 gap Exp $
+#H  @(#)$Id: classes.gi, v 2.1.2 2010/11/16 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -16,8 +16,8 @@
 # a new method (from version 1.5.0) based on sections. This new method is
 # much faster for groups, and a bit slower for nonassociative loops.
 
-InstallOtherMethod( IsAssociative, "for quasigroup",
-    [ IsQuasigroup ], 0,
+InstallOtherMethod( IsAssociative, "for loops",
+    [ IsLoop ], 0,
 function( Q )
     local sLS, x, y;
     sLS := Set( LeftSection( Q ) );
@@ -537,7 +537,10 @@ InstallTrueMethod( IsFlexible, IsCommutative );
 InstallMethod( IsLeftAlternative, "for quasigroup",
     [ IsQuasigroup],
 function( Q )
-   return ForAll( LeftSection( Q ), a -> a*a in LeftSection( Q ) );
+    if IsLoop( Q ) then 
+        return ForAll( LeftSection( Q ), a -> a*a in LeftSection( Q ) );
+    fi;
+    return ForAll( Q, x -> ForAll( Q, y -> x*(x*y) = (x*x)*y ) );
 end );
 
 # implies
@@ -552,7 +555,10 @@ InstallTrueMethod( IsRightAlternative, IsLeftAlternative and IsCommutative );
 InstallMethod( IsRightAlternative, "for quasigroup",
     [ IsQuasigroup ],
 function( Q )
-    return ForAll( RightSection( Q ), a -> a*a in RightSection( Q ) );
+    if IsLoop( Q ) then
+        return ForAll( RightSection( Q ), a -> a*a in RightSection( Q ) );
+    fi;
+    return ForAll( Q, x -> ForAll( Q, y -> (x*y)*y = x*(y*y) ) );
 end );
 
 # implies

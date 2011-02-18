@@ -6,16 +6,16 @@ mostly Bol and Moufang loops.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Core methods for Bol loops}
 
-Let $L$ be a left Bol loop\index{left Bol loop} such that the mapping $x\mapsto
+Let $L$ be a left Bol loop\index{Bol loop!left}\index{loop!Bol} such that the mapping $x\mapsto
 x^2$ is a permutation of $L$. Define a new operation $*$ on $L$ by $x*y
 =(x(y^2x))^{1/2}$. Then Bruck showed that $(L,*)$ is a left Bruck loop, called
-the <assoicated left Bruck loop>.\index{associated left Bruck loop}. (In fact,
+the <assoicated left Bruck loop>.\index{Bruck loop!associated left}\index{loop!associated Bruck}. (In fact,
 Bruck used the isomorphic operation $x*y = x^{1/2}(yx^{1/2})$ instead. Our
 approach is more natural, since the associated left Bruck loop to a left Bruck
 loop $L$ is identical to $L$ then.) The associated left Bruck loop of $L$ is
 returned via
 
-\>AssoicatedLeftBruckLoop( <L> ) A
+\>AssociatedLeftBruckLoop( <L> ) A
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -24,7 +24,7 @@ returned via
 Ale\v{s} Dr\'apal discovered two prominent families of extensions of Moufang
 loops. It turns out that these extensions can be used to obtain all
 nonassociative Moufang loops of order at most $64$. We call these two
-constructions <Moufang modifications>\index{Moufang modifications}. The library
+constructions <Moufang modifications>\index{modification!Moufang}. The library
 of Moufang loops included with {\LOOPS} is based on Moufang modifications. We
 describe the two modifications briefly here. See \cite{DrVo} for details.
 
@@ -38,7 +38,7 @@ $$
     x\ast y = xyh^{\sigma(i+j)},
 $$
 where $x\in \alpha^i$, $y\in\alpha^j$, $i\in M$, $j\in M$. Then $(L,\ast)$ is a
-Moufang loop, a <cyclic modification>\index{cyclic modification} of $L$.
+Moufang loop, a <cyclic modification>\index{modification!cyclic} of $L$.
 
 When $L$, $S$, $\alpha$, $h$ are as above and when $a$ is any element of
 $\alpha$, the corresponding cyclic modification is obtained via
@@ -59,7 +59,7 @@ $$
 $$
 where $x\in\alpha^i\cup e\alpha^i$, $y\in\alpha^j\cup \alpha^jf$, $i\in M$,
 $j\in M$, $y\in G_r$, $r\in\{0,1\}$. Then $(L,\ast)$ is a Moufang loop, a
-<dihedral modification>\index{dihedral modification} of $L$.
+<dihedral modification>\index{modification!dihedral} of $L$.
 
 When $L$, $S$, $e$, $f$ and $h$ are as above, the corresponding dihedral
 modification is obtained via
@@ -115,3 +115,37 @@ The function
 \>TrialityPcGroup( <L> ) F
 
 differs from `TrialityPermGroup' only in that $G$ is returned as a pc group.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Realizing groups as multiplication groups of loops}
+
+The following commands look for loops such that the multiplication group is
+contained in a given transitive permutation group <G>.
+
+The resulting loops are given by their right sections.
+
+\>AllLoopTablesInGroup( <G>[, <depth>[, <infolevel>]] ) O
+\>AllProperLoopTablesInGroup( <G>[, <depth>[, <infolevel>]] ) O
+\>OneLoopTableInGroup( <G>[, <depth>[, <infolevel>]] ) O
+\>OneProperLoopTableInGroup( <G>[, <depth>[, <infolevel>]] ) O
+\>AllLoopsWithMltGroup( <G>[, <depth>[, <infolevel>]] ) O
+\>OneLoopWithMltGroup( <G>[, <depth>[, <infolevel>]] ) O
+
+One can speed up the search by setting the argument <depth> higher, the price
+is much higher memory consumption. <depth> is optimally chosen if in the permutation group <G>, there are not
+many permutations fixing <depth> elements. You can omit the argument <depth> or set it equal to
+2 with little harm.
+
+The parameter <infolevel> determines the amount of information you get during
+the search. With <infolevel>=0, no information is provided.
+With <infolevel>=1, you get the information on timing and hits.
+With <infolevel>=2, the results are printed, as well.
+
+\beginexample
+gap> g:=PGL(3,3);
+Group([ (6,7)(8,11)(9,13)(10,12), (1,2,5,7,13,3,8,6,10,9,12,4,11) ])
+gap> a:=AllLoopTablesInGroup(g,3,0);; Size(a);
+56
+gap> a:=AllLoopsWithMltGroup(g,3,0);; Size(a);
+52
+\endexample

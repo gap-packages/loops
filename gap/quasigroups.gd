@@ -76,11 +76,11 @@ DeclareOperation( "LoopByRightSection", [ IsPermCollection ] );
 ##  CONVERSIONS
 ##  -------------------------------------------------------------------------
 
-DeclareOperation( "AsQuasigroup", [ IsMagma ] );
+DeclareOperation( "IntoQuasigroup", [ IsMagma ] );
 DeclareOperation( "PrincipalLoopIsotope",
     [ IsQuasigroup, IsQuasigroupElement, IsQuasigroupElement ] );
-DeclareOperation( "AsLoop", [ IsMagma ] );
-# AsGroup already declared as attribute of IsList
+DeclareOperation( "IntoLoop", [ IsMagma ] );
+DeclareOperation( "IntoGroup", [ IsMagma ] );
 
 #############################################################################
 ## PRODUCTS OF LOOPS

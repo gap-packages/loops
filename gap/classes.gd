@@ -2,7 +2,7 @@
 ##
 #W  classes.gd  Testing varieties [loops]
 ##
-#H  @(#)$Id: classes.gd, v 2.0.0 2008/01/21 gap Exp $
+#H  @(#)$Id: classes.gd, v 2.1.2 2010/11/16 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -12,7 +12,7 @@
 ##  ASSOCIATIVITY, COMMUTATIVITY AND GENERALIZATIONS
 ##  -------------------------------------------------------------------------
 
-DeclareProperty( "IsAssociative", IsQuasigroup );
+DeclareProperty( "IsAssociative", IsLoop );
 DeclareProperty( "IsCommutative", IsQuasigroup );
 DeclareProperty( "IsPowerAssociative", IsLoop );
 DeclareProperty( "IsDiassociative", IsLoop );

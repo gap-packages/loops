@@ -86,6 +86,22 @@ gap> for i in [1..t] do
 >       od;
 > od;
 
+# NILPOTENT LOOPS
+
+gap> DisplayLibraryInfo( "nilpotent" );
+The library contains all nonassociative nilpotent loops
+of order less than 12.
+------
+Extent of the library:
+   2 loops of order 6
+   134 loops of order 8
+   8 loops of order 9
+   1043 loops of order 10
+true
+
+gap> NilpotentLoop( 10, 1000 );
+<nilpotent loop 10/1000>
+
 # PAIGE LOOPS
 
 gap> DisplayLibraryInfo( "Paige" );

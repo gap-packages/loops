@@ -7,13 +7,14 @@ In this chapter we describe several ways in which quasigroups and loops can be c
 
 Let $X=\{x_1,\dots,x_n\}$ be a set and $\cdot$ a binary operation on $X$. Then
 an $n$ by $n$ array with rows and columns bordered by $x_1$, $\dots$, $x_n$, in
-this order, is a <Cayley table>\index{Cayley table}, or a <multiplication
-table>\index{multiplication table} of $\cdot$, if the entry in the row $x_i$
-and column $x_j$ is $x_i\cdot x_j$.
+this order, is a <Cayley table>\index{table!Cayley}\index{Cayley table}, or a
+<multiplication table>\index{table!multiplication}\index{multiplication table}
+of $\cdot$, if the entry in the row $x_i$ and column $x_j$ is $x_i\cdot x_j$.
 
-A Cayley table is a <quasigroup table>\index{quasigroup table} if it is a
-<Latin square>\index{Latin square}, i.e., if every entry $x_i$ appears in every
-column and every row exactly once.
+A Cayley table is a <quasigroup
+table>\index{table!quasigroup}\index{quasigroup!table} if it is a <Latin
+square>\index{Latin square}, i.e., if every entry $x_i$ appears in every column
+and every row exactly once.
 
 An annoying feature of quasigroup tables in practice is that they are often not
 bordered, and it is up to the reader to figure out what is meant. Throughout
@@ -25,9 +26,10 @@ not assume that the distinct entries $x_1$, $\dots$, $x_n$ form the interval
 $1$, $\dots$, $n$. The significance of this observation will become clear in
 Chapter "Methods based on permutation groups".
 
-Finally, we say that a quasigroup table is a <loop table>\index{loop table} if
-the first row and the first column are the same, and if the entries in the
-first row are ordered in an ascending fashion.
+Finally, we say that a quasigroup table is a <loop
+table>\index{table!loop}\index{loop!table} if the first row and the first
+column are the same, and if the entries in the first row are ordered in an
+ascending fashion.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Testing Cayley tables}
@@ -278,7 +280,8 @@ To demonstrate `LoopByRightSection', let us recall a construction due to Nagy \c
 Let $X$ be a simple group with subgroups $Y_0$, $Y_1$ such that $Y_0\cap Y_1=1$
 and $X=Y_0Y_1$. Let $G=X\times X$ and $H=Y_0\times Y_1$. Then $T =
 \{(x,x^{-1});\; x\in X\}$ is a right transversal of $H$ in $G$, and the
-corresponding loop is a simple (right) Bol loop.\index{simple Bol loop}
+corresponding loop is a simple (right) Bol loop.\index{Bol
+loop!simple}\index{simple loop!Bol}
 
 The next example illustrates this construction with $X=A_5$, $Y_0=A_4$, and
 $Y_1 = \langle(1,2,3,4,5)\rangle$.
@@ -324,7 +327,7 @@ Conversely, given $K$, $F$, $f = \varphi$, and $t = \theta$ as above,
 returns the extension of $K$ by $F$ using the action $f$ and cocycle $t$.
 
 \beginexample
-gap> F := AsLoop( Group( (1,2) ) );
+gap> F := IntoLoop( Group( (1,2) ) );
 <loop of order 2>
 gap> K := DirectProduct( F, F );;
 gap> phi := [ (), (2,3) ];;
@@ -336,21 +339,88 @@ false
 \endexample
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Random quasigroups and loops}
+
+We say that an algorithm selects a latin square of order $n$ <at
+random>\index{Latin square!random}\label{random!Latin square} if every latin
+square of order $n$ is returned by the algorithm with the same probability.
+Selecting a latin square at random is a nontrivial problem.
+
+In \cite{JaMa}, Jacobson and Matthews defined a random walk on the space of
+latin squares and so-called <improper latin squares> that visits every latin
+square with the same probability. The diameter of the space is no more than
+$4(n-1)^3$, that is, no more than $4(n-1)^3$ steps are needed to travel from
+one latin square of order $n$ to another.
+
+The Jacobson-Matthews algorithm can be used to generate random quasigroups as
+follows: (i) select any latin square of order $n$, for instance the canonical
+multiplication table of the cyclic group of order $n$, (ii) perform
+sufficiently many steps of the random walk, stopping at a proper or improper
+latin square, (iii) if necessary, perform a few more steps to end up with a
+proper latin square. Upon normalizing the resulting latin square, we obtain a
+random loop of order $n$.
+
+By the above result, it suffices to use about $n^3$ steps to arrive at any
+latin square of order $n$ from the initial latin square. In fact, a much
+smaller number of steps is probably
+sufficient.\index{random!loop}\index{loop!random}
+
+\>RandomLoop( <n> ) O
+
+returns a random loop of order $n$, using the Jacobson-Matthews algorithm with
+$n^3$ steps. Every loop of order $n$ is potentially returned, but the method is
+slow for $n>50$, say. You can control the trade-off between randomness and speed with
+
+\>RandomLoop( <n>, <iter> ) O
+
+returns a random loop of order $n$, using the Jacobson-Matthews algorithm with
+<iter> many steps. When <iter> is small, the returned loop will be close to the
+canonical Cayley table of the cyclic group of order $n$.
+
+The corresponding commands for random quasigroups
+are\index{quasigroup!random}\index{random!quasigroup}
+
+\>RandomQuasigroup( <n> ) O
+\>RandomQuasigroup( <n>, <iter> ) O
+
+Finally,
+
+\>RandomNilpotentLoop( <lst> ) O
+
+returns a random nilpotent loop\index{nilpotent
+loop!random}\index{random!nilpotent loop} as follows (see Section "Nilpotency
+and central series" for more on nilpotency):
+
+<lst> must be a list of positive integers and/or finite abelian groups. If
+<lst> $= [a_1]$ and $a_1$ is an integer, a random abelian group of order $a_1$
+is returned, else $a_1$ is an abelian group and `AsLoop(' $a_1$ `)' is
+returned. If <lst> $=[a_1,\dots,a_m]$, a random central extension of
+`RandomNilpotentLoop(' $[a_1]$ `)' by `RandomNilpotentLoop(' $[a_2,\dots,a_m]$
+`)' is returned.
+
+To determine the nilpotency class $c$ of the resulting loop, assume that <lst>
+has length at least $2$, contains only integers bigger than $1$, and let $m$ be
+the last entry of <lst>. If $m>2$ then $c=$ `Length(<lst>)', else $c=$
+`Length(<lst>)'$-1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Conversions}
 
-As we have already mentioned, \LOOPS\ contains operations that convert
-between magmas, quasigroups, loops and groups, provided such conversions are
-possible.
+As we have already mentioned, \LOOPS\ contains methods that convert between
+magmas, quasigroups, loops and groups, provided such conversions are possible.
 
 If $M$ is a declared magma that happens to be a quasigroup, the corresponding
 quasigroup is returned via
 
-\>AsQuasigroup( <M> ) O
+\>IntoQuasigroup( <M> ) O
+
+Note that if <M> is already declared as a quasigroup, `IntoQuasigroup( <M> )'
+merely returns <M>.
 
 Given a quasigroup $M$ and two of its elements $f$, $g$, the principal loop
 isotope $x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)$ turns $(M,\circ)$ into a loop
 with neutral element $f\cdot g$ (see Section "Homomorphisms and homotopisms").
-Since loops in \LOOPS\ have to have neutral element labelled as $1$, the
+Since loops in \LOOPS\ have to have neutral element labeled as $1$, the
 function
 
 \>PrincipalLoopIsotope( <M>, <f>, <g> )
@@ -358,15 +428,17 @@ function
 returns an isomorphic copy of the principal isotope $(M,\circ)$ via the
 transposition $(1,f\cdot g)$.
 
-If $M$ is a magma that happens to be a quasigroup, the operation
+If $M$ is a declared magma that happens to be a quasigroup (not necessarily a
+loop!), the operation
 
-\>AsLoop( <M> ) O
+\>IntoLoop( <M> ) O
 
 returns a loop $L$ as follows:
 \beginlist%unordered
+\item{$\circ$} if $M$ is already declared as a loop, $L=M$, else
 \item{$\circ$}
     if $M$ possesses a neutral element $e$ and $f$ is the first element of $M$,
-    then $L$ is an isomorphic copy of $M$ via the transposition $(e,f)$,
+    then $L$ is an isomorphic copy of $M$ via the transposition $(e,f)$, else
 \item{$\circ$}
     if $M$ does not posses a neutral element, $L$ is returned as
     `PrincipalLoopIsotope( <M>, <M.1>, <M.1> )'
@@ -376,17 +448,27 @@ One could obtain a loop from $M$ in yet another way, by normalizing the Cayley
 table of $M$. These three approaches can result in nonisomorphic loops in
 general.
 
-Finally, when $M$ is a declared magma that happens to be a group, then the
+Finally, when $M$ is a declared magma that happens to be a group, the
 corresponding group is returned by
 
-\>AsGroup( <M> ) A
+\>IntoGroup( <M> ) O
 
-Note that the conversions work in both directions, not just toward more special
-structures. Thus, if $G$ is a declared group, then `AsLoop( <G> )' returns the
-corresponding loop, for instance. Use the `AsLoop' command to apply methods of
-{\LOOPS} to groups.
+as follows:
+\beginlist%unordered
+\item{$\circ$} if $M$ is already declared as a group, $M$ is returned, else
+\item{$\circ$} `RightMultiplciationGroup( IntoLoop( <M> ) )' is returned, i.e.,
+    a permutation group isomorphic to $M$.
+\endlist
 
-Also see `IsomorphicCopyByPerm'.
+All three conversion methods return `fail' if the requested conversion is not
+possible.
+
+Up to version 2.0.0, we have supported `AsQuasigroup', `AsLoop' and `AsGroup'
+in place of `IntoQuasigroup', `IntoLoop' and `IntoGroup', respectively. We have
+changed the terminology starting with version 2.1.0 in order to comply with
+{\GAP} naming rules for `AsSomething', as explained in Chapter "How the package
+works". Finally, the method `AsGroup' is built into the core of {\GAP} and it
+returns an fp group if its argument is an associative loop.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Products of loops}
@@ -404,12 +486,10 @@ Otherwise a loop is returned. If $n=1$, $L1$ is returned.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Opposite quasigroups and loops}
 
-When $Q$ is a quasigroup with multiplication $\cdot$, the <opposite quasigroup>
-%
-\index{opposite quasigroup}
-%
- of $Q$ is a quasigroup with the same underlying set as $Q$ and with
-multiplication $*$ defined by $x*y=y\cdot x$.
+When $Q$ is a quasigroup with multiplication $\cdot$, the <opposite
+quasigroup>\index{opposite quasigroup}\index{quasigroup!opposite} of $Q$ is a
+quasigroup with the same underlying set as $Q$ and with multiplication $*$
+defined by $x*y=y\cdot x$.
 
 Since the quasigroup-theoretical concepts are often chiral (cf. left Bol loops
 versus right Bol loops), it is useful to have access to the opposite quasigroup

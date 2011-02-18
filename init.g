@@ -2,7 +2,7 @@
 ##
 #A  init.g                  loops                G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: init.g, v 2.0.0 2008/03/06 gap Exp $
+#H  @(#)$Id: init.g, v 2.1.3 2011/02/18 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -11,7 +11,7 @@
 #############################################################################
 ##  DECLARING PACKAGE
 ##  -------------------------------------------------------------------------
-DeclareAutoPackage("loops", "2.0.0", ReturnTrue);
+DeclareAutoPackage("loops", "2.1.3", ReturnTrue);
 
 #############################################################################
 ##  BANNER
@@ -27,6 +27,8 @@ ReadPkg( "loops", "gap/core_methods.gd");   # most common structural methods
 ReadPkg( "loops", "gap/classes.gd");        # testing varieties         
 ReadPkg( "loops", "gap/iso.gd");            # isomorphisms and isotopisms
 ReadPkg( "loops", "gap/extensions.gd");     # extensions
+ReadPkg( "loops", "gap/random.gd");         # random loops
+ReadPkg( "loops", "gap/mlt_search.gd");     # realizing groups as multiplication groups of loops
 
 #############################################################################
 ##  METHODS FOR BOL AND MOUFANG LOOPS

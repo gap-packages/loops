@@ -2,7 +2,7 @@
 ##
 #W  core_methods.gi Most common structural methods [loops]
 ##
-#H  @(#)$Id: core_methods.gi, v 2.0.0 2008/03/06 gap Exp $
+#H  @(#)$Id: core_methods.gi, v 2.1.3 2011/02/17 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -33,7 +33,7 @@ InstallMethod( GeneratorsOfQuasigroup, "for quasigroup",
 
 InstallOtherMethod( GeneratorsSmallest, "for a quasigroup",
         [ IsQuasigroup ],
-        function( Q )
+function( Q )
     local gens, diff;
     gens := [ ];
     diff := Elements( Q );
@@ -384,14 +384,17 @@ end );
 ##
 ##  This auxiliary function assumes that:
 ##    a) Q is a quasigroup with Q = Parent( Q )
-##    b) pos_of_gens is a subset of [ 1..Size( Q ) ] (not a sublist)
+##    b) pos_of_gens is a nonempty subset of [ 1..Size( Q ) ] (not a sublist)
 ##    c) pos_of_gens determines a subquasigroup of Q
 ##  It then returns the corresponding subquasigroup of Q.
 
-InstallMethod( SubquasigroupNC, "for quasigroup and subset of integer",
+InstallMethod( SubquasigroupNC, "for quasigroup and set of integers",
     [ IsQuasigroup, IsSet ],
 function( Q, pos_of_gens )
     local subqg, Qtype, elms;
+    if IsEmpty( pos_of_gens ) then
+        Error( "LOOPS: <2> must be a nonempty subset.");
+    fi;
     if not( Q = Parent( Q ) ) then
         Error( "LOOPS: <1> must be its own parent." );
     fi;
@@ -420,8 +423,11 @@ InstallMethod( Subquasigroup, "for quasigroup and list of elements",
 function( Q, gens )
     local pos_gens, transl, pos_of_elms, relmultgr, subqg;
     # NG: we allow list of indices as well
+    # PV: we allow gens to be empty, too. This will never happen when Subquasigroup is called from Subloop,
+    # but it can happen when Q is a quasigroup. For instance, when Q has empty nucleus, it makes sense
+    # to return [] rather than an error message when calling Nuc(Q).
     if IsEmpty( gens ) then
-        Error( "LOOPS: the list of generators of a quasigroup cannot be empty" );
+        return [];
     fi;
     if not( ForAll( gens, g -> g in Q ) or ForAll( gens, g-> g in PosInParent( Q ) ) ) then
         Error("LOOPS: <2> must be a list of elements of quasigroup <1> or their indices.");
@@ -440,7 +446,7 @@ function( Q, gens )
         relmultgr := Subgroup( MultiplicationGroup( Parent( Q ) ), transl );
         pos_gens := Set( Orbits( relmultgr, pos_gens )[ 1 ] );
     od;
-    subqg := SubquasigroupNC( Parent( Q ), pos_of_elms );
+    subqg := SubquasigroupNC( Parent( Q ), Set( pos_of_elms ) );
     if IsLoop( Q ) and Size( Q ) > 1 then
         SetGeneratorsOfMagma( subqg, Difference( gens, [ One( Q ) ] ) );
     else
