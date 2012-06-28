@@ -8,21 +8,21 @@ library up to isotopism starts with <itp>.
 \Section{A typical library}
 
 A library named <my Library> is stored in file `data/mylibrary.tbl', and the
-corresponding data structure is named `my_library_data'.
+corresponding data structure is named `LOOPS_my_library_data'.
 
 In most cases, the array `my_library_data' consists of three lists
 \beginlist%unordered
 \item{$\circ$}
-    `my_library_data[ 1 ]' is a list of orders for which there is at
+    `LOOPS_my_library_data[ 1 ]' is a list of orders for which there is at
     least one loop in the library,
 \item{$\circ$}
-    `my_library_data[ 2 ][ k ]' is the number of loops of order
-    `my_library_data[ 1 ][ k ]' in the library,
+    `LOOPS_my_library_data[ 2 ][ k ]' is the number of loops of order
+    `LOOPS_my_library_data[ 1 ][ k ]' in the library,
 \item{$\circ$}
-    `my_library_data[ 3 ][ s ]' contains data necessary to produce the
+    `LOOPS_my_library_data[ 3 ][ s ]' contains data necessary to produce the
     $s$th loop in the library.
 \endlist
-The format of `my_library_data[ 3 ]' depends on the particular library and is
+The format of `LOOPS_my_library_data[ 3 ]' depends on the particular library and is
 not standardized in any way.
 
 The user can retrieve the $m$th loop of order $n$ from library named <my
@@ -38,7 +38,7 @@ where <name> is the name of the library.
 
 For example, when the library is called <left Bol>, the corresponding data file
 is called `data/leftbol.tbl', the corresponding data structure is named
-`left_bol_data', and the $m$th left Bol loop of order $n$ is obtained via
+`LOOPS_left_bol_data', and the $m$th left Bol loop of order $n$ is obtained via
 
 \){LeftBolLoop( <n>, <m> )}
 
@@ -71,7 +71,7 @@ $n$ is obtained by
 \Section{Moufang loops}
 
 The library named <Moufang> contains all nonassociative Moufang loops of order
-$n\le 64$ and $n=81$.
+$n\le 64$ and $n\in\{81,243\}$.
 
 The $m$th nonassociative Moufang loop of order $n$ is obtained by
 
@@ -79,14 +79,15 @@ The $m$th nonassociative Moufang loop of order $n$ is obtained by
 
 For $n\le 63$, our catalog numbers coincide with those of Goodaire et al.
 \cite{Go}. The classification of Moufang loops of order $64$ and $81$ was
-carried out in \cite{NaVo2007}.
+carried out in \cite{NaVo2007}. The classification of Moufang loops of order $243$
+was carried out by Slattery and Zenisek \cite{SlZe2011}.
 
 The extent of the library is summarized below:
 
 $$
 \matrix{
-    {\rm order}&12&16&20&24&28&32&36&40&42&44&48&52&54&56&60&64&81\cr
-    {\rm loops\ in\ the\ libary}&1 &5 &1 &5 &1 &71&4 &5 &1 &1 &51&1 &2 &4 &5 &4262& 5
+    {\rm order}&12&16&20&24&28&32&36&40&42&44&48&52&54&56&60&64&81&243\cr
+    {\rm loops\ in\ the\ libary}&1 &5 &1 &5 &1 &71&4 &5 &1 &1 &51&1 &2 &4 &5 &4262& 5 &72
 }
 $$
 
@@ -193,7 +194,7 @@ loop
 \Section{Nilpotent loops}
 
 The library named <nilpotent> contains all nonassociative nilpotent loops of
-order less than 12, up to isomorphism. There are $2$ nonassociative nilpotent
+order less than $12$, up to isomorphism. There are $2$ nonassociative nilpotent
 loops of order $6$, $134$ of order $8$, $8$ of order $9$ and $1043$ of order
 $10$. They are obtained as usual with
 
@@ -202,6 +203,16 @@ $10$. They are obtained as usual with
 See \cite{DaVo} for more on enumeration of nilpotent loops. For instance, there
 are $2623755$ nilpotent loops of order $12$, and $123794003928541545927226368$
 nilpotent loops of order $22$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Automorphic loops}
+
+The library named <automorphic> contains all nonassociative automorphic loops of order
+less that $16$, up to isomorphism. There is $1$ such loop of order $6$, $7$ of
+order $8$, $3$ of order $10$, $2$ of order $12$, $5$ of order $14$, and $2$ of order $15$.
+They are obtained as usual with
+
+\>AutomorphicLoop( <n>, <m> ) F
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Interesting loops}

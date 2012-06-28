@@ -2,12 +2,12 @@
 ##
 #W  cc.tbl    CC-loops p^2, 2p, for p odd prime  G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: cc.tbl, v 0.9995 2005/07/22 gap Exp $
+#H  @(#)$Id: cc.tbl, v 2.2.0 2012/06/28 gap Exp $
 ##  
 #Y  Copyright (C)  2005,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
 # CC-loops are activated differently, hence the data structure is not needed
-cc_data := [ fail, fail, fail ];
+LOOPS_cc_data := [ fail, fail, fail ];
 

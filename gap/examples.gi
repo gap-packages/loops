@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples [loops]
 ##  
-#H  @(#)$Id: examples.gi, v 2.0.0 2008/01/21 gap Exp $
+#H  @(#)$Id: examples.gi, v 2.2.0 2012/06/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -13,18 +13,19 @@
 ##  -------------------------------------------------------------------------
 
 # up to isomorphism
-ReadPkg("loops", "data/leftbol.tbl");       # left Bol loops
-ReadPkg("loops", "data/moufang.tbl");       # Moufang loops
-ReadPkg("loops", "data/paige.tbl");         # Paige loops
-ReadPkg("loops", "data/code.tbl");          # code loops
-ReadPkg("loops", "data/steiner.tbl");       # Steiner loops
-ReadPkg("loops", "data/cc.tbl");            # CC-loops
-ReadPkg("loops", "data/small.tbl");         # small loops
-ReadPkg("loops", "data/interesting.tbl");   # interesting loops
-ReadPkg("loops", "data/nilpotent.tbl");     # nilpotent loops
+ReadPackage("loops", "data/leftbol.tbl");       # left Bol loops
+ReadPackage("loops", "data/moufang.tbl");       # Moufang loops
+ReadPackage("loops", "data/paige.tbl");         # Paige loops
+ReadPackage("loops", "data/code.tbl");          # code loops
+ReadPackage("loops", "data/steiner.tbl");       # Steiner loops
+ReadPackage("loops", "data/cc.tbl");            # CC-loops
+ReadPackage("loops", "data/small.tbl");         # small loops
+ReadPackage("loops", "data/interesting.tbl");   # interesting loops
+ReadPackage("loops", "data/nilpotent.tbl");     # nilpotent loops
+ReadPackage("loops", "data/automorphic.tbl");   # automorphic loops
 
 # up to isotopism
-ReadPkg("loops", "data/itp_small.tbl");     # small loops up to isotopism
+ReadPackage("loops", "data/itp_small.tbl");     # small loops up to isotopism
 
 #############################################################################
 ##  DISPLAYING INFORMATION ABOUT A LIBRARY
@@ -38,17 +39,18 @@ ReadPkg("loops", "data/itp_small.tbl");     # small loops up to isotopism
 
 LibraryByName := function( name )
     #up to isomorphism
-    if name = "left Bol" then return left_bol_data; 
-    elif name = "Moufang" then return moufang_data;
-    elif name = "Paige" then return paige_data;
-    elif name = "code" then return code_data;
-    elif name = "Steiner" then return steiner_data;
-    elif name = "CC" then return cc_data;
-    elif name = "small" then return small_data;
-    elif name = "interesting" then return interesting_data;
-    elif name = "nilpotent" then return nilpotent_data;
+    if name = "left Bol" then return LOOPS_left_bol_data; 
+    elif name = "Moufang" then return LOOPS_moufang_data;
+    elif name = "Paige" then return LOOPS_paige_data;
+    elif name = "code" then return LOOPS_code_data;
+    elif name = "Steiner" then return LOOPS_steiner_data;
+    elif name = "CC" then return LOOPS_cc_data;
+    elif name = "small" then return LOOPS_small_data;
+    elif name = "interesting" then return LOOPS_interesting_data;
+    elif name = "nilpotent" then return LOOPS_nilpotent_data;
+    elif name = "automorphic" then return LOOPS_automorphic_data;
     #up to isotopism
-    elif name = "itp small" then return itp_small_data;
+    elif name = "itp small" then return LOOPS_itp_small_data;
     fi;
 end;
 
@@ -64,7 +66,7 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     if name = "left Bol" then
         s := "The library contains all nonassociative left Bol loops of order less than 17, \nincluding Moufang loops.";
     elif name = "Moufang" then
-        s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81.";
+        s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81 and 243.";
     elif name = "Paige" then
         s := "The library contains the smallest nonassociative finite \nsimple Moufang loop.";
     elif name = "code" then
@@ -79,13 +81,15 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
         s := "The library contains a few interesting loops.";
     elif name = "nilpotent" then
         s := "The library contains all nonassociative nilpotent loops \nof order less than 12.";
+    elif name = "automorphic" then
+        s := "The library contains all nonassociative automorphic loops \nof order less than 16.";
     # up to isotopism
     elif name = "itp small" then
         s := "The library contains all nonassociative loops of order less than 7 up to isotopism.";
     else
         Info( InfoWarning, 1, Concatenation(
             "The admissible names for loop libraries are: \n",
-            "[ \"left Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"small\", \"itp small\", \"interesting\", \"nilpotent\" ]."
+            "[ \"left Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"small\", \"itp small\", \"interesting\", \"nilpotent\", \"automorphic\" ]."
         ) );
         return fail;
     fi;
@@ -118,6 +122,39 @@ end);
 
 #############################################################################
 ##  
+#F  EncodeCayleyTable( ct ) 
+#F  DecodeCayleyTable( str ) 
+##    
+##  Auxiliary routines for encoding and decoding of Cayley tables up to 
+##  order 92, using characters instead of numbers.
+
+EncodeCayleyTable := function( ct )
+    local n, i, j, ret;
+    n := Length( ct );
+    ret := "";
+    for i in [2..n] do for j in [2..n] do
+        Add(ret, CHAR_INT(ct[i][j]+34));
+    od; od;
+    return ret;
+end;
+
+DecodeCayleyTable := function( str )
+    local n, pos, ret, i, j;
+    n := Sqrt( Length( str ) ) + 1;
+    pos := 1;
+    ret := [[1..n]];
+    for i in [2..n] do
+        ret[i] := [i];
+        for j in [2..n] do
+        ret[i][j] := INT_CHAR(str[pos])-34;
+            pos:=pos+1;
+        od;
+    od;
+    return ret;
+end;
+
+#############################################################################
+##  
 #F  ActivateLeftBolLoop( pos ) 
 ##    
 ##  Retrieves the <pos>th left Bol loop of order <n>.
@@ -125,55 +162,21 @@ end);
 
 ActivateLeftBolLoop := function( pos )
 
-    local ct_encode, ct_decode, rep_pos, ct, perm;
-   
-    #############################################################################
-    ##  
-    #F  ct_encode( ct ) 
-    #F  ct_decode( str )
-    ##    
-    ##  Auxiliary routines for encoding and decoding of Cayley tables up to 
-    ##  order 92, using characters instead of numbers.
-    
-    ct_encode:=function(ct) # up to size of 92
-        local n,i,j,ret;
-        n:=Length(ct);
-        ret:="";
-        for i in [2..n] do for j in [2..n] do
-            Add(ret, CHAR_INT(ct[i][j]+34));
-        od; od;
-        return ret;
-    end;
-    
-    ct_decode:=function(str) # up to size of 92
-        local n,pos,ret,i,j;
-        n:=Sqrt(Length(str))+1;
-        pos:=1;
-        ret:=[[1..n]];
-        for i in [2..n] do
-            ret[i]:=[i];
-            for j in [2..n] do
-                ret[i][j]:=INT_CHAR(str[pos])-34;
-                pos:=pos+1;
-            od;
-        od;
-        return ret;
-    end;
-
+    local rep_pos, ct, perm;
     # the left Bol loop activation
     
     rep_pos := pos;
     # searching for a Cayley table on which the loop is based
-    while not IsString( left_bol_data[ 3 ][ rep_pos ] ) do 
+    while not IsString( LOOPS_left_bol_data[ 3 ][ rep_pos ] ) do 
         rep_pos := rep_pos - 1;
     od;
     if rep_pos = pos then
         # loop given by encoded Cayley table
-        ct := ct_decode( left_bol_data[ 3 ][ pos ] );
+        ct := DecodeCayleyTable( LOOPS_left_bol_data[ 3 ][ pos ] );
     else
         # loop given as an isotope of another loop
-        ct := ct_decode( left_bol_data[ 3 ][ rep_pos ] );
-        perm := PermList( ct[ left_bol_data[ 3 ][ pos ] ] );
+        ct := DecodeCayleyTable( LOOPS_left_bol_data[ 3 ][ rep_pos ] );
+        perm := PermList( ct[ LOOPS_left_bol_data[ 3 ][ pos ] ] );
         ct := Set( List( ct, row -> OnTuples( row, perm^-1 ) ) );
     fi;
     return LoopByCayleyTable( ct );
@@ -190,38 +193,38 @@ end;
 
 ActivateMoufangLoop := function( pos, n )
 
-    local d, parent_pos, parent, S, a, h, e, f, G, ret, x, row, y, b, c, z;
+    local d, UnpackCocycle, parent_pos, parent, S, a, h, e, f, G, ret, x, row, y, b, c, z;
     
-    d := moufang_data[ 3 ][ pos ]; #data
+    d := LOOPS_moufang_data[ 3 ][ pos ]; #data
     
-    # order 81 is different from all other implemented orders
-    if n = 81 then 
-        # extension of a group of order 27 by GF(3)
-        # REDO WHEN EXTENSIONS ARE IMPLEMENTED IN LOOPS
-        # making the string d into list of entries 0, 1, 2
-        d := List( d, char -> Position( "012", char ) - 1 );
-        # all are extensions of the same group
-        G := IntoLoop( SmallGroup(27,5) ); 
-        ret := [];
-        # constructing the multiplication table
-        for x in [1..27] do for a in [0..2] do
-            row := [];
-            for y in [1..27] do for b in [0..2] do
-                c := CayleyTable( G )[ x ][ y ];
-                z := (a + b + d[ (x-1)*27 + y ] ) mod 3;
-                Add( row, (c-1)*3 + z + 1 );
+    # orders 81 and 243 are represented as central extensions
+    if n = 81 or n = 243 then 
+        # auxiliary routine for unpacking cocycle from strings to arrays
+        UnpackCocycle := function( s )
+            local n, coc, i, j;
+            s := List( s, char -> Position( "123456789", char ) );
+            n := Sqrt( Length( s ) );
+            coc := List([1..n], i -> 0*[1..n]);
+            for i in [1..n] do for j in [1..n] do
+                coc[i][j] := s[ (i-1)*n + j ];
             od; od;
-            Add( ret, row );
-        od; od;
-        # returning the loop corresponding to the multiplication table 
-        return LoopByCayleyTable( ret );
+            return coc;
+        end;
+        
+        # calling LOOPS routine "LoopByExtension"
+        return LoopByExtension( 
+            IntoLoop( SmallGroup( d[1], d[2] ) ), # K
+            IntoLoop( SmallGroup( d[3], d[4] ) ), # F
+            List([1..d[3]], i -> () ), # trivial action F -> Aut( K )
+            UnpackCocycle( d[ 5 ] ) # cocycle
+        );
     fi;
     
     # all other orders
     if d[ 1 ] > 0 then # must activate parent first
         #determine position of parent
         parent_pos := pos - 1;
-        while moufang_data[ 3 ][ parent_pos ][ 1 ] > 0 do 
+        while LOOPS_moufang_data[ 3 ][ parent_pos ][ 1 ] > 0 do 
             parent_pos := parent_pos - 1;
         od;
         parent_pos := parent_pos + d[ 1 ] - 1;
@@ -263,7 +266,7 @@ end;
 ##  <pos> is the position of the loop in the database.
 ##  <n> is the order of the loop.
 ## 
-##  The database steiner_data contains blocks of steiner triple systems.
+##  The database LOOPS_steiner_data contains blocks of steiner triple systems.
 ##  If the system is on k points, the poitns are labelled 0,...,k-1.
 ##  The constructed Steiner loop has elements labelled 1,...,k+1=n
 
@@ -283,7 +286,7 @@ ActivateSteinerLoop := function( pos, n )
         return Position( "0123456789abcdef", s ) - 1;
     end;
     
-    d := steiner_data[ 3 ][ pos ]; # data for the loop = three strings 
+    d := LOOPS_steiner_data[ 3 ][ pos ]; # data for the loop = three strings 
     #creating the blocks
     blocks := []; 
     for i in [1..Length( d[ 1 ] )] do
@@ -369,29 +372,6 @@ end;
 
 #############################################################################
 ##  
-#F  ActivateSmallLoop( s, n ) 
-##    
-##  Activates small loop of order n from the database of small loops.
-##  The loop is representes by string s that corresponds to the entries
-##  in the Cayley table, not including the first row and the first column.
-
-ActivateSmallLoop := function( s, n )
-    local T, i, j, pos;
-
-    #creating the multiplication table
-    T := List( [1..n], i->[1..n] );
-    for i in [1..n] do T[i][1] := i; T[1][i] := i; od;
-    pos := 1;
-    for i in [2..n] do for j in [2..n] do
-        T[i][j] := Position( "123456789", s[pos] );
-        pos := pos + 1;
-    od; od;
-
-    return LoopByCayleyTable( T );
-end;     
-
-#############################################################################
-##  
 #F  ActivateNilpotentLoop( data ) 
 ##    
 ##  Activates the nilpotent loop based on data = [ K, F, t ], where
@@ -448,9 +428,7 @@ ActivateNilpotentLoop := function( data )
     # constructing the loop
     return LoopByExtension( K, F, phi, theta );
 
-end;      
-
-# no need to activate loops up to isotopism
+end;     
 
 #############################################################################
 ##  READING LOOPS FROM THE LIBRARY - GENERIC METHOD
@@ -525,7 +503,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         SetIsLeftBolLoop( loop, true );
     elif name = "Moufang" then
         # renaming loops so that they agree with Goodaire's classification
-        PG := List([1..81], i->());
+        PG := List([1..243], i->());
         PG[16] :=   (2,5,3,4);
         PG[24] :=   (1,3,4)(2,5);
         PG[32] :=   (1,4,61,7,64,31,19,44,3,51,24,46,22,49,65,9,50,39,41,2,63,27,57,14,5,55,13,69,32,58,17,53,15)
@@ -554,12 +532,15 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         loop := ActivateCCLoop( n, m );
         SetIsCCLoop( loop, true );
     elif name = "small" then
-        loop := ActivateSmallLoop( lib[ 3 ][ n - 4 ][ m ], n );
+        loop := LoopByCayleyTable( DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ] ) );
     elif name = "interesting" then
-        loop := LoopByCayleyTable( lib[ 3 ][ PosInDB( m ) ][ 1 ] );
+        loop := LoopByCayleyTable( DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ][ 1 ] ) );
         SetName( loop, lib[ 3 ][ PosInDB( m ) ][ 2 ] );
     elif name = "nilpotent" then
         loop := ActivateNilpotentLoop( lib[ 3 ][ PosInDB( m ) ] );
+    elif name = "automorphic" then
+        loop := LoopByCayleyTable( DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ] ) );
+        SetIsAutomorphicLoop( loop, true );
     # up to isotopism        
     elif name = "itp small" then
         return LibraryLoop( "small", n, lib[ 3 ][ n-4 ][ m ] );
@@ -575,101 +556,65 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
 end);
 
 #############################################################################
+##  READING LOOPS FROM THE LIBRARY - SPECIFIC CALLS
+##  -------------------------------------------------------------------------
+
+#############################################################################
 ##  
 #F  LeftBolLoop( n, m ) 
+#F  MoufangLoop( n, m ) 
+#F  PaigeLoop( q )
+#F  CodeLoop( n, m ) 
+#F  SteinerLoop( n, m ) 
+#F  CCLoop( n, m ) 
+#F  SmallLoop( n, m ) 
+#F  InterestingLoop( n, m ) 
+#F  NilpotentLoop( n, m ) 
+#F  AutomorphicLoop( n, m )
+#F  ItpSmallLoop( n, m ) 
 ##    
-##  mth proper left Bol loop of order n
 
 InstallGlobalFunction( LeftBolLoop, function( n, m )
     return LibraryLoop( "left Bol", n, m );
 end);
 
-#############################################################################
-##  
-#F  MoufangLoop( n, m ) 
-##    
-##  mth nonassociative Moufang loop of order n
-
 InstallGlobalFunction( MoufangLoop, function( n, m )
     return LibraryLoop( "Moufang", n, m );
 end);
 
-#############################################################################
-##  
-#F  PaigeLoop( q ) 
-##    
-##  Paige loop constructed over GF( q )
-
 InstallGlobalFunction( PaigeLoop, function( q )
+    # Paige loop over GF(q)
     if not q=2 then return Error( "Only q=2 is implemented."); fi;
     return LibraryLoop( "Paige", 120, 1 );
 end);
-
-#############################################################################
-##  
-#F  CodeLoop( n, m ) 
-##    
-##  mth nonassoicative code loop of order n
 
 InstallGlobalFunction( CodeLoop, function( n, m )
     return LibraryLoop( "code", n, m );
 end);
 
-#############################################################################
-##  
-#F  SteinerLoop( n, m ) 
-##    
-##  mth Steiner loop of order n
-
 InstallGlobalFunction( SteinerLoop, function( n, m )
     return LibraryLoop( "Steiner", n, m );
 end);
-
-#############################################################################
-##  
-#F  CCLoop( n, m ) 
-##    
-##  mth CC-loop of order n
 
 InstallGlobalFunction( CCLoop, function( n, m )
     return LibraryLoop( "CC", n, m );
 end);
 
-#############################################################################
-##  
-#F  SmallLoop( n, m ) 
-##    
-##  mth small loop of order n
-
 InstallGlobalFunction( SmallLoop, function( n, m )
     return LibraryLoop( "small", n, m );
 end);
-
-#############################################################################
-##  
-#F  InterestingLoop( n, m ) 
-##    
-##  <m>th interesting loop of order <n>
 
 InstallGlobalFunction( InterestingLoop, function( n, m )
     return LibraryLoop( "interesting", n, m );
 end);
 
-#############################################################################
-##  
-#F  NilpotentLoop( n, m ) 
-##    
-##  <m>th nilpotent loop of order <n>
-
 InstallGlobalFunction( NilpotentLoop, function( n, m )
     return LibraryLoop( "nilpotent", n, m );
 end);
 
-#############################################################################
-##  
-#F  ItpSmallLoop( n, m ) 
-##    
-##  mth small loop of order n up to isotopism
+InstallGlobalFunction( AutomorphicLoop, function( n, m )
+    return LibraryLoop( "automorphic", n, m );
+end);
 
 InstallGlobalFunction( ItpSmallLoop, function( n, m )
     return LibraryLoop( "itp small", n, m );

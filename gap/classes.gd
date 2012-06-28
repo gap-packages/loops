@@ -2,7 +2,7 @@
 ##
 #W  classes.gd  Testing varieties [loops]
 ##
-#H  @(#)$Id: classes.gd, v 2.1.2 2010/11/16 gap Exp $
+#H  @(#)$Id: classes.gd, v 2.2.0 2012/01/19 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -94,6 +94,10 @@ DeclareSynonymAttr( "IsLeftKLoop", IsLeftBruckLoop );
 DeclareProperty( "IsRightBruckLoop", IsLoop );
 DeclareSynonymAttr( "IsRightKLoop", IsRightBruckLoop );
 DeclareProperty( "IsALoop", IsLoop );
+DeclareSynonymAttr( "IsAutomorphicLoop", IsALoop );
 DeclareProperty( "IsLeftALoop", IsLoop );
+DeclareSynonymAttr( "IsLeftAutomorphicLoop", IsLeftALoop );
 DeclareProperty( "IsMiddleALoop", IsLoop );
+DeclareSynonymAttr( "IsMiddleAutomorphicLoop", IsMiddleALoop );
 DeclareProperty( "IsRightALoop", IsLoop );
+DeclareSynonymAttr( "IsRightAutomorphicLoop", IsRightALoop );

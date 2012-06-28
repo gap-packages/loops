@@ -23,13 +23,13 @@ Extent of the library:
 true
 
 # number of orders implemented in the library
-gap> t := Length( interesting_data[ 1 ] );
+gap> t := Length( LOOPS_interesting_data[ 1 ] );
 4
 
 # testing loops  
 gap> for i in [1..t] do
->       n := interesting_data[ 1 ][ i ];
->       for m in [ 1..interesting_data[ 2 ][ i ] ] do
+>       n := LOOPS_interesting_data[ 1 ][ i ];
+>       for m in [ 1..LOOPS_interesting_data[ 2 ][ i ] ] do
 >               InterestingLoop( n, m );
 >       od;
 > od;
@@ -42,19 +42,19 @@ including Moufang loops.
 ------
 Extent of the library:
    6 loops of order 8
-   1 loop of order 12
+   3 loops of order 12
    2 loops of order 15
    2038 loops of order 16
 true
 
 # number of orders implemented in the library
-gap> t := Length( left_bol_data[ 1 ] );
+gap> t := Length( LOOPS_left_bol_data[ 1 ] );
 4
 
 # testing loops  
 gap> for i in [1..t] do
->       n := left_bol_data[ 1 ][ i ];
->       for m in [ 1..left_bol_data[ 2 ][ i ] ] do
+>       n := LOOPS_left_bol_data[ 1 ][ i ];
+>       for m in [ 1..LOOPS_left_bol_data[ 2 ][ i ] ] do
 >               LeftBolLoop( n, m );
 >       od;
 > od;
@@ -75,13 +75,13 @@ Extent of the library:
 true
 
 # number of orders implemented in the library
-gap> t := Length( steiner_data[ 1 ] );
+gap> t := Length( LOOPS_steiner_data[ 1 ] );
 5
 
 # testing loops  
 gap> for i in [1..t] do
->       n := steiner_data[ 1 ][ i ];
->       for m in [ 1..steiner_data[ 2 ][ i ] ] do
+>       n := LOOPS_steiner_data[ 1 ][ i ];
+>       for m in [ 1..LOOPS_steiner_data[ 2 ][ i ] ] do
 >               SteinerLoop( n, m );
 >       od;
 > od;
@@ -179,5 +179,22 @@ gap> CodeLoop( 16, 3 );
 <Moufang loop 16/3>
 gap> CodeLoop( 64, 80 );
 <Moufang loop 64/4247>
+
+# AUTOMORPHIC LOOPS
+gap> DisplayLibraryInfo("automorphic");
+The library contains all nonassociative automorphic loops
+of order less than 16.
+------
+Extent of the library:
+   1 loop of order 6
+   7 loops of order 8
+   3 loops of order 10
+   2 loops of order 12
+   5 loops of order 14
+   2 loops of order 15
+true
+
+gap> AutomorphicLoop(15,2);
+<automorphic loop 15/2>
 
 gap> STOP_TEST( "lib.tst", 10000000 );

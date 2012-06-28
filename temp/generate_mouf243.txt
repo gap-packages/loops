@@ -1,0 +1,108 @@
+# This file was used to generate data for the library of Moufang loops of order 243.
+# The starting point are multiplication tables of such loops from Slattery+Zenisek.
+# The function "CanonicalCentralExtensions" might be useful for loops Q such that
+# Q/Z(Q) is a group, since it produces Q from the canonical (GAP library) groups
+# Z(Q) and Q/Z(Q).
+
+
+CanonicalCentralExtension := function( Q )
+	local K, gps, G, ismK, posK, F, ismF, posF, i, ii, p, nc, phi, theta;
+	if not ( IsAssociative( Center( Q ) ) and IsAssociative( Q/Center(Q) ) ) then
+		return fail; 
+	fi;
+	Q := IsomorphicCopyByNormalSubloop( Q, Center(Q) );
+	# making Center( Q ) canonical
+	K := Center( Q );
+	gps := List( AllGroups( Size( K ) ), IntoLoop );
+	for G in gps do
+		ismK := IsomorphismLoops( K, G );
+		if not ismK = fail then
+			break;
+		fi;
+	od;
+	posK := Position( gps, G );
+	Q := IsomorphicCopyByPerm( Q, ismK );
+	Q := IsomorphicCopyByNormalSubloop( Q, Center( Q ) );
+	# K is now canonical
+	F := Q/Center(Q);
+	# looking at F
+	gps := List( AllGroups( Size( F ) ), IntoLoop );
+	for G in gps do	
+		ismF := IsomorphismLoops( F, G );
+		if not ismF = fail then
+			break;
+		fi;
+	od;
+	posF := Position( gps, G );
+	# permute blocks of F in Q according to ismF
+	p := List( 0*[ 1..Size( Q ) ] );
+	for i in [1..Size(F)] do for ii in [1..Size(K)] do
+		p[ (i-1)*Size(K) + ii ] := (i^ismF - 1)*Size(K) + ii;
+	od; od;
+	p := PermList( p );
+	Q := IsomorphicCopyByPerm( Q, p );	
+	# both K and F are now canonical
+	nc := NuclearExtension( Q, Center(Q) );
+	K := nc[ 1 ];
+	F := nc[ 2 ];	
+	theta := nc[ 4 ];
+	return [ Size(K), posK, Size(F), posF, theta ];
+end;
+
+LoopByCanonicalCentralExtension := function( ext )
+	return LoopByExtension(
+		IntoLoop( SmallGroup( ext[1], ext[2] ) ),
+		IntoLoop( SmallGroup( ext[3], ext[4] ) ),
+		List([1..ext[3]], i -> () ), # trivial action F -> Aut( K )
+		ext[5]
+	);
+end;
+
+PackCocycle := function( coc )
+	local chars, s, n, i, j;
+	chars := "123456789";	
+	s := "";
+	n := Length( coc );
+	for i in [1..n] do for j in [1..n] do
+		Add(s, chars[ coc[ i ][ j ] ] );
+	od; od;
+	return s;
+end;
+
+UnpackCocycle := function( s )
+	local n, coc, i, j;
+	s := List( s, char -> Position( "123456789", char ) );		
+	n := Sqrt( Length( s ) );
+	coc := List([1..n], i -> 0*[1..n]);
+	for i in [1..n] do for j in [1..n] do
+		coc[i][j] := s[ (i-1)*n + j ];
+	od; od;
+	return coc;
+end;
+
+GenerateData81 := function()
+	local f, i, Q, ext;
+	f := "c:/temp/moufang/mouf81.txt";
+	PrintTo(f, "# Moufang loops of order 81\n"); 
+	for i in [1..5] do
+		Q := MoufangLoop(81,i); # assuming LOOPS version 2.1.3 is loaded
+		ext := CanonicalCentralExtension( Q );
+		ext[5] := PackCocycle( ext[5] );
+		AppendTo( f, ext, ",\n" );
+	od;
+	return true;	
+end;
+
+GenerateData243 := function()
+	local f, i, Q, ext;
+	f := "c:/temp/moufang/mouf243.txt";
+	PrintTo(f, "# Moufang loops of order 243\n");
+	for i in [1..72] do
+		Info(InfoWarning,1,i);
+		Q := LoopByCayleyTable( TL[ i ] ); # assuming tables of Mike Slattery are loaded
+		ext := CanonicalCentralExtension( Q );
+		ext[5] := PackCocycle( ext[5] );
+		AppendTo( f, ext, ",\n" );
+	od;
+	return true;
+end;

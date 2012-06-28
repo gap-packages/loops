@@ -2,7 +2,7 @@
 ##
 #W  steiner.tbl    Small Steiner loops           G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: steiner.tbl, v 0.997 2004/10/13 gap Exp $
+#H  @(#)$Id: steiner.tbl, v 2.2.0 2012/06/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -11,7 +11,7 @@
 # (PROG) The data below represent blocks of Steiner triple systems.
 # The blocks and their names are taken from Colbourn, Rosa: Triple Systems.
 
-steiner_data := [
+LOOPS_steiner_data := [
 # implemented orders
 [ 4, 8, 10, 14, 16],
 # number of loops of given order

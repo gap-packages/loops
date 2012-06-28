@@ -24,7 +24,7 @@
 InstallMethod( Discriminator, "for loop",
     [ IsLoop ],
 function( L )
-    local n, T, I, i, j, ebo, c, J, counter, A, P, B, FrequencySet;
+    local n, T, I, i, j, k, ebo, c, J, counter, A, P, B, FrequencySet;
     
     # making sure loop table is canonical
     if L = Parent( L ) then T := CayleyTable( L );
@@ -35,8 +35,8 @@ function( L )
         # not power associative loop, hence crude discriminator
         # Element x asks: Am I neutral element? (Cost: linear)
         # PROG: This is needed to make sure that the neutral element will be in a block by itself.
-        I := List( [1..n], i -> [false, 0, 0, 0, 0, 0 ] );
-        I[1] := [true, 0, 0, 0, 0, 0 ];
+        I := List( [1..n], i -> [false, 0, 0, 0, 0, 0, 0 ] );
+        I[1] := [true, 0, 0, 0, 0, 0, 0 ];
         # Element x asks: Am I an involution? (Cost: linear)
         for i in [1..n] do
             I[ i ][ 2 ] := T[ i ][ i ] = 1;
@@ -62,10 +62,18 @@ function( L )
         for i in [1..n] do
             I[ i ][ 6 ] :=  T[ T[ i ][ i ] ][ i ] = T[ i ][ T[ i ][ i ] ];
         od;
+	# Element x asks: with how many elements do I associate in the first position (x*(y*z) = (x*y)*z ?)
+	for i in [1..n] do
+		for j in [1..n] do for k in [1..n] do
+			if T[ i ][ T[ j ][ k ] ] = T[ T[ i ][ j ] ][ k ] then
+				I[ i ][ 7 ] := I[ i ][ 7 ] + 1;
+			fi;
+		od; od;
+	od;
     else    
         #power associative loop, hence refined discriminator
         # Element x asks: What is my order?
-        I := List( L, x -> [Order(x), 0, 0, 0, 0, false] );
+        I := List( L, x -> [Order(x), 0, 0, 0, 0, false, 0] );
         # Element x asks: How many times am I a square, third power, fourth power?
         for i in [1..n] do
             j := T[ i ][ i ];
@@ -94,6 +102,14 @@ function( L )
         for i in [1..n] do
             I[ i ][ 6 ] := Elements( L )[ i ] in Center( L );
         od;
+	# Element x asks: with how many elements do I associate in the first position (x*(y*z) = (x*y)*z ?)
+	for i in [1..n] do
+		for j in [1..n] do for k in [1..n] do
+			if T[ i ][ T[ j ][ k ] ] = T[ T[ i ][ j ] ][ k ] then
+				I[ i ][ 7 ] := I[ i ][ 7 ] + 1;
+			fi;
+		od; od;
+	od;
     fi; # All invariants have been calculated at this point.
     
     FrequencySet := function (L)

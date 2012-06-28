@@ -2,7 +2,7 @@
 ##
 #W  code.tbl    Small code loops up to isomorphism        Nagy / Vojtechovsky
 ##  
-#H  @(#)$Id: code.tbl, v 1.5.1 2007/06/27 gap Exp $
+#H  @(#)$Id: code.tbl, v 2.2.0 2012/06/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -11,7 +11,7 @@
 #(PROG) The data structure points to the library of Moufang loops. 
 # If code_data[3][a][b] = m then moufang_data[3][2^(a+1)][m] is returned.
 
-code_data := [
+LOOPS_code_data := [
 # implemented orders
 [ 16, 32, 64 ],
 # number of loops of given order

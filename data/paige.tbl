@@ -2,7 +2,7 @@
 ##
 #W  paige.tbl    Paige loops                     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: paige.tbl, v 0.997 2004/10/13 gap Exp $
+#H  @(#)$Id: paige.tbl, v 2.2.0 2012/06/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -10,7 +10,7 @@
 
 # (MATH) Paige loops = nonassociative finite simple Moufang loops
 
-paige_data := [ 
+LOOPS_paige_data := [ 
 # implemented orders
 [ 120 ],
 # number of loops of given order

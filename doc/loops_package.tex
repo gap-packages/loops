@@ -1,0 +1,19 @@
+% This is an auxiliary file that can be processed with LATeX, in order to create a .bbl file for the manual.
+% Here is what should be done.
+% 1) Run LATeX on this file.
+% 2) Run BibTeX.
+% 3) Rename the file loops_package.bbl into manual.bbl
+% 4) Manually add numbers into square brackets in bibitems,
+%    e.g., change \bibitem{Ar} to \bibitem[1]{Ar}
+% 5) Run TeX on manual.tex, etc.
+
+\documentclass{article}
+
+\begin{document}
+
+\cite{Ar}, \cite{Br}, \cite{ChPfSm}, \cite{CoRo}, \cite{CsDr}, \cite{DaVo}, \cite{DrVo}, \cite{Fe}, \cite{Go}, \cite{JaMa}, \cite{KiKuPh}, \cite{Ku}, \cite{Li}, \cite{Mo}, \cite{Na}, \cite{NaVo2003}, \cite{NaVo2007}, \cite{Pf}, \cite{PhVo}, \cite{SlZe2011}, \cite{Vo}, \cite{Wi}.
+
+\bibliographystyle{plain}
+\bibliography{loops_package}
+
+\end{document} 

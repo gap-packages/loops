@@ -2,12 +2,12 @@
 ##
 #W  lefbol.tbl    Small left Bol loops           G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: leftbol.tbl, v 2.1.2 2010/12/09 gap Exp $
+#H  @(#)$Id: leftbol.tbl, v 2.2.0 2012/06/28 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
-left_bol_data := [
+LOOPS_left_bol_data := [
 #implemented orders
 [ 8, 12, 15, 16 ],
 #number of nonassociative loops of given order

@@ -298,15 +298,21 @@ loop!right}\index{Bruck loop}\index{loop!Bruck}. Bruck loops are also known as
 
 A loop whose all left (resp. middle, right) inner mappings are automorphisms is
 called a <left> (resp. <middle>, <right>)
-<A-loop>\index{A-loop!left}\index{A-loop!middle}\index{A-loop!right}. A loop
+<automorphic loop>\index{automorphic loop!left}\index{automorphic loop!middle}\index{automorphic loop!right}. A loop
 whose every inner mapping is an automorphism is known as an
-<A-loop>\index{A-loop}\index{loop!A}. Diassociative A-loops are Moufang by
-\cite{KiKuPh}. See the built-in filters for additional properties of A-loops.
+<automorphic loop>\index{automorphic loop}\index{loop!automorphic}. Diassociative automorphic loops are Moufang by
+\cite{KiKuPh}. See the built-in filters for additional properties of automorphic loops.
 
+\>IsLeftAutomorphicLoop( <L> ) P
+\>IsMiddleAutomorphicLoop( <L> ) P
+\>IsRightAutomorphicLoop( <L> ) P
+\>IsAutomorphicLoop( <L> ) P
+
+Automorphic loops have historically been called <A-loops>\index{A-loop}\index{loop!A}. We therefore support the synonyms
 
 \>IsLeftALoop( <L> ) P
 \>IsMiddleALoop( <L> ) P
 \>IsRightALoop( <L> ) P
 \>IsALoop( <L> ) P
 
-Do not confuse `IsALoop' and `IsLoop'.
+Be careful not to confuse `IsALoop' and `IsLoop'.

@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "2.1.3",
-Date := "18/02/2011",
-ArchiveURL := "http://www.math.du.edu/loops/loops-2.1.3",
+Version := "2.2.0",
+Date := "28/06/2012",
+ArchiveURL := "http://www.math.du.edu/loops/loops-2.2.0",
 ArchiveFormats := "-win.zip .tar.gz",
 
 Persons := [
@@ -53,13 +53,11 @@ PackageInfoURL :=
   "http://www.math.du.edu/loops/PackageInfo.g",
 
 AbstractHTML := Concatenation( 
-"The purpose of the LOOPS package is to provide researchers in ",
-"nonassociative algebra with a computational tool for calculations in ",
-"quasigroups and loops, which would integrate standard notions in ",
-"quasigroup theory with libraries of loops and quasigroups. The ",
-"authors also wished to expand GAP towards the realm of nonassociative ",
-"structures, that are only sporadically present in GAP (e.g. octonion ",
-"algebras in version 4.3)."
+"The LOOPS package provides researchers in nonassociative algebra ",
+"with a computational tool that integrates standard notions ",
+"of loop theory with libraries of loops and group-theoretical ",
+"algorithms of GAP. The package also expands GAP toward ",
+"nonassociative structures."
   ),
 
 PackageWWWHome := "http://www.math.du.edu/loops",
@@ -84,7 +82,7 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "This version of LOOPS is ready for GAP 4.4.\n",
+BannerString := "This version of LOOPS is ready for GAP 4.5.\n",
 
 Autoload := false,  # false for deposited packages
 TestFile := "tst/testall.g",
