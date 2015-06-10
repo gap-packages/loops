@@ -22,3 +22,10 @@ DeclareGlobalFunction( "LoopByCyclicModification" );
 ##  DIHEDRAL MODIFICATION
 ##  -------------------------------------------------------------------------
 DeclareGlobalFunction( "LoopByDihedralModification" );
+
+#############################################################################
+##  AUXILIARY
+##  -------------------------------------------------------------------------
+DeclareGlobalFunction( "LOOPS_PositionList" );
+DeclareGlobalFunction( "LOOPS_Modular" );
+DeclareGlobalFunction( "LOOPS_DVSigma" );

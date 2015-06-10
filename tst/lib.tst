@@ -2,7 +2,7 @@
 ##
 #W  lib.tst   Testing libraries of loops         G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: lib.tst, v 1.9.0 2007/08/11 gap Exp $
+#H  @(#)$Id: lib.tst, v 3.0.0 2015/06/15 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -20,11 +20,12 @@ Extent of the library:
    1 loop of order 6
    1 loop of order 16
    1 loop of order 32
+   1 loop of order 96
 true
 
 # number of orders implemented in the library
 gap> t := Length( LOOPS_interesting_data[ 1 ] );
-4
+5
 
 # testing loops  
 gap> for i in [1..t] do
@@ -34,11 +35,10 @@ gap> for i in [1..t] do
 >       od;
 > od;
 
-# LEFT BOL LOOPS
+# LEFT/RIGHT BOL LOOPS
 
 gap> DisplayLibraryInfo( "left Bol" );
-The library contains all nonassociative left Bol loops of order less than 17,
-including Moufang loops.
+The library contains all nonassociative left Bol loops of order less than 17.
 ------
 Extent of the library:
    6 loops of order 8
@@ -58,6 +58,10 @@ gap> for i in [1..t] do
 >               LeftBolLoop( n, m );
 >       od;
 > od;
+
+# testing right Bol loop
+gap> RightBolLoop( 8, 1 );
+<right Bol loop 8/1>
 
 # STEINER LOOPS
 
@@ -115,17 +119,55 @@ true
 gap> PaigeLoop( 2 );
 <Paige loop 120/1>
 
-# CC-LOOPS
-
-gap> DisplayLibraryInfo("CC");
-The library contains all nonassociative CC-loops
-of order p^2 and 2*p for any odd prime p.
-There are precisely 3 such loops of order p^2,
-and precisely 1 such loop of order 2*p.
+# RCC LOOPS
+gap> DisplayLibraryInfo("RCC");
+The library contains all nonassociative RCC loops of order less than 28.
 ------
 Extent of the library:
- 3 loops of order p^2 and 1 loop of order 2*p
- for every odd prime p
+   3 loops of order 6
+   19 loops of order 8
+   5 loops of order 9
+   16 loops of order 10
+   155 loops of order 12
+   97 loops of order 14
+   17 loops of order 15
+   6317 loops of order 16
+   1901 loops of order 18
+   8248 loops of order 20
+   119 loops of order 21
+   10487 loops of order 22
+   471995 loops of order 24
+   119 loops of order 25
+   151971 loops of order 26
+   152701 loops of order 27
+true
+
+gap> RCCLoop(6,1); RCCLoop(16,6317); RightConjugacyClosedLoop(27,152701);
+<RCC loop 6/1>
+<RCC loop 16/6317>
+<RCC loop 27/152701>
+
+gap> LCCLoop(6,3); LCCLoop(25,119);
+<LCC loop 6/3>
+<LCC loop 25/119>
+
+# CC LOOPS
+
+gap> DisplayLibraryInfo("CC");
+The library contains all nonassociative CC loops of order less than 28
+and all nonassociative CC loops of order p^2 and 2*p for any odd prime p.
+------
+Extent of the library:
+   2 loops of order 8
+   3 loops of order 12
+   28 loops of order 16
+   7 loops of order 18
+   3 loops of order 20
+   1 loop of order 21
+   14 loops of order 24
+   55 loops of order 27
+   3 loops of order p^2 for every odd prime p,
+   1 loop of order 2*p for every odd prime p
 true
 
 gap> CCLoop(25,1); CCLoop(49,2); CCLoop(121,3); CCLoop(14,1);
@@ -134,10 +176,14 @@ gap> CCLoop(25,1); CCLoop(49,2); CCLoop(121,3); CCLoop(14,1);
 <CC loop 121/3>
 <CC loop 14/1>
 
+gap> CCLoop(16,28); ConjugacyClosedLoop(27,55);
+<CC loop 16/28>
+<CC loop 27/55>
+
 # SMALL LOOPS
 
 gap> DisplayLibraryInfo("small");
-The library contains all nonassocaitive loops of order less than 7.
+The library contains all nonassociative loops of order less than 7.
 ------
 Extent of the library:
    5 loops of order 5
@@ -166,7 +212,7 @@ gap> ItpSmallLoop( 5, 1 ); ItpSmallLoop( 6, 14 );
 # CODE LOOPS
 
 gap> DisplayLibraryInfo("code");
-The library contains all nonasscoiative even code loops
+The library contains all nonassociative even code loops
 of order less than 65.
 ------
 Extent of the library:
@@ -181,6 +227,7 @@ gap> CodeLoop( 64, 80 );
 <Moufang loop 64/4247>
 
 # AUTOMORPHIC LOOPS
+
 gap> DisplayLibraryInfo("automorphic");
 The library contains all nonassociative automorphic loops
 of order less than 16.

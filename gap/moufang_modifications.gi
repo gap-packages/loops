@@ -2,7 +2,7 @@
 ##
 #W  moufang_modifications.gi   Moufang modifications [loops]
 ##  
-#H  @(#)$Id: moufang_modifications.gi, v 2.0.0 2008/01/21 gap Exp $
+#H  @(#)$Id: moufang_modifications.gi, v 3.0.0 2015/06/15 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -44,42 +44,45 @@ end);
 
 #############################################################################
 ##  
-#F  PositionList( A, B ) 
+#F  LOOPS_PositionList( A, B ) 
 ##    
 ##  input: lists A, B
 ##  returns: list P, where P[i] is the position of B[i] in A
 
-PositionList := function( A, B )
+InstallGlobalFunction( LOOPS_PositionList,
+function( A, B )
     local P, b;
     P := [];
     for b in B do Add( P, Position( A, b ) ); od;
     return P;
-end;
+end);
 
 #############################################################################
 ##  
-#F  Modular( i, m ) 
+#F  LOOPS_Modular( i, m ) 
 ##    
 ##  returns i modulo the set [-m+1..m]
 
-Modular:=function(i, m)
+InstallGlobalFunction( LOOPS_Modular,
+function(i, m)
     while i>m do i:=i-2*m; od;
     while i<1-m do i:=i+2*m; od;
     return i;
-end;
+end);
 
 #############################################################################
 ##  
-#F  DVSigma( i, m ) 
+#F  LOOPS_DVSigma( i, m ) 
 ##
 ##  Calculates overflow of i modulo [-m+1..m].
 ##  See documentation for more details.
             
-DVSigma := function( i, m )
+InstallGlobalFunction( LOOPS_DVSigma,
+function( i, m )
     if i > m then return 1; fi;
     if i < 1 - m then return -1; fi;
     return 0;
-end;
+end);
 
 #############################################################################
 ##  CYCLIC MODIFICATION
@@ -112,7 +115,7 @@ InstallGlobalFunction( LoopByCyclicModification, function( L, S, a, h )
     ih := Position( Elements( L ), h^(-1) ); #inverse of h
     h := Position( Elements( L ), h );
     a := Position( Elements( L ), a );
-    S := PositionList( Elements( L ), Elements( S ) );
+    S := LOOPS_PositionList( Elements( L ), Elements( S ) );
     L := CayleyTable( L );
     
     # setting parameter m of the construction
@@ -126,13 +129,13 @@ InstallGlobalFunction( LoopByCyclicModification, function( L, S, a, h )
     od;
 
     # into which cosets belong elements of L
-    iL := List( [ 1..n ], x -> Modular( SublistPosition(aP, x ) - 1, m ) );
+    iL := List( [ 1..n ], x -> LOOPS_Modular( LOOPS_SublistPosition(aP, x ) - 1, m ) );
 
     # setting up the multiplication table
     T := List( [ 1..n ], i->[] );
     for x in [ 1..n ] do for y in [ 1..n ] do
         z := L[ x ][ y ];
-        exponent := DVSigma( iL[ x ] + iL[ y ], m );
+        exponent := LOOPS_DVSigma( iL[ x ] + iL[ y ], m );
         if exponent = 1 then z := L[ z ][ h ]; fi;
         if exponent = -1 then z := L[ z ][ ih ]; fi;
         T[ x ][ y ] := z;
@@ -180,8 +183,8 @@ InstallGlobalFunction( LoopByDihedralModification, function( L, S, e, f, h )
     a := Position( Elements( L ), a );
     e := Position( Elements( L ), e );
     f := Position( Elements( L ), f );
-    S := PositionList( Elements( L ), Elements( S ) );
-    G0 := PositionList( Elements( L ), Elements( G0 ) );
+    S := LOOPS_PositionList( Elements( L ), Elements( S ) );
+    G0 := LOOPS_PositionList( Elements( L ), Elements( G0 ) );
     L := CayleyTable( L );
 
     # setting parameter m
@@ -197,14 +200,14 @@ InstallGlobalFunction( LoopByDihedralModification, function( L, S, e, f, h )
     fP := List( aP, x -> Union( List( x, y -> [ y, L[ y ][ f ] ] ) ) );
     
     # into which cosets belong elements of L
-    eL := List( [ 1..n ], x -> Modular( SublistPosition(eP, x ) - 1, m ) );
-    fL := List( [ 1..n ], x -> Modular( SublistPosition(fP, x ) - 1, m ) );
+    eL := List( [ 1..n ], x -> LOOPS_Modular( LOOPS_SublistPosition(eP, x ) - 1, m ) );
+    fL := List( [ 1..n ], x -> LOOPS_Modular( LOOPS_SublistPosition(fP, x ) - 1, m ) );
 
     # setting up multiplication table
     T := List( L, x->[] );
     for x in [ 1..n ] do for y in [ 1..n ] do
-        if y in G0 then exp := DVSigma( eL[ x ] + fL[ y ], m );
-        else exp := (-1)*DVSigma( eL[ x ] + fL[ y ], m ); fi;
+        if y in G0 then exp := LOOPS_DVSigma( eL[ x ] + fL[ y ], m );
+        else exp := (-1)*LOOPS_DVSigma( eL[ x ] + fL[ y ], m ); fi;
         z := L[ x ][ y ];
         if exp = 1 then z := L[ z ][ h ]; fi;
         if exp = -1 then z := L[ z ][ ih ]; fi;

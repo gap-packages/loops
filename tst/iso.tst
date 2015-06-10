@@ -2,7 +2,7 @@
 ##
 #W  iso.tst   Testing isomorphisms             G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: iso.tst, v 2.0.0 2008/03/06 gap Exp $
+#H  @(#)$Id: iso.tst, v 3.0.0 2015/06/15 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -33,6 +33,6 @@ gap> IsomorphismLoops( Q, Qp );
 # TESTING ISOTOPISMS
 
 gap> IsotopismLoops( SmallLoop( 5, 1 ), SmallLoop( 5, 4 ) );    
-[ (3,5,4), (1,2), (1,2) ]
+[ (3,4,5), (1,2), (1,2) ]
 
 gap> STOP_TEST( "iso.tst", 10000000 );

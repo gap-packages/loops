@@ -9,7 +9,7 @@ mostly Bol and Moufang loops.
 Let $L$ be a left Bol loop\index{Bol loop!left}\index{loop!Bol} such that the mapping $x\mapsto
 x^2$ is a permutation of $L$. Define a new operation $*$ on $L$ by $x*y
 =(x(y^2x))^{1/2}$. Then Bruck showed that $(L,*)$ is a left Bruck loop, called
-the <assoicated left Bruck loop>.\index{Bruck loop!associated left}\index{loop!associated Bruck}. (In fact,
+the <assoicated left Bruck loop>\index{Bruck loop!associated left}\index{loop!associated Bruck}. (In fact,
 Bruck used the isomorphic operation $x*y = x^{1/2}(yx^{1/2})$ instead. Our
 approach is more natural, since the associated left Bruck loop to a left Bruck
 loop $L$ is identical to $L$ then.) The associated left Bruck loop of $L$ is
@@ -17,6 +17,18 @@ returned via
 
 \>AssociatedLeftBruckLoop( <L> ) A
 
+The dual attribute is supported for right Bol loops\index{Bol loop!right}\index{loop!Bol}:
+
+\>AssociatedRightBruckLoop( <L> ) A
+
+Many right Bol loops can be constructed from exact group factorizations. The triple $(G,H_1,H_2)$ is an <exact group factorization>\index{exact group factorization} if $H_1$, $H_2$ are subgroups of $G$ such that $H_1H_2=G$ and $H_1\cap H_2=1$.
+
+If $(G,H_1,H_2)$ is an exact group factorization then $(G\times G, H_1\times H_2, T)$ with $T=\{(x,x^{-1} : x\in G\}$ is a loop folder that gives rise to a right Bol loop. The corresponding methods in {\LOOPS} are:
+
+\>IsExactGroupFactorization( <G>, <H1>, <H2> )
+\>RightBolLoopByExactGroupFactorization( <arg> )
+
+The argument of `RightBolLoopFromExactGroupFactorization' can either be the exact group factorization $[G,H_1,H_2]$ or the tuple $[G,H]$, where $H$ is a regular subgroup of $G$. We also allow to enter the arguments separately, instead of using lists.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Moufang modifications}

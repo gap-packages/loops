@@ -2,7 +2,7 @@
 ##
 #W  mlt_search.gi  Realizing groups as multiplication groups of loops [loops]
 ##
-#H  @(#)$Id: mlt_search.gi, v 2.1.0 2008/12/08 gap Exp $
+#H  @(#)$Id: mlt_search.gi, v 3.0.0 2015/06/12 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -52,18 +52,20 @@
 ##########################################################################
 
 # Debugging
-loop_search_runtime:=function(tstart)
+LOOPS_SearchRuntime:=function(tstart)
 	return Concatenation("[ ", StringTime(Runtime()-tstart)," ]");
 end;
-loop_search_info:=NewInfoClass("InfoCayleySearch");
-SetInfoLevel(loop_search_info,1);
 
-# loop_table_search_NC(G, depth, infolevel, task)
+LOOPS_SearchInfo:=NewInfoClass("InfoCayleySearch");
+SetInfoLevel(LOOPS_SearchInfo,1);
+
+
+# LOOPS_TableSearchNC(G, depth, infolevel, task)
 # 	restiction in ["", "all", "all proper", "one", "one proper", "all exact", "one exact"]
 # 	if task="" then task:="all";
 
 # auxiliary function
-loop_table_search_NC:=function(g, ldepth, infolevel, task)
+LOOPS_TableSearchNC:=function(g, ldepth, infolevel, task)
 	local 
 	# task variables
 	only_one, only_proper, only_exact, takeit,
@@ -158,50 +160,50 @@ loop_table_search_NC:=function(g, ldepth, infolevel, task)
 	# main search part
 	# printing the task ["", "all", "all proper", "one", "one proper", "all exact", "one exact"]
 	
-	old_infolevel:=InfoLevel(loop_search_info);
-	SetInfoLevel(loop_search_info,infolevel);
+	old_infolevel:=InfoLevel(LOOPS_SearchInfo);
+	SetInfoLevel(LOOPS_SearchInfo,infolevel);
 
 	if task="" then task:="all"; fi;
 	if task="all" then 
 		only_one:=false;
 		only_proper:=false;
 		only_exact:=false;
-		Info(loop_search_info, 1, "### Search for all loops in the given group ###");
+		Info(LOOPS_SearchInfo, 1, "### Search for all loops in the given group ###");
 	elif task="all proper" then 
 		only_one:=false;
 		only_proper:=true;
 		only_exact:=false;
-		Info(loop_search_info, 1, "### Search for all nonassociative loops in the given group ###");
+		Info(LOOPS_SearchInfo, 1, "### Search for all nonassociative loops in the given group ###");
 	elif task="one" then 
 		only_one:=true;
 		only_proper:=false;
 		only_exact:=false;
-		Info(loop_search_info, 1, "### Search for one loop in the given group ###");
+		Info(LOOPS_SearchInfo, 1, "### Search for one loop in the given group ###");
 	elif task="one proper" then 
 		only_one:=true;
 		only_proper:=true;
 		only_exact:=false;
-		Info(loop_search_info, 1, "### Search for one nonassociative loops loops in the given group ###");
+		Info(LOOPS_SearchInfo, 1, "### Search for one nonassociative loops loops in the given group ###");
 	elif task="all exact" then 
 		only_one:=false;
 		only_proper:=false;
 		only_exact:=true;
-		Info(loop_search_info, 1, "### Search for all loops with given multiplication group ###");
+		Info(LOOPS_SearchInfo, 1, "### Search for all loops with given multiplication group ###");
 	elif task="one exact" then 
 		only_one:=true;
 		only_proper:=false;
 		only_exact:=true;
-		Info(loop_search_info, 1, "### Search for one loop with given multiplication group ###");
+		Info(LOOPS_SearchInfo, 1, "### Search for one loop with given multiplication group ###");
 	else 
-		SetInfoLevel(loop_search_info,old_infolevel);
+		SetInfoLevel(LOOPS_SearchInfo,old_infolevel);
 		return fail; 
 	fi;
 
 	time_start:=Runtime();
 	degree:=NrMovedPoints(g);
 	depth:=ldepth;
-	Info(loop_search_info, 1, "# Size of the input group: ", Size(g));
-	Info(loop_search_info, 1, "# Degree of the permutation group: ", degree);
+	Info(LOOPS_SearchInfo, 1, "# Size of the input group: ", Size(g));
+	Info(LOOPS_SearchInfo, 1, "# Degree of the permutation group: ", degree);
 
 	# analysis of the fixed point free elements
 	fpf_classes:=Filtered(ConjugacyClasses(g),x->NrMovedPoints(Representative(x))=degree);
@@ -213,11 +215,11 @@ loop_table_search_NC:=function(g, ldepth, infolevel, task)
 	MakeImmutable(V);
 	reps:=List(fpf_classes,x->Minimum(Elements(x)));
 	reps:=Set(reps,x->Position(V,x));
-	Info(loop_search_info, 1, "# ", loop_search_runtime(time_start), " Search started."); 
+	Info(LOOPS_SearchInfo, 1, "# ", LOOPS_SearchRuntime(time_start), " Search started."); 
 
-	Info(loop_search_info, 1, "# Collected the fixed point free elements." );
-	Info(loop_search_info, 1, "# Number of conjugugacy classes = ", Size(reps), "." );
-	Info(loop_search_info, 1, "# Number of fixed point free elements = ", Size(V), "." );
+	Info(LOOPS_SearchInfo, 1, "# Collected the fixed point free elements." );
+	Info(LOOPS_SearchInfo, 1, "# Number of conjugugacy classes = ", Size(reps), "." );
+	Info(LOOPS_SearchInfo, 1, "# Number of fixed point free elements = ", Size(V), "." );
 
 	# hash tables
 	hash:=List([1..depth],i->[]);
@@ -236,7 +238,7 @@ loop_table_search_NC:=function(g, ldepth, infolevel, task)
 		x0:=ShallowCopy(x1);
 	od;
 	MakeImmutable(hash);
-	Info(loop_search_info, 1, "# ", loop_search_runtime(time_start), " Hash table of depth ", depth, " created." );
+	Info(LOOPS_SearchInfo, 1, "# ", LOOPS_SearchRuntime(time_start), " Hash table of depth ", depth, " created." );
 
 	# initialization
 	row:=['*'];
@@ -247,7 +249,7 @@ loop_table_search_NC:=function(g, ldepth, infolevel, task)
 
 	while next_node() do
 		if level=2 then 
-			Info(loop_search_info, 1, "# ", loop_search_runtime(time_start), 
+			Info(LOOPS_SearchInfo, 1, "# ", LOOPS_SearchRuntime(time_start), 
 				" We have ", Length(pi[2])+1, " more step(s)." ); 
 		fi;
 		if level=degree then 
@@ -265,10 +267,10 @@ loop_table_search_NC:=function(g, ldepth, infolevel, task)
 			fi;
 			if takeit then 
 				Add(results, ShallowCopy(row));
-				Info(loop_search_info, 2, "##############################");
-				Info(loop_search_info, 1, "# ", loop_search_runtime(time_start), 
+				Info(LOOPS_SearchInfo, 2, "##############################");
+				Info(LOOPS_SearchInfo, 1, "# ", LOOPS_SearchRuntime(time_start), 
 					" Hit number ", Length(results));
-				Info(loop_search_info, 2, ct);
+				Info(LOOPS_SearchInfo, 2, ct);
 				if only_one then break; fi;
 			fi;
 		else
@@ -277,15 +279,15 @@ loop_table_search_NC:=function(g, ldepth, infolevel, task)
 		fi;
 	od;
 
-	Info(loop_search_info, 1, "##############################");
-	Info(loop_search_info, 1, "# ", loop_search_runtime(time_start), " Finished. ", Length(results), " loops found." );
+	Info(LOOPS_SearchInfo, 1, "##############################");
+	Info(LOOPS_SearchInfo, 1, "# ", LOOPS_SearchRuntime(time_start), " Finished. ", Length(results), " loops found." );
 	
-	SetInfoLevel(loop_search_info,old_infolevel);
+	SetInfoLevel(LOOPS_SearchInfo,old_infolevel);
 	return List(results,x->Concatenation([()],V{x{[2..degree]}}));
 end;
 
 # auxiliary function
-loop_search_input_check:=function( G, depth, infolevel, task )
+LOOPS_SearchInputCheck:=function( G, depth, infolevel, task )
 	local degree;
 	if not IsPermGroup(G) then 
 		Info( InfoWarning, 1, "<G> must be a permutation group" );
@@ -328,9 +330,9 @@ function( G )
 	task:="all";
 	depth:=fail;
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -342,9 +344,9 @@ function( G, depth )
 	local infolevel, task, a;
 	task:="all";
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -355,9 +357,9 @@ InstallOtherMethod( AllLoopTablesInGroup, "for a group and two integers",
 function( G, depth, infolevel )
 	local task, a;
 	task:="all";
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -376,9 +378,9 @@ function( G )
 	task:="all proper";
 	depth:=fail;
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -390,9 +392,9 @@ function( G, depth )
 	local infolevel, task, a;
 	task:="all proper";
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -403,9 +405,9 @@ InstallOtherMethod( AllProperLoopTablesInGroup, "for a group and two integers",
 function( G, depth, infolevel )
 	local task, a;
 	task:="all proper";
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -424,9 +426,9 @@ function( G )
 	task:="one";
 	depth:=fail;
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -438,9 +440,9 @@ function( G, depth )
 	local infolevel, task, a;
 	task:="one";
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -451,9 +453,9 @@ InstallOtherMethod( OneLoopTableInGroup, "for a group and two integers",
 function( G, depth, infolevel )
 	local task, a;
 	task:="one";
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -472,9 +474,9 @@ function( G )
 	task:="one proper";
 	depth:=fail;
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -486,9 +488,9 @@ function( G, depth )
 	local infolevel, task, a;
 	task:="one proper";
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -499,9 +501,9 @@ InstallOtherMethod( OneProperLoopTableInGroup, "for a group and two integers",
 function( G, depth, infolevel )
 	local task, a;
 	task:="one proper";
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -520,9 +522,9 @@ function( G )
 	task:="all exact";
 	depth:=fail;
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -534,9 +536,9 @@ function( G, depth )
 	local infolevel, task, a;
 	task:="all exact";
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -547,9 +549,9 @@ InstallOtherMethod( AllLoopsWithMltGroup, "for a group and two integers",
 function( G, depth, infolevel )
 	local task, a;
 	task:="all exact";
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -568,9 +570,9 @@ function( G )
 	task:="one exact";
 	depth:=fail;
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -582,9 +584,9 @@ function( G, depth )
 	local infolevel, task, a;
 	task:="one exact";
 	infolevel:=fail;
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;
@@ -595,9 +597,9 @@ InstallOtherMethod( OneLoopWithMltGroup, "for a group and two integers",
 function( G, depth, infolevel )
 	local task, a;
 	task:="one exact";
-	a:=loop_search_input_check(G,depth,infolevel,task);
+	a:=LOOPS_SearchInputCheck(G,depth,infolevel,task);
 	if a<>false then
-		return loop_table_search_NC(a[1],a[2],a[3],a[4]);
+		return LOOPS_TableSearchNC(a[1],a[2],a[3],a[4]);
 	else
 		return fail;
 	fi;

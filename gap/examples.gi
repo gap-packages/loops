@@ -2,11 +2,19 @@
 ##
 #W  examples.gi              Examples [loops]
 ##  
-#H  @(#)$Id: examples.gi, v 2.2.0 2012/06/28 gap Exp $
+#H  @(#)$Id: examples.gi, v 3.0.0 2015/06/10 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
+
+#############################################################################
+##  Binding gobal variable LOOPS_aux 
+##
+##  The variable is used for temporary storage throughout the package. 
+##  We therefore do not want the variable to be read only.
+
+LOOPS_aux := [];
 
 #############################################################################
 ##  READING DATA
@@ -18,7 +26,8 @@ ReadPackage("loops", "data/moufang.tbl");       # Moufang loops
 ReadPackage("loops", "data/paige.tbl");         # Paige loops
 ReadPackage("loops", "data/code.tbl");          # code loops
 ReadPackage("loops", "data/steiner.tbl");       # Steiner loops
-ReadPackage("loops", "data/cc.tbl");            # CC-loops
+ReadPackage("loops", "data/cc.tbl");            # CC loops
+ReadPackage("loops", "data/rcc.tbl");           # RCC loops (more is read upon calling RCCLoop(n,m) for the first time
 ReadPackage("loops", "data/small.tbl");         # small loops
 ReadPackage("loops", "data/interesting.tbl");   # interesting loops
 ReadPackage("loops", "data/nilpotent.tbl");     # nilpotent loops
@@ -33,11 +42,12 @@ ReadPackage("loops", "data/itp_small.tbl");     # small loops up to isotopism
 
 #############################################################################
 ##  
-#F  LibraryByName( name ) 
+#F  LOOPS_LibraryByName( name ) 
 ##    
 ##  Auxiliary. Returns the library corresponding to <name>.
 
-LibraryByName := function( name )
+InstallGlobalFunction( LOOPS_LibraryByName, 
+function( name )
     #up to isomorphism
     if name = "left Bol" then return LOOPS_left_bol_data; 
     elif name = "Moufang" then return LOOPS_moufang_data;
@@ -45,6 +55,7 @@ LibraryByName := function( name )
     elif name = "code" then return LOOPS_code_data;
     elif name = "Steiner" then return LOOPS_steiner_data;
     elif name = "CC" then return LOOPS_cc_data;
+    elif name = "RCC" then return LOOPS_rcc_data;
     elif name = "small" then return LOOPS_small_data;
     elif name = "interesting" then return LOOPS_interesting_data;
     elif name = "nilpotent" then return LOOPS_nilpotent_data;
@@ -52,7 +63,7 @@ LibraryByName := function( name )
     #up to isotopism
     elif name = "itp small" then return LOOPS_itp_small_data;
     fi;
-end;
+end);
 
 #############################################################################
 ##  
@@ -64,19 +75,27 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     local s, lib, k;
     # up to isomorphism
     if name = "left Bol" then
-        s := "The library contains all nonassociative left Bol loops of order less than 17, \nincluding Moufang loops.";
+        s := "The library contains all nonassociative left Bol loops of order less than 17.";
+    elif name = "right Bol" then
+        s := "The library contains all nonassociative right Bol loops of order less than 17.";
+        name := "left Bol"; # using dual data
     elif name = "Moufang" then
         s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81 and 243.";
     elif name = "Paige" then
         s := "The library contains the smallest nonassociative finite \nsimple Moufang loop.";
     elif name = "code" then
-        s := "The library contains all nonasscoiative even code loops \nof order less than 65.";
+        s := "The library contains all nonassociative even code loops \nof order less than 65.";
     elif name = "Steiner" then
         s := "The library contains all nonassociative Steiner loops \nof order less or equal to 16. It also contains the \nassociative Steiner loops of order 4 and 8.";
     elif name = "CC" then
-        s := "The library contains all nonassociative CC-loops \nof order p^2 and 2*p for any odd prime p.\nThere are precisely 3 such loops of order p^2,\nand precisely 1 such loop of order 2*p.";
+        s := "The library contains all nonassociative CC loops of order less than 28 \nand all nonassociative CC loops of order p^2 and 2*p for any odd prime p.";
+    elif name = "RCC" then
+        s := "The library contains all nonassociative RCC loops of order less than 28.";
+    elif name = "LCC" then
+        s := "The library contains all nonassociative LCC loops of order less than 28.";
+        name := "RCC"; # using dual data
     elif name = "small" then
-        s := "The library contains all nonassocaitive loops of order less than 7.";
+        s := "The library contains all nonassociative loops of order less than 7.";
     elif name = "interesting" then
         s := "The library contains a few interesting loops.";
     elif name = "nilpotent" then
@@ -89,25 +108,24 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     else
         Info( InfoWarning, 1, Concatenation(
             "The admissible names for loop libraries are: \n",
-            "[ \"left Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"small\", \"itp small\", \"interesting\", \"nilpotent\", \"automorphic\" ]."
+            "[ \"left Bol\", \"right Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"RCC\", \"LCC\", \"small\", \"itp small\", \"interesting\", \"nilpotent\", \"automorphic\" ]."
         ) );
         return fail;
     fi;
     
     s := Concatenation( s, "\n------\nExtent of the library:" );
     
-    lib := LibraryByName( name );
-    if not name = "CC" then
-        for k in [1..Length( lib[ 1 ] ) ] do
-            if lib[ 2 ][ k ] = 1 then
-                s := Concatenation( s, "\n   ", String( lib[ 2 ][ k ] ), " loop of order ", String( lib[ 1 ][ k ] ) );
-            else
-                s := Concatenation( s, "\n   ", String( lib[ 2 ][ k ] ), " loops of order ", String( lib[ 1 ][ k ] ) );
-            fi;
-        od;
-    else
-        s := Concatenation( s, "\n 3 loops of order p^2 and 1 loop of order 2*p\n for every odd prime p" );
-    fi;     
+    lib := LOOPS_LibraryByName( name );
+    for k in [1..Length( lib[ 1 ] ) ] do
+        if lib[ 2 ][ k ] = 1 then
+            s := Concatenation( s, "\n   ", String( lib[ 2 ][ k ] ), " loop of order ", String( lib[ 1 ][ k ] ) );
+        else
+            s := Concatenation( s, "\n   ", String( lib[ 2 ][ k ] ), " loops of order ", String( lib[ 1 ][ k ] ) );
+        fi;
+    od;
+    if name = "CC" then
+        s := Concatenation( s, "\n   3 loops of order p^2 for every odd prime p,\n   1 loop of order 2*p for every odd prime p" );
+    fi;
     s := Concatenation( s, "\n" );
     Print( s );
     return true;
@@ -117,51 +135,18 @@ end);
 ##  AUXILIARY FUNCTIONS
 ##  -------------------------------------------------------------------------
 ##  When the data in the database is encoded in some way, we usually
-##  retrieve the loop via function ActivateXLoop, where X is the name 
+##  retrieve the loop via function LOOPS_ActivateXLoop, where X is the name 
 ##  of the class.
 
 #############################################################################
 ##  
-#F  EncodeCayleyTable( ct ) 
-#F  DecodeCayleyTable( str ) 
-##    
-##  Auxiliary routines for encoding and decoding of Cayley tables up to 
-##  order 92, using characters instead of numbers.
-
-EncodeCayleyTable := function( ct )
-    local n, i, j, ret;
-    n := Length( ct );
-    ret := "";
-    for i in [2..n] do for j in [2..n] do
-        Add(ret, CHAR_INT(ct[i][j]+34));
-    od; od;
-    return ret;
-end;
-
-DecodeCayleyTable := function( str )
-    local n, pos, ret, i, j;
-    n := Sqrt( Length( str ) ) + 1;
-    pos := 1;
-    ret := [[1..n]];
-    for i in [2..n] do
-        ret[i] := [i];
-        for j in [2..n] do
-        ret[i][j] := INT_CHAR(str[pos])-34;
-            pos:=pos+1;
-        od;
-    od;
-    return ret;
-end;
-
-#############################################################################
-##  
-#F  ActivateLeftBolLoop( pos ) 
+#F  LOOPS_ActivateLeftBolLoop( pos ) 
 ##    
 ##  Retrieves the <pos>th left Bol loop of order <n>.
 ##  The position <pos> is precalculated via PosInDB (see below).
 
-ActivateLeftBolLoop := function( pos )
-
+InstallGlobalFunction( LOOPS_ActivateLeftBolLoop,
+function( pos )
     local rep_pos, ct, perm;
     # the left Bol loop activation
     
@@ -172,27 +157,27 @@ ActivateLeftBolLoop := function( pos )
     od;
     if rep_pos = pos then
         # loop given by encoded Cayley table
-        ct := DecodeCayleyTable( LOOPS_left_bol_data[ 3 ][ pos ] );
+        ct := LOOPS_DecodeCayleyTable( LOOPS_left_bol_data[ 3 ][ pos ] );
     else
         # loop given as an isotope of another loop
-        ct := DecodeCayleyTable( LOOPS_left_bol_data[ 3 ][ rep_pos ] );
+        ct := LOOPS_DecodeCayleyTable( LOOPS_left_bol_data[ 3 ][ rep_pos ] );
         perm := PermList( ct[ LOOPS_left_bol_data[ 3 ][ pos ] ] );
         ct := Set( List( ct, row -> OnTuples( row, perm^-1 ) ) );
     fi;
     return LoopByCayleyTable( ct );
     
-end;
+end);
 
 #############################################################################
 ##  
-#F  ActivateMoufangLoop( pos, n ) 
+#F  LOOPS_ActivateMoufangLoop( pos, n ) 
 ##    
 ##  Auxiliary function for activating Moufang loops from the database.
 ##  <pos> is the position of the loop in the database. 
 ##  <n> is the order of the loops
 
-ActivateMoufangLoop := function( pos, n )
-
+InstallGlobalFunction( LOOPS_ActivateMoufangLoop,
+function( pos, n )
     local d, UnpackCocycle, parent_pos, parent, S, a, h, e, f, G, ret, x, row, y, b, c, z;
     
     d := LOOPS_moufang_data[ 3 ][ pos ]; #data
@@ -228,7 +213,7 @@ ActivateMoufangLoop := function( pos, n )
             parent_pos := parent_pos - 1;
         od;
         parent_pos := parent_pos + d[ 1 ] - 1;
-        parent := ActivateMoufangLoop( parent_pos, 0  ); # order not important
+        parent := LOOPS_ActivateMoufangLoop( parent_pos, 0  ); # order not important
 
         if d[ 2 ] = "C" then #cyclic modification
             S := List( d[ 3 ], i -> Elements( parent )[ i ] );
@@ -256,11 +241,11 @@ ActivateMoufangLoop := function( pos, n )
         return DirectProduct( parent, CyclicGroup( d[ 3 ][ 3 ] ) );    
     fi;
 
-end;
+end);
 
 #############################################################################
 ##  
-#F  ActivateSteinerLoop( pos, n ) 
+#F  LOOPS_ActivateSteinerLoop( pos, n ) 
 ##    
 ##  Auxiliary function activating Steiner loops from the database.
 ##  <pos> is the position of the loop in the database.
@@ -270,8 +255,8 @@ end;
 ##  If the system is on k points, the poitns are labelled 0,...,k-1.
 ##  The constructed Steiner loop has elements labelled 1,...,k+1=n
 
-ActivateSteinerLoop := function( pos, n )
-
+InstallGlobalFunction( LOOPS_ActivateSteinerLoop,
+function( pos, n )
     local d, blocks, i, T, i_in, ij_in, j, MyInt;
 
     #############################################################################
@@ -308,18 +293,96 @@ ActivateSteinerLoop := function( pos, n )
     od;
     
     return LoopByCayleyTable( T );
-end;
+end);
 
 #############################################################################
 ##  
-#F  ActivateCCLoop( n, m ) 
+#F  LOOPS_ActivateRCCLoop( n, m ) 
 ##    
-##  Activates a CC-loop from the library.
+##  Activates an RCC loop from the library.
 ##  See manual for complete discussion concerning this library.
 
-ActivateCCLoop := function( n, m )
+InstallGlobalFunction( LOOPS_ActivateRCCLoop,
+function( n, m )
+    local pos_n, pos_m, g, nr_conj_classes, data, data2, next_compactified, x, i, rel_m, G, section, pos_conjugacy_classes;
 
-    local T, x, y, k, a, b, p, SmallestNonsquare;
+    pos_n := Position( LOOPS_rcc_data[ 1 ], n );
+    if  IsEmpty( LOOPS_rcc_transitive_groups ) then # data not read yet
+        ReadPackage( "loops", "data/rcc/rcc_transitive_groups.tbl" );
+    fi;
+    # determining the transitive group corresponding to pos_n, m
+    pos_m := Length( LOOPS_rcc_data[ 3 ][ pos_n ][ 1 ] ); # nr of transitive groups associated with order n
+    while LOOPS_rcc_data[ 3 ][ pos_n ][ 2 ][ pos_m ] > m do 
+        pos_m := pos_m - 1;
+    od;
+    g := LOOPS_rcc_data[ 3 ][ pos_n ][ 1 ][ pos_m ]; # index of transitive group (of degree n) in GAP library
+    # activating data for the group, if needed
+    if not IsBound( LOOPS_rcc_sections[ pos_n ][ pos_m ] ) then
+        # data must be read from file and decoded
+        ReadPackage( "loops", Concatenation( "data/rcc/sections", String(n), ".", String(g), ".tbl" ) );
+        # variable LOOPS_aux is now read and ready to be processed
+        nr_conj_classes := Length( LOOPS_rcc_transitive_groups[ pos_n ][ pos_m ][ 2 ] );
+        data := SplitString( LOOPS_aux, " " );
+        data2 := [];
+        next_compactified := false;
+        for x in data do 
+            if x="" then # the next entry is compactified, eg. "a$X" means "a", "$", "X"
+                next_compactified := true;
+            elif not next_compactified then
+                Add( data2, x );
+            else # compactified string
+                next_compactified := false;
+                for i in [1..Length(x)] do
+                    Add( data2, x{[i..i]} );    # Add( data2, x[i] ) is not safe when data2 is empty
+                od;
+            fi;
+        od;
+        data := List( data2, x -> LOOPS_ConvertToDecimal( x, 91 ) ); 
+        # reconstructing the sequence from the difference sequence
+        for i in [2..Length( data )] do
+            data[ i ] := data[ i-1 ] - data[ i ];
+        od;
+        LOOPS_rcc_sections[ pos_n ][ pos_m ] := data; 
+    fi;
+    # data is now loaded
+    G := TransitiveGroup(n, g);
+    rel_m := m - LOOPS_rcc_data[ 3 ][ pos_n ][ 2 ][ pos_m ] + 1;  # relative position of the loop in the file for G
+    section := [];
+    nr_conj_classes := Length( LOOPS_rcc_transitive_groups[ pos_n ][ pos_m ][ 2 ] );
+    if not LOOPS_rcc_conjugacy_classes[ 1 ] = [ n, g ] then # must calculate conjugacy classes, so let's reset old data
+        LOOPS_rcc_conjugacy_classes[ 1 ] := [ n, g ];
+		LOOPS_rcc_conjugacy_classes[ 2 ] := List( [1..nr_conj_classes], x->[] );
+    fi;
+	x := LOOPS_rcc_sections[ pos_n ][ pos_m ][ rel_m ];
+	x := LOOPS_ConvertFromDecimal( x, 2, nr_conj_classes ); # convert to a binary string of prescribed length
+	pos_conjugacy_classes := Positions( x, '1' );
+    for i in [1..nr_conj_classes] do
+        if LOOPS_rcc_conjugacy_classes[ 2 ][ i ] = [] then
+            LOOPS_rcc_conjugacy_classes[ 2 ][ i ] := Elements( ConjugacyClass( G, LOOPS_rcc_transitive_groups[ pos_n ][ pos_m ][ 2 ][ i ] ) );
+        fi;
+    od;
+	section := Concatenation( LOOPS_rcc_conjugacy_classes[ 2 ]{pos_conjugacy_classes} );
+    Add( section, One( G ) ); # the trivial class is contained in all loops and never stored
+    Sort( section );
+    return LoopByRightSection( section );
+end);
+
+#############################################################################
+##  
+#F  LOOPS_ActivateCCLoop( n, m, is_p_case ) 
+##    
+##  Activates a CC-loop from the library.
+##  The argument is_p_case is set to true if n = p^2 or n=2*p for an odd prime p.
+##  See manual for complete discussion concerning this library.
+
+InstallGlobalFunction( LOOPS_ActivateCCLoop,
+function( n, m, is_p_case )
+    local pos_n, T, x, y, k, a, b, p, SmallestNonsquare;
+    
+    if not is_p_case then # use library of RCC loops
+        pos_n := Position( LOOPS_cc_data[ 1 ], n );
+        return LOOPS_ActivateRCCLoop( n, LOOPS_cc_data[ 3 ][ pos_n ][ m ] ); 
+    fi;
 
     #############################################################################
     ##  
@@ -368,11 +431,11 @@ ActivateCCLoop := function( n, m )
         od; od; od; od; 
     fi;
     return LoopByCayleyTable( T );
-end;
+end);
 
 #############################################################################
 ##  
-#F  ActivateNilpotentLoop( data ) 
+#F  LOOPS_ActivateNilpotentLoop( data ) 
 ##    
 ##  Activates the nilpotent loop based on data = [ K, F, t ], where
 ##  K determines a central (normal) subloop,
@@ -393,7 +456,8 @@ end;
 ##  The loop is then obtained via LoopByExtension( K, F, phi, t), where
 ##  phi is trivial.
 
-ActivateNilpotentLoop := function( data )
+InstallGlobalFunction( LOOPS_ActivateNilpotentLoop,
+function( data )
     local K, F, f, k, t, theta, i, j, phi;
     
     # preparing normal subloop and factor loop
@@ -428,7 +492,7 @@ ActivateNilpotentLoop := function( data )
     # constructing the loop
     return LoopByExtension( K, F, phi, theta );
 
-end;     
+end);     
 
 #############################################################################
 ##  READING LOOPS FROM THE LIBRARY - GENERIC METHOD
@@ -442,9 +506,16 @@ end;
 
 InstallGlobalFunction( LibraryLoop, function( name, n, m )
 
-    local lib, implemented_orders, NOL, loop, pos_n, p, PG, m_inv, PosInDB, root, half;
+    local lib, implemented_orders, NOL, loop, pos_n, p, PG, m_inv, PosInDB, root, half, is_CC_p_case, g, h;
 
-    lib := LibraryByName( name );
+    # selecting data library
+    if name = "right Bol" then # using dual data
+        lib := LOOPS_LibraryByName( "left Bol" );
+    elif name = "LCC" then # using dual data
+        lib := LOOPS_LibraryByName( "RCC" );
+    else
+        lib := LOOPS_LibraryByName( name );
+    fi;
 
     # extent of the library
     implemented_orders := lib[ 1 ];
@@ -454,39 +525,46 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     
     # testing arguments
     if (not n in Integers) or (not m in Integers) or not (n>0) or not (m>0) then
-        Error("Both arguments must be positive integers.");
+        Error("LOOPS: Both arguments must be positive integers.");
     fi;
-    if not name = "CC" then
-        if not n in implemented_orders then Error("Order ", n, " not implemented."); fi;    
+    is_CC_p_case := false;
+    if not n in implemented_orders then
+        if not name="CC" then 
+            Error("LOOPS: Order ", n, " not implemented.");
+        else # CC loops, checking if n = p^2 or 2*p for odd prime p
+            root := Sqrt( n );
+            half := n/2;
+            if ( IsInt( root ) and IsOddInt( root) and IsPrime( root ) ) or ( IsInt( half ) and IsOddInt( half ) and IsPrime( half ) ) then
+                is_CC_p_case := true;
+            else
+                Error("LOOPS: Order ", n, " not implemented.");
+            fi;
+        fi;
+    fi;
+    if is_CC_p_case then # CC loops of order p^2 or 2*p
+        if IsEvenInt( n ) and ( not m=1 ) then # 2*p
+           Error("LOOPS: There is only 1 nonassociative CC-loop of order 2*p for an odd prime p.");
+        fi;
+        if (not IsEvenInt( n )) and (not m in [1..3]) then # p^2
+            Error("LOOPS: There are only 3 nonassociative CC-loops of order p^2 for an odd prime p.");
+        fi;
+    else 
         pos_n := Position( implemented_orders, n );
         if NOL[ pos_n ] < m then 
             if NOL[ pos_n ] = 1 then
-                Error("There is only ", NOL[ pos_n ], " ", name, " loop of order ", n, " in the library."); 
+                Error("LOOPS: There is only ", NOL[ pos_n ], " ", name, " loop of order ", n, " in the library."); 
             else
-                Error("There are only ", NOL[ pos_n ], " ", name, " loops of order ", n, " in the library."); 
+                Error("LOOPS: There are only ", NOL[ pos_n ], " ", name, " loops of order ", n, " in the library."); 
             fi;
-        fi;    
-    else # CC-loops
-        root := Sqrt( n );
-        half := n/2;
-        if ( not ( IsInt( root ) and IsOddInt( root) and IsPrime( root ) ) ) 
-            and ( not ( IsInt( half ) and IsOddInt( half ) and IsPrime( half ) ) ) then
-            Error("There are only CC-loops of size p^2 and 2*p for odd primes p in the library.");
-        fi;
-        if IsEvenInt( n ) and ( not m=1 ) then # 2*p
-           Error("There is only 1 nonassociative CC-loop of size 2*p for an odd prime p.");
-        fi;
-        if (not IsEvenInt( n )) and (not m in [1..3]) then #p^2
-            Error("There are only 3 nonassociative CC-loops of size p^2 for an odd prime p.");
-        fi;
-    fi;                                            
+        fi; 
+    fi;                                     
     
     #############################################################################
     ##  
     #F  PosInDB( m ) 
     ##  
     ##  Auxiliary function. Returns the position of the <m>th loop of order <n>
-    ##  in the database. Note that <n> is specified globally.
+    ##  in the database. Note that <pos_n> is specified globally.
     PosInDB := function( m )
         local p;
         for p in [1 .. pos_n - 1] do
@@ -499,8 +577,11 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     
     # up to isomorphism
     if name = "left Bol" then 
-        loop := ActivateLeftBolLoop( PosInDB( m ) );
+        loop := LOOPS_ActivateLeftBolLoop( PosInDB( m ) );
         SetIsLeftBolLoop( loop, true );
+    elif name = "right Bol" then
+        loop := Opposite( LOOPS_ActivateLeftBolLoop( PosInDB( m ) ) );
+        SetIsRightBolLoop( loop, true );
     elif name = "Moufang" then
         # renaming loops so that they agree with Goodaire's classification
         PG := List([1..243], i->());
@@ -517,7 +598,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         PG[60] :=   (1,2);
         m_inv := m^Inverse( PG[ n ] );
         # activating the loop
-        loop := ActivateMoufangLoop( PosInDB( m_inv ), n );
+        loop := LOOPS_ActivateMoufangLoop( PosInDB( m_inv ), n );
         SetIsMoufangLoop( loop, true );
     elif name = "Paige" then
         loop := LoopByCayleyTable( lib[ 3 ][ 1 ] ); #only one loop there at this point
@@ -526,20 +607,34 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         loop := LibraryLoop( "Moufang", n, lib[ 3 ][ pos_n ][ m ] ); 
         SetIsCodeLoop( loop, true );
     elif name = "Steiner" then
-        loop := ActivateSteinerLoop( PosInDB( m ), n );
+        loop := LOOPS_ActivateSteinerLoop( PosInDB( m ), n );
         SetIsSteinerLoop( loop, true );
     elif name = "CC" then
-        loop := ActivateCCLoop( n, m );
+        loop := LOOPS_ActivateCCLoop( n, m, is_CC_p_case );
         SetIsCCLoop( loop, true );
+    elif name = "RCC" then
+        loop := LOOPS_ActivateRCCLoop( n, m );
+        SetIsRCCLoop( loop, true );
+    elif name = "LCC" then
+        loop := Opposite( LOOPS_ActivateRCCLoop( n, m ) );
+        SetIsLCCLoop( loop, true );     
     elif name = "small" then
-        loop := LoopByCayleyTable( DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ] ) );
+        loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ] ) );
     elif name = "interesting" then
-        loop := LoopByCayleyTable( DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ][ 1 ] ) );
+        if [n,m] = [92,1] then # simple Bol loop of order 92
+            g := Group((1,4)(2,9)(3,10)(6,11)(7,12)(13,21)(14,22)(15,24)(16,23)(17,30)(18,29)(19,31)(20,32)(33,35)(38,40), 
+                (1,2,4,6,8,7,5,3)(9,13,25,18,10,14,26,17)(11,15,27,20,12,16,28,19)(21,30,38,34,23,31,40,35)(22,32,39,36,24,29,37,33));
+            h := Normalizer( g, SylowSubgroup( g, 5) );
+            g := Action( g, RightCosets( g, h ), OnRight );
+            loop := LoopByRightSection(Union(Filtered(ConjugacyClasses(g),c->Size(c) in [1,15,80])));
+        else             
+            loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ][ 1 ] ) );
+        fi;
         SetName( loop, lib[ 3 ][ PosInDB( m ) ][ 2 ] );
     elif name = "nilpotent" then
-        loop := ActivateNilpotentLoop( lib[ 3 ][ PosInDB( m ) ] );
+        loop := LOOPS_ActivateNilpotentLoop( lib[ 3 ][ PosInDB( m ) ] );
     elif name = "automorphic" then
-        loop := LoopByCayleyTable( DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ] ) );
+        loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ PosInDB( m ) ] ) );
         SetIsAutomorphicLoop( loop, true );
     # up to isotopism        
     elif name = "itp small" then
@@ -562,6 +657,7 @@ end);
 #############################################################################
 ##  
 #F  LeftBolLoop( n, m ) 
+#F  RightBolLoop( n, m )
 #F  MoufangLoop( n, m ) 
 #F  PaigeLoop( q )
 #F  CodeLoop( n, m ) 
@@ -578,13 +674,17 @@ InstallGlobalFunction( LeftBolLoop, function( n, m )
     return LibraryLoop( "left Bol", n, m );
 end);
 
+InstallGlobalFunction( RightBolLoop, function( n, m )
+   return LibraryLoop( "right Bol", n, m );
+end);
+
 InstallGlobalFunction( MoufangLoop, function( n, m )
     return LibraryLoop( "Moufang", n, m );
 end);
 
 InstallGlobalFunction( PaigeLoop, function( q )
     # Paige loop over GF(q)
-    if not q=2 then return Error( "Only q=2 is implemented."); fi;
+    if not q=2 then return Error("LOOPS: Only q=2 is implemented."); fi;
     return LibraryLoop( "Paige", 120, 1 );
 end);
 
@@ -599,6 +699,27 @@ end);
 InstallGlobalFunction( CCLoop, function( n, m )
     return LibraryLoop( "CC", n, m );
 end);
+
+InstallGlobalFunction( ConjugacyClosedLoop, function( n, m )
+    return LibraryLoop( "CC", n, m );
+end);
+
+InstallGlobalFunction( RCCLoop, function( n, m )
+    return LibraryLoop( "RCC", n, m );
+end);
+
+InstallGlobalFunction( RightConjugacyClosedLoop, function( n, m )
+    return LibraryLoop( "RCC", n, m );
+end);
+
+InstallGlobalFunction( LCCLoop, function( n, m )
+    return LibraryLoop( "LCC", n, m );
+end);
+
+InstallGlobalFunction( LeftConjugacyClosedLoop, function( n, m )
+    return LibraryLoop( "LCC", n, m );
+end);
+
 
 InstallGlobalFunction( SmallLoop, function( n, m )
     return LibraryLoop( "small", n, m );

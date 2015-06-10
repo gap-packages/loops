@@ -2,7 +2,7 @@
 ##
 #W  classes.gd  Testing varieties [loops]
 ##
-#H  @(#)$Id: classes.gd, v 2.2.0 2012/01/19 gap Exp $
+#H  @(#)$Id: classes.gd, v 3.0.0 2015/06/12 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -79,8 +79,11 @@ DeclareProperty( "IsPowerAlternative", IsLoop );
 ##  -------------------------------------------------------------------------
 
 DeclareProperty( "IsLCCLoop", IsLoop );
+DeclareSynonymAttr( "IsLeftConjugacyClosedLoop", IsLCCLoop );
 DeclareProperty( "IsRCCLoop", IsLoop );
+DeclareSynonymAttr( "IsRightConjugacyClosedLoop", IsRCCLoop );
 DeclareProperty( "IsCCLoop", IsLoop );
+DeclareSynonymAttr( "IsConjugacyClosedLoop", IsCCLoop );
 DeclareProperty( "IsOsbornLoop", IsLoop );
 
 ############################################################################

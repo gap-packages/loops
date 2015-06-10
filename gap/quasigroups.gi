@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gi  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: creation.gi, v 2.1.0 2008/12/08 gap Exp $
+#H  @(#)$Id: creation.gi, v 3.0.0 2015/06/12 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -216,7 +216,7 @@ end);
 
 #############################################################################
 ##
-#F  ReadCayleyTableFromFile( filename, replace_by_spaces )
+#F  LOOPS_ReadCayleyTableFromFile( filename, replace_by_spaces )
 ##
 ##  Auxiliary function. Reads the content of <filename> and tries to
 ##  interpret the data as a multiplication table, according to the rules
@@ -234,7 +234,8 @@ end);
 ##     its position among the distinct chunks
 ##  6) multiplication table is constructed and returned
 
-ReadCayleyTableFromFile := function( filename, replace_by_spaces)
+InstallGlobalFunction( LOOPS_ReadCayleyTableFromFile,
+function( filename, replace_by_spaces)
 
     local input, s, i, chunks, started, starting_pos, z, j, distinct_chunks, c, n, T;
 
@@ -293,19 +294,19 @@ ReadCayleyTableFromFile := function( filename, replace_by_spaces)
 
     return T;
 
-end;
+end);
 
 #############################################################################
 ##
 #O  QuasigroupFromFile( filename, replace] )
 ##
-##  Calls ReadCayleyTableFromFile( filename, replace ) in order to return
+##  Calls LOOPS_ReadCayleyTableFromFile( filename, replace ) in order to return
 ##  the quasigroup with multiplication table in file <filename>.
 
 InstallMethod( QuasigroupFromFile, "for string and string",
     [ IsString, IsString ],
 function( filename, replace )
-    return QuasigroupByCayleyTable( ReadCayleyTableFromFile( filename, replace ) );
+    return QuasigroupByCayleyTable( LOOPS_ReadCayleyTableFromFile( filename, replace ) );
 end );
 
 
@@ -313,17 +314,17 @@ end );
 ##
 #O  LoopFromFile( filename , replace] )
 ##
-##  Calls ReadCayleyTableFromFile( filename, replace ) in order to return
+##  Calls LOOPS_ReadCayleyTableFromFile( filename, replace ) in order to return
 ##  the loop with multiplication table in file <filename>.
 
 InstallMethod( LoopFromFile, "for string and string",
     [ IsString, IsString ],
 function( filename, replace )
-    return LoopByCayleyTable(  ReadCayleyTableFromFile( filename, replace ) );
+    return LoopByCayleyTable(  LOOPS_ReadCayleyTableFromFile( filename, replace ) );
 end );
 
 #############################################################################
-##  CREATING QUASIGROUPS AND LOOPS BY SECTIONS
+##  CREATING QUASIGROUPS AND LOOPS BY SECTIONS AND FOLDERS
 ##  -------------------------------------------------------------------------
 
 #############################################################################
@@ -415,13 +416,20 @@ end);
 
 #############################################################################
 ##
-#O  CayleyTableByRightSection( G, H, T )
+#O  LOOPS_CayleyTableByRightFolder( G, H, T )
 ##
 ##  Auxiliary operation.
-##  If <T> is a left right transversal to a subgroup <H> if the group <G>,
-##  returns the multiplication table defined by  tH*t'H = (tt')H.
+##
+##  A right folder is a triple (G,H,T) such that G is a group, H is 
+##  a subgroup of G, and T is a right transversal to H in G.
+##
+##  Returns the multiplication table on {Hx: x in G} by Ht*Hs = H(ts).
+##
+##  The multiplication table is a quasigroup if and only if
+##  T is a right transversal to every conjugate H^g in G.
 
-CayleyTableByRightSection := function( G, H, T )
+InstallGlobalFunction( LOOPS_CayleyTableByRightFolder, 
+function( G, H, T )
     local act, nT, actT, i, p, ct;
     # act = action of G on right cosest G/H
     act := ActionHomomorphism( G, RightCosets( G, H ), OnRight );
@@ -440,32 +448,34 @@ CayleyTableByRightSection := function( G, H, T )
         fi;
     od;
     return TransposedMat( ct );
-end;
-
-#############################################################################
-##
-#O  QuasigroupByRightSection( G, H, T )
-##
-##  See CayleyTableByRightSection
-
-InstallOtherMethod( QuasigroupByRightSection,
-    "for a group, a subgroup and right transversal",
-    [ IsGroup, IsGroup, IsMultiplicativeElementCollection ],
-function( G, H, T )
-    return QuasigroupByCayleyTable( CayleyTableByRightSection( G, H, T ) );
 end);
 
 #############################################################################
 ##
-#O  LoopByRightSection( G, H, T )
+#O  QuasigroupByRightFolder( G, H, T )
 ##
-##  See CayleyTableByRigthSection
+##  See CayleyTableByRightFolder. We do not check if the right folder
+##  is a quasigroup right folder.
 
-InstallOtherMethod( LoopByRightSection,
+InstallMethod( QuasigroupByRightFolder,
     "for a group, a subgroup and right transversal",
     [ IsGroup, IsGroup, IsMultiplicativeElementCollection ],
 function( G, H, T )
-    return LoopByCayleyTable( CayleyTableByRightSection( G, H, T ) );
+    return QuasigroupByCayleyTable( LOOPS_CayleyTableByRightFolder( G, H, T ) );
+end);
+
+#############################################################################
+##
+#O  LoopByRightFolder( G, H, T )
+##
+##  See CayleyTableByRigthFolder. We do not check if the right folder
+##  is a loop right folder.
+
+InstallOtherMethod( LoopByRightFolder,
+    "for a group, a subgroup and right transversal",
+    [ IsGroup, IsGroup, IsMultiplicativeElementCollection ],
+function( G, H, T )
+    return LoopByCayleyTable( LOOPS_CayleyTableByRightFolder( G, H, T ) );
 end);
 
 #############################################################################
@@ -612,7 +622,7 @@ function( list, first )
     local L, p;
 
     # Check the arguments.
-    if IsEmpty( list ) then Error( "LOOPS: <arg 1> must be nonempty." ); fi;
+    if IsEmpty( list ) then Error( "LOOPS: <1> must be nonempty." ); fi;
     if not ForAny( list, IsLoop ) then
     # there are no loops on the list
     TryNextMethod();
@@ -644,7 +654,7 @@ function( list, dummy )
 
     # Check the arguments.
     if IsEmpty( list ) then
-      Error( "LOOPS: <arg 1> must be nonempty." );
+      Error( "LOOPS: <1> must be nonempty." );
     elif ForAny( list, G -> (not IsGroup( G )) and (not IsLoop( G ) ) ) then
       TryNextMethod();
     fi;

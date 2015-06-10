@@ -258,13 +258,19 @@ closed loop!left}\index{conjugacy closed loop!right} if its left (resp.\ right)
 translations are closed under conjugation. A loop that is both left and right
 conjugacy closed is called <conjugacy closed>\index{conjugacy closed
 loop}\index{loop!conjugacy closed}. It is common to refer to these loops as
-LCC-, RCC-, CC-loops, respectively.
+LCC, RCC, CC loops, respectively.
 
 \>IsLCCLoop( <L> ) P
 \>IsRCCLoop( <L> ) P
 \>IsCCLoop( <L> ) P
 
 The equivalence LCC $+$ RCC $=$ CC is built into {\LOOPS}.
+
+We also support the synonyms
+
+\>IsLeftConjugacyClosedLoop( <L> ) P
+\>IsRightConjugacyClosedLoop( <L> ) P
+\>IsConjugacyClosedLoop( <L> ) P
 
 A loop is <Osborn>\index{Osborn loop}\index{loop!Osborn} if it satisfies
 $x(yz\cdot x)=(x^\lambda\backslash y)(zx)$, where $x^\lambda$ is the left
@@ -315,4 +321,4 @@ Automorphic loops have historically been called <A-loops>\index{A-loop}\index{lo
 \>IsRightALoop( <L> ) P
 \>IsALoop( <L> ) P
 
-Be careful not to confuse `IsALoop' and `IsLoop'.
+Be careful not to confuse `IsALoop' and `IsLoop'. 

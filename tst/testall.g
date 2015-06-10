@@ -2,7 +2,7 @@
 ##
 #W  testall.g   Testing LOOPS                    G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: testall.g, v 2.0.0 2008/03/06 gap Exp $
+#H  @(#)$Id: testall.g, v 3.0.0 2015/06/15 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)

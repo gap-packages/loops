@@ -259,49 +259,25 @@ gap> CayleyTable( LoopByLeftSection( ls ) );
 [ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ]
 \endexample
 
-Let $G$ be a group, $H$ a subgroup, and $T$ a right
-transversal\index{transversal} to $H$ in $G$. Then the operation $\circ$
-defined on the right cosets $Q = \{Ht;\;t\in T\}$ by $Ht\circ Ht' = H(tt')$
-turns $Q$ into a quasigroup if and only if $T$ is a right transversal to all
-conjugates $g^{-1}Hg$ of $H$ in $G$. In fact, every quasigroup $Q$ can be
-obtained in this way (let $G={\rm{Mlt}}(Q)$, $H={\rm{RMlt}}(Q)$ and
-$T=\{R_x;\;x\in Q\}$).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Creating quasigroups and loops by folders}
+
+Let $G$ be a group, $H$ a subgroup, and $T$ a right transversal\index{transversal} to $H$ in $G$. Then the operation $\circ$ defined on the right cosets $Q = \{Ht;\;t\in T\}$ by $Ht\circ Ht' = H(tt')$ turns $Q$ into a quasigroup if and only if $T$ is a right transversal to all conjugates $g^{-1}Hg$ of $H$ in $G$. In fact, every quasigroup $Q$ can be obtained in this way (let $G={\rm{RMlt}}(Q)$, $H={\rm{RInn}}(Q)$ and $T=\{R_x;\;x\in Q\}$).
 
 The resulting quasigroup (or loop) is returned via
 
-\>QuasigroupByRightSection( <G>, <H>, <T> ) O
-\>LoopByRightSection( <G>, <H>, <T> ) O
+\>QuasigroupByRightFolder( <G>, <H>, <T> ) O
+\>LoopByRightFolder( <G>, <H>, <T> ) O
 
-We do not support the dual operations for left sections since, by default,
-actions in {\GAP} act on the right.
+We do not support the dual operations for left sections since, by default, actions in {\GAP} act on the right.
 
-To demonstrate `LoopByRightSection', let us recall a construction due to Nagy \cite{Na}:
-
-Let $X$ be a simple group with subgroups $Y_0$, $Y_1$ such that $Y_0\cap Y_1=1$
-and $X=Y_0Y_1$. Let $G=X\times X$ and $H=Y_0\times Y_1$. Then $T =
-\{(x,x^{-1});\; x\in X\}$ is a right transversal of $H$ in $G$, and the
-corresponding loop is a simple (right) Bol loop.\index{Bol
-loop!simple}\index{simple loop!Bol}
-
-The next example illustrates this construction with $X=A_5$, $Y_0=A_4$, and
-$Y_1 = \langle(1,2,3,4,5)\rangle$.
+Here is a simple example in which $T$ is actually the right section of the resulting loop.
 
 \beginexample
-gap> Shift := function( p ) # shifts permutation "up" by 5
->       local ls;
->       ls := ListPerm( p );
->       ls := Concatenation( [1,2,3,4,5], List( ls, x -> x + 5 ) );
->       return PermList( ls );
-> end;
-function( p ) ... end
-gap> A := AlternatingGroup( 5 );;
-gap> G := DirectProduct( A, A );;
-gap> H := Subgroup( G, [ (1,2,3), (2,3,4), (6,7,8,9,10) ] );;
-gap> T := List( A, x -> x * Shift(x)^(-1) );;
-gap> L := LoopByRightSection( G, H, T );
-<loop of order 60>
-gap> [ IsRightBolLoop( L ), IsSimple( L ), IsMoufangLoop( L ) ];
-[ true, true, false ]
+gap> T := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;
+gap> G := Group( T );; H := Stabilizer( G, 1 );;
+gap> LoopByRightFolder( G, H, T );
+<loop of order 5>
 \endexample
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

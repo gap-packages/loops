@@ -2,7 +2,7 @@
 ##
 #W  core_methods.tst   Testing core methods      G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: core_methods.tst, v 2.0.0 2008/03/06 gap Exp $
+#H  @(#)$Id: core_methods.tst, v 3.0.0 2015/06/15 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -127,9 +127,24 @@ gap> Size( InnerMappingGroup( L ) );
 gap> MiddleInnerMappingGroup( L );
 <permutation group with 12 generators>
 
-# TESTING LOOP BY LEFT SECTION
+# TESTING LOOP BY LEFT/RIGHT SECTION
+gap> LoopByRightSection( [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ] );
+<loop of order 5>
+gap> S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;
+gap> LoopByLeftSection( LeftSection( S ) );
+<loop of order 3>
+gap> LoopByRightSection( RightSection( S ) );
+<loop of order 3>
+gap> QuasigroupByLeftSection( LeftSection( S ) );
+<quasigroup of order 3>
+gap> QuasigroupByRightSection( RightSection( S ) );
+<quasigroup of order 3>
+gap> CayleyTableByPerms( LeftSection( S ) );
+[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
 
-gap> Shift := function( p )
+# TESTING LOOP BY RIGHT FOLDER 
+
+gap> LOOPS_Shift := function( p )
 >       local ls;
 >       ls := ListPerm( p );
 >       ls := Concatenation( [1,2,3,4,5], List( ls, x -> x + 5 ) );
@@ -142,21 +157,11 @@ gap> G := DirectProduct( A, A );
 Group([ (1,2,3,4,5), (3,4,5), (6,7,8,9,10), (8,9,10) ])
 gap> H := Subgroup( G, [ (1,2,3), (2,3,4), (6,7,8,9,10) ] );
 Group([ (1,2,3), (2,3,4), (6,7,8,9,10) ])
-gap> T := List( A, x -> x * Shift(x)^(-1) );;
-gap> L := LoopByRightSection( G, H, T );
+gap> T := List( A, x -> x * LOOPS_Shift(x)^(-1) );;
+gap> LoopByRightFolder( G, H, T );
 <loop of order 60>
-
-gap> S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;
-gap> LoopByLeftSection( LeftSection( S ) );
-<loop of order 3>
-gap> LoopByRightSection( RightSection( S ) );
-<loop of order 3>
-gap> QuasigroupByLeftSection( LeftSection( S ) );
-<quasigroup of order 3>
-gap> QuasigroupByRightSection( RightSection( S ) );
-<quasigroup of order 3>
-gap> CayleyTableByPerms( LeftSection( S ) );
-[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
+gap> QuasigroupByRightFolder( G, H, T );
+<quasigroup of order 60>
 
 # TESTING RANDOM QUASIGROUPS AND LOOPS
 
@@ -308,11 +313,14 @@ false
 
 # TESTING CONJUGACY CLOSED LOOPS
 
-gap> IsLCCLoop( L );
+gap> IsLCCLoop( L ); IsLeftConjugacyClosedLoop( L );
 false
-gap> IsRCCLoop( L );
 false
-gap> IsCCLoop( L );
+gap> IsRCCLoop( L ); IsRightConjugacyClosedLoop( L );
+false
+false
+gap> IsCCLoop( L ); IsConjugacyClosedLoop( L );
+false
 false
 
 # TESTING BRUCK AND STEINER LOOPS

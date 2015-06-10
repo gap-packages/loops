@@ -9,10 +9,17 @@
     extend {\GAP} toward the realm of nonassociative structures.
 \endlist
 
+{\LOOPS} has been accepted to {\GAP} on May 2015.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{License}
+
+{\LOOPS} is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Installation}
 
-We assume that you have \package{GAP 4.4} or newer installed on your computer.
+We assume that you have \package{GAP 4.7} or newer installed on your computer.
 Download the {\LOOPS} package from the distribution website
 
 \URL{http://www.math.du.edu/loops}
@@ -24,9 +31,16 @@ package {\LOOPS} can then be loaded to {\GAP} anytime by calling
 \begintt
 LoadPackage("loops");
 \endtt
-If you wish to load {\LOOPS} automatically while starting {\GAP}, open the file
-`loops/PackageInfo.g', and change `Autoload:=false' to
-`Autoload:=true' in the file.
+If you wish to load {\LOOPS} automatically while starting {\GAP}, start {\GAP}, execute the following commands,
+
+\beginexample
+gap> pref := UserPreference( "PackagesToLoad " );;
+gap> Add( pref, "loops" );;
+gap> SetUserPreference( "PackagesToLoad", pref );;
+gap> WriteGapIniFile();;
+\endexample
+
+quit {\GAP} and restart it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Documentation}
@@ -52,6 +66,15 @@ can be found in the folder `tst'. The command `ReadPackage("loops",
 "tst/testall.g")' runs all tests for {\LOOPS}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Section{Memory management}
+
+Some libraries of loops are loaded only upon explicit demand and can occupy a lot of memory. For instance, the library or RCC loops occupies close to 100 MB of memory when fully loaded. The global function
+
+\>LOOPS_FreeMemory( ) F
+
+will restore memory usage of the {\LOOPS} package by unbinding on-demand library data.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Feedback}
 
 We welcome all comments and suggestions on {\LOOPS}, especially those
@@ -60,10 +83,8 @@ concerning the future development of the package. You can contact us by e-mail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Section{Acknowledgement}
 
-We thank the following people for sending us remarks and comments, and for
-suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann,
-Andreas Distler, Steve Flammia, Kenneth W. Johnson, Michael K. Kinyon, Frank
-L\accent127ubeck, and Jonathan D. H. Smith.
+We thank the following people for sending us remarks and comments, and for suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann, Andreas Distler, Ale\v{s} Dr\'apal, Steve Flammia, Kenneth W.~Johnson, Michael K.~Kinyon, Frank L\accent127ubeck and Jonathan D.H.~Smith.
 
-G\'abor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr
-Vojt\v{e}chovsk\'y by the 2006 PROF grant of the University of Denver.
+The library of Moufang loops of order 243 was provided by Michael C.~Slattery and Ashley L.~Zenisek. The library of right conjugacy closed loops of order less than 28 was provided by Katharina Artic.
+
+G\'abor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr Vojt\v{e}chovsk\'y by the 2006 PROF grant of the University of Denver and by the Simons Foundation Collaboration Grant 210176.

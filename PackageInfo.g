@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "2.2.0",
-Date := "28/06/2012",
-ArchiveURL := "http://www.math.du.edu/loops/loops-2.2.0",
+Version := "3.0.0",
+Date := "10/06/2015",
+ArchiveURL := "http://www.math.du.edu/loops/loops-3.0.0",
 ArchiveFormats := "-win.zip .tar.gz",
 
 Persons := [
@@ -30,7 +30,7 @@ Persons := [
     WWWHome       := "http://www.math.du.edu/~petr/",
     PostalAddress := Concatenation( [
                        "Department of Mathematics, University of Denver\n",
-                       "2360 S. Gaylord Street\n",
+                       "2280 S. Vine Street\n",
                        "Denver, CO 80208\n",
                        "USA" ] ),
     Place         := "Denver",
@@ -45,7 +45,9 @@ Persons := [
 ##    "dev"           for development versions of packages 
 ##    "other"         for all other packages
 ##
-Status := "deposited",
+Status := "accepted",
+CommunicatedBy := "Leonard Soicher (QMUL)",
+AcceptDate := "05/2015",
 
 README_URL := 
   "http://www.math.du.edu/loops/README.loops",
@@ -82,10 +84,12 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "This version of LOOPS is ready for GAP 4.5.\n",
+BannerString := "This version of LOOPS is ready for GAP 4.7.\n",
 
 Autoload := false,  # false for deposited packages
 TestFile := "tst/testall.g",
-Keywords := ["loop", "quasigroup", "Moufang loop", "Bol loop", 
-    "Steiner loop", "triality"]
+Keywords := ["loop", "quasigroup", "latin square", 
+    "multiplication group", "inner mapping group",
+    "Moufang loop", "Bol loop", "conjugacy closed loop", "automorphic loop", "Steiner loop",
+    "triality", "isomorphism of loops", "isotopism of loops"]
 ));

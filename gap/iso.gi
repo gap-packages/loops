@@ -2,7 +2,7 @@
 ##
 #W  iso.gi  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: iso.gi, v 2.0.0 2008/02/20 gap Exp $
+#H  @(#)$Id: iso.gi, v 3.0.0 2015/06/12 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -143,13 +143,14 @@ end);
 
 #############################################################################
 ##  
-#F  EfficientGenerators( L, D ) 
+#F  LOOPS_EfficientGenerators( L, D ) 
 ##    
 ##  Auxiliary function. 
 ##  Given a loop <L> with discriminator <D>, it returns a list of generators 
 ##  of <L> obtained by greedy algorithm from the partition <D>[ 2 ] of <L>.
 
-EfficientGenerators := function( L, D ) 
+InstallGlobalFunction( LOOPS_EfficientGenerators,
+function( L, D ) 
     local A, i, gens, S;
     if Size( L ) = 1 then return [ One( L ) ]; fi;
     A := [];
@@ -161,7 +162,7 @@ EfficientGenerators := function( L, D )
         A := Filtered( A, x -> not x in S );
     od;
     return gens;
-end;
+end);
 
 #############################################################################
 ##  
@@ -188,7 +189,7 @@ end);
 
 #############################################################################
 ##  
-#F  ExtendHomomorphismByClosingSource( f, L, M ) 
+#F  LOOPS_ExtendHomomorphismByClosingSource( f, L, M ) 
 ##
 ##  Auxiliary.    
 ##  <L>, <M> are multiplication tables of loops, <f> is a partial map
@@ -196,8 +197,8 @@ end);
 ##  This function attempts to extend <f> into a homomorphism of loops by 
 ##  extending the source of <f> into (the smallest possible) subloop of <L>.
 
-ExtendHomomorphismByClosingSource := function( f, L, M )
-
+InstallGlobalFunction( LOOPS_ExtendHomomorphismByClosingSource,
+function( f, L, M )
     local oldS, newS, pairs, x, y, newNow, p, z, fz;    
     oldS := [ ];
     newS := f[ 2 ];
@@ -228,25 +229,26 @@ ExtendHomomorphismByClosingSource := function( f, L, M )
         newS := ShallowCopy( newNow );
     until IsEmpty( newS );
     return f;           
-end;
+end);
 
 #############################################################################
 ##  
-#F  SublistPosition( S, x ) 
+#F  LOOPS_SublistPosition( S, x ) 
 ##  
 ##  auxiliary function  
 ##  input: list of lists <S>, element <x>
 ##  returns: smallest i such that x in S[i]; or fail.
 
-SublistPosition := function( S, x )
+InstallGlobalFunction( LOOPS_SublistPosition,
+function( S, x )
     local i;
     for i in [ 1..Length( S ) ] do if x in S[ i ] then return i; fi; od;
     return fail;
-end;
+end);
 
 #############################################################################
 ##  
-#F  ExtendIsomorphism( f, L, GenL, DisL, M, DisM ) 
+#F  LOOPS_ExtendIsomorphism( f, L, GenL, DisL, M, DisM ) 
 ##  
 ##  Auxiliary.  
 ##  Given a partial map <f> from loop <L> to loop <M>, it attempts to extend
@@ -255,23 +257,24 @@ end;
 ##  efficient generators of <L>, disriminator of <L>, efficient generators
 ##  of <M>, respectively.
 
-ExtendIsomorphism := function( f, L, GenL, DisL, M, DisM )
+InstallGlobalFunction( LOOPS_ExtendIsomorphism,
+function( f, L, GenL, DisL, M, DisM )
     local x, possible_images, y, g;
-    f := ExtendHomomorphismByClosingSource( f, L, M );
+    f := LOOPS_ExtendHomomorphismByClosingSource( f, L, M );
     if f = fail or Length( f[ 2 ] ) > Length( f[ 3 ] ) then return fail; fi;
     if Length( f[ 2 ] ) = Length( L ) then return f; fi; #isomorphism found
     
     x := GenL[ 1 ];
     GenL := List( [ 2..Length( GenL ) ], i -> GenL[ i ] ); 
-    possible_images := Filtered( DisM[ SublistPosition( DisL, x ) ], y -> not y in f[ 3 ] );    
+    possible_images := Filtered( DisM[ LOOPS_SublistPosition( DisL, x ) ], y -> not y in f[ 3 ] );    
     for y in possible_images do
         g := StructuralCopy( f );
         g[ 1 ][ x ] := y; AddSet( g[ 2 ], x ); AddSet( g[ 3 ], y );
-        g := ExtendIsomorphism( g, L, GenL, DisL, M, DisM );
+        g := LOOPS_ExtendIsomorphism( g, L, GenL, DisL, M, DisM );
         if not g = fail then return g; fi; #isomorphism found
     od;
     return fail;    
-end;
+end);
 
 #############################################################################
 ##  ISOMORPHISMS OF LOOPS
@@ -285,7 +288,8 @@ end;
 ##  disciminator <DisL> of <L>, and another loop <M> with discriminator
 ##  <DisM>, it returns an isomorophism from <L> onto <M>, or it fails.
 
-IsomorphismLoopsNC := function( L, GenL, DisL, M, DisM )
+InstallGlobalFunction( IsomorphismLoopsNC,
+function( L, GenL, DisL, M, DisM )
     local map, iso;
     if not AreEqualDiscriminators( DisL, DisM ) then return fail; fi;
 
@@ -297,10 +301,10 @@ IsomorphismLoopsNC := function( L, GenL, DisL, M, DisM )
     #mapping
     map := 0 * [ 1.. Size( L ) ]; map[ 1 ] := 1;
    
-    iso := ExtendIsomorphism( [ map, [ 1 ], [ 1 ] ], CayleyTable( L ), GenL, DisL, CayleyTable( M ), DisM );
+    iso := LOOPS_ExtendIsomorphism( [ map, [ 1 ], [ 1 ] ], CayleyTable( L ), GenL, DisL, CayleyTable( M ), DisM );
     if not iso = fail then return SortingPerm( iso[ 1 ] ); fi;
     return fail;
-end;
+end);
 
 #############################################################################
 ##  
@@ -317,7 +321,7 @@ function( L, M )
     if not L = Parent( L ) then L := LoopByCayleyTable( CayleyTable( L ) ); fi;    
     if not M = Parent( M ) then M := LoopByCayleyTable( CayleyTable( M ) ); fi;    
     DisL := Discriminator( L );
-    GenL := EfficientGenerators( L, DisL );
+    GenL := LOOPS_EfficientGenerators( L, DisL );
     DisM := Discriminator( M );
     return IsomorphismLoopsNC( L, GenL, DisL, M, DisM );
 end);
@@ -335,12 +339,12 @@ function( ls )
     local loops, L, D, G, with_same_D, is_new_loop, K;
     # making sure only loops are on the list
     if not IsEmpty( Filtered( ls, x -> not IsLoop( x ) ) ) then
-        Error("<arg1> must be a list of loops");
+        Error("LOOPS: <1> must be a list of loops");
     fi;        
     loops := [];
     for L in ls do
         D := Discriminator( L );
-        G := EfficientGenerators( L, D );
+        G := LOOPS_EfficientGenerators( L, D );
         # will be testing only loops with the same discriminator
         with_same_D := Filtered( loops, K -> AreEqualDiscriminators( K[2], D ) );
         is_new_loop := true;
@@ -409,14 +413,15 @@ end);
 
 #############################################################################
 ##  
-#F  AutomorphismsFixingSet( S, L, GenL, DisL ) 
+#F  LOOPS_AutomorphismsFixingSet( S, L, GenL, DisL ) 
 ##
 ##  Auxiliary function. 
 ##  Given a loop <L>, its subset <S>, the efficient generators <GenL> of <L>
 ##  and the discriminator <DisL> of <L>, it returns all automorphisms of <L>
 ##  fixing the set <S> pointwise.
 
-AutomorphismsFixingSet := function( S, L, GenL, DisL )
+InstallGlobalFunction( LOOPS_AutomorphismsFixingSet,
+function( S, L, GenL, DisL )
     local n, x, A, possible_images, y, i, map, g;
     
     # this is faster than extending a map
@@ -434,7 +439,7 @@ AutomorphismsFixingSet := function( S, L, GenL, DisL )
     
     A := [];
     
-    possible_images :=  Difference( DisL[ SublistPosition( DisL, x ) ], [ x ] ); 
+    possible_images :=  Difference( DisL[ LOOPS_SublistPosition( DisL, x ) ], [ x ] ); 
     for y in possible_images do
         # constructing map
         map := 0*[1..n];
@@ -442,13 +447,13 @@ AutomorphismsFixingSet := function( S, L, GenL, DisL )
         map[ x ] := y;
         g := [ map, Union( S, [ x ] ), Union( S, [ y ] ) ];
         # extending map
-        g := ExtendIsomorphism( g, CayleyTable( L ), GenL, DisL, CayleyTable( L ), DisL );
+        g := LOOPS_ExtendIsomorphism( g, CayleyTable( L ), GenL, DisL, CayleyTable( L ), DisL );
         if not g = fail then AddSet( A, g[ 1 ] ); fi;
     od;
     
     S := Union( S, [ x ] );
-    return Union( A, AutomorphismsFixingSet( S, L, GenL, DisL ) );  
-end;
+    return Union( A, LOOPS_AutomorphismsFixingSet( S, L, GenL, DisL ) );  
+end);
 
 #############################################################################
 ##  
@@ -464,10 +469,10 @@ function( L )
     # making sure L has canonical Cayley table
     if not L = Parent( L ) then L := LoopByCayleyTable( CayleyTable( L ) ); fi;
     DisL := Discriminator( L );
-    GenL := List( EfficientGenerators( L, DisL ), x -> Position( Elements( L ), x ) );
+    GenL := List( LOOPS_EfficientGenerators( L, DisL ), x -> Position( Elements( L ), x ) );
     DisL := List( Discriminator( L )[ 2 ], B -> List( B, x -> Position( Elements( L ), x ) ) );
     
-    A := AutomorphismsFixingSet( [ 1 ], L, GenL, DisL );
+    A := LOOPS_AutomorphismsFixingSet( [ 1 ], L, GenL, DisL );
     
     if IsEmpty( A ) then return Group( () ); fi; # no notrivial automorphism
     return Group( List( A, p -> SortingPerm( p ) ) );
@@ -522,8 +527,8 @@ function( L1, L2 )
             pos := Position( istps, L );
             f := fg[ pos ][ 1 ]; 
             g := fg[ pos ][ 2 ];
-            alpha := Inverse( RightTranslation( L1, g ) );
-            beta := Inverse( LeftTranslation( L1, f ) );
+            alpha := RightTranslation( L1, g );
+            beta := LeftTranslation( L1, f );
             # we also applied an isomorphism (1,f*g) inside PrincipalLoopIsotope           
             p := Position( L1, f*g );
             gamma := ();
@@ -556,7 +561,7 @@ function( ls )
     local loops, L, is_new_loop, K, M, istps, f, g;
     # making sure only loops are on the list
     if not IsEmpty( Filtered( ls, x -> not IsLoop( x ) ) ) then
-        Error("<arg1> must be a list of loops");
+        Error("LOOPS: <1> must be a list of loops");
     fi;        
     loops := [];
     for L in ls do

@@ -2,7 +2,7 @@
 ##
 #W  moufang_triality.gi     Triality of Moufang loops [loops]
 ##  
-#H  @(#)$Id: moufang_triality.gi, v 2.0.0 2008/01/21 gap Exp $
+#H  @(#)$Id: moufang_triality.gi, v 3.0.0 2015/06/12 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -22,7 +22,7 @@ InstallGlobalFunction( TrialityPermGroup, function( L )
     if IsGroup( L ) then L:=IntoLoop( L ); fi;
     
     if not( IsMoufangLoop( L ) ) then
-        Error( "The loop has to be Moufang!" );
+        Error( "LOOPS: <1> has to be a Moufang loop." );
     fi;
     
     trrho := Product( List( [1..Size(L)], k -> (k,k+Size(L),k+2*Size(L)) ) );
@@ -63,7 +63,7 @@ InstallGlobalFunction( TrialityPcGroup, function( L )
         trg_pc,sigma_pc,rho_pc;
     
     if not( IsSolvable( MultiplicationGroup( L ) ) ) then
-        Error( "The triality group is not solvable!" );
+        Error( "LOOPS: The triality group is not solvable." );
     fi;
     
     trcoll := TrialityPermGroup( L );

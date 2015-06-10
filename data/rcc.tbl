@@ -1,0 +1,145 @@
+#############################################################################
+##
+#W  rcc.tbl    Small RCC loops        K. Artic / G. P. Nagy / P. Vojtechovsky
+##  
+#H  @(#)$Id: rcc.tbl, v 3.0.0 2015/06/17 gap Exp $
+##  
+#Y  Copyright (C)  2015,  K. Artic (RWTH Aachen, Germany)
+#Y                        G. P. Nagy (University of Szeged, Hungary),  
+#Y                        P. Vojtechovsky (University of Denver, USA)
+##
+
+#############################################################################
+## Binding global variables 
+## LOOPS_rcc_data
+## LOOPS_rcc_transitive_groups
+## LOOPS_rcc_sections
+## LOOPS_rcc_conjugacy_classes
+
+# Right sections of RCC loops are unions of conjugacy classes in some transitive groups.
+#
+# LOOPS_rcc_data knows which orders n are implemented, how many rcc loops of order
+#   n are there in the library, which transitive groups are used for a given n
+#   to build the loops, and what is the first index of a loop associated with
+#   a given transitive group. This variable is read into memory upon loading LOOPS.
+#   (PROG) For easier reading, we label degrees of transitive groups using "degree n",
+#   and we include the entry m for TransitiveGroup( n, m ) alongside representatives of conjugacy classes.
+#
+# LOOPS_rcc_transitive_groups contains representatives of conjugacy classes in certain transitive groups.
+#   It is read only when user calls RCCLoop(n,m) for the first time, in which case
+#   data for all transitive groups are read into memory.
+#
+# LOOPS_rcc_sections contains binary selector vectors that correspond to representatives
+#   of conjugacy classes whose union gives the right section of an RCC loop.
+#   File "data/rcc/sectionsN.M.tbl" contains data for the binary selector vectors of all RCC loops
+#       constructed from TransitiveGroup( N, M ).
+#   The data is stored as a long string with " " used as separators.
+#   If "  " (doublespace) occurs, then the next substring is compactified: "aB#x" means "a B # x".
+#   Each unpacked substring corresponds to an integer, coded in base 91 (see convert.gi why base 91 is used).
+#   The integers correspond to a difference sequence a_1, a_2 - a_1, a_3 - a_2, ...
+#   To obtain the binary selectors, we:
+#       - reconstruct the sequence a_1, a_2, a_3, ... from the difference sequence,
+#       - convert each a_i to a binary string of canonical length (= number of conjugacy classes stored for the given transitive group)
+#   The sequence a_i is populated on demand, one transitive group at a time.
+#   The binary strings are calculated on demand, one loop (section) at a time.
+#
+# LOOPS_rcc_conjugacy_classes is of the form [ [n,g], c], where [n,g] specifies the transitive group G used
+#   most recently, and c are the conjugacy classes of G. This speeds up activation of the library loops
+#   when they are constructed sequentially.
+   
+LOOPS_rcc_data := [
+# item LOOPS_rcc_data[ 1 ], implemented orders
+[ 6,  8, 9, 10,  12, 14, 15,   16,   18,   20,  21,    22,     24,  25,     26,     27],
+# item LOOPS_rcc_data[ 2 ], number of loops of given order
+[ 3, 19, 5, 16, 155, 97, 17, 6317, 1901, 8248, 119, 10487, 471995, 119, 151971, 152701],
+# item LOOPS_rcc_data[ 3 ], info on transitive groups and indices
+[
+# order n=6 metadata
+[
+[ 5 ],  # index m for TransitiveGroup(n,m)
+[ 1 ]   # first index of a loop constructed from that transitive group
+],
+# order 8 metadata
+[
+[ 7, 9, 10, 11, 13, 17, 23 ], 
+[ 1, 4, 7, 10, 13, 14, 18 ]
+],
+# order 9 metadata
+[
+[ 4, 6, 7 ],
+[ 1, 3, 5 ]
+],
+# order 10 metadata
+[
+[ 4, 6 ],
+[ 1, 3 ]
+],
+# order 12 metadata
+[
+[ 6, 10, 11, 14, 15, 18, 19, 20, 26, 28, 37, 39, 42, 85, 117, 124 ],
+[ 1, 3, 5, 9, 27, 29, 56, 83, 85, 92, 94, 96, 98, 152, 153, 154 ]
+],
+# order 14 metadata
+[
+[ 4, 5, 8 ],
+[ 1, 3, 5 ]
+],
+# order 15 metadata
+[
+[ 3, 4, 8, 15 ],
+[ 1, 3, 8, 15 ]
+],
+# order 16 metadata
+[
+[ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 54, 57, 58, 59, 60, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 79, 80, 81, 82, 84, 87, 89, 91, 93, 95, 96, 97, 100, 102, 103, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 155, 161, 163, 179, 180, 188, 189, 196, 197, 198, 199, 201, 204, 205, 207, 211, 254, 260, 289, 296, 325, 328, 422 ],
+[ 1, 39, 85, 109, 143, 195, 209, 233, 264, 286, 317, 336, 340, 342, 346, 349, 352, 361, 364, 372, 376, 382, 385, 389, 395, 398, 406, 415, 419, 422, 424, 433, 436, 444, 450, 452, 455, 461, 470, 475, 476, 477, 817, 1393, 1737, 2323, 2334, 2348, 2368, 2384, 2412, 2422, 2437, 2477, 2548, 2576, 2596, 2610, 2628, 2638, 2649, 2698, 2718, 2722, 2734, 2758, 2770, 2794, 2818, 2846, 2851, 2922, 2942, 3070, 3102, 3250, 3390, 3430, 3506, 3524, 3536, 3564, 3660, 3676, 3686, 3798, 3818, 3819, 3820, 3825, 3830, 3834, 3836, 3841, 3846, 3848, 4926, 5026, 5138, 5238, 5302, 5534, 5758, 5886, 5894, 5910, 6302, 6306, 6310, 6314 ]
+],
+# order 18 metadata
+[
+[ 6, 10, 11, 14, 15, 16, 17, 18, 19, 21, 22, 23, 28, 29, 43, 46, 74, 78, 79, 80, 81, 83, 96 ],
+[ 1, 19, 20, 22, 75, 102, 250, 343, 351, 364, 368, 371, 384, 386, 388, 402, 438, 1592, 1604, 1771, 1837, 1876, 1900 ]
+],
+# order 20 metadata
+[
+[ 6, 8, 9, 11, 12, 13, 14, 16, 20, 21, 22, 24, 25, 29, 42, 51, 53, 58, 59, 102, 182 ],
+[ 1, 5, 7, 12, 16, 154, 160, 173, 183, 211, 215, 219, 1222, 2225, 2288, 2292, 2294, 8214, 8228, 8242, 8246 ]
+],
+# order 21 metadata
+[
+[ 3, 4, 6, 7, 9, 13, 21 ],
+[ 1, 3, 6, 19, 23, 33, 116 ]
+],
+# order 22 metadata
+[
+[ 4, 5, 7 ],
+[ 1, 5, 9 ]
+],
+# order 24 metadata
+[
+[ 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 38, 39, 40, 41, 42, 43, 44, 45, 46, 49, 51, 52, 53, 54, 55, 64, 65, 66, 67, 68, 69, 70, 71, 77, 78, 83, 84, 92, 95, 100, 101, 102, 104, 106, 109, 112, 113, 114, 115, 116, 117, 118, 119, 123, 125, 134, 136, 137, 139, 140, 141, 142, 143, 144, 145, 146, 208, 209, 210, 211, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 235, 236, 237, 245, 246, 247, 248, 250, 252, 253, 269, 271, 282, 335, 360, 361, 362, 363, 563, 576, 588, 606, 607, 608, 609, 610, 611, 616, 626, 627, 628, 629, 668, 670, 671, 673, 678, 684, 685, 700, 705, 1294, 1295, 1296, 1297, 1298, 1299, 1300, 1301, 1302, 1303, 1338, 1346, 1348, 1353, 1355, 1384, 1507, 2622, 2623, 2624, 2625, 2824 ],
+[ 1, 352, 973, 1001, 1022, 1037, 1039, 1042, 1046, 1049, 1055, 1090, 1093, 1096, 1104, 1108, 1154, 1158, 1779, 2130, 2148, 2166, 2168, 2170, 2185, 2206, 2207, 2216, 2218, 2246, 2255, 2259, 2269, 2400, 4087, 5110, 5241, 5682, 7249, 7251, 7319, 7504, 7508, 7511, 7514, 182744, 182912, 183000, 183257, 183345, 183538, 183546, 183554, 185630, 192078, 193114, 194186, 194223, 194349, 194359, 194373, 194377, 194379, 194713, 194835, 194842, 194849, 194851, 194853, 194860, 195113, 195117, 195121, 195310, 202098, 208886, 221577, 232178, 232214, 232250, 232254, 232298, 232324, 232360, 232368, 232420, 232456, 232508, 232512, 232526, 232566, 232606, 232642, 232778, 232914, 243443, 256068, 256075, 256077, 256094, 256102, 256110, 256119, 257305, 257357, 257649, 257673, 257713, 257776, 257780, 336620, 336828, 337212, 337420, 337540, 337620, 337740, 337796, 367925, 469287, 470113, 471119, 471120, 471121, 471201, 471257, 471267, 471283, 471291, 471348, 471350, 471355, 471391, 471393, 471412, 471417, 471436, 471455, 471491, 471493, 471512, 471514, 471516, 471518, 471524, 471527, 471911, 471915, 471929, 471953, 471967, 471991 ]
+],
+# order 25 metadata
+[
+[ 3, 7, 13, 14 ],
+[ 1, 6, 70, 109 ]
+],
+# order 26 metadata
+[
+[ 4, 5, 6, 8, 11 ],
+[ 1, 3, 5, 7, 11 ]
+],
+# order 27 metadata
+[
+[ 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 27, 28, 33, 36, 57, 60, 73, 75, 78, 86, 89, 95, 97, 101, 105, 107, 109, 110, 113, 114 ],
+[ 1, 3, 5, 56, 58, 61, 78, 361, 568, 715, 717, 719, 1126, 1128, 1130, 1704, 1708, 1743, 1837, 1884, 1938, 2043, 2057, 2058, 2220, 2223, 2236, 19157, 19243, 19333, 19346, 19367, 152689 ],
+]
+#end of the loops
+]
+];
+
+LOOPS_rcc_transitive_groups := [];
+
+LOOPS_rcc_sections :=  List( [1..Length(LOOPS_rcc_data[1])], i-> [] );
+
+LOOPS_rcc_conjugacy_classes := [ [], [] ];

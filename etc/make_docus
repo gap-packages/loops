@@ -1,5 +1,5 @@
 #! /bin/bash
-cd /home/nagyg/Maths/2006/pkg/loops/doc
+cd /opt/gap4r5/local/pkg/loops/doc
 rm -f manual.aux manual.dvi \
     manual.idx manual.ilg   \
     manual.ind manual.lab   \
@@ -20,6 +20,6 @@ pdftex manual &> /dev/null
 dvips manual &> /dev/null
 
 echo "*** Producing HTML files ***"
-rm htm/*
-../etc/convert.pl -icu -n loops ./ htm/
+rm ../htm/*
+../etc/convert.pl -icu -n loops ./ ../htm/
 
