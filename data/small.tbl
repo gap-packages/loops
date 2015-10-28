@@ -2,7 +2,7 @@
 ##
 #W  small.tbl    Small loops                     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: small.tbl, v 3.0.0 2015/06/05 gap Exp $
+#H  @(#)$Id: small.tbl, v 3.1.0 2015/09/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -16,12 +16,15 @@ LOOPS_small_data := [
 # the loops
 [
 #order 5
+[
 "0342340141202013",
 "0342341040212103",
 "0342401324013120",
 "0342410324103021",
-"2043340141200312",
+"2043340141200312"
+],
 #order 6
+[
 "0325434501254105013241023",
 "0325434501254105102340132",
 "0325434501450125012321430",
@@ -129,5 +132,6 @@ LOOPS_small_data := [
 "2305441530504120512334201",
 "2305445103045125123030421",
 "2305445103542100153230421"
+]
 ]
 ];  

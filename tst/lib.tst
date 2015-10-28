@@ -38,18 +38,20 @@ gap> for i in [1..t] do
 # LEFT/RIGHT BOL LOOPS
 
 gap> DisplayLibraryInfo( "left Bol" );
-The library contains all nonassociative left Bol loops of order less than 17.
+The library contains all nonassociative left Bol loops of order less than 17
+and all nonassociative left Bol loops of order p*q, where p>q>2 are primes.
 ------
 Extent of the library:
    6 loops of order 8
    3 loops of order 12
-   2 loops of order 15
    2038 loops of order 16
+   (p-q)/2 loops of order p*q for primes p>q>2 such that q divides p-1
+   (p-q+2)/2 loops of order p*q for primes p>q>2 such that q divides p+1
 true
 
 # number of orders implemented in the library
 gap> t := Length( LOOPS_left_bol_data[ 1 ] );
-4
+3
 
 # testing loops  
 gap> for i in [1..t] do

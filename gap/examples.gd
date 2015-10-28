@@ -2,7 +2,7 @@
 ##
 #W  examples.gd           Examples [loops]
 ##  
-#H  @(#)$Id: examples.gd, v 2.2.1 2015/05/07 gap Exp $
+#H  @(#)$Id: examples.gd, v 3.1.0 2015/09/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -43,6 +43,8 @@ DeclareGlobalFunction( "ItpSmallLoop" );
 
 # auxiliary
 DeclareGlobalFunction( "LOOPS_LibraryByName" );
+DeclareGlobalFunction( "LOOPS_SmallestNonsquare" );
+DeclareGlobalFunction( "LOOPS_ActivateLeftBolLoopPQ" );
 DeclareGlobalFunction( "LOOPS_ActivateLeftBolLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateMoufangLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateSteinerLoop" );

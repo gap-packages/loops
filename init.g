@@ -2,7 +2,7 @@
 ##
 #A  init.g                  loops                G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: init.g, v 3.0.0 2015/06/10 gap Exp $
+#H  @(#)$Id: init.g, v 3.1.0 2015/10/28 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

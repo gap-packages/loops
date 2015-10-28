@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gd  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: quasigroups.gd, v 3.0.0 2015/06/15 gap Exp $
+#H  @(#)$Id: quasigroups.gd, v 3.1.0 2015/10/28 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -92,7 +92,9 @@ DeclareOperation( "IntoGroup", [ IsMagma ] );
 ## OPPOSITE QUASIGROUPS AND LOOPS
 ## --------------------------------------------------------------------------
 
-DeclareOperation( "Opposite", [ IsQuasigroup ] );
+DeclareOperation( "OppositeQuasigroup", [ IsQuasigroup ] );
+DeclareOperation( "OppositeLoop", [ IsLoop ] );
+DeclareAttribute( "Opposite", IsQuasigroup );
 
 #############################################################################
 ## AUXILIARY

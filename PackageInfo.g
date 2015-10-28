@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "3.0.0",
-Date := "10/06/2015",
-ArchiveURL := "http://www.math.du.edu/loops/loops-3.0.0",
+Version := "3.1.0",
+Date := "28/10/2015",
+ArchiveURL := "http://www.math.du.edu/loops/loops-3.1.0",
 ArchiveFormats := "-win.zip .tar.gz",
 
 Persons := [
@@ -66,9 +66,8 @@ PackageWWWHome := "http://www.math.du.edu/loops",
                
 PackageDoc := rec(
   BookName  := "loops",
-  Archive := "",
-  ArchiveURLSubset := ["doc", "htm"],
-  HTMLStart := "htm/chapters.htm",
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "The LOOPS Package: Loops and quasigroups for GAP",

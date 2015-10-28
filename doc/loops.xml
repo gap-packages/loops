@@ -1,0 +1,2328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+
+<Book Name="Loops">
+
+<!-- Read the file pkg/loops/etc/gapdoc.txt for instructions on how to produce the documentation. -->
+
+<!-- Typesetting rules for this document that produce acceptable outcome in both html and pdf:
+
+* Use <Br/><P/> at the beginning of paragraphs that are supposed to have an empty line just before them for greater emphasis, eg., before Remark, Example, and to break up the text. (This has no effect on html.)
+
+* Inside <ManSection>, list all <Func .../> etc at the beginning, followed by optional <Returns></Returns>, and only then add remarks and other explanatory text within <Description>.
+
+* If there is additonal text after ManSection, insert <Br/> at the end of the last tag of the <ManSection>, e.g., <Br/></Description></ManSection>. (This has no effect in html.)
+
+-->
+
+<!-- Working around GAPDoc bugs:
+
+* To fix a bug with <Example>: GAPDoc is adding an extra "end of line" character before </span> in the <Example> environment, whenever the line starts with "gap>". To remove these extra line breaks, it is necessary to go into the relevant html files and delete the extra line breaks. Do this only at the very end, since any additional processing of the XML file will reintroduce the extra line breaks.
+
+-->
+
+<TitlePage>
+        <Title>The <Package>LOOPS</Package> Package</Title>
+        <Version>Version 3.1.0</Version>
+        <Subtitle>Computing with quasigroups and loops in &GAP;</Subtitle>
+        <Author>G&#225;bor P. Nagy
+                <Email>nagyg@math.u-szeged.hu</Email>
+                <Address>Department of Mathematics, University of Szeged</Address>
+        </Author>
+        <Author>Petr Vojt&#283;chovsk&#253;
+                <Email>petr@math.du.edu</Email>
+                <Address>Department of Mathematics, University of Denver</Address>
+        </Author>
+        <Copyright>&copyright; 2015 G&#225;bor P. Nagy and Petr Vojt&#283;chovsk&#253;.
+        </Copyright>
+</TitlePage>
+
+<TableOfContents/>
+
+<Body>
+
+<!-- CHAPTER Introduction +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:Introduction"> <Heading>Introduction</Heading>
+
+<Package>LOOPS</Package> is a package for <Package>GAP4</Package> whose purpose is to:
+        <List>
+                <Item>provide researchers in nonassociative algebra with a powerful computational tool concerning finite loops and quasigroups,</Item>
+                <Item>extend &GAP; toward the realm of nonassociative structures.</Item>
+        </List>
+<Package>LOOPS</Package> has been accepted as an official package of &GAP; in May 2015.
+
+<!-- Section: License ------------------------------------------------------------------------------------ -->
+
+<Section Label="Sec:License"> <Heading>License</Heading>
+
+<Package>LOOPS</Package> is free software. You can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
+
+</Section>
+
+<!-- Section: Installation -------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Installation"> <Heading>Installation</Heading>
+
+Have <Package>GAP 4.7</Package> or newer installed on your computer.
+
+<P/>If you do not see the subfolder <File>pkg/loops</File> in the main directory of &GAP; then download the <Package>LOOPS</Package> package from the distribution website <URL>http://www.math.du.edu/loops</URL> and unpack the downloaded file into the <File>pkg</File> subfolder.
+
+<P/>The package <Package>LOOPS</Package> can then be loaded to &GAP; anytime by calling <Code>LoadPackage("loops");</Code>.
+
+<P/>If you wish to load <Package>LOOPS</Package> automatically while starting &GAP;, start &GAP;, execute the following commands,
+<Verb>
+gap> pref := UserPreference( "PackagesToLoad " );;
+gap> Add( pref, "loops" );;
+gap> SetUserPreference( "PackagesToLoad", pref );;
+gap> WriteGapIniFile();;
+</Verb>
+quit &GAP; and restart it.
+
+</Section>
+
+<!-- Section: Documentation ----------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Documentation"> <Heading>Documentation</Heading>
+
+The documentation has been prepared with the &GAPDoc; package and is therefore available in several formats: &LaTeX;, pdf, ps, html, and as an inline help in &GAP;. All these formats have been obtained directly from the master XML documentation file. Consequently, the different formats of the documentation differ only in their appearance, not in content.
+
+<P/>The preferred format of the documentation is html with MathJax turned on.
+
+<P/>All formats of the documentation can be found in the <File>doc</File> folder of <Package>LOOPS</Package>. You can also download the documentation from the <Package>LOOPS</Package> distribution website.
+
+<P/>The inline &GAP; help is available upon installing <Package>LOOPS</Package> and can be accessed in the usual way, i.e., upon typing <Code>?command</Code>, &GAP; displays the section of the <Package>LOOPS</Package> manual containing information about <Code>command</Code>.
+
+</Section>
+
+<!-- Section: Test Files ---------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:TestFiles"> <Heading>Test Files</Heading>
+
+Test files conforming to &GAP; standards are provided for <Package>LOOPS</Package> and can be found in the folder <File>tst</File>. The command <Code>ReadPackage("loops","tst/testall.g")</Code> runs all tests for <Package>LOOPS</Package>.
+
+</Section>
+
+<!-- Section: Memory Management ----------------------------------------------------------------------- -->
+
+<Section Label="Sec:MemoryManagement"> <Heading>Memory Management</Heading>
+
+Some libraries of loops are loaded only upon explicit demand and can occupy a lot of memory. For instance, the library or RCC loops occupies close to 100 MB of memory when fully loaded. The command <Code>LOOPS_FreeMemory();</Code> will attempt to free memory by unbinding on-demand library data loaded by <Package>LOOPS</Package>.
+
+</Section>
+
+<!-- Section: Feedback ---------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Feedback"> <Heading>Feedback</Heading>
+
+We welcome all comments and suggestions on <Package>LOOPS</Package>, especially those concerning the future development of the package. You can contact us by e-mail.
+
+</Section>
+
+<!-- Section: Acknowledgment --------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Acknowledgment"> <Heading>Acknowledgment</Heading>
+
+We thank the following people for sending us remarks and comments, and for suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Steve Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov, Frank L&#252;beck and Jonathan D.H. Smith.
+
+<P/>The library of Moufang loops of order 243 was generated from data provided by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy closed loops of order less than 28 was generated from data provided by Katharina Artic.
+
+<P/>G&#225;bor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr Vojt&#283;chovsk&#253; was supported by the 2006 PROF grant of the University of Denver and by the Simons Foundation Collaboration Grant 210176.
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER Mathematical Background +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:MathematicalBackground"> <Heading>Mathematical Background</Heading>
+
+We assume that you are familiar with the theory of quasigroups and loops, for instance with the textbook of Bruck <Cite Key="Br"/> or Pflugfelder <Cite Key="Pf"/>. Nevertheless, we did include definitions and results in this manual in order to unify terminology and improve legibility of the text. Some general concepts of quasigroups and loops can be found in this chapter. More special concepts are defined throughout the text as needed.
+
+<!-- Section: Quasigroups and loops ---------------------------------------------------------------------- -->
+
+<Section Label="Sec:QuasigroupsAndLoops"> <Heading>Quasigroups and Loops</Heading>
+
+A set with one binary operation (denoted <M>\cdot</M> here) is called <Index>groupoid</Index><Emph>groupoid</Emph> or <Index>magma</Index><Emph>magma</Emph>, the latter name being used in &GAP;.
+
+<P/>An element <M>1</M> of a groupoid <M>G</M> is a <Index>neutral element</Index><Emph>neutral element</Emph> or an <Index Subkey="element">identity</Index><Emph>identity element</Emph> if <M>1\cdot x = x\cdot 1 = x</M> for every <M>x</M> in <M>G</M>.
+
+<P/>Let <M>G</M> be a groupoid with neutral element <M>1</M>. Then an element <M>x^{-1}</M> is called a <Index Subkey="two-sided">inverse</Index><Emph>two-sided inverse</Emph> of <M>x</M> in <M>G</M> if <M> x\cdot x^{-1} = x^{-1}\cdot x = 1</M>.
+
+<P/>Recall that <Index>group</Index>groups are associative groupoids with an identity element and two-sided inverses.  Groups can be reached in another way from groupoids, namely via quasigroups and loops.
+
+<P/>A <Index>quasigroup</Index><Emph>quasigroup</Emph> <M>Q</M> is a groupoid such that the equation <M>x\cdot y=z</M> has a unique solution in <M>Q</M> whenever two of the three elements <M>x</M>, <M>y</M>, <M>z</M> of <M>Q</M> are specified. Note that multiplication tables of finite quasigroups are precisely <Index>latin square</Index><Emph>latin squares</Emph>, i.e., square arrays with symbols arranged so that each symbol occurs in each row and in each column exactly once. A <Index>loop</Index><Emph>loop</Emph> <M>L</M> is a quasigroup with a neutral element.
+
+<P/>Groups are clearly loops. Conversely, it is not hard to show that associative quasigroups are groups.
+
+</Section>
+
+<!-- Section: Translations ------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Translations"> <Heading>Translations</Heading>
+
+Given an element <M>x</M> of a quasigroup <M>Q</M>, we can associative two permutations of <M>Q</M> with it: the <Index Subkey="left">translation</Index><Emph>left translation</Emph> <M>L_x:Q\to Q</M> defined by <M>y\mapsto x\cdot y</M>, and the <Index Subkey="right">translation</Index><Emph>right translation</Emph> <M>R_x:Q\to Q</M> defined by <M>y\mapsto y\cdot x</M>.
+
+<P/>The binary operation <M>x\backslash y = L_x^{-1}(y)</M> is called the <Index Subkey="left">division</Index><Emph>left division</Emph>, and <M>x/y = R_y^{-1}(x)</M> is called the <Index  Subkey="right">division</Index><Emph>right division</Emph>.
+
+<P/>Although it is possible to compose two left (right) translations of a quasigroup, the resulting permutation is not necessarily a left (right) translation. The set <M>\{L_x|x\in Q\}</M> is called the <Index Subkey="left">section</Index><Emph>left section</Emph> of <M>Q</M>, and <M>\{R_x|x\in Q\}</M> is the <Index Subkey="right">section</Index><Emph>right section</Emph> of <M>Q</M>.
+
+<P/>Let <M>S_Q</M> be the symmetric group on <M>Q</M>. Then the subgroup <M>{\rm Mlt}_{\lambda}(Q)=\langle L_x|x\in Q\rangle</M> of <M>S_Q</M> generated by all left translations is the <Index Subkey="left">multiplication group</Index><Emph>left multiplication group</Emph> of <M>Q</M>. Similarly, <M>{\rm Mlt}_{\rho}(Q)= \langle R_x|x\in Q\rangle</M> is the <Index Subkey="right">multiplication group</Index><Emph>right multiplication group</Emph> of <M>Q</M>. The smallest group containing both <M>{\rm Mlt}_{\lambda}(Q)</M> and <M>{\rm Mlt}_{\rho}(Q)</M> is called the <Index>multiplication group</Index><Emph>multiplication group</Emph> of <M>Q</M> and is denoted by <M>{\rm Mlt}(Q)</M>.
+
+<P/>For a loop <M>Q</M>, the <Index Subkey="left">inner mapping group</Index><Emph>left inner mapping group</Emph> <M>{\rm Inn}_{\lambda}(Q)</M> is the stabilizer of <M>1</M> in <M>{\rm Mlt}_{\lambda}(Q)</M>. The <Index Subkey="right">inner mapping group</Index><Emph>right inner mapping group</Emph> <M>{\rm Inn}_{\rho}(Q)</M> is defined dually. The <Index>inner mapping group</Index><Emph>inner mapping group</Emph> <M>{\rm Inn}(Q)</M> is the stabilizer of <M>1</M> in <M>Q</M>.
+
+</Section>
+
+<!-- Section:  Subquasigroups and subloops -------------------------------------------------------------- -->
+
+<Section Label="Sec:SubquasigroupsAndSubloops"> <Heading>Subquasigroups and Subloops</Heading>
+
+A nonempty subset <M>S</M> of a quasigroup <M>Q</M> is a <Index>subquasigroup</Index><Emph>subquasigroup</Emph> if it is closed under multiplication and the left and right divisions. In the finite case, it suffices for <M>S</M> to be closed under multiplication. <Index>subloop</Index><Emph>Subloops</Emph> are defined analogously when <M>Q</M> is a loop.
+
+<P/>The <Index Subkey="left">nucleus</Index><Emph>left nucleus</Emph> <M>{\rm Nuc}_{\lambda}(Q)</M> of <M>Q</M> consists of all elements <M>x</M> of <M>Q</M> such that <M>x(yz) = (xy)z</M> for every <M>y</M>, <M>z</M> in <M>Q</M>. The <Index Subkey="middle">nucleus</Index><Emph>middle nucleus</Emph> <M>{\rm Nuc}_{\mu}(Q)</M> and the <Index Subkey="right">nucleus</Index><Emph>right nucleus</Emph> <M>{\rm Nuc}_{\rho}(Q)</M> are defined analogously. The <Index>nucleus</Index><Emph>nucleus</Emph> <M>{\rm Nuc}(Q)</M> is the intersection of the left, middle and right nuclei.
+
+<P/>The <Index>commutant</Index><Emph>commutant</Emph> <M>C(Q)</M> of <M>Q</M> consists of all elements <M>x</M> of <M>Q</M> that commute with all elements of <M>Q</M>. The    <Index>center</Index><Emph>center</Emph> <M>Z(Q)</M> of <M>Q</M> is the intersection of <M>{\rm Nuc}(Q)</M> with <M>C(Q)</M>.
+
+<P/>A subloop <M>S</M> of <M>Q</M> is <Index Subkey="normal">subloop</Index><Emph>normal</Emph> in <M>Q</M> if <M>f(S)=S</M> for every inner mapping <M>f</M> of <M>Q</M>.
+
+</Section>
+
+<!-- Section:  Nilpotence and solvability ------------------------------------------------------------------ -->
+
+<Section Label="Sec:NilpotenceAndSolvability"> <Heading>Nilpotence and Solvability</Heading>
+
+For a loop <M>Q</M> define <M>Z_0(Q) = 1</M> and let <M>Z_{i+1}(Q)</M> be the preimage of the center of <M>Q/Z_i(Q)</M> in <M>Q</M>. A loop <M>Q</M> is <Index>nilpotence class</Index><Index>nilpotent loop</Index><Index Subkey="nilpotent">loop</Index><Emph>nilpotent of class</Emph> <M>n</M> if <M>n</M> is the least nonnegative integer such that <M>Z_n(Q)=Q</M>. In such case <M>Z_0(Q)\le Z_1(Q)\le \dots \le Z_n(Q)</M> is the <Emph>upper central series</Emph><Index Subkey="upper">central series</Index>.
+
+<P/>The <Index>derived subloop</Index><Emph>derived subloop</Emph> <M>Q'</M> of <M>Q</M> is the least normal subloop of <M>Q</M> such that <M>Q/Q'</M> is a commutative group. Define <M>Q^{(0)}=Q</M> and let <M>Q^{(i+1)}</M> be the derived subloop of <M>Q^{(i)}</M>. Then <M>Q</M> is <Index>solvability class</Index><Index>solvable loop</Index><Index Subkey="solvable">loop</Index><Emph>solvable of class</Emph> <M>n</M> if <M>n</M> is the least nonnegative integer such that <M>Q^{(n)} = 1</M>. In such a case <M>Q^{(0)}\ge Q^{(1)}\ge \cdots \ge Q^{(n)}</M> is the <Emph>derived series</Emph><Index>derived series</Index> of <M>Q</M>.
+
+</Section>
+
+<!-- Section:  Commutators and Associators -------------------------------------------------------------- -->
+
+<Section Label="Sec:AssociatorsAndCommutators"> <Heading>Associators and Commutators</Heading>
+
+Let <M>Q</M> be a quasigroup and let <M>x</M>, <M>y</M>, <M>z</M> be elements of <M>Q</M>. Then the <Index>commutator</Index><Emph>commutator</Emph> of <M>x</M>, <M>y</M> is the unique element <M>[x,y]</M> of <M>Q</M> such that <M>xy = [x,y](yx)</M>, and the <Index>associator</Index><Emph>associator</Emph> of <M>x</M>, <M>y</M>, <M>z</M> is the unique element <M>[x,y,z]</M> of <M>Q</M> such that <M>(xy)z = [x,y,z](x(yz))</M>.
+
+<P/>The <Index>associator subloop</Index><Emph>associator subloop</Emph> <M>A(Q)</M> of <M>Q</M> is the least normal subloop of <M>Q</M> such that <M>Q/A(Q)</M> is a group.
+
+<P/>It is not hard to see that <M>A(Q)</M> is the least normal subloop of <M>Q</M> containing all commutators, and <M>Q'</M> is the least normal subloop of <M>Q</M> containing all commutators and associators.
+
+</Section>
+
+<!-- Section:  Homomorphisms and Homotopisms ---------------------------------------------------------- -->
+
+<Section Label="Sec:HomomorphismsAndHomotopisms"> <Heading>Homomorphism and Homotopisms</Heading>
+
+Let <M>K</M>, <M>H</M> be two quasigroups. Then a map <M>f:K\to H</M> is a <Index>homomorphism</Index><Emph>homomorphism</Emph> if <M>f(x)\cdot f(y)=f(x\cdot y)</M> for every <M>x</M>, <M>y\in K</M>. If <M>f</M> is also a bijection, we speak of an <Index>isomorphism</Index><Emph>isomorphism</Emph>, and the two quasigroups are called isomorphic.
+
+<P/>An ordered triple <M>(\alpha,\beta,\gamma)</M> of maps <M>\alpha</M>, <M>\beta</M>,
+<M>\gamma:K\to H</M> is a <Index>homotopism</Index><Emph>homotopism</Emph> if <M>\alpha(x)\cdot\beta(y) = \gamma(x\cdot y)</M> for every <M>x</M>, <M>y</M> in <M>K</M>. If the three maps are bijections, then <M>(\alpha,\beta,\gamma)</M> is an <Index>isotopism</Index><Emph>isotopism</Emph>, and the two quasigroups are isotopic.
+
+<P/>Isotopic groups are necessarily isomorphic, but this is certainly not true for nonassociative quasigroups or loops. In fact, every quasigroup is isotopic to a loop.
+
+<P/>Let <M>(K,\cdot)</M>, <M>(K,\circ)</M> be two quasigroups defined on the same set <M>K</M>. Then an isotopism <M>(\alpha,\beta,{\rm id}_K)</M> is called a <Index Subkey="principal">isotopism</Index><Emph>principal isotopism</Emph>. An important class of principal isotopisms is obtained as follows:
+
+Let <M>(K,\cdot)</M> be a quasigroup, and let <M>f</M>, <M>g</M> be elements of <M>K</M>. Define a new operation <M>\circ</M> on <M>K</M> by <M>x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)</M>, where <M>R_g</M>, <M>L_f</M> are translations. Then <M>(K,\circ)</M> is a quasigroup isotopic to <M>(K,\cdot)</M>, in fact a loop with neutral element <M>f\cdot g</M>. We call <M>(K,\circ)</M> a <Index Subkey="principal">loop isotope</Index><Emph>principal loop isotope</Emph> of <M>(K,\cdot)</M>.
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: How the Package Works ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:HowThePackageWorks"> <Heading>How the Package Works</Heading>
+
+The package consists of three complementary components:
+<List>
+        <Item>the core algorithms for quasigroup theoretical notions  (see Chapters <Ref Chap="Chap:CreatingQuasigroupsAndLoops"/>, <Ref Chap="Chap:BasicMethodsAndAttributes"/>, <Ref Chap="Chap:MethodsBasedOnPermutationGroups"/> and <Ref Chap="Chap:TestingPropertiesOfQuasigroupsAndLoops"/>),</Item>
+        <Item>algorithms for specific varieties of loops, mostly for Moufang loops (see Chapter <Ref Chap="Chap:SpecificMethods"/>),</Item>
+        <Item>the library of small loops (see Chapter <Ref Chap="Chap:LibrariesOfLoops"/>).</Item>
+</List>
+Although we do not explain the algorithms in detail here, we describe the general philosophy so that users can anticipate the capabilities and behavior of <Package>LOOPS</Package>.
+
+<!-- Section:  Representing quasigroups ------------------------------------------------------------------ -->
+
+<Section Label="Sec:RepresentingQuasigroups"> <Heading>Representing Quasigroups</Heading>
+
+Since permutation representation in the usual sense is impossible for nonassociative structures, and since the theory of nonassociative presentations is not well understood, we resorted to multiplication tables to represent quasigroups in &GAP;. (In order to save storage space, we sometimes use one multiplication table to represent several quasigroups, for instance when a quasigroup is a subquasigroup of another quasigroup. See Section <Ref Sect="Sec:AboutCayleyTables"/> for more details.)
+
+<P/>Consequently, the package is intended primarily for quasigroups and loops of small order, say up to 1000.
+
+<P/>The &GAP; categories <Index>IsQuasigroupElement</Index><Code>IsQuasigroupElement</Code>, <Index>IsLoopElement</Index><Code>IsLoopElement</Code>, <Index>IsQuasigroup</Index><Code>IsQuasigroup</Code> and <Index>IsLoop</Index><Code>IsLoop</Code> are declared in <Package>LOOPS</Package> as follows:
+
+<Verb>
+DeclareCategory( "IsQuasigroupElement", IsMultiplicativeElement );
+DeclareRepresentation( "IsQuasigroupElmRep",
+    IsPositionalObjectRep and IsMultiplicativeElement, [1] );
+DeclareCategory( "IsLoopElement",
+    IsQuasigroupElement and IsMultiplicativeElementWithInverse );
+DeclareRepresentation( "IsLoopElmRep",
+    IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
+## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
+DeclareCategory( "IsLatin", IsObject );
+DeclareCategory( "IsQuasigroup", IsMagma and IsLatin );
+DeclareCategory( "IsLoop", IsQuasigroup and
+    IsMultiplicativeElementWithInverseCollection);
+</Verb>
+
+</Section>
+
+<!-- Section:  Conversions between magmas, quasigroups, loops and groups -------------------------------- -->
+
+<Section Label="Sec:ConversionsEtc"> <Heading>Conversions between magmas, quasigroups, loops and groups</Heading>
+
+Whether an object is considered a magma, quasigroup, loop or group is a matter of declaration in <Package>LOOPS</Package>. Loops are automatically quasigroups, and both groups and quasigroups are automatically magmas. All standard &GAP; commands for magmas are therefore available for quasigroups and loops.
+
+<P/>In &GAP;, functions of the type <Code>AsSomething(<Arg>X</Arg>)</Code> convert the domain <Arg>X</Arg> into <Code>Something</Code>, if possible, without changing the underlying domain <Arg>X</Arg>. For example, if <Arg>X</Arg> is declared as magma but is associative and has neutral element and inverses, <Code>AsGroup(<Arg>X</Arg>)</Code> returns the corresponding group with the underlying domain <Arg>X</Arg>.
+
+<P/>We have opted for a more general kind of conversions in <Package>LOOPS</Package> (starting with version 2.1.0), using functions of the type <Code>IntoSomething(<Arg>X</Arg>)</Code>. The two main features that distinguish <Code>IntoSomething</Code> from <Code>AsSomething</Code> are:
+<List>
+        <Item>The function <Code>IntoSomething(<Arg>X</Arg>)</Code> does not necessarily return the same    domain as <Arg>X</Arg>. The reason is that <Arg>X</Arg> can be a group, for instance, defined on one of many possible domains, while <Code>IntoLoop(<Arg>X</Arg>)</Code> must result in a loop, and hence be defined on a subset of some interval <M>1</M>, <M>\dots</M>, <M>n</M> (see Section <Ref Sect="Sec:ParentOfAQuasigroup"/>).</Item>
+        <Item>In some special situations, the function <Code>IntoSomething(<Arg>X</Arg>)</Code> allows to    convert <Arg>X</Arg> into <Code>Something</Code> even though <Arg>X</Arg> does not have all the properties  of <Code>Something</Code>. For instance, every quasigroup is isotopic to a loop, so it makes sense to allow the conversion <Code>IntoLoop(<Arg>Q</Arg>)</Code> even if the quasigroup <Arg>Q</Arg> does not posses a neutral element.</Item>
+</List>
+Details of all conversions in <Package>LOOPS</Package> can be found in Section <Ref Sect="Sec:Conversions"/>.
+
+</Section>
+
+<!-- Section:  Calculating with Quasigroups --------------------------------------------------------------- -->
+
+<Section Label="Sec:CalculationWithQuasigroups"> <Heading>Calculating with Quasigroups</Heading>
+
+Although the quasigroups are ultimately represented by multiplication tables, the algorithms are efficient because nearly all calculations are delegated to groups. The connection between quasigroups and groups is facilitated via translations (see Section <Ref Sect="Sec:Translations"/>), and we illustrate it with a few examples:
+
+<Br/><P/><B>Example:</B> This example shows how properties of quasigroups can be translated into properties of translations in a straightforward way. Let <M>Q</M> be a quasigroup. We ask if <M>Q</M> is associative. We can either test if <M>(xy)z=x(yz)</M> for every <M>x</M>, <M>y</M>, <M>z</M> in <M>Q</M>, or we can ask if <M>L_{xy}=L_xL_y</M> for every <M>x</M>, <M>y</M> in <M>Q</M>. Note that since <M>L_{xy}</M>, <M>L_x</M> and <M>L_y</M> are elements of a permutation group, we do not have to refer directly to the multiplication table once the left translations of <M>Q</M> are known.
+
+<Br/><P/><B>Example:</B> This example shows how properties of loops can be translated into
+properties of translations in a way that requires some theory. A <Index Subkey="left">Bol loop</Index><Index Subkey="left Bol">loop</Index><Emph>left Bol loop</Emph> is a loop satisfying <M>x(y(xz)) = (x(yx))z</M>. We claim (without proof) that a loop <M>Q</M> is left Bol if and only if <M>L_xL_yL_x</M> is a left translation for every <M>x</M>, <M>y</M> in <M>Q</M>.
+
+<Br/><P/><B>Example:</B> This example shows that many properties of loops become purely
+group-theoretical once they are expressed in terms of translations. A loop is <Index>simple loop</Index><Index Subkey="simple">loop</Index><Emph>simple</Emph> if it has no nontrivial congruences. It is possible to show that a loop is simple if and only if its multiplication group is a primitive permutation group.
+
+<Br/><P/>The main idea of the package is therefore to:
+<List>
+        <Item>calculate the translations and the associated permutation groups when they are needed,</Item>
+        <Item>store them as attributes,</Item>
+        <Item>use them in algorithms as often as possible.</Item>
+</List>
+
+</Section>
+
+<!-- Section:  Naming, Viewing and Printing Quasigroups and their Elements --------------------------------- -->
+
+<Section Label="Sec:NamingEtc"> <Heading>Naming, Viewing and Printing Quasigroups and their Elements</Heading>
+
+&GAP; displays information about objects in two modes: the <Code>View</Code> mode (default, short), and the <Code>Print</Code> mode (longer). Moreover, when the name of an object is set, the name is always shown, no matter which display mode is used.
+
+<P/>Only loops contained in the libraries of <Package>LOOPS</Package> are named. For instance, the loop obtained via <Code>MoufangLoop(32,4)</Code>, the 4th Moufang loop of order 32, is named "Moufang loop 32/4'' and is shown as <Code>&lt;Moufang loop 32/4&gt;</Code>.
+
+<P/>A generic quasigroup of order <M>n</M> is displayed as <Code>&lt;quasigroup of order n&gt;</Code>. Similarly, a loop of order <M>n</M> appears as <Code>&lt;loop of order n&gt;</Code>.
+
+<P/>The displayed information of a generic loop is enhanced if more information about the loop becomes available. For instance, when it is established that a loop of order 12 has the left alternative property, the loop will be shown as <Code>&lt;left alternative loop of order 12&gt;</Code> until a stronger property is obtained. Which property is diplayed is governed by the filters built into <Package>LOOPS</Package> (see Appendix <Ref Appendix="Apx:Filters"/>).
+
+<ManSection><Heading>SetQuasigroupElmName and SetLoopElmName</Heading>
+
+<Func Name="SetQuasigroupElmName" Arg="Q, name"/>
+<Func Name="SetLoopElmName" Arg="Q, name"/>
+
+<Description>The above functions change the names of elements of a quasigroup (resp. loop) <Arg>Q</Arg> to <Arg>name</Arg>.</Description>
+
+<Description>By default, elements of a quasigroup appear as <Code>qi</Code> and elements of a loop appear as <Code>li</Code> in both display modes, where <Code>i</Code> is a positive integer. The neutral element of a loop is always indexed by 1.<Br/></Description>
+
+</ManSection>
+
+<P/>For quasigroups and loops in the <Code>Print</Code> mode, we display the multiplication table (if it is known), otherwise we display the elements.
+
+<Br/><P/>In the following example, <Code>L</Code> is a loop with two elements.
+
+<Example>
+gap> L;
+&lt;loop of order 2>
+gap> Print( L );
+&lt;loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]>
+gap> Elements( L );
+[ l1, l2 ]
+gap> SetLoopElmName( L, "loop_element" );; Elements( L );
+[ loop_element1, loop_element2 ]
+</Example>
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: Creating Quasigroups and Loops ++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:CreatingQuasigroupsAndLoops"> <Heading>Creating Quasigroups and Loops</Heading>
+
+In this chapter we describe several ways in which quasigroups and loops can be created in <Package>LOOPS</Package>.
+
+<!-- Section:  About Cayley Tables ----------------------------------------------------------------------- -->
+
+<Section Label="Sec:AboutCayleyTables"> <Heading>About Cayley Tables</Heading>
+
+Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <M>X</M>. Then an <M>n</M> by <M>n</M> array with rows and columns bordered by <M>x_1</M>, <M>\dots</M>, <M>x_n</M>, in this order, is a <Index>Cayley table</Index><Emph>Cayley table</Emph>, or a <Index>multiplication table</Index><Emph>multiplication table</Emph> of <M>\cdot</M>, if the entry in the row <M>x_i</M> and column <M>x_j</M> is <M>x_i\cdot x_j</M>.
+
+<P/>A Cayley table is a <Index>quasigroup table</Index><Emph>quasigroup table</Emph> if it is a <Index>latin square</Index>latin square, i.e., if every entry <M>x_i</M> appears in every column and every row exactly once.
+
+<P/>An unfortunate feature of multiplication tables in practice is that they are often not bordered, that is, it is up to the reader to figure out what is meant. Throughout this manual and in <Package>LOOPS</Package>, we therefore make the following assumption: <Emph>All distinct entries in a quasigroup table must be positive integers, say <M>x_1 &lt; x_2 &lt; \cdots &lt; x_n</M>, and if no border is specified, we assume that the table is bordered by <M>x_1</M>, <M>\dots</M>, <M>x_n</M>, in this order.</Emph> Note that we do not assume that the distinct entries <M>x_1</M>, <M>\dots</M>, <M>x_n</M> form the interval <M>1</M>, <M>\dots</M>, <M>n</M>. The significance of this observation will become clear in Chapter <Ref Chap="Chap:MethodsBasedOnPermutationGroups"/>.
+
+<P/>Finally, we say that a quasigroup table is a <Index>loop table</Index><Emph>loop table</Emph> if the first row and the first column are the same, and if the entries in the first row are ordered in an ascending fashion.
+
+</Section>
+
+<!-- Section:  Testing Cayley Tables --------------------------------------------------------------------- -->
+
+<Section Label="Sec:TestingCayleyTables"> <Heading>Testing Cayley Tables</Heading>
+
+<ManSection>
+<Heading>IsQuasigroupTable and IsQuasigroupCayleyTable</Heading>
+<Oper Name="IsQuasigroupTable" Arg="T"/>
+<Oper Name="IsQuasigroupCayleyTable" Arg="T"/>
+<Returns><Code>true</Code> if <Arg>T</Arg> is a quasigroup table as defined above, else <Code>false</Code>.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>IsLoopTable and IsLoopCayleyTable</Heading>
+<Oper Name="IsLoopTable" Arg="T"/>
+<Oper Name="IsLoopCayleyTable" Arg="T"/>
+<Returns><Code>true</Code> if <Arg>T</Arg> is a loop table as defined above, else <Code>false</Code>.<Br/></Returns>
+</ManSection>
+
+<P/><B>Remark:</B>The package <Package>GUAVA</Package> also contains operations dealing with latin squares. In particular, <Code>IsLatinSquare</Code> is declared in <Package>GUAVA</Package>.
+
+</Section>
+
+<!-- Section:  Canonical and Normalized Cayley Tables ---------------------------------------------------- -->
+
+<Section Label="Sec:CanonicalAndNormalizedCayleyTables"> <Heading>Canonical and Normalized Cayley Tables</Heading>
+
+<ManSection>
+<Oper Name="CanonicalCayleyTable" Arg="T"/>
+<Returns>Canonical Cayley table constructed from Cayley table <Arg>T</Arg> by replacing entries <M>x_i</M> with <M>i</M>.</Returns>
+<Description>A Cayley table is said to be <Index Subkey="canonical">Cayley table</Index><Emph>canonical</Emph> if it is based on elements <M>1</M>, <M>\dots</M>, <M>n</M>. Although we do not assume that every quasigroup table is canonical, it is often desirable to present quasigroup tables in canonical way.</Description>
+</ManSection>
+
+<ManSection>
+<Oper Name="NormalizedQuasigroupTable" Arg="T"/>
+<Returns>A normalized version of the Cayley table <Arg>T</Arg>.</Returns>
+<Description>A given Cayley table <Arg>T</Arg> is normalized in three steps as follows: first, <Code>CanonicalCayleyTable</Code> is called to rename entries to <M>1</M>, <M>\dots</M>, <M>n</M>, then the columns of <Arg>T</Arg> are permuted so that the first row reads <M>1</M>, <M>\dots</M>, <M>n</M>, and finally the rows of <Arg>T</Arg> are permuted so that the first column reads <M>1</M>, <M>\dots</M>, <M>n</M>.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Creating Quasigroups and Loops From Cayley Tables ----------------------------------------- -->
+
+<Section Label="Sec:CreatingQuasigroupsAndLoopsFromCayleyTables"> <Heading>Creating Quasigroups and Loops From Cayley Tables</Heading>
+
+<ManSection>
+<Heading>QuasigroupByCayleyTable and LoopByCayleyTable</Heading>
+<Oper Name="QuasigroupByCayleyTable" Arg="T"/>
+<Oper Name="LoopByCayleyTable" Arg="T"/>
+<Returns>The quasigroup (resp. loop) with quasigroup table (resp. loop table) <Arg>T</Arg>.</Returns>
+<Description>Since <Code>CanonicalCayleyTable</Code> is called within the above operation, the resulting quasigroup will have Cayley table with distinct entries <M>1</M>, <M>\dots</M>, <M>n</M>.
+</Description>
+</ManSection>
+
+<Example>
+gap> ct := CanonicalCayleyTable( [[5,3],[3,5]] );
+[ [ 2, 1 ], [ 1, 2 ] ]
+gap> NormalizedQuasigroupTable( ct );
+[ [ 1, 2 ], [ 2, 1 ] ]
+gap> LoopByCayleyTable( last );
+&lt;loop of order 2>
+gap> [ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];
+[ true, false ]
+</Example>
+
+</Section>
+
+<!-- Section:  Creating Quasigroups and Loops from a File ------------------------------------------------- -->
+
+<Section Label="Sec:CreatingQuasigroupsAndLoopsFromAFile"> <Heading>Creating Quasigroups and Loops from a File</Heading>
+
+Typing a large multiplication table manually is tedious and error-prone. We have therefore included a general method in <Package>LOOPS</Package> that reads multiplication tables of quasigroups from a file.
+
+<P/>Instead of writing a separate algorithm for each common format, our algorithm relies on the user to provide a bit of information about the input file. Here is an outline of the algorithm, with file named <Arg>filename</Arg> and a string <Arg>del</Arg> as input (in essence, the characters of <Arg>del</Arg> will be ignored while reading the file):
+<List>
+        <Item>read the entire content of <Arg>filename</Arg> into a string <Arg>s</Arg>,</Item>
+        <Item>replace all end-of-line characters in <Arg>s</Arg> by spaces,</Item>
+        <Item>replace by spaces all characters of <Arg>s</Arg> that appear in <Arg>del</Arg>,</Item>
+        <Item>split <Arg>s</Arg> into maximal substrings without spaces, called <Emph>chunks</Emph> here,</Item>
+        <Item>let <M>n</M> be the number of distinct chunks,</Item>
+        <Item>if the number of chunks is not <M>n^2</M>, report error,</Item>
+        <Item>construct the multiplication table by assigning numerical values <M>1</M>, <M>\dots</M>, <M>n</M> to chunks, depending on their position among distinct chunks.</Item>
+</List>
+
+<P/>The following examples clarify the algorithm and document its versatility. All examples are of the form <M>F+D\Longrightarrow T</M>, meaning that an input file containing <M>F</M> together with the deletion string <M>D</M> produce multiplication table <M>T</M>.
+
+<Br/><P/><B>Example:</B> Data does not have to be arranged into an array of any kind.
+<Display>
+        \begin{array}{cccc}
+                0&amp;1&amp;2&amp;1\\
+                2&amp;0&amp;2&amp; \\
+                0&amp;1&amp; &amp;
+        \end{array}\quad + \quad "" \quad \Longrightarrow\quad
+        \begin{array}{ccc}
+                1&amp;2&amp;3\\
+                2&amp;3&amp;1\\
+                3&amp;1&amp;2
+        \end{array}
+</Display>
+
+<P/><B>Example:</B> Chunks can be any strings.
+<Display>
+        \begin{array}{cc}
+                {\rm red}&amp;{\rm green}\\
+                {\rm green}&amp;{\rm red}\\
+        \end{array}\quad + \quad ""  \quad \Longrightarrow\quad
+        \begin{array}{cc}
+                1&amp; 2\\
+                2&amp; 1
+        \end{array}
+</Display>
+
+<P/><B>Example:</B> A typical table produced by &GAP; is easily parsed by deleting brackets and commas.
+<Display>
+        [ [0, 1], [1, 0] ] \quad + \quad "[,]"  \quad \Longrightarrow\quad
+        \begin{array}{cc}
+                1&amp; 2\\
+                2&amp; 1
+        \end{array}
+</Display>
+
+<P/><B>Example:</B> A typical &TeX; table with rows separated by lines is also easily converted. Note that we have to use <M>\backslash\backslash</M> to ensure that every occurrence of <M>\backslash</M> is deleted, since <M>\backslash\backslash</M> represents the character <M>\backslash</M> in &GAP;
+<Display>
+        \begin{array}{lll}
+                x\&amp;&amp; y\&amp;&amp;\ z\backslash\backslash\cr
+                y\&amp;&amp; z\&amp;&amp;\ x\backslash\backslash\cr
+                z\&amp;&amp; x\&amp;&amp;\ y
+        \end{array}
+         \quad + \quad "\backslash\backslash\&amp;" \quad \Longrightarrow\quad
+        \begin{array}{ccc}
+                1&amp;2&amp;3\cr
+                2&amp;3&amp;1\cr
+                3&amp;1&amp;2
+        \end{array}
+</Display>
+
+<ManSection>
+<Heading>QuasigroupFromFile and LoopFromFile</Heading>
+<Oper Name="QuasigroupFromFile" Arg="filename, del"/>
+<Oper Name="LoopFromFile" Arg="filename, del"/>
+<Returns>The quasigroup (resp. loop) whose multiplication table data is in file <Arg>filename</Arg>, ignoring the characters contained in the string <Arg>del</Arg>.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Creating Quasigroups and Loops From Sections ---------------------------------------------- -->
+
+<Section Label="Sec:CreatingQuasigroupsAndLoopsFromSections"> <Heading>Creating Quasigroups and Loops From Sections</Heading>
+
+<ManSection>
+<Oper Name="CayleyTableByPerms" Arg="P"/>
+<Returns>If <Arg>P</Arg> is a set of <M>n</M> permutations of an <M>n</M>-element set <M>X</M>, returns Cayley table <M>C</M> such that <M>C[i][j] = X[j]^{P[i]}</M>.</Returns>
+
+<Description><P/>The cardinality of the underlying set is determined by the moved points of the first permutation in <Arg>P</Arg>, unless the first permutation is the identity permutation, in which case the second permutation is used.
+
+<P/>In particular, if <Arg>P</Arg> is the left section of a quasigroup <Arg>Q</Arg>, <Code>CayleyTableByPerms(<Arg>Q</Arg>)</Code> returns the multiplication table of <Arg>Q</Arg>.
+</Description>
+
+</ManSection>
+
+<ManSection>
+<Heading>QuasigroupByLeftSection and LoopByLeftSection</Heading>
+<Oper Name="QuasigroupByLeftSection" Arg="P"/>
+<Oper Name="LoopByLeftSection" Arg="P"/>
+<Returns>If <Arg>P</Arg> is a set of permutations corresponding to the left translations of a quasigroup (resp. loop), returns the corresponding quasigroup (resp. loop).</Returns>
+
+<Description>The order of permutations in <Arg>P</Arg> is important in the quasigroup case, but it is disregarded in the loop case, since then the order of rows in the corresponding multiplication table is determined by the presence of the neutral element.</Description>
+</ManSection>
+
+<ManSection>
+<Heading>QuasigroupByRightSection and LoopByRightSection</Heading>
+
+<Oper Name="QuasigroupByRightSection" Arg="P"/>
+<Oper Name="LoopByRightSection" Arg="P"/>
+<Description>
+These are the dual operations to <Code>QuasigroupByLeftSection</Code> and <Code>LoopByLeftSection</Code>.</Description>
+</ManSection>
+
+<Example>
+gap> S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;
+gap> ls := LeftSection( S );
+[ (), (1,3,5), (1,5,3) ]
+gap> CayleyTableByPerms( ls );
+[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
+gap> CayleyTable( LoopByLeftSection( ls ) );
+[ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ]
+</Example>
+
+</Section>
+
+<!-- Section:  Creating Quasigroups and Loops from Folders ------------------------------------------------ -->
+
+<Section Label="Sec:CreatingQuasigroupsAndLoopsFromFolders"> <Heading>Creating Quasigroups and Loops From Folders</Heading>
+
+Let <M>G</M> be a group, <M>H</M> a subgroup of <M>G</M>, and <M>T</M> a right transversal to <M>H</M> in <M>G</M>. Let <M>\tau:G\to T</M> be defined by <M>x\in H\tau(x)</M>. Then the operation <M>\circ</M> defined on the right cosets <M>Q = \{Ht|t\in T\}</M> by <M>Hs\circ Ht = H\tau(st)</M> turns <M>Q</M> into a quasigroup if and only if <M>T</M> is a right transversal to all conjugates <M>g^{-1}Hg</M> of <M>H</M> in <M>G</M>. (In fact, every quasigroup <M>Q</M> can be obtained in this way  by letting <M>G={\rm Mlt}_\rho(Q)</M>, <M>H={\rm Inn}_\rho(Q)</M> and <M>T=\{R_x|x\in Q\}</M>.)
+
+<P/>We call the triple <M>(G,H,T)</M> a <Index Subkey ="quasigroup">folder</Index><Emph>right quasigroup (or loop) folder</Emph>.
+
+<ManSection>
+<Heading>QuasigroupByRightFolder and LoopByRightFolder</Heading>
+
+<Oper Name="QuasigroupByRightFolder" Arg="G, H, T"/>
+<Oper Name="LoopByRightFolder" Arg="G, H, T"/>
+<Returns>The quasigroup (resp. loop) from the right folder (<Arg>G</Arg>, <Arg>H</Arg>, <Arg>T</Arg>).</Returns>
+
+</ManSection>
+
+<P/><B>Remark:</B> We do not support the dual operations for left sections since, by default, actions in &GAP; act on the right.
+
+<Br/><P/>Here is a simple example in which <M>T</M> is actually the right section of the resulting loop.
+
+<Example>
+gap> T := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;
+gap> G := Group( T );; H := Stabilizer( G, 1 );;
+gap> LoopByRightFolder( G, H, T );
+&lt;loop of order 5>
+</Example>
+
+</Section>
+
+<!-- Section:  Creating Quasigroups and Loops by Nuclear Extensions  -------------------------------------- -->
+
+<Section Label="Sec:CreatingQuasigroupsAndLoopsByNuclearExtensions"> <Heading>Creating Quasigroups and Loops By Nuclear Extensions</Heading>
+
+Let <M>K</M>, <M>F</M> be loops. Then a loop <M>Q</M> is an <Index>extension</Index><Emph>extension</Emph> of <M>K</M> by <M>F</M> if <M>K</M> is a normal subloop of <M>Q</M> such that <M>Q/K</M> is isomorphic to <M>F</M>. An extension <M>Q</M> of <M>K</M> by <M>F</M> is <Index Subkey="nuclear">extension</Index><Emph>nuclear</Emph> if <M>K</M> is an abelian group and <M>K\le N(Q)</M>.
+
+<P/>A map <M>\theta:F\times F\to K</M> is a <Index>cocycle</Index><Emph>cocycle</Emph> if <M>\theta(1,x) = \theta(x,1) = 1</M> for every <M>x\in F</M>.
+
+<P/>The following theorem holds for loops <M>Q</M>, <M>F</M> and an abelian group <M>K</M>: <M>Q</M> is
+a nuclear extension of <M>K</M> by <M>F</M> if and only if there is a cocycle <M>\theta:F\times F\to K</M> and a homomorphism <M>\varphi:F\to{\rm Aut}(Q)</M> such that <M>K\times F</M> with multiplication <M>(a,x)(b,y) = (a\varphi_x(b)\theta(x,y),xy)</M> is isomorphic to <M>Q</M>.
+
+<ManSection>
+
+<Oper Name="NuclearExtension" Arg="Q, K"/>
+
+<Returns> The data necessary to construct <Arg>Q</Arg> as a nuclear extension of the subloop <Arg>K</Arg> by <Arg>Q</Arg><M>/</M><Arg>K</Arg>, namely <M>[K, F, \varphi, \theta]</M> as above. Note that <Arg>K</Arg> must be a commutative subloop of the nucleus of <Arg>Q</Arg>.</Returns>
+
+<Description>If <M>n=|F|</M> and <M>m=|</M><Arg>K</Arg><M>|</M>, the cocycle <M>\theta</M> is returned as an <M>n\times n</M> array with entries in <M>\{1,\dots,m\}</M>, and the homomorphism <M>\varphi</M> is returned as a list of length <M>n</M> of permutations of <M>\{1,\dots,m\}</M>.</Description>
+
+</ManSection>
+
+<ManSection>
+
+<Oper Name="LoopByExtension" Arg="K, F, f, t"/>
+<Returns>The extension of an abelian group <Arg>K</Arg> by a loop <Arg>F</Arg>, using action <Arg>f</Arg> and cocycle <Arg>t</Arg>. The arguments must be formatted as the output of <Code>NuclearExtension</Code>.</Returns>
+
+</ManSection>
+
+<Example>
+gap> F := IntoLoop( Group( (1,2) ) );
+&lt;loop of order 2>
+gap> K := DirectProduct( F, F );;
+gap> phi := [ (), (2,3) ];;
+gap> theta := [ [ 1, 1 ], [ 1, 3 ] ];;
+gap> LoopByExtension( K, F, phi, theta );
+&lt;loop of order 8>
+gap> IsAssociative( last );
+false
+</Example>
+
+</Section>
+
+<!-- Section:  Random Quasigroups and Loops ------------------------------------------------------------ -->
+
+<Section Label="Sec:RandomQuasigroupsAndLoops"> <Heading>Random Quasigroups and Loops</Heading>
+
+An algorithm is said to select a latin square of order <M>n</M> <Emph>at random</Emph><Index Subkey="random">latin square</Index> if every latin square of order <M>n</M> is returned by the algorithm with the same probability. Selecting a latin square at random is a nontrivial problem.
+
+<P/>In <Cite Key="JaMa"/>, Jacobson and Matthews defined a random walk on the space of latin squares and so-called improper latin squares that visits every latin square with the same probability. The diameter of the space is no more than <M>4(n-1)^3</M> in the sense that no more than <M>4(n-1)^3</M> properly chosen steps are needed to travel from one latin square of order <M>n</M> to another.
+
+<P/>The Jacobson-Matthews algorithm can be used to generate random quasigroups as follows: (i) select any latin square of order <M>n</M>, for instance the canonical multiplication table of the cyclic group of order <M>n</M>, (ii) perform sufficiently many steps of the random walk, stopping at a proper or improper latin square, (iii) if necessary, perform a few more steps to end up with a proper latin square. Upon normalizing the resulting latin square, we obtain a random loop of order <M>n</M>.
+
+<P/>By the above result, it suffices to use about <M>n^3</M> steps to arrive at any latin square of order <M>n</M> from the initial latin square. In fact, a smaller number of steps is probably sufficient.
+
+<ManSection>
+
+<Heading>RandomQuasigroup and RandomLoop</Heading>
+
+<Oper Name="RandomQuasigroup" Arg="n[, iter]"/>
+<Oper Name="RandomLoop" Arg="n[, iter]"/>
+
+<Returns>A random quasigroup (resp. loop) of order <Arg>n</Arg> using the Jacobson-Matthews algorithm. If the optional argument <Arg>iter</Arg> is omitted, <Arg>n</Arg><M>{}^3</M> steps are used. Otherwise <Arg>iter</Arg> steps are used.</Returns>
+
+<Description>If <Arg>iter</Arg> is small, the Cayley table of the returned quasigroup (resp. loop) will be close to the canonical Cayley table of the cyclic group of order <Arg>n</Arg>.</Description>
+
+</ManSection>
+
+<ManSection>
+
+<Oper Name="RandomNilpotentLoop" Arg="lst"/>
+
+<Returns>A random nilpotent loop<Index Subkey="nilpotent">loop</Index> as follows (see Section <Ref Sect="Sec:NilpotencyAndCentralSeries"/> for more information on nilpotency): <Arg>lst</Arg> must be a list of positive integers and/or finite abelian groups. If <Code><Arg>lst</Arg>=[a1]</Code> and <Code>a1</Code> is an integer, a random abelian group of order <Code>a1</Code> is returned, else <Code>a1</Code> is an abelian group and <Code>AsLoop(a1)</Code> is returned. If <Code><Arg>lst</Arg>= [a1,...,am]</Code>, a random central extension of <Code>RandomNilpotentLoop([a1])</Code> by <Code>RandomNilpotentLoop([a2,...,am])</Code> is returned.</Returns>
+
+<Description>To determine the nilpotency class <M>c</M> of the resulting loop, assume that <Arg>lst</Arg> has length at least 2, contains only integers bigger than 1, and let <M>m</M> be the last entry of <Arg>lst</Arg>. If <M>m>2</M> then <M>c</M> is equal to <Code>Length(<Arg>lst</Arg>)</Code>, else <M>c</M> is equal to <Code>Length(<Arg>lst</Arg>)-1</Code>.</Description>
+
+</ManSection>
+
+</Section>
+
+<!-- Section:  Conversions ------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Conversions"> <Heading>Conversions</Heading>
+
+<Package>LOOPS</Package> contains methods that convert between magmas, quasigroups, loops and groups, provided such conversions are possible. Each of the conversion methods <Code>IntoQuasigroup</Code>, <Code>IntoLoop</Code> and <Code>IntoGroup</Code> returns <Code>fail</Code> if the requested conversion is not possible.
+
+<Br/><P/><B>Remark:</B> Up to version 2.0.0 of <Package>LOOPS</Package>, we supported <Code>AsQuasigroup</Code>, <Code>AsLoop</Code> and <Code>AsGroup</Code> in place of <Code>IntoQuasigroup</Code>, <Code>IntoLoop</Code> and <Code>IntoGroup</Code>, respectively. We have changed the terminology starting with version 2.1.0 in order to comply with &GAP; naming rules for <Code>AsSomething</Code>, as explained in Chapter <Ref Chap="Chap:HowThePackageWorks"/>. Finally, the method <Code>AsGroup</Code> is a core method of &GAP; that returns an fp group if its argument is an associative loop.
+
+<ManSection>
+
+<Oper Name="IntoQuasigroup" Arg="M"/>
+<Returns>If <Arg>M</Arg> is a declared magma that happens to be a quasigroup, the corresponding quasigroup is returned. If <Arg>M</Arg> is already declared as a quasigroup, <Arg>M</Arg> is returned.</Returns>
+
+</ManSection>
+
+<ManSection>
+<Oper Name="PrincipalLoopIsotope" Arg="M, f, g"/>
+
+<Returns>An isomorphic copy of the principal isotope <M>(</M><Arg>M</Arg>,<M>\circ)</M> via the transposition <M>(1</M>,<Arg>f</Arg><M>\cdot</M><Arg>g</Arg><M>)</M>. An isomorphic copy is returned rather than <M>(</M><Arg>M</Arg>,<M>\circ)</M> because in <Package>LOOPS</Package> all loops have to have neutral element labeled as <M>1</M>.</Returns>
+
+<Description>Given a quasigroup <M>M</M> and two of its elements <M>f</M>, <M>g</M>, the principal loop isotope <M>x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)</M> turns <M>(M,\circ)</M> into a loop with neutral element <M>f\cdot g</M> (see Section <Ref Sect="Sec:HomomorphismsAndHomotopisms"/>).</Description>
+</ManSection>
+
+<ManSection>
+
+<Oper Name="IntoLoop" Arg="M"/>
+<Returns>If <Arg>M</Arg> is a declared magma that happens to be a quasigroup (but not necessarily a loop!), a loop is returned as follows: If <Arg>M</Arg> is already declared as a loop, <Arg>M</Arg> is returned. Else, if <Arg>M</Arg> possesses a neutral element <M>e</M> and if <M>f</M> is the first element of <Arg>M</Arg>, then an isomorphic copy of <Arg>M</Arg> via the transposition <M>(e,f)</M> is returned. If <Arg>M</Arg> does not posses a neutral element, <Code>PrincipalLoopIsotope(<Arg>M</Arg>, <Arg>M.1</Arg>, <Arg>M.1</Arg>)</Code> is returned.<Br/></Returns>
+</ManSection>
+
+<P/><B>Remark:</B> One could obtain a loop from a declared magma <Arg>M</Arg> in yet another way, by normalizing the Cayley table of <Arg>M</Arg>. The three approaches can result in nonisomorphic loops in general.
+
+<ManSection>
+
+<Oper Name="IntoGroup" Arg="M"/>
+<Returns>If <Arg>M</Arg> is a declared magma that happens to be a group, the corresponding group is returned as follows: If <Arg>M</Arg> is already declared as a group, <Arg>M</Arg> is returned, else <Code>RightMultiplicationGroup(IntoLoop(<Arg>M</Arg>))</Code> is returned, which is a permutation group isomorphic to <Arg>M</Arg>.</Returns>
+
+</ManSection>
+
+</Section>
+
+<!-- Section:  Products of Loops ------------------------------------------------------------------------- -->
+
+<Section Label="Sec:ProductsOfLoops"> <Heading>Products of Loops</Heading>
+
+<ManSection>
+
+<Oper Name="DirectProduct" Arg="L1, ..., Ln"/>
+<Returns>If each <Arg>Li</Arg> is either a declared loop or a declared group, the direct product of <Arg>L1</Arg>, <M>\dots</M>, <Arg>Ln</Arg> is returned. If every <Arg>Li</Arg> is a declared group, a group is returned, otherwise a loop is returned.</Returns>
+
+</ManSection>
+
+</Section>
+
+<!-- Section:  Opposite Quasigroups and Loops ----------------------------------------------------------- -->
+
+<Section Label="Sec:OppositeQuasigroupsAndLoops"> <Heading>Opposite Quasigroups and Loops</Heading>
+
+When <M>Q</M> is a quasigroup with multiplication <M>\cdot</M>, the <Index>opposite quasigroup</Index><Index Subkey="opposite">quasigroup</Index><Emph>opposite quasigroup</Emph> of <M>Q</M> is a quasigroup with the same underlying set as <M>Q</M> and with multiplication <M>*</M> defined by <M>x*y=y\cdot x</M>.
+
+<ManSection>
+<Heading>Opposite, OppositeQuasigroup and OppositeLoop</Heading>
+
+<Attr Name="Opposite" Arg="Q"/>
+<Oper Name="OppositeQuasigroup" Arg="Q"/>
+<Oper Name="OppositeLoop" Arg="Q"/>
+<Returns> The opposite of the quasigroup (resp. loop) <Arg>Q</Arg>. Note that if <Code>OppositeQuasigroup(<Arg>Q</Arg>)</Code> or <Code>OppositeLoop(<Arg>Q</Arg>)</Code> are called, then the returned quasigroup or loop is not stored as an attribute of <Arg>Q</Arg>.</Returns>
+
+</ManSection>
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: Basic Methods and Attributes ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:BasicMethodsAndAttributes"> <Heading>Basic Methods And Attributes</Heading>
+
+In this chapter we describe the basic core methods and attributes of the <Package>LOOPS</Package> package.
+
+<!-- Section:  Basic Attributes --------------------------------------------------------------------------- -->
+
+<Section Label="Sec:BasicAttributes"> <Heading>Basic Attributes</Heading>
+
+We associate many attributes with quasigroups in order to speed up computation. This section lists some basic attributes of quasigroups and loops.
+
+<ManSection>
+<Attr Name="Elements" Arg="Q"/>
+<Returns>The list of elements of a quasigroup <Arg>Q</Arg>.</Returns>
+<Description>See Section <Ref Sect="Sec:NamingEtc"/> for more information about element labels.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="CayleyTable" Arg="Q"/>
+<Returns>The Cayley table of a quasigroup <Arg>Q</Arg>.</Returns>
+<Description>See Section <Ref Sect="Sec:AboutCayleyTables"/> for more information about quasigroup Cayley tables.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="One" Arg="Q"/>
+<Returns>The identity element of a loop <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<P/><B>Remark:</B>If you want to know if a quasigroup <Arg>Q</Arg> has a neutral element, you can find out
+with the standard function for magmas <Code>MultiplicativeNeutralElement(<Arg>Q</Arg>)</Code>.
+
+<ManSection>
+<Attr Name="Size" Arg="Q"/>
+<Returns>The size of a quasigroup <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="Exponent" Arg="Q"/>
+<Returns>The exponent of a power associative loop <Arg>Q</Arg>. (The method does not test if <Arg>Q</Arg> is power associative.)</Returns>
+<Description>When <Arg>Q</Arg> is a <Emph>power associative loop</Emph><Index Subkey="power associative">loop</Index><Index>power associative loop</Index>, that is, the powers of elements are well-defined in <Arg>Q</Arg>, then the <Emph>exponent</Emph><Index>exponent</Index> of <Arg>Q</Arg> is the smallest positive integer divisible by the orders of all elements of <Arg>Q</Arg>. </Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Basic Arithmetic Operations ---------------------------------------------------------------- -->
+
+<Section Label="Sec:BasicArithemticOperations"> <Heading>Basic Arithmetic Operations</Heading>
+
+Each quasigroup element in &GAP; knows to which quasigroup it belongs. It is therefore possible to perform arithmetic operations with quasigroup elements without referring to the quasigroup. All elements involved in the calculation must belong to the same quasigroup.
+
+<P/>Two elements <M>x</M>, <M>y</M> of the same quasigroup are multiplied by <M>x*y</M> in &GAP;. Since multiplication of at least three elements is ambiguous in the nonassociative case, we parenthesize elements by default from left to right, i.e., <M>x*y*z</M> means <M>((x*y)*z)</M>. Of course, one can specify the order of multiplications by providing parentheses.
+
+<ManSection>
+<Heading>LeftDivision and RightDivision</Heading>
+
+<Oper Name="LeftDivision" Arg="x, y"/>
+<Oper Name="RightDivision" Arg="x, y"/>
+<Returns>The left division <Arg>x</Arg><M>\backslash</M><Arg>y</Arg> (resp. the right division <Arg>x</Arg><M>/</M><Arg>y</Arg>) of two elements <Arg>x</Arg>, <Arg>y</Arg> of the same quasigroup.<Br/></Returns>
+
+<Oper Name="LeftDivision" Arg="S, x"/>
+<Oper Name="LeftDivision" Arg="x, S"/>
+<Oper Name="RightDivision" Arg="S, x"/>
+<Oper Name="RightDivision" Arg="x, S"/>
+<Returns>The list of elements obtained by performing the specified arithmetical operation elementwise using a list <Arg>S</Arg> of elements and an element <Arg>x</Arg>.<Br/></Returns>
+
+</ManSection>
+
+<P/><B>Remark:</B> We support <M>/</M> in place of <Code>RightDivision</Code>. But we do not support <M>\backslash</M> in place of <Code>LeftDivision</Code>.
+
+<ManSection>
+<Heading>LeftDivisionCayleyTable and RightDivisionCayleyTable</Heading>
+<Oper Name="LeftDivisionCayleyTable" Arg="Q"/>
+<Oper Name="RightDivisionCayleyTable" Arg="Q"/>
+<Returns>The Cayley table of the respective arithmetic operation of a quasigroup <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Powers and Inverses ----------------------------------------------------------------------- -->
+
+<Section Label="Sec:PowersAndInverses"> <Heading>Powers and Inverses</Heading>
+
+Powers of elements are generally not well-defined in quasigroups. For magmas and a positive integral exponent, &GAP; calculates powers in the following way: <M>x^1=x</M>, <M>x^{2k}=(x^k)\cdot(x^k)</M> and <M>x^{2k+1}=(x^{2k})\cdot x</M>. One can easily see that this returns <M>x^k</M> in about <M>\log_2(k)</M> steps. For <Package>LOOPS</Package>, we have decided to keep this method, but the user should be aware that the method is sound only in power associative quasigroups.
+
+<P/>Let <M>x</M> be an element of a loop <M>Q</M> with neutral element <M>1</M>. Then the <Emph>left inverse</Emph><Index Subkey="left">inverse</Index> <M>x^\lambda</M> of <M>x</M> is the unique element of <M>Q</M> satisfying <M>x^\lambda x=1</M>. Similarly, the <Emph>right inverse</Emph><Index Subkey="right">inverse</Index> <M>x^\rho</M> satisfies <M>xx^\rho=1</M>. If <M>x^\lambda=x^\rho</M>, we call <M>x^{-1}=x^\lambda=x^\rho</M> the <Emph>inverse</Emph><Index>inverse</Index> of <M>x</M>.
+
+<ManSection>
+<Heading>LeftInverse, RightInverse and Inverse</Heading>
+
+<Oper Name="LeftInverse" Arg="x"/>
+<Oper Name="RightInverse" Arg="x"/>
+<Oper Name="Inverse" Arg="x"/>
+<Returns>The left inverse, right inverse and inverse, respectively, of the quasigroup element <Arg>x</Arg>.</Returns>
+</ManSection>
+
+<Example>
+gap> CayleyTable( Q );
+[ [ 1, 2, 3, 4, 5 ],
+  [ 2, 1, 4, 5, 3 ],
+  [ 3, 4, 5, 1, 2 ],
+  [ 4, 5, 2, 3, 1 ],
+  [ 5, 3, 1, 2, 4 ] ]
+gap> elms := Elements( Q );
+gap> [ l1, l2, l3, l4, l5 ];
+gap> [ LeftInverse( elms[3] ), RightInverse( elms[3] ), Inverse( elms[3] ) ];
+[ l5, l4, fail ]
+</Example>
+
+</Section>
+
+<!-- Section:  Associators and Commutators -------------------------------------------------------------- -->
+
+<Section Label="Sec:AssociatorsAndCommutators2"> <Heading>Associators and Commutators</Heading>
+
+See Section <Ref Sect="Sec:AssociatorsAndCommutators"/> for definitions of associators and commutators.
+
+<ManSection>
+<Oper Name="Associator" Arg="x, y, z"/>
+<Returns>The associator of the elements <Arg>x</Arg>, <Arg>y</Arg>, <Arg>z</Arg> of the same quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="Commutator" Arg="x, y"/>
+<Returns>The commutator of the elements <Arg>x</Arg>, <Arg>y</Arg> of the same quasigroup.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Generators -------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Generators"> <Heading>Generators</Heading>
+
+<ManSection>
+<Heading>GeneratorsOfQuasigroup and GeneratorsOfLoop</Heading>
+<Attr Name="GeneratorsOfQuasigroup" Arg="Q"/>
+<Attr Name="GeneratorsOfLoop" Arg="Q"/>
+<Returns>A set of generators of a quasigroup (resp. loop) <Arg>Q</Arg>. (Both methods are synonyms of <Code>GeneratorsOfMagma</Code>.)</Returns>
+</ManSection>
+
+<P/>As usual in &GAP;, one can refer to the <Code>i</Code>th generator of a quasigroup <Code>Q</Code> by <Code>Q.i</Code>. Note that while it is often the case that <Code> Q.i = Elements(Q)[i]</Code>, it is not necessarily so.
+
+<ManSection>
+<Attr Name="GeneratorsSmallest" Arg="Q"/>
+<Returns>A generating set <M>\{q_0</M>, <M>\dots</M>, <M>q_m\}</M> of <Arg>Q</Arg> such that
+<M>Q_0=\emptyset</M>, <M>Q_m=</M><Arg>Q</Arg>, <M>Q_i=\langle q_1</M>, <M>\dots</M>, <M>q_i \rangle</M>, and <M>q_{i+1}</M> is the least element of <Arg>Q</Arg><M>\setminus Q_i</M>.</Returns>
+</ManSection>
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: Methods Based on Permutation Groups +++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:MethodsBasedOnPermutationGroups"> <Heading>Methods Based on Permutation Groups</Heading>
+
+Most calculations in the <Package>LOOPS</Package> package are delegated to groups, taking advantage of the various permutations and permutation groups associated with quasigroups. This chapter explains in detail how the permutations associated with a quasigroup are calculated, and it also describes some of the core methods of <Package>LOOPS</Package> based on permutations. Additional core methods can be found in Chapter <Ref Chap="Chap:TestingPropertiesOfQuasigroupsAndLoops"/>.
+
+<!-- Section:  Parent of a Quasigroup -------------------------------------------------------------------- -->
+
+<Section Label="Sec:ParentOfAQuasigroup"> <Heading>Parent of a Quasigroup</Heading>
+
+Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the multiplication in <M>S</M> coincides with the multiplication in <M>Q</M>, it is reasonable not to store the multiplication table of <M>S</M>. However, the quasigroup <M>S</M> then must know that it is a subquasigroup of <M>Q</M>.
+
+<ManSection>
+<Attr Name="Parent" Arg="Q"/>
+<Returns>The parent quasigroup of the quasigroup <Arg>Q</Arg>.</Returns>
+
+<Description>When <Arg>Q</Arg> is not created as a subquasigroup of another quasigroup, the attribute <Code>Parent(<Arg>Q</Arg>)</Code> is set to <Arg>Q</Arg>. When <Arg>Q</Arg> is created as a subquasigroup of a quasigroup <Arg>H</Arg>, we set <Code>Parent(<Arg>Q</Arg>)</Code> equal to <Code>Parent(<Arg>H</Arg>)</Code>. Thus, in effect, <Code>Parent(<Arg>Q</Arg>)</Code> is the largest quasigroup from which <Arg>Q</Arg> has been created.</Description>
+
+</ManSection>
+
+<ManSection>
+<Oper Name="Position" Arg="Q, x"/>
+<Returns>The position of <Arg>x</Arg> among the elements of <Arg>Q</Arg>.<Br/></Returns>
+</ManSection>
+
+<P/>Let <Arg>Q</Arg> be a quasigroup with parent <Arg>P</Arg>, where <Arg>P</Arg> is some <M>n</M>-element quasigroup. Let <Arg>x</Arg> be an element of <Arg>Q</Arg>. Then <Code><Arg>x</Arg>![1]</Code> is the position of <Arg>x</Arg> among the elements of <Arg>P</Arg>, i.e., <Code><Arg>x</Arg>![1] = Position(Elements(<Arg>P</Arg>),<Arg>x</Arg>)</Code>.
+
+<P/>While referring to elements of <Arg>Q</Arg> by their positions, the user should understand whether the positions are meant among the elements of <Arg>Q</Arg>, or among the elements of the parent <Arg>P</Arg> of <Arg>Q</Arg>. Since it requires no calculation to obtain <Code><Arg>x</Arg>![1]</Code>, we always use the position of an element in its parent quasigroup in <Package>LOOPS</Package>. In this way, many attributes of a quasigroup, including its Cayley table, are permanently tied to its parent.
+
+<P/>It is now clear why we have not insisted that Cayley tables of quasigroups must have entries covering the entire interval <M>1</M>, <M>\dots</M>, <M>n</M> for some <M>n</M>.
+
+<ManSection>
+
+<Oper Name="PosInParent" Arg="S"/>
+<Returns>When <Arg>S</Arg> is a list of quasigroup elements (not necessarily from the same quasigroup), returns the corresponding list of positions of elements of <Arg>S</Arg> in the corresponding parent, i.e., <Code>PosInParent(<Arg>S</Arg>)[i] = <Arg>S</Arg>[i]![1] = Position(Parent(<Arg>S</Arg>[i]),<Arg>S</Arg>[i])</Code>.<Br/></Returns>
+
+</ManSection>
+
+<P/>Quasigroups with the same parent can be compared as follows. Assume that <M>A</M>, <M>B</M> are two quasigroups with common parent <M>Q</M>. Let <M>G_A</M>, <M>G_B</M> be the canonical generating sets of <M>A</M> and <M>B</M>, respectively, obtained by the method <Code>GeneratorsSmallest</Code> (see Section <Ref Sect="Sec:Generators"/>). Then we define <M>A&lt;B</M> if and only if <M>G_A&lt;G_B</M> lexicographically.
+
+</Section>
+
+<!-- Section:  Subquasigroups and Subloops -------------------------------------------------------------- -->
+
+<Section Label="Sec:SubquasigroupsAndSubloops2"> <Heading>Subquasigroups and Subloops</Heading>
+
+<ManSection>
+<Oper Name="Subquasigroup" Arg="Q, S"/>
+<Returns>When <Arg>S</Arg> is a subset (of elements or indices) of a quasigroup <Arg>Q</Arg>, returns the smallest subquasigroup (resp. subloop) of <Arg>Q</Arg> containing <Arg>S</Arg>.</Returns>
+
+<Description>We allow <Arg>S</Arg> to be a list of elements of <Arg>Q</Arg>, or a list of integers representing the positions of the respective elements in the parent quasigroup (resp. loop) of <Arg>Q</Arg>.
+
+<P/>If <Arg>S</Arg> is empty, <Code>Subloop(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> returns the one-element subloop of <Arg>Q</Arg>, while <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> returns the empty set.
+
+<P/><B>Remark:</B> The empty set is sometimes considered to be a subquasigroup of <Arg>Q</Arg> (although not in <Package>LOOPS</Package>). The above convention is useful for handling certain situations, for instance when the user calls <Code>Center(<Arg>Q</Arg>)</Code> for a quasigroup <Arg>Q</Arg> with empty center.</Description>
+</ManSection>
+
+<ManSection>
+<Oper Name="Subloop" Arg="Q, S"/>
+<Description>This is a loop analog of <Code>IsSubquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code>.</Description>
+</ManSection>
+
+<ManSection>
+<Heading>IsSubquasigroup and IsSubloop</Heading>
+<Oper Name="IsSubquasigroup" Arg="Q, S"/>
+<Oper Name="IsSubloop" Arg="Q, S"/>
+
+<Returns><Code>true</Code> if <Arg>S</Arg> is a subquasigroup (resp. subloop) of a quasigroup (resp. loop) <Arg>Q</Arg>, <Code>false</Code> otherwise. In other words, returns <Code>true</Code> if <Arg>S</Arg> and <Arg>Q</Arg> are quasigroups (resp. loops) with the same parent and <Arg>S</Arg> is a subset of <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="AllSubloops" Arg="Q"/>
+<Returns>A list of all subloops of a loop <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+
+<Func Name="RightCosets" Arg="Q, S"/>
+<Returns>If <Arg>S</Arg> is a subloop of <Arg>Q</Arg>, returns a list of all right cosets<Index>coset</Index> of <Arg>S</Arg> in <Arg>Q</Arg>.</Returns>
+
+<Description>The coset <Arg>S</Arg> is listed first, and the elements of each coset are ordered in the same way as the elements of <Arg>S</Arg>, i.e., if <Arg>S</Arg><M> = [s_1,\dots,s_m]</M>, then <Arg>S</Arg><M>x=[s_1x,\dots,s_mx]</M>.</Description>
+
+</ManSection>
+
+<ManSection>
+<Oper Name="RightTransversal" Arg="Q, S"/>
+<Returns>A right transversal of a subloop <Arg>S</Arg> in a loop <Arg>Q</Arg>. The transversal consists of the list of first elements from the right cosets obtained by <Code>RightCosets(<Arg>Q</Arg>,<Arg>S</Arg>)</Code>.</Returns>
+<Description>When <Arg>S</Arg> is a subloop of <Arg>Q</Arg>, the right transversal<Index>transversal</Index> of <Arg>S</Arg> with respect to <Arg>Q</Arg> is a subset of <Arg>Q</Arg> containing one element from each right coset of <Arg>S</Arg> in <Arg>Q</Arg>.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Translations and Sections ------------------------------------------------------------------ -->
+
+<Section Label="Sec:TranslationsAndSections"> <Heading>Translations and Sections</Heading>
+
+When <M>x</M> is an element of a quasigroup <M>Q</M>, the left translation <M>L_x</M> is a permutation of <M>Q</M>. In <Package>LOOPS</Package>, all permutations associated with quasigroups and their elements are permutations in the sense of &GAP;, i.e., they are bijections of some interval <M>1</M>, <M>\dots</M>, <M>n</M>. Moreover, following our convention, the numerical entries of the permutations point to the positions among elements of the parent of <M>Q</M>, not among elements of <M>Q</M>.
+
+<ManSection>
+<Heading>LeftTranslation and RightTranslation</Heading>
+<Oper Name="LeftTranslation" Arg="Q, x"/>
+<Oper Name="RightTranslation" Arg="Q, x"/>
+<Returns>If <Arg>x</Arg> is an element of a quasigroup <Arg>Q</Arg>, returns the left translation (resp. right translation) by <Arg>x</Arg> in <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>LeftSection and RightSection</Heading>
+<Oper Name="LeftSection" Arg="Q"/>
+<Oper Name="RightSection" Arg="Q"/>
+<Returns>The left section (resp. right section) of a quasigroup <Arg>Q</Arg>.<Br/></Returns>
+</ManSection>
+
+<P/>Here is an example illustrating the main features of the subquasigroup construction and the relationship between a quasigroup and its parent.
+
+<P/>Note how the Cayley table of a subquasigroup is created only upon explicit demand. Also note that changing the names of elements of a subquasigroup (subloop) automatically changes the names of the elements of the parent subquasigroup (subloop). This is because the elements are shared.
+
+<Example>
+gap> M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );
+&lt;loop of order 3>
+gap> [ Parent( S ) = M, Elements( S ), PosInParent( S ) ];
+[ true, [ l1, l3, l5], [ 1, 3, 5 ] ]
+gap> HasCayleyTable( S );
+false
+gap> SetLoopElmName( S, "s" );; Elements( S ); Elements( M );
+[ s1, s3, s5 ]
+[ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ]
+gap> CayleyTable( S );
+[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
+gap> LeftSection( S );
+[ (), (1,3,5), (1,5,3) ]
+gap> [ HasCayleyTable( S ), Parent( S ) = M ];
+[ true, true ]
+gap> L := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );
+[ l1, l2, l3 ]
+gap> [ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];
+[ true, true, false ]
+gap> LeftSection( L );
+[ (), (1,2,3), (1,3,2) ]
+</Example>
+
+</Section>
+
+<!-- Section:  Multiplication Groups ----------------------------------------------------------------------- -->
+
+<Section Label="Sec:MultiplicationGroups"> <Heading>Multiplication Groups</Heading>
+
+<ManSection>
+<Heading>LeftMutliplicationGroup, RightMultiplicationGroup and MultiplicationGroup</Heading>
+<Attr Name="LeftMultiplicationGroup" Arg="Q"/>
+<Attr Name="RightMultiplicationGroup" Arg="Q"/>
+<Attr Name="MultiplicationGroup" Arg="Q"/>
+<Returns>The left multiplication group, right multiplication group, resp. multiplication group of a quasigroup <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>RelativeLeftMultiplicationGroup, RelativeRightMultiplicationGroup and RelativeMultiplicationGroup</Heading>
+
+<Oper Name="RelativeLeftMultiplicationGroup" Arg="Q, S"/>
+<Oper Name="RelativeRightMultiplicationGroup" Arg="Q, S"/>
+<Oper Name="RelativeMultiplicationGroup" Arg="Q, S"/>
+<Returns>The relative left multiplication group, the relative right multiplication group, resp. the relative multiplication group of a quasigroup <Arg>Q</Arg> with respect to a subquasigroup <Arg>S</Arg> of <Arg>Q</Arg>.</Returns>
+
+<Description>Let <M>S</M> be a subquasigroup of a quasigroup <M>Q</M>. Then the <Index Subkey="relative left">multiplication group</Index><Emph>relative left multiplication group</Emph> of <M>Q</M> with respect to <M>S</M> is the group <M>\langle L(x)|x\in S\rangle</M>, where <M>L(x)</M> is the left translation by <M>x</M> in <M>Q</M> restricted to <M>S</M>. The <Index Subkey="relative right ">multiplication group</Index><Emph>relative right multiplication group</Emph> and the <Index Subkey="relative">multiplication group</Index><Emph>relative multiplication group</Emph> are defined analogously.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Inner Mapping Groups ---------------------------------------------------------------------- -->
+
+<Section Label="Sec:InnerMappingGroups"> <Heading>Inner Mapping Groups</Heading>
+
+By a result of Bruck, the left inner mapping group of a loop is generated by all <Index Subkey="left">inner mapping</Index><Emph>left inner mappings</Emph> <M>L(x,y) = L_{yx}^{-1}L_yL_x</M>, and the right inner mapping group is generated by all <Index Subkey="right">inner mapping</Index><Emph>right inner mappings</Emph> <M>R(x,y) = R_{xy}^{-1}R_yR_x</M>.
+
+<P/>In analogy with group theory, we define the <Index>conjugation</Index><Emph>conjugations</Emph> or the <Index Subkey="middle">inner mapping</Index><Emph>middle inner mappings</Emph> as <M>T(x) =
+L_x^{-1}R_x</M>. The <Index Subkey="middle">inner mapping group</Index><Emph>middle inner mapping grroup</Emph> is then the group generated by all conjugations.
+
+<ManSection>
+<Heading>LeftInnerMapping, RightInnerMapping, MiddleInnerMapping</Heading>
+<Oper Name="LeftInnerMapping" Arg="Q, x, y"/>
+<Oper Name="RightInnerMapping" Arg="Q, x, y"/>
+<Oper Name="MiddleInnerMapping" Arg="Q, x"/>
+<Returns>The left inner mapping <M>L(</M><Arg>x</Arg>,<Arg>y</Arg><M>)</M>, the right inner mapping <M>R(</M><Arg>x</Arg>,<Arg>y</Arg><M>)</M>, resp. the middle inner mapping <M>T(</M><Arg>x</Arg><M>)</M> of a loop <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>LeftInnerMappingGroup, RightInnerMappingGroup, MiddleInnerMappingGroup</Heading>
+<Attr Name="LeftInnerMappingGroup" Arg="Q"/>
+<Attr Name="RightInnerMappingGroup" Arg="Q"/>
+<Attr Name="MiddleInnerMappingGroup" Arg="Q"/>
+<Returns>The left inner mapping group, right inner mapping group, resp. middle inner mapping group of a loop <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="InnerMappingGroup" Arg="Q"/>
+<Returns>The inner mapping group of a loop <Arg>Q</Arg>.<Br/></Returns>
+</ManSection>
+
+<P/>Here is an example for multiplication groups and inner mapping groups:
+
+<Example>
+gap> M := MoufangLoop(12,1);
+&lt;Moufang loop 12/1>
+gap> LeftSection(M)[2];
+(1,2)(3,4)(5,6)(7,8)(9,12)(10,11)
+gap> Mlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);
+&lt;permutation group of size 2592 with 23 generators>
+Group([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])
+gap> Size(Inn);
+216
+</Example>
+
+</Section>
+
+<!-- Section:  Nuclei, Commutant, Center, and Associator Subloop ----------------------------------------- -->
+
+<Section Label="Sec:NucleiEtal"> <Heading>Nuclei, Commutant, Center, and Associator Subloop</Heading>
+
+See Section <Ref Sect="Sec:SubquasigroupsAndSubloops"/> for the relevant definitions.
+
+<ManSection>
+<Heading>LeftNucles, MiddleNucleus, and RightNucleus</Heading>
+<Attr Name="LeftNucleus" Arg="Q"/>
+<Attr Name="MiddleNucleus" Arg="Q"/>
+<Attr Name="RightNucleus" Arg="Q"/>
+<Returns>The left nucleus, middle nucleus, resp. right nucleus of a quasigroup <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>Nuc, NucleusOfQuasigroup and NucleusOfLoop</Heading>
+<Attr Name="Nuc" Arg="Q"/>
+<Attr Name="NucleusOfQuasigroup" Arg="Q"/>
+<Attr Name="NucleusOfLoop" Arg="Q"/>
+<Returns>These synonymous attributes return the nucleus of a quasigroup <Arg>Q</Arg>.</Returns>
+
+<Description>Since all nuclei are subquasigroups of <Arg>Q</Arg>, they are returned as subquasigroups (resp. subloops). When <Arg>Q</Arg> is a loop then all nuclei are in fact groups, and they are returned as associative loops.
+
+<P/><B>Remark:</B> The name <Code>Nucleus</Code> is a global function of &GAP; with two variables. We have therefore used <Code>Nuc</Code> rather than <Code>Nucleus</Code> for the nucleus. This abbreviation is sometimes used in the literature, too.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="Commutant" Arg="Q"/>
+<Returns>The commutant of a quasigroup <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="Center" Arg="Q"/>
+<Returns>The center of a quasigroup <Arg>Q</Arg>.</Returns>
+
+<Description>If <Arg>Q</Arg> is a loop, the center of <Arg>Q</Arg> is a subgroup of <Arg>Q</Arg> and it is returned as an associative loop.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="AssociatorSubloop" Arg="Q"/>
+<Returns>The associator subloop of a loop <Arg>Q</Arg>.</Returns>
+<Description>We calculate the associator subloop of <Arg>Q</Arg> as the smallest normal subloop of <Arg>Q</Arg> containing all elements <M>x\backslash\alpha(x)</M>, where <M>x</M> is an element of <Arg>Q</Arg> and <M>\alpha</M> is a left inner mapping of <Arg>Q</Arg>.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Normal Subloops and Simple Loops ---------------------------------------------------------- -->
+
+<Section Label="Sec:NormalSubloopsAndSimpleLoops"> <Heading>Normal Subloops and Simple Loops</Heading>
+
+<ManSection>
+<Oper Name="IsNormal" Arg="Q, S"/>
+<Returns><Code>true</Code> if <Arg>S</Arg> is a normal subloop of a loop <Arg>Q</Arg>.</Returns>
+<Description>A subloop <M>S</M> of a loop <M>Q</M> is <Emph>normal</Emph><Index Subkey="normal">subloop</Index><Index>normal subloop</Index> if it is invariant under all inner mappings of <M>Q</M>. </Description>
+</ManSection>
+
+<ManSection>
+<Oper Name="NormalClosure" Arg="Q, S"/>
+<Returns>The normal closure of a subset <Arg>S</Arg> of a loop <Arg>Q</Arg>.</Returns>
+<Description>For a subset <M>S</M> of a loop <M>Q</M>, the <Emph>normal closure</Emph><Index>normal closure</Index> of <M>S</M> in <M>Q</M> is the smallest normal subloop of <M>Q</M> containing <M>S</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Oper Name="IsSimple" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a simple loop.</Returns>
+<Description>A loop <M>Q</M> is <Emph>simple</Emph><Index>simple loop</Index><Index Subkey="simple">loop</Index> if <M>\{1\}</M> and <M>Q</M> are the only normal subloops of <M>Q</M>.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Factor Loops ------------------------------------------------------------------------------ -->
+
+<Section Label="Sec:FactorLoops"> <Heading>Factor Loops</Heading>
+
+<ManSection>
+<Oper Name="FactorLoop" Arg="Q, S"/>
+<Returns>When <Arg>S</Arg> is a normal subloop of a loop <Arg>Q</Arg>, returns the factor loop <Arg>Q</Arg><M>/</M><Arg>S</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="NaturalHomomorphismByNormalSubloop" Arg="Q, S"/>
+<Returns>When <Arg>S</Arg> is a normal subloop of a loop <Arg>Q</Arg>, returns the natural projection from <Arg>Q</Arg> onto <Arg>Q</Arg><M>/</M><Arg>S</Arg>.</Returns>
+</ManSection>
+
+<Example>
+gap> M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );
+&lt;loop of order 3>
+gap> IsNormal( M, S );
+true
+gap> F := FactorLoop( M, S );
+&lt;loop of order 4>
+gap> NaturalHomomorphismByNormalSubloop( M, S );
+MappingByFunction( &lt;loop of order 12>, &lt;loop of order 4>,
+    function( x ) ... end )
+</Example>
+
+</Section>
+
+<!-- Section:  Nilpotency and Central Series -------------------------------------------------------------- -->
+
+<Section Label="Sec:NilpotencyAndCentralSeries"> <Heading>Nilpotency and Central Series</Heading>
+
+See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for the relevant definitions.
+
+<ManSection>
+<Prop Name="IsNilpotent" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a nilpotent loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="NilpotencyClassOfLoop" Arg="Q"/>
+<Returns>The nilpotency class of a loop <Arg>Q</Arg> if <Arg>Q</Arg> is nilpotent, <Code>fail</Code> otherwise.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsStronglyNilpotent" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a strongly nilpotent loop.</Returns>
+<Description>A loop <M>Q</M> is said to be <Emph>strongly nilpotent</Emph><Index>strongly nilpotent loop</Index><Index Subkey="strongly">nilpotent loop</Index><Index Subkey="strongly nilpotent">loop</Index> if its multiplication group is nilpotent.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="UpperCentralSeries" Arg="Q"/>
+<Returns>When <Arg>Q</Arg> is a nilpotent loop, returns the upper central series of <Arg>Q</Arg>, else returns <Code>fail</Code>.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="LowerCentralSeries" Arg="Q"/>
+<Returns>When <Arg>Q</Arg> is a nilpotent loop, returns the lower central series of <Arg>Q</Arg>, else returns <Code>fail</Code>.</Returns>
+<Description>The <Emph>lower central series</Emph><Index Subkey="lower">central series</Index> for loops is defined analogously to groups.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Solvability, Derived Series and Frattini Subloop ---------------------------------------------- -->
+
+<Section Label="Sec:SolvabilityEtc"> <Heading>Solvability, Derived Series and Frattini Subloop</Heading>
+
+See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvability an derived subloop.
+
+<ManSection>
+<Prop Name="IsSolvable" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a solvable loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="DerivedSubloop" Arg="Q"/>
+<Returns>The derived subloop of a loop <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="DerivedLength" Arg="Q"/>
+<Returns>If <Arg>Q</Arg> is solvable, returns the derived length of <Arg>Q</Arg>, else returns <Code>fail</Code>.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>FrattiniSubloop and FrattinifactorSize</Heading>
+<Attr Name="FrattiniSubloop" Arg="Q"/>
+<Returns>The Frattini subloop of <Arg>Q</Arg>. The method is implemented only for strongly nilpotent loops.</Returns>
+<Description><Emph>Frattini subloop</Emph><Index>Frattini subloop</Index> of a loop <M>Q</M> is the intersection of maximal subloops of <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="FrattinifactorSize" Arg="Q"/>
+</ManSection>
+
+</Section>
+
+
+<!-- Section:  Isomorphisms and Automorphisms ----------------------------------------------------------- -->
+
+<Section Label="Sec:IsomorphismsAndAutomorphisms"> <Heading>Isomorphisms and Automorphisms</Heading>
+
+<ManSection>
+<Oper Name="IsomorphismLoops" Arg="Q, L"/>
+<Returns>An isomorphism from a loop <Arg>Q</Arg> to a loop <Arg>L</Arg> if the loops are isomorphic, <Code>fail</Code> otherwise.</Returns>
+<Description>If an isomorphism exists, it is returned as a permutation <M>f</M> of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M>, where <M>i^f=j</M> means that the <M>i</M>th element of <Arg>Q</Arg> is mapped onto the <M>j</M>th element of <Arg>L</Arg>. Note that this convention is used even if the underlying sets of <Arg>L</Arg>, <Arg>M</Arg> are not indexed by consecutive integers.</Description>
+</ManSection>
+
+<ManSection>
+<Oper Name="LoopsUpToIsomorphism" Arg="ls"/>
+<Returns>Given a list <Arg>ls</Arg> of loops, returns a sublist of <Arg>ls</Arg> consisting of representatives of isomorphism classes of loops from <Arg>ls</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Attr Name="AutomorphismGroup" Arg="Q"/>
+<Returns>The automorphism group of a loop <Arg>Q</Arg>, with the same convention on permutations as in the case of <Code>IsomorphismLoops</Code>.<Br/></Returns>
+</ManSection>
+
+<P/><B>Remark:</B> Since two isomorphisms differ by an automorphism, all isomorphisms from <Arg>Q</Arg> to <Arg>L</Arg> can be obtained by a combination of <Code>IsomorphismLoops(<Arg>Q</Arg>,<Arg>L</Arg>)</Code> and <Code>AutomorphismGroup(<Arg>L</Arg>)</Code>.
+
+<Br/><P/>While dealing with Cayley tables, it is often useful to rename or reorder the elements of the underlying quasigroup without changing the isomorphism type of the quasigroups. <Package>LOOPS</Package> contains several functions for this purpose.
+
+<ManSection>
+<Oper Name="IsomorphicCopyByPerm" Arg="Q, f"/>
+<Returns>When <Arg>Q</Arg> is a quasigroup and <Arg>f</Arg> is a permutation of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M>, returns a quasigroup defined on the same set as <Arg>Q</Arg> with multiplication <M>*</M> defined by <M>x*y = </M><Arg>f</Arg><M>(</M><Arg>f</Arg><M>{}^{-1}(x)</M><Arg>f</Arg><M>{}^{-1}(y))</M>. When <Arg>Q</Arg> is a declared loop, a loop is returned. Consequently, when <Arg>Q</Arg> is a declared loop and <Arg>f</Arg><M>(1) = k\ne 1</M>, then <Arg>f</Arg> is first replaced with <Arg>f</Arg><M>\circ (1,k)</M>, to make sure that the resulting Cayley table is normalized.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="IsomorphicCopyByNormalSubloop" Arg="Q, S"/>
+<Returns>When <Arg>S</Arg> is a normal subloop of a loop <Arg>Q</Arg>, returns an isomorphic copy of <Arg>Q</Arg> in which the elements are ordered according to the right cosets of <Arg>S</Arg>. In particular, the Cayley table of <Arg>S</Arg> will appear in the top left corner of the Cayley table of the resulting loop.<Br/></Returns>
+</ManSection>
+
+<P/>In order to speed up the search for isomorphisms and automorphisms, we first calculate some loop invariants preserved under isomorphisms, and then we use these invariants to partition the loop into blocks of elements preserved under isomorphisms. The following two operations are used in the search.
+
+<ManSection>
+<Oper Name="Discriminator" Arg="Q"/>
+<Returns>A data structure with isomorphism invariants of a loop <Arg>Q</Arg>. See <Cite Key="Vo"/> or the file <File>iso.gi</File> for more details.</Returns>
+</ManSection>
+
+<P/>If two loops have different discriminators, they are not isomorphic. If they
+have identical discriminators, they may or may not be isomorphic.
+
+<ManSection>
+<Oper Name="AreEqualDiscriminators" Arg="D1, D2"/>
+<Returns><Code>true</Code> if <Arg>D1</Arg>, <Arg>D2</Arg> are equal discriminators for the purposes of isomorphism searches.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Isotopisms  ------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:Isotopism"> <Heading>Isotopisms</Heading>
+
+At the moment, <Package>LOOPS</Package> contains only slow methods for testing if two loops are isotopic. The method works as follows: It is well known that if a loop <M>K</M> is isotopic to a loop <M>L</M> then there exist a principal loop isotope <M>P</M> of <M>K</M> such that <M>P</M> is isomorphic to <M>L</M>. The algorithm first finds all principal isotopes of <M>K</M>, then filters them up to isomorphism, and then checks if any of them is isomorphic to <M>L</M>. This is rather slow already for small orders.
+
+<ManSection>
+<Oper Name="IsotopismLoops" Arg="K, L"/>
+<Returns><Code>fail</Code> if <Arg>K</Arg>, <Arg>L</Arg> are not isotopic loops, else it returns an isotopism as a triple of bijections on <M>1,\dots,|</M><Arg>K</Arg><M>|</M>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="LoopsUpToIsotopism" Arg="ls"/>
+<Returns>Given a list <Arg>ls</Arg> of loops, returns a sublist of <Arg>ls</Arg> consisting of representatives of isotopism classes of loops from <Arg>ls</Arg>.</Returns>
+</ManSection>
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: Testing Properties of Quasigroups and Loops +++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:TestingPropertiesOfQuasigroupsAndLoops"> <Heading>Testing Properties of Quasigroups and Loops</Heading>
+
+Although loops are quasigroups, it is often the case in the literature that a property of the same name can differ for quasigroups and loops. For instance, a Steiner loop is not necessarily a Steiner quasigroup.
+
+<P/>To avoid such ambivalences, we often include the noun <Code>Loop</Code> or <Code>Quasigroup</Code> as part of the name of the property, e.g., <Code>IsSteinerQuasigroup</Code> versus <Code>IsSteinerLoop</Code>.
+
+<P/>On the other hand, some properties coincide for quasigroups and loops and we therefore do not include <Code>Loop</Code>, <Code>Quasigroup</Code> as part of the name of the property, e.g., <Code>IsCommutative</Code>.
+
+<!-- Section:  Associativity, Commutativity and Generalizations -------------------------------------------- -->
+
+<Section Label="Sec:AssociativityCommutativityAndGeneralizations"> <Heading>Associativity, Commutativity and Generalizations</Heading>
+
+<ManSection>
+<Prop Name="IsAssociative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an associative quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsCommutative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a commutative quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsPowerAssociative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a power associative loop.</Returns>
+<Description>A loop <M>Q</M> is said to be <Emph>power associative</Emph><Index Subkey="power associative">loop</Index><Index>power associative loop</Index> if every element of <M>Q</M> generates an associative loop.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsDiassociative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a diassociative loop.</Returns>
+<Description>A loop <M>Q</M> is said to be <Emph>diassociative</Emph><Index Subkey="diassociative">loop</Index><Index>diassociative loop</Index> if any two elements of <M>Q</M> generate an associative sublop.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Inverse Properties ------------------------------------------------------------------------- -->
+
+<Section Label="Sec:InverseProperties"> <Heading>Inverse Propeties</Heading>
+
+For an element <M>x</M> of a loop <M>Q</M>, the <Emph>left inverse</Emph><Index Subkey="left">inverse</Index> of <M>x</M> is the element <M>x^\lambda</M> of <M>Q</M> such that <M>x^\lambda \cdot x = 1</M>, while the <Emph>right inverse</Emph><Index Subkey="right">inverse</Index> of <M>x</M> is the element <M>x^\rho</M> of <M>Q</M> such that <M>x\cdot x^\rho = 1</M>.
+
+<ManSection>
+<Heading>HasLeftInverseProperty, HasRightInverseProperty and HasInverseProperty</Heading>
+<Prop Name="HasLeftInverseProperty" Arg="Q"/>
+<Prop Name="HasRightInverseProperty" Arg="Q"/>
+<Prop Name="HasInverseProperty" Arg="Q"/>
+<Returns><Code>true</Code> if a loop <Arg>Q</Arg> has the left inverse property, right inverse property, resp. inverse property.</Returns>
+<Description>A loop <M>Q</M> has the <Emph>left inverse property</Emph><Index Subkey="left">inverse property</Index> if <M>x^\lambda(xy)=y</M> for every <M>x</M>, <M>y</M> in <M>Q</M>. Dually, <M>Q</M> has the <Emph>right inverse property</Emph><Index Subkey="right">inverse property</Index> if <M>(yx)x^\rho=y</M> for every <M>x</M>, <M>y</M> in <M>Q</M>. If <M>Q</M> has both the left inverse property and the right inverse property, it has the <Emph>inverse property</Emph><Index>inverse property</Index>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="HasTwosidedInverses" Arg="Q"/>
+<Returns><Code>true</Code> if a loop <Arg>Q</Arg> has two-sided inverses.</Returns>
+<Description>A loop <M>Q</M> is said to have <Emph>two-sided inverses</Emph><Index Subkey="two-sided">inverse</Index> if <M>x^\lambda=x^\rho</M> for every <M>x</M> in <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="HasWeakInverseProperty" Arg="Q"/>
+<Returns><Code>true</Code> if a loop <Arg>Q</Arg> has the weak inverse property.</Returns>
+<Description>A  loop <M>Q</M> has the <Emph>weak inverse property</Emph><Index Subkey="weak">inverse property</Index> if <M>(xy)^\lambda x = y^\lambda</M> (equivalently, <M>x(yx)^\rho = y^\rho</M>) holds for every <M>x</M>, <M>y</M> in <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="HasAutomorphicInverseProperty" Arg="Q"/>
+<Returns><Code>true</Code> if a loop <Arg>Q</Arg> has the automorphic inverse property.</Returns>
+<Description>According to <Cite Key="Ar"/>, a loop <M>Q</M> has the <Emph>automorphic inverse property</Emph><Index>automorphic inverse property</Index><Index Subkey="automorphic">inverse property</Index> if <M>(xy)^\lambda = x^\lambda y^\lambda</M>, or, equivalently, <M>(xy)^\rho = x^\rho y^\rho</M> holds for every <M>x</M>, <M>y</M> in <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="HasAntiautomorphicInverseProperty" Arg="Q"/>
+<Returns><Code>true</Code> if a loop <Arg>Q</Arg> has the antiautomorphic inverse property.</Returns>
+<Description>A loop <M>Q</M> has the <Emph>antiautomorphic inverse property</Emph><Index>antiautomorphic inverse property</Index><Index Subkey="antiautomorphic">inverse property</Index> if <M>(xy)^\lambda=y^\lambda x^\lambda</M>, or, equivalently, <M>(xy)^\rho = y^\rho x^\rho</M> holds for every <M>x</M>, <M>y</M> in <M>Q</M>.<Br/></Description>
+</ManSection>
+
+<P/>See Appendix <Ref Appendix="Apx:Filters"/> for implications implemented in <Package>LOOPS</Package> among various inverse properties.
+
+</Section>
+
+<!-- Section:  Some Properties of Quasigroups ------------------------------------------------------------ -->
+
+<Section Label="Sec:SomePropertiesOfQuasigroups"> <Heading>Some Properties of Quasigroups</Heading>
+
+<ManSection>
+<Prop Name="IsSemisymmetric" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a semisymmetric quasigroup.</Returns>
+<Description>A quasigroup <M>Q</M> is <Emph>semisymmetric</Emph><Index>semisymmetric quasigroup</Index><Index Subkey="semisymmetric">quasigroup</Index> if <M>(xy)x=y</M>, or, equivalently <M>x(yx)=y</M> holds for every <M>x</M>, <M>y</M> in <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsTotallySymmetric" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a totally symmetric quasigroup.</Returns>
+<Description>A commutative semisymmetric quasigroup is called <Emph>totally symmetric</Emph><Index>totally symmetric quasigroup</Index><Index Subkey="totally symmetric">quasigroup</Index>. Totally symmetric quasigroups are precisely the quasigroups satisfying <M>xy=x\backslash y = x/y</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsIdempotent" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an idempotent quasigroup.</Returns>
+<Description>A quasigroup is <Emph>idempotent</Emph><Index>idempotent quasigroup</Index><Index Subkey="idempotent">quasigroup</Index> if it satisfies <M>x^2=x</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsSteinerQuasigroup" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a Steiner quasigroup.</Returns>
+<Description>A totally symmetric idempotent quasigroup is called a <Emph>Steiner quasigroup</Emph><Index>Steiner quasigroup</Index><Index Subkey="Steiner">quasigroup</Index>.</Description>
+</ManSection>
+
+<ManSection>
+<Description>A quasigroup <M>Q</M> is <Emph>unipotent</Emph><Index>unipotent quasigroup</Index><Index Subkey="unipotent">quasigroup</Index> if it satisfies <M>x^2=y^2</M> for every <M>x</M>, <M>y</M> in <M>Q</M>.</Description>
+<Prop Name="IsUnipotent" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a unipotent quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>IsLeftDistributive, IsRightDistributive, IsDistributive</Heading>
+<Prop Name="IsLeftDistributive" Arg="Q"/>
+<Prop Name="IsRightDistributive" Arg="Q"/>
+<Prop Name="IsDistributive" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left distributive quasigroup, resp. a right distributive quasigroup, resp. a distributive quasigroup.</Returns>
+<Description>A quasigroup is <Emph>left distributive</Emph><Index Subkey="left distributive">quasigroup</Index><Index Subkey="left">distributive quasigroup</Index> if it satisfies <M>x(yz) = (xy)(xz)</M>, <Emph>right distributive</Emph><Index Subkey="right distributive">quasigroup</Index><Index Subkey="right">distributive quasigroup</Index> if it satisfies <M>(xy)z = (xz)(yz)</M>, and <Emph>distributive</Emph><Index Subkey="distributive">quasigroup</Index><Index>distributive quasigroup</Index> if it is both left distributive and right distributive.
+<P/><B>Remark:</B> In order to be compatible with &GAP;s terminology, we also support the synonyms <Code>IsLDistributive</Code> and <Code>IsRDistributive</Code> of <Code>IsLeftDistributive</Code> and <Code>IsRightDistributive</Code>, respectively.</Description>
+</ManSection>
+
+<ManSection>
+<Heading>IsEntropic and IsMedial</Heading>
+<Prop Name="IsEntropic" Arg="Q"/>
+<Prop Name="IsMedial" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an entropic (aka medial) quasigroup.</Returns>
+<Description>A quasigroup is <Emph>entropic</Emph><Index>entropic quasigroup</Index><Index Subkey="entropic">quasigroup</Index> or <Emph>medial</Emph><Index>medial quasigroup</Index><Index Subkey="medial">quasigroup</Index> if it satisfies the identity <M>(xy)(uv) = (xu)(yv)</M>.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Loops of Bol-Moufang Type ---------------------------------------------------------------- -->
+
+<Section Label="Sec:LoopsOfBolMoufangType"> <Heading>Loops of Bol Moufang Type</Heading>
+
+Following <Cite Key="Fe"/> and <Cite Key="PhiVoj"/>, a variety of loops is said to be of <Emph>Bol-Moufang type</Emph><Index Subkey="of Bol-Moufang type">loop</Index> if it is defined by a single <Emph>identity of Bol-Moufang type</Emph><Index Subkey="of Bol-Moufang type">identity</Index>, i.e., by an identity that contains the same 3 variables on both sides, exactly one of the variables occurs twice on both sides, and the variables occur in the same order on both sides.
+
+<P/>It is proved in <Cite Key="PhiVoj"/> that there are 13 varieties of nonassociative loops of Bol-Moufang type. These are:
+<List>
+        <Item><Emph>left alternative loops</Emph><Index Subkey="left">alternative loop</Index><Index Subkey="left alternative">loop</Index> defined by <M>x(xy) = (xx)y</M>,</Item>
+        <Item><Emph>right alternative loops</Emph><Index Subkey="right">alternative loop</Index><Index Subkey="right alternative">loop</Index> defined by <M>x(yy) = (xy)y</M>,</Item>
+        <Item><Emph>left nuclear square loops</Emph><Index Subkey="left">nuclear square loop</Index><Index Subkey="left nuclear square">loop</Index> defined by <M>(xx)(yz) = ((xx)y)z</M>,</Item>
+        <Item><Emph>middle nuclear square loops</Emph><Index Subkey="middle">nuclear square loop</Index><Index Subkey="middle nuclear square">loop</Index>defined by <M>x((yy)z) = (x(yy))z</M>,</Item>
+        <Item><Emph>right nuclear square loops</Emph><Index Subkey="right">nuclear square loop</Index><Index Subkey="right nuclear square">loop</Index> defined by <M>x(y(zz)) = (xy)(zz)</M>,</Item>
+        <Item><Emph>flexible loops</Emph><Index>flexible loop</Index><Index Subkey="flexible">loop</Index> defined by   <M>x(yx) = (xy)x</M>,</Item>
+        <Item><Emph>left Bol loops</Emph><Index Subkey="left">Bol loop</Index><Index Subkey="left Bol">loop</Index> defined by <M>x(y(xz)) = (x(yx))z</M>, always left alternative,</Item>
+        <Item><Emph>right Bol loops</Emph><Index Subkey="right">Bol loop</Index><Index Subkey="right Bol">loop</Index> defined by <M>x((yz)y) = ((xy)z)y</M>, always right alternative,</Item>
+        <Item><Emph>LC loops</Emph><Index>LC loop</Index><Index Subkey="LC">loop</Index> defined by <M>(xx)(yz) = (x(xy))z</M>, always left alternative, left nuclear square and middle nuclear square,</Item>
+        <Item><Emph>RC loops</Emph><Index>RC loop</Index><Index Subkey="RC">loop</Index> defined by <M>x((yz)z) = (xy)(zz)</M>, always right alternative, right nuclear square and middle nuclear square,</Item>
+        <Item><Emph>Moufang loops</Emph><Index>Moufang loop</Index><Index Subkey="Moufang">loop</Index> defined by <M>(xy)(zx) = (x(yz))x</M>, always flexible, left Bol and right Bol,</Item>
+        <Item><Emph>C loops</Emph><Index>C loop</Index><Index Subkey="C">loop</Index> defined by <M>x(y(yz)) = ((xy)y)z</M>, always LC and RC,</Item>
+        <Item><Emph>extra loops</Emph><Index>extra loop</Index><Index Subkey="extra">loop</Index> defined by <M>x(y(zx)) = ((xy)z)x</M>, always Moufang and C.</Item>
+</List>
+
+<P/>Note that although some of the defining identities are not of Bol-Moufang type, they are equivalent to a Bol-Moufang identity. Moreover, many varieties of loops of Bol-Moufang type can be defined by one of several equivalent identities of Bol-Moufang type.
+
+<P/>There are also several varieties related to loops of Bol-Moufang type. A loop is said to be <Emph>alternative</Emph><Index>alternative loop</Index><Index Subkey="alternative">loop</Index> if it
+is both left alternative and right alternative. A loop is <Emph>nuclear square</Emph><Index>nuclear square loop</Index><Index Subkey="nuclear square">loop</Index> if it is left nuclear square, middle nuclear square and right nuclear square.
+
+<ManSection>
+<Prop Name="IsExtraLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an extra loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsMoufangLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a Moufang loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsCLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a C loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsLeftBolLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left Bol loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsRightBolLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a right Bol loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsLCLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an LC loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsRCLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an RC loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsLeftNuclearSquareLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left nuclear square loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsMiddleNuclearSquareLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a middle nuclear square loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsRightNuclearSquareLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a right nuclear square loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsNuclearSquareLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a nuclear square loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsFlexible" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a flexible quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsLeftAlternative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left alternative quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsRightAlternative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a right alternative quasigroup.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsAlternative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an alternative quasigroup.<Br/></Returns>
+</ManSection>
+
+<P/>While listing the varieties of loops of Bol-Moufang type, we have also listed all inclusions among them. These inclusions are built into <Package>LOOPS</Package> as filters.
+
+<Br/><P/>The following trivial example shows some of the implications and the naming
+conventions of <Package>LOOPS</Package> at work:
+
+<Example>
+gap> L := LoopByCayleyTable( [ [ 1, 2 ], [ 2, 1 ] ] );
+&lt;loop of order 2>
+gap> [ IsLeftBolLoop( L ), L ]
+[ true, &lt;left Bol loop of order 2> ]
+gap> [ HasIsLeftAlternativeLoop( L ), IsLeftAlternativeLoop( L ) ];
+[ true, true ]
+gap> [ HasIsRightBolLoop( L ), IsRightBolLoop( L ) ];
+[ false, true ]
+gap> L;
+&lt;Moufang loop of order 2>
+gap> [ IsAssociative( L ), L ];
+[ true, &lt;associative loop of order 2> ]
+</Example>
+
+<P/>The analogous terminology for quasigroups of Bol-Moufang type is not standard yet, and hence is not supported in <Package>LOOPS</Package> except for the situations explicitly noted above.
+
+</Section>
+
+<!-- Section:  Power Alternative Loops ------------------------------------------------------------------- -->
+
+<Section Label="Sec:PowerAlternativeLoops"> <Heading>Power Alternative Loops</Heading>
+
+A loop is <Emph>left power alternative</Emph><Index Subkey="left">power alternative loop</Index><Index Subkey="left power alternative">loop</Index> if it is power associative and satisfies <M>x^n(x^m y) = x^{n+m}y</M> for all elements <M>x</M>, <M>y</M> and all integers <M>m</M>, <M>n</M>. Similarly, a loop is <Emph>right power alternative</Emph><Index Subkey="right">power alternative loop</Index><Index Subkey="right power alternative">loop</Index> if it is power associative and satisfies <M>(x y^n)y^m = xy^{n+m}</M> for all elements <M>x</M>, <M>y</M> and all integers <M>m</M>, <M>n</M>. A loop is <Emph>power alternative</Emph><Index>power alternative loop</Index><Index Subkey="power alternative">loop</Index> if it is both left power alternative and right power alternative.
+
+<P/>Left power alternative loops are left alternative and have the left inverse property. Left Bol loops and LC loops are left power alternative.
+
+<ManSection>
+<Heading>IsLeftPowerAlternative, IsRightPowerAlternative and IsPowerAlternative</Heading>
+<Prop Name="IsLeftPowerAlternative" Arg="Q"/>
+<Prop Name="IsRightPowerAlternative" Arg="Q"/>
+<Prop Name="IsPowerAlternative" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left power alternative loop, resp. a right power alternative loop, resp. a power alternative loop.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Conjugacy Closed Loops and Related Properties --------------------------------------------- -->
+
+<Section Label="Sec:ConjugacyClosedEtc"> <Heading>Conjugacy Closed Loops and Related Properties</Heading>
+
+A loop <M>Q</M> is <Emph>left conjugacy closed</Emph><Index Subkey="left">conjugacy closed loop</Index><Index Subkey="left conjugacy closed">loop</Index> if the set of left translations of <M>Q</M> is closed under conjugation (by itself). Similarly, a loop <M>Q</M> is <Emph>right conjugacy closed</Emph><Index Subkey="right">conjugacy closed loop</Index><Index Subkey="right conjugacy closed">loop</Index> if the set of right translations of <M>Q</M> is closed under conjugation. A loop is <Emph>conjugacy closed</Emph><Index>conjugacy closed loop</Index><Index Subkey="conjugacy closed">loop</Index> if it is both left conjugacy closed and right conjugacy closed. It is common to refer to these loops as LCC, RCC, and CC loops, respectively.
+
+<P/>The equivalence LCC <M>+</M> RCC <M>=</M> CC is built into <Package>LOOPS</Package>.
+
+<ManSection>
+<Prop Name="IsLCCLoop" Arg="Q"/>
+<Prop Name="IsLeftConjugacyClosedLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left conjugacy closed loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsRCCLoop" Arg="Q"/>
+<Prop Name="IsRightConjugacyClosedLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a right conjugacy closed loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsCCLoop" Arg="Q"/>
+<Prop Name="IsConjugacyClosedLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a conjugacy closed loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsOsbornLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an Osborn loop.</Returns>
+<Description>A loop is <Emph>Osborn</Emph><Index>Osborn loop</Index><Index Subkey="Osborn">loop</Index> if it satisfies <M>x(yz\cdot x)=(x^\lambda\backslash y)(zx)</M>. Both Moufang loops and CC loops are Osborn.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Automorphic Loops ------------------------------------------------------------------------ -->
+
+<Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
+
+A loop <M>Q</M> whose all left (resp. middle, resp. right) inner mappings are automorphisms of <M>Q</M> is known as a <Emph>left automorphic loop</Emph><Index Subkey="left">automorphic loop</Index><Index Subkey="left automorphic">loop</Index> (resp. <Emph>middle automorphic loop</Emph><Index Subkey="middle">automorphic loop</Index><Index Subkey="middle automorphic">loop</Index>, resp. <Emph>right automorphic loop</Emph><Index Subkey="right">automorphic loop</Index><Index Subkey="right automorphic">loop</Index>).
+
+<P/>A loop <M>Q</M> is an <Emph>automorphic loop</Emph><Index>automorphic loop</Index><Index Subkey="automorphic">loop</Index> if all inner mappings of <M>Q</M> are automorphisms of <M>Q</M>.
+
+<P/>Automorphic loops are also known as <Emph>A loops</Emph>, and similar terminology exists for left, right and middle automorphic loops.
+
+<P/>Diassociative automorphic loops are Moufang by <Cite Key="KiKuPh"/>. See the built-in filters for additional properties of automorphic loops.
+
+<ManSection>
+<Prop Name="IsLeftAutomorphicLoop" Arg="Q"/>
+<Prop Name="IsLeftALoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left automorphic loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsMiddleAutomorphicLoop" Arg="Q"/>
+<Prop Name="IsMiddleALoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a middle automorphic loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsRightAutomorphicLoop" Arg="Q"/>
+<Prop Name="IsRightALoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a right automorphic loop.</Returns>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsAutomorphicLoop" Arg="Q"/>
+<Prop Name="IsALoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is an automorphic loop.</Returns>
+</ManSection>
+
+<P/><B>Remark:</B> Be careful not to confuse <Code>IsALoop</Code> and <Code>IsLoop</Code>.
+
+</Section>
+
+<!-- Section:  Additional Varieties of Loops --------------------------------------------------------------- -->
+
+<Section Label="Sec:AdditionalVarietiesOfLoops"> <Heading>Additonal Varieties of Loops</Heading>
+
+<ManSection>
+<Prop Name="IsCodeLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a code loop.</Returns>
+<Description>A <Emph>code loop</Emph><Index>code loop</Index><Index Subkey="code">loop</Index> is a Moufang 2-loop with a Frattini subloop of order 1 or 2. Code loops are extra and conjugacy closed.</Description>
+</ManSection>
+
+<ManSection>
+<Prop Name="IsSteinerLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a Steiner loop.</Returns>
+<Description>A <Emph>Steiner loop</Emph><Index>Steiner loop</Index><Index Subkey="Steiner">loop</Index> is an inverse property loop of exponent 2. Steiner loops are commutative.</Description>
+</ManSection>
+
+<ManSection>
+<Heading>IsLeftBruckLoop and IsLeftKLoop</Heading>
+<Prop Name="IsLeftBruckLoop" Arg="Q"/>
+<Prop Name="IsLeftKLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a left Bruck loop (aka left K loop).</Returns>
+<Description>A left Bol loop with the automorphic inverse property is known as a <Emph>left Bruck loop</Emph><Index Subkey="left">Bruck loop</Index><Index Subkey="left Bruck">loop</Index> or a <Emph>left K loop</Emph><Index Subkey="left">K loop</Index><Index Subkey="left K">loop</Index>.</Description>
+</ManSection>
+
+<ManSection>
+<Heading>IsRightBruckLoop and IsRightKLoop</Heading>
+<Prop Name="IsRightBruckLoop" Arg="Q"/>
+<Prop Name="IsRightKLoop" Arg="Q"/>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a right Bruck loop (aka right K loop).</Returns>
+<Description>A right Bol loop with the automorphic inverse property is known as a <Emph>right Bruck loop</Emph><Index Subkey="right">Bruck loop</Index><Index Subkey="right Bruck">loop</Index> or a <Emph>right K loop</Emph><Index Subkey="right">K loop</Index><Index Subkey="right K">loop</Index>.</Description>
+</ManSection>
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: Specific Methods +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:SpecificMethods"> <Heading>Specific Methods</Heading>
+
+This chapter describes methods of <Package>LOOPS</Package> that apply to specific classes of loops, mostly Bol and Moufang loops.
+
+<!-- Section:  Core Methods for Bol Loops ---------------------------------------------------------------- -->
+
+<Section Label="Sec:CoreMethodsForBolLoops"> <Heading>Core Methods for Bol Loops</Heading>
+
+<ManSection>
+<Heading>AssociatedLeftBruckLoop and AssociatedRightBruckLoop</Heading>
+<Attr Name="AssociatedLeftBruckLoop" Arg="Q"/>
+<Attr Name="AssociatedRightBruckLoop" Arg="Q"/>
+<Returns>The left (resp. right) Bruck loop associated with a uniquely 2-divisible left (resp. right) Bol loop <Arg>Q</Arg>.</Returns>
+<Description>Let <M>Q</M> be a left Bol loop<Index Subkey="left Bol">loop</Index><Index Subkey="left">Bol loop</Index> such that the mapping <M>x\mapsto x^2</M> is a permutation of <M>Q</M>. Define a new operation <M>*</M> on <M>Q</M> by <M>x*y =(x(y^2x))^{1/2}</M>. Then <M>(Q,*)</M> is a left Bruck loop, called the <Emph>associated left Bruck loop</Emph><Index Subkey="associated left">Bruck loop</Index><Index Subkey="associated left Bruck">loop</Index>. (In fact, Bruck used the isomorphic operation <M>x*y = x^{1/2}(yx^{1/2})</M> instead. Our approach is more natural in the sense that the left Bruck loop associated with a left Bruck loop is identical to the original loop.) Associated right Bruck loops are defined dually.</Description>
+</ManSection>
+
+<ManSection>
+<Oper Name="IsExactGroupFactorization" Arg="G, H1, H2"/>
+<Returns><Code>true</Code> if (<Arg>G</Arg>, <Arg>H1</Arg>, <Arg>H2</Arg>) is an exact group factorization.</Returns>
+<Description>Many right Bol loops can be constructed from exact group factorizations. The triple <M>(G,H_1,H_2)</M> is an <Emph>exact group factorization</Emph><Index>exact group factorization</Index> if <M>H_1</M>, <M>H_2</M> are subgroups of <M>G</M> such that <M>H_1H_2=G</M> and <M>H_1\cap H_2=1</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Description>If <M>(G,H_1,H_2)</M> is an exact group factorization then <M>(G\times G, H_1\times H_2, T)</M> with <M>T=\{(x,x^{-1})| x\in G\}</M> is a loop folder that gives rise to a right Bol loop.</Description>
+<Func Name="RightBolLoopByExactGroupFactorization" Arg="arg"/>
+<Returns>The right Bol loop constructed from an exact group factorization. The argument <Arg>arg</Arg> can either be an exact group factorization <Code>[G,H1,H2]</Code>, or the tuple <Code>[G,H]</Code>, where <Code>H</Code> is a regular subgroup of <Code>G</Code>. We also allow <Arg>arg</Arg> to be separate entries rather than a list of entries.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Moufang Modifications --------------------------------------------------------------------- -->
+
+<Section Label="Sec:MoufangModifications"> <Heading>Moufang Modifications</Heading>
+
+Dr&#225;pal <Cite Key="DrapalCD"/> described two prominent families of extensions of Moufang loops. It turns out that these extensions suffice to obtain all nonassociative Moufang loops of order at most 64 if one starts with so-called Chein loops. We call the two constructions <Emph>Moufang modifications</Emph><Index Subkey="Moufang">modification</Index>. The library of Moufang loops included in <Package>LOOPS</Package> is based on Moufang modifications. See <Cite Key="DrVo"/> for details.
+
+<ManSection>
+<Func Name="LoopByCyclicModification" Arg="Q, S, a, h"/>
+<Returns>The cyclic modification of a Moufang loop <Arg>Q</Arg> obtained from <Arg>S</Arg>, <Arg>a</Arg><M>=\alpha</M> and <Arg>h</Arg> described below.</Returns>
+<Description>Assume that <M>Q</M> is a Moufang loop with a normal subloop <M>S</M> such that <M>Q/S</M> is a cyclic group of order <M>2m</M>. Let <M>h\in S\cap Z(L)</M>. Let <M>\alpha</M> be a generator of <M>Q/S</M> and write <M>Q = \bigcup_{i\in M} \alpha^i</M>, where <M>M=\{-m+1</M>, <M>\dots</M>, <M>m\}</M>. Let <M>\sigma:\mathbb{Z}\to M</M> be defined by <M>\sigma(i)=0</M> if <M>i\in M</M>, <M>\sigma(i)=1</M> if <M>i>m</M>, and <M>\sigma(i)=-1</M> if <M>i&lt;-m+1</M>. Introduce a new multiplication <M>*</M> on <M>Q</M> by <M>x*y = xyh^{\sigma(i+j)}</M>, where <M>x\in \alpha^i</M>, <M>y\in\alpha^j</M>, <M>i\in M</M> and <M>j\in M</M>. Then <M>(Q,*)</M> is a Moufang loop, a <Emph>cyclic modification</Emph><Index Subkey="cyclic">modification</Index> of <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Func Name="LoopByDihedralModification" Arg="Q, S, e, f, h"/>
+<Returns>The dihedral modification of a Moufang loop <Arg>Q</Arg> obtained from <Arg>S</Arg>, <Arg>e</Arg>, <Arg>f</Arg> and <Arg>h</Arg> as described below.</Returns>
+<Description>Let <M>Q</M> be a Moufang loop with a normal subloop <M>S</M> such that <M>Q/S</M> is a dihedral group of order <M>4m</M>, with <M>m\ge 1</M>. Let <M>M</M> and <M>\sigma</M> be
+defined as in the cyclic case. Let <M>\beta</M>, <M>\gamma</M> be two involutions of <M>Q/S</M> such that <M>\alpha=\beta\gamma</M> generates a cyclic subgroup of <M>Q/S</M> of order <M>2m</M>. Let <M>e\in\beta</M> and <M>f\in\gamma</M> be arbitrary. Then <M>Q</M> can be written as a disjoint union <M>Q=\bigcup_{i\in M}(\alpha^i\cup e\alpha^i)</M>, and also <M>Q=\bigcup_{i\in M}(\alpha^i\cup \alpha^if)</M>. Let <M>G_0=\bigcup_{i\in M}\alpha^i</M>, and <M>G_1=L\setminus G_0</M>. Let <M>h\in S\cap N(L)\cap Z(G_0)</M>. Introduce a new multiplication <M>*</M> on <M>Q</M> by <M>x*y = xyh^{(-1)^r\sigma(i+j)}</M>, where <M>x\in\alpha^i\cup e\alpha^i</M>, <M>y\in\alpha^j\cup \alpha^jf</M>, <M>i\in M</M>, <M>j\in M</M>, <M>y\in G_r</M> and <M>r\in\{0,1\}</M>. Then <M>(Q,*)</M> is a Moufang loop, a <Emph>dihedral modification</Emph><Index Subkey="dihedral">modification</Index> of <M>Q</M>.</Description>
+</ManSection>
+
+<ManSection>
+<Func Name="LoopMG2" Arg="G"/>
+<Returns>The Chein loop constructed from a group <Arg>G</Arg>.</Returns>
+<Description>Let <M>G</M> be a group. Let <M>\overline{G}=\{\overline{g}|g\in G\}</M> be a disjoint copy of elements of <M>G</M>. Define multiplication <M>*</M> on <M>Q=G\cup \overline{G}</M> by <M>g*h = gh</M>, <M>g*\overline{h}=\overline{hg}</M>, <M>\overline{g}*h = \overline{gh^{-1}}</M> and <M>\overline{g}*\overline{h}=h^{-1}g</M>, where <M>g</M>, <M>h\in G</M>. Then <M>(Q,*)=M(G,2)</M> is a so-called <Emph>Chein loop</Emph><Index>Chein loop</Index><Index Subkey="Chein">loop</Index>, which is always a Moufang loop, and it is associative if and only if <M>G</M> is commutative.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Triality for Moufang Loops ------------------------------------------------------------------ -->
+
+<Section Label="Sec:TrialityForMoufangLoops"> <Heading>Triality for Moufang Loops</Heading>
+
+Let <M>G</M> be a group and <M>\sigma</M>, <M>\rho</M> be automorphisms of <M>G</M> satisfying <M>\sigma^2 = \rho^3 = (\sigma \rho)^2 = 1</M>. Below we write automorphisms as exponents and <M>[g,\sigma]</M> for <M>g^{-1}g^\sigma</M>. We say that the triple <M>(G,\rho,\sigma)</M> is a <Emph>group with triality</Emph><Index>group with triality</Index> if <M>[g, \sigma] [g,\sigma]^\rho [g,\sigma]^{\rho^2} =1</M> holds for all <M>g \in G</M>. It is known that one can associate a group with triality <M>(G,\rho,\sigma)</M> in a canonical way with a Moufang loop <M>Q</M>. See <Cite Key="NaVo2003"/> for more details.
+
+<P/>For any Moufang loop <M>Q</M>, we can calculate the triality group as a permutation group acting on <M>3|Q|</M> points. If the multiplication group of <M>Q</M> is polycyclic, then we can also represent the triality group as a pc group. In both cases, the automorphisms <M>\sigma</M> and <M>\rho</M> are in the same family as the elements of <M>G</M>.
+
+<ManSection>
+<Func Name="TrialityPermGroup" Arg="Q"/>
+<Returns>A record with components <Code>G</Code>, <Code>rho</Code>, <Code>sigma</Code>, where <Code>G</Code> is the canonical group with triality associated with a Moufang loop <Arg>Q</Arg>, and <Code>rho</Code>, <Code>sigma</Code> are the corresponding triality automorphisms.</Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="TrialityPcGroup" Arg="Q"/>
+<Description>This is a variation of <Code>TrialityPermGroup</Code> in which <Code>G</Code> is returned as a pc group.</Description>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Realizing Groups and Multiplication Groups of Loops ------------------------------------------ -->
+
+<Section Label="Sec:RealizingGroupsEtc"> <Heading>Realizing Groups as Multiplication Groups of Loops</Heading>
+
+It is difficult to determine which groups can occur as multiplication groups of loops.
+
+<P/>The following operations search for loops whose multiplication groups are contained within a specified transitive permutation group <Arg>G</Arg>. In all these operations, one can speed up the search by increasing the optional argument <Arg>depth</Arg>, the price being a much higher memory consumption. The argument <Arg>depth</Arg> is optimally chosen if in the permutation group <Arg>G</Arg> there are not many permutations fixing <Arg>depth</Arg> elements. It is safe to omit the argument or set it equal to 2.
+
+<P/>The optional argument <Arg>infolevel</Arg> determines the amount of information displayed during the search. With <Code><Arg>infolevel</Arg>=0</Code>, no information is provided. With <Code><Arg>infolevel</Arg>=1</Code>, you get some information on timing and hits. With <Code><Arg>infolevel</Arg>=2</Code>, the results are printed as well.
+
+<ManSection>
+<Oper Name="AllLoopTablesInGroup" Arg="G[, depth[, infolevel]]"/>
+<Returns>All Cayley tables of loops whose multiplication group is contained in the transitive permutation group <Arg>G</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="AllProperLoopTablesInGroup" Arg="G[, depth[, infolevel]]"/>
+<Returns>All Cayley tables of nonassociative loops whose multiplication group is contained in the transitive permutation group <Arg>G</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="OneLoopTableInGroup" Arg="G[, depth[, infolevel]]"/>
+<Returns>A Cayley table of a loop whose multiplication group is contained in the transitive permutation group <Arg>G</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="OneProperLoopTableInGroup" Arg="G[, depth[, infolevel]]"/>
+<Returns>A Cayley table of a nonassociative loop whose multiplication group is contained in the transitive permutation group <Arg>G</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="AllLoopsWithMltGroup" Arg="G[, depth[, infolevel]]"/>
+<Returns>A list of all loops (given as sections) whose multiplication group is equal to the transitive permutation group <Arg>G</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="OneLoopWithMltGroup" Arg="G[, depth[, infolevel]]"/>
+<Returns>One loop (given as a section) whose multiplication group is equal to the transitive permutation group <Arg>G</Arg>.</Returns>
+</ManSection>
+
+<Example>
+gap> g:=PGL(3,3);
+Group([ (6,7)(8,11)(9,13)(10,12), (1,2,5,7,13,3,8,6,10,9,12,4,11) ])
+gap> a:=AllLoopTablesInGroup(g,3,0);; Size(a);
+56
+gap> a:=AllLoopsWithMltGroup(g,3,0);; Size(a);
+52
+</Example>
+
+</Section>
+
+</Chapter>
+
+<!-- CHAPTER: Libraries of Loops +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:LibrariesOfLoops"> <Heading>Libraries of Loops</Heading>
+
+Libraries of small loops form an integral part of <Package>LOOPS</Package>. The loops are stored in libraries up to isomorphism and, sometimes, up to isotopism.
+
+<!-- Section:  A Typical Library -------------------------------------------------------------------------- -->
+
+<Section Label="Sec:ATypicalLibrary"> <Heading>A Typical Library</Heading>
+
+A library named <Emph>my Library</Emph> is stored in file <File>data/mylibrary.tbl</File>, and the corresponding data structure is named <Code>LOOPS_my_library_data</Code>. For example, when the library is called <Emph>left Bol</Emph>, the corresponding data file is called <File>data/leftbol.tbl</File> and the corresponding data structure is named <Code>LOOPS_left_bol_data</Code>.
+
+<P/>In most cases, the array <Code>LOOPS_my_library_data</Code> consists of three lists:
+<List>
+        <Item><Code>LOOPS_my_library_data[1]</Code> is a list of orders for which there is at least one loop in the library,</Item>
+        <Item><Code>LOOPS_my_library_data[2][k]</Code> is the number of loops of order <Code>LOOPS_my_library_data[1][k]</Code> in the library,</Item>
+        <Item><Code>LOOPS_my_library_data[3][k][s]</Code> contains data necessary to produce the  <Code>s</Code>th loop of order <Code>LOOPS_my_library_data[1][k]</Code> in the library.</Item>
+</List>
+The format of <Code>LOOPS_my_library_data[3]</Code> depends heavily on the particular library and is not standardized in any way. The data is often coded to save space.
+
+<ManSection>
+<Func Name="LibraryLoop" Arg="libname, n, m"/>
+<Returns>The <Arg>m</Arg>th loop of order <Arg>n</Arg> from the library named <Arg>libname</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="MyLibraryLoop" Arg="n, m"/>
+<Description>This is a template function that retrieves the <Arg>m</Arg>th loop of order <Arg>n</Arg> from the library named <Emph>my library</Emph>.</Description>
+</ManSection>
+
+<P/>For example, the <Arg>m</Arg>th left Bol loop of order <Arg>n</Arg> is obtained via <Code>LeftBolLoop(<Arg>n</Arg>,<Arg>m</Arg>)</Code> or via <Code>LibraryLoop("left Bol",<Arg>n</Arg>,<Arg>m</Arg>)</Code>.
+
+<ManSection>
+<Func Name="DisplayLibraryInfo" Arg="libname"/>
+<Returns>Brief information about the loops contained in the library named <Arg>libname</Arg>.<Br/></Returns>
+</ManSection>
+
+<P/>We are now going to describe the individual libraries.
+
+</Section>
+
+<!-- Section:  Left Bol Loops and Right Bol Loops ---------------------------------------------------------- -->
+
+<Section Label="Sec:LeftBolLoopsEtc"> <Heading>Left Bol Loops and Right Bol Loops</Heading>
+
+The library named <Emph>left Bol</Emph> contains all nonassociative left Bol loops of order less than 17, including Moufang loops, as well as all left Bol loops of order <M>pq</M> for primes <M>p>q>2</M>. There are 6 such loops of order 8, 1 of order 12, 2 of order 15, 2038 of order 16, and <M>(p+q-4)/2</M> of order <M>pq</M>.
+
+<P/>The classification of left Bol loops of order 16 was first accomplished by Moorhouse <Cite Key="Mo"/>. Our library was generated independently and it agrees with Moorhouse's results. The left Bol loops of order <M>pq</M> were classified in <Cite Key="KiNaVo2015"/>.
+
+<ManSection>
+<Func Name="LeftBolLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th left Bol loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="RightBolLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th right Bol loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+<P/><B>Remark:</B> Only left Bol loops are stored in the library. Right Bol loops are retrieved by calling <Code>Opposite</Code> on left Bol loops.
+
+</Section>
+
+<!-- Section:  Moufang Loops ---------------------------------------------------------------------------- -->
+
+<Section Label="Sec:MoufangLoops"> <Heading>Moufang Loops</Heading>
+
+The library named <Emph>Moufang</Emph> contains all nonassociative Moufang loops of order <M>n\le 64</M> and <M>n\in\{81,243\}</M>.
+
+<ManSection>
+<Func Name="MoufangLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th Moufang loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+<P/>For <M>n\le 63</M>, our catalog numbers coincide with those of Goodaire et al. <Cite Key="Go"/>. The classification of Moufang loops of order 64 and 81 was carried out in <Cite Key="NaVo2007"/>. The classification of Moufang loops of order 243 was carried out by Slattery and Zenisek <Cite Key="SlZe2011"/>.
+
+<P/>The extent of the library is summarized below:
+<Display>
+\begin{array}{r|rrrrrrrrrrrrrrrrrr}
+        order&amp;12&amp;16&amp;20&amp;24&amp;28&amp;32&amp;36&amp;40&amp;42&amp;44&amp;48&amp;52&amp;54&amp;56&amp;60&amp;64&amp;81&amp;243\cr
+        loops&amp;1 &amp;5 &amp;1 &amp;5 &amp;1 &amp;71&amp;4 &amp;5 &amp;1 &amp;1 &amp;51&amp;1 &amp;2 &amp;4 &amp;5 &amp;4262&amp; 5 &amp;72
+\end{array}
+</Display>
+
+<P/>The <Emph>octonion loop</Emph><Index>octonion loop</Index><Index Subkey="octonion">loop</Index> of order 16 (i.e., the multiplication loop of the basis elements in the 8-dimensional standard real octonion algebra) can be obtained as <Code>MoufangLoop(16,3)</Code>.
+
+</Section>
+
+<!-- Section:  Code Loops ------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:CodeLoops"> <Heading>Code Loops</Heading>
+
+The library named <Emph>code</Emph> contains all nonassociative code loops of order less than 65. There are 5 such loops of order 16, 16 of order 32, and 80 of order 64, all Moufang. The library merely points to the corresponding Moufang loops. See <Cite Key="NaVo2007"/> for a classification of small code loops.
+
+<ManSection>
+<Func Name="CodeLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th code loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Steiner Loops ----------------------------------------------------------------------------- -->
+
+<Section Label="Sec:SteinerLoops"> <Heading>Steiner Loops</Heading>
+
+Here is how the libary named <Emph>Steiner</Emph> is described within <Package>LOOPS</Package>:
+
+<Example>
+gap> DisplayLibraryInfo( "Steiner" );
+The library contains all nonassociative Steiner loops of order less or equal to 16.
+It also contains the associative Steiner loops of order 4 and 8.
+------
+Extent of the library:
+   1 loop of order 4
+   1 loop of order 8
+   1 loop of order 10
+   2 loops of order 14
+   80 loops of order 16
+true
+</Example>
+
+<P/>Our labeling of Steiner loops of order 16 coincides with the labeling of Steiner triple systems of order 15 in <Cite Key="CoRo"/>.
+
+<ManSection>
+<Func Name="SteinerLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th Steiner loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Conjugacy Closed Loops ------------------------------------------------------------------- -->
+
+<Section Label="Sec:ConjugacyClosedLoops"> <Heading>Conjugacy Closed Loops</Heading>
+
+The library named <Emph>RCC</Emph> contains all nonassocitive right conjugacy closed loops of order <M>n\le 27</M> up to isomorphism. The data for the library was generated by Katharina Artic <Cite Key="Artic"/> who can also provide additional data for all right conjugacy closed loops of order <M>n\le 31</M>.
+
+<P/>Let <M>Q</M> be a right conjugacy closed loop, <M>G</M> its right multiplication group and <M>T</M> its right section. Then <M>\langle T\rangle = G</M> is a transitive group, and <M>T</M> is a union of conjugacy classes of <M>G</M>. Every right conjugacy closed loop of order <M>n</M> can therefore be represented as a union of certain conjugacy classes of a transitive group of degree <M>n</M>. This is how right conjugacy closed loops of order less than <M>28</M> are represented in <Package>LOOPS</Package>.
+
+The following table summarizes the number of right conjugacy closed loops of a given order up to isomorphism:
+<Display>
+\begin{array}{r|rrrrrrrrrrrrrrrr}
+        order &amp;6&amp; 8&amp;9&amp;10&amp; 12&amp;14&amp;15&amp;  16&amp;  18&amp;  20&amp;\cr
+        loops &amp;3&amp;19&amp;5&amp;16&amp;155&amp;97&amp; 17&amp;6317&amp;1901&amp;8248&amp;\cr
+        \hline
+        order &amp;21&amp;   22&amp;    24&amp; 25&amp;    26&amp;    27\cr
+        loops &amp;119&amp;10487&amp;471995&amp; 119&amp;151971&amp;152701
+\end{array}
+</Display>
+
+<ManSection>
+<Heading>RCCLoop and RightConjugacyClosedLoop</Heading>
+<Func Name="RCCLoop" Arg="n, m"/>
+<Func Name="RightConjugacyClosedLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th right conjugacy closed loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+<ManSection>
+<Heading>LCCLoop and LeftConjugacyClosedLoop</Heading>
+<Func Name="LCCLoop" Arg="n, m"/>
+<Func Name="LeftConjugacyClosedLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th left conjugacy closed loop of order <Arg>n</Arg> in the library.</Returns>
+<Description><B>Remark:</B> Only the right conjugacy closed loops are stored in the library. Left conjugacy closed loops are obtained from right conjugacy closed loops via <Code>Opposite</Code>.<Br/></Description>
+</ManSection>
+
+<P/>The library named <Emph>CC</Emph> contains all nonassociative conjugacy closed loops of order <M>n\le 27</M> and also of orders <M>2p</M> and <M>p^2</M> for all primes <M>p</M>.
+
+<P/>By results of Kunen <Cite Key="Kun"/>, for every odd prime <M>p</M> there are precisely 3 nonassociative conjugacy closed loops of order <M>p^2</M>. Cs&#246;rg&#337; and Dr&#225;pal <Cite Key="CsDr"/> described these 3 loops by multiplicative formulas on <M>\mathbb{Z}_{p^2}</M> and <M>\mathbb{Z}_p \times \mathbb{Z}_p</M> as follows:
+<List>
+        <Item>Case <M>m = 1</M>:Let <M>k</M> be the smallest positive integer relatively prime to <M>p</M> and such that <M>k</M> is a square modulo <M>p</M> (i.e., <M>k=1</M>). Define multiplication on <M>\mathbb{Z}_{p^2}</M> by <M>x\cdot y = x + y + kpx^2y</M>.</Item>
+        <Item>Case <M>m = 2</M>: Let <M>k</M> be the smallest positive integer relatively prime to <M>p</M> and such that <M>k</M> is not a square modulo <M>p</M>. Define multiplication on <M>\mathbb{Z}_{p^2}</M> by <M>x\cdot y = x + y + kpx^2y</M>.</Item>
+        <Item>Case <M>m = 3</M>: Define multiplication on <M>\mathbb{Z}_p \times \mathbb{Z}_p</M> by <M>(x,a)(y,b) = (x+y, a+b+x^2y )</M>.</Item>
+</List>
+
+<P/>Moreover, Wilson <Cite Key="Wi"/> constructed a nonassociative conjugacy closed loop of order <M>2p</M> for every odd prime <M>p</M>, and Kunen <Cite Key="Kun"/> showed that there are no other nonassociative conjugacy closed oops of this order. Here is the relevant multiplication formula on <M>\mathbb{Z}_2 \times \mathbb{Z}_p</M>: <M>(0,m)(0,n) = ( 0, m + n )</M>, <M>(0,m)(1,n) = ( 1, -m + n )</M>, <M>(1,m)(0,n) = ( 1, m + n)</M>, <M>(1,m)(1,n) = ( 0, 1 - m + n )</M>.
+
+<ManSection>
+<Heading>CCLoop and ConjugacyClosedLoop</Heading>
+<Func Name="CCLoop" Arg="n, m"/>
+<Func Name="ConjugacyClosedLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th conjugacy closed loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Small Loops ------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:SmallLoops"> <Heading>Small Loops</Heading>
+
+The library named <Emph>small</Emph> contains all nonassociative loops of order 5 and 6. There are 5 and 107 such loops, respectively.
+
+<ManSection>
+<Func Name="SmallLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Paige Loops ------------------------------------------------------------------------------- -->
+
+<Section Label="Sec:PaigeLoops"> <Heading>Paige Loops</Heading>
+
+<Emph>Paige loops</Emph><Index>Paige loop</Index><Index Subkey="Paige">loop</Index> are nonassociative finite simple Moufang loops. By <Cite Key="Li"/>, there is precisely one Paige loop for every finite field.
+
+<P/>The library named <Emph>Paige</Emph> contains the smallest nonassociative simple Moufang loop.
+
+<ManSection>
+<Func Name="PaigeLoop" Arg="q"/>
+<Returns>The Paige loop constructed over the finite field of order <Arg>q</Arg>. Only the case <Code><Arg>q</Arg>=2</Code> is implemented.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Nilpotent Loops ---------------------------------------------------------------------------- -->
+
+<Section Label="Sec:NilpotentLoops"> <Heading>Nilpotent Loops</Heading>
+
+The library named <Emph>nilpotent</Emph> contains all nonassociative nilpotent loops of order less than 12 up to isomorphism. There are 2 nonassociative nilpotent loops of order 6, 134 of order 8, 8 of order 9 and 1043 of order
+10.
+
+<P/>See <Cite Key="DaVo"/> for more on enumeration of nilpotent loops. For instance, there
+are 2623755 nilpotent loops of order 12, and 123794003928541545927226368 nilpotent loops of order 22.
+
+<ManSection>
+<Func Name="NilpotentLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th nilpotent loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Automorphic Loops ------------------------------------------------------------------------ -->
+
+<Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
+
+The library named <Emph>automorphic</Emph> contains all nonassociative automorphic loops of order less than 16 up to isomorphism. There is 1 such loop of order 6, 7 of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15.
+
+<ManSection>
+<Func Name="AutomorphicLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th automorphic loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Interesting Loops -------------------------------------------------------------------------- -->
+
+<Section Label="Sec:InterestingLoops"> <Heading>Interesting Loops</Heading>
+
+The library named <Emph>interesting</Emph> contains some loops that are illustrative in the theory of loops. At this point, the library contains a nonassociative loop of order 5, a nonassociative nilpotent loop of order 6, a non-Moufang left Bol loop of order 16, the loop of sedenions<Index>sedenion loop</Index><Index Subkey="sedenion">loop</Index> of order 32 (sedenions generalize octonions), and the unique nonassociative simple right Bol loop of order 96 and exponent 2.
+
+<ManSection>
+<Func Name="InterestingLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th interesting loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- Section:  Libraries of Loops up to Isotopism ---------------------------------------------------------- -->
+
+<Section Label="Sec:LibrariesOfLoopsUpToIsotopism"> <Heading>Libraries of Loops Up To Isotopism</Heading>
+
+For the library named <Emph>small</Emph> we also provide the corresponding library of loops up to isotopism.
+
+In general, given a library named <Emph>libname</Emph>, the corresponding library of loops up to isotopism is named <Emph>itp lib</Emph>, and the loops can be retrieved by the template <Code>ItpLibLoop(n,m)</Code>.
+
+<ManSection>
+<Func Name="ItpSmallLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th small loop of order <Arg>n</Arg> up to isotopism in the library.</Returns>
+</ManSection>
+
+<Example>
+gap> SmallLoop( 6, 14 );
+&lt;small loop 6/14>
+gap> ItpSmallLoop( 6, 14 );
+&lt;small loop 6/42>
+gap> LibraryLoop( "itp small", 6, 14 );
+&lt;small loop 6/42>
+</Example>
+
+<P/>Note that loops up to isotopism form a subset of the corresponding library of loops up to isomorphism. For instance, the above example shows that the 14th small loop of order 6 up to isotopism is in fact the 42nd small loop of order 6 up to isomorphism.
+
+</Section>
+
+</Chapter>
+
+</Body>
+
+<!-- APPENDIX: Files ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Appendix Label="Apx:Files"> <Heading>Files</Heading>
+
+Below is a list of all relevant files forming the <Package>LOOPS</Package> package. Some technical files are not included. A typical user will not need to know any of this information. All paths are relative to the <File>pkg/loops</File> folder.
+<Br/><Br/><File>../README.loops</File> (installation and usage instructions)
+<Br/><File>init.g</File> (declarations)
+<Br/><File>PackageInfo.g</File> (loading info for GAP 4.4)
+<Br/><File>read.g</File> (implementations)
+<Br/><File>data/automorphic.tbl</File> (library of automorphic loops)
+<Br/><File>data/cc.tbl</File> (library of conjugacy closed loops)
+<Br/><File>data/code.tbl</File> (library of code loops)
+<Br/><File>data/interesting.tbl</File> (library of interesting loops)
+<Br/><File>data/itp_small.tbl</File> (library of small loops up to isotopism)
+<Br/><File>data/leftbol.tbl</File> (library of left Bol loops)
+<Br/><File>data/moufang.tbl</File> (library of Moufang loops)
+<Br/><File>data/nilpotent.tbl</File> (library of small nilpotent loops)
+<Br/><File>data/rcc.tbl</File> (library of right conjugacy closed loops)
+<Br/><File>data/rcc/*.*</File> (additional files for the library of right conjugacy closed loops)
+<Br/><File>data/paige.tbl</File> (library of Paige loops)
+<Br/><File>data/small.tbl</File> (library of small loops)
+<Br/><File>data/steiner.tbl</File> (library of Steiner loops)
+<Br/><File>doc/*.*</File> (all documentation files)
+<Br/><File>doc/loops.xml</File> (the main documentation file for GAPDoc)
+<Br/><File>doc/loops.bib</File> (the main bibliography file for documentation)
+<Br/><File>gap/banner.g</File> (banner of LOOPS)
+<Br/><File>gap/bol_core_methods.gd .gi</File> (core methods for Bol loops)
+<Br/><File>gap/classes.gd .gi</File> (properties of quasigroups and loops)
+<Br/><File>gap/convert.gd .gi</File> (methods for data conversion and compression)
+<Br/><File>gap/core_methods.gd .gi</File> (core methods for quasigroups and loops)
+<Br/><File>gap/elements.gd .gi</File> (elements and basic arithmetic operations)
+<Br/><File>gap/examples.gd .gi</File> (methods for libraries of loops)
+<Br/><File>gap/extensions.gd .gi</File> (methods for extensions of loops)
+<Br/><File>gap/iso.gd .gi</File> (methods for isomorphisms and isotopisms of loops)
+<Br/><File>gap/memory.gd .gi</File> (memory management)
+<Br/><File>gap/mlt_search.gd .gi</File> (realizing groups as multiplication groups of loops)
+<Br/><File>gap/moufang_modifications.gd .gi</File> (methods for Moufang modifications)
+<Br/><File>gap/moufang_triality.gd .gi</File> (methods for triality of Moufang loops)
+<Br/><File>gap/quasigroups.gd .gi</File> (representing, creating and displaying quasigroups)
+<Br/><File>gap/random.gd .gi</File> (random quasigroups and loops)
+<Br/><File>tst/bol.tst</File> (test file for Bol loops)
+<Br/><File>tst/core_methods.tst</File> (test file for core methods)
+<Br/><File>tst/iso.tst</File> (test file for isomorphisms and automorphisms)
+<Br/><File>tst/lib.tst</File> (test file for libraries of loops, except Moufang loops)
+<Br/><File>tst/nilpot.tst</File> (test file for nilpotency and triality)
+<Br/><File>tst/testall.g</File> (batch for all tets files)
+
+</Appendix>
+
+<!-- APPENDIX: Filters ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Appendix Label="Apx:Filters"> <Heading>Filters</Heading>
+
+Many implications among properties of loops are built directly into <Package>LOOPS</Package>. A sizeable portion of these properties are of trivial character or are based on definitions (e.g., alternative loops <M>=</M> left alternative loops <M>+</M> right alternative loops). The remaining implications are theorems.
+
+<P/>All filters of <Package>LOOPS</Package> are summarized below, using the <Package>GAP</Package> convention that the property on the left is implied by the property (properties) on the right.
+<Br/><Br/>
+<Code>( IsExtraLoop, IsAssociative and IsLoop )</Code>
+<Br/><Code>( IsExtraLoop, IsCodeLoop )</Code>
+<Br/><Code>( IsCCLoop, IsCodeLoop )</Code>
+<Br/><Code>( HasTwosidedInverses, IsPowerAssociative )</Code>
+<Br/><Code>( IsPowerAlternative, IsDiassociative )</Code>
+<Br/><Code>( IsFlexible, IsDiassociative )</Code>
+<Br/><Code>( HasAntiautomorphicInverseProperty, HasAutomorphicInverseProperty and IsCommutative )</Code>
+<Br/><Code>( HasAutomorphicInverseProperty, HasAntiautomorphicInverseProperty and IsCommutative )</Code>
+<Br/><Code>( HasLeftInverseProperty, HasInverseProperty )</Code>
+<Br/><Code>( HasRightInverseProperty, HasInverseProperty )</Code>
+<Br/><Code>( HasWeakInverseProperty, HasInverseProperty )</Code>
+<Br/><Code>( HasAntiautomorphicInverseProperty, HasInverseProperty )</Code>
+<Br/><Code>( HasTwosidedInverses, HasAntiautomorphicInverseProperty )</Code>
+<Br/><Code>( HasInverseProperty, HasLeftInverseProperty and IsCommutative )</Code>
+<Br/><Code>( HasInverseProperty, HasRightInverseProperty and IsCommutative )</Code>
+<Br/><Code>( HasInverseProperty, HasLeftInverseProperty and HasRightInverseProperty )</Code>
+<Br/><Code>( HasInverseProperty, HasLeftInverseProperty and HasWeakInverseProperty )</Code>
+<Br/><Code>( HasInverseProperty, HasRightInverseProperty and HasWeakInverseProperty )</Code>
+<Br/><Code>( HasInverseProperty, HasLeftInverseProperty and HasAntiautomorphicInverseProperty )</Code>
+<Br/><Code>( HasInverseProperty, HasRightInverseProperty and HasAntiautomorphicInverseProperty )</Code>
+<Br/><Code>( HasInverseProperty, HasWeakInverseProperty and HasAntiautomorphicInverseProperty )</Code>
+<Br/><Code>( HasTwosidedInverses, HasLeftInverseProperty )</Code>
+<Br/><Code>( HasTwosidedInverses, HasRightInverseProperty )</Code>
+<Br/><Code>( HasTwosidedInverses, IsFlexible and IsLoop )</Code>
+<Br/><Code>( IsMoufangLoop, IsExtraLoop )</Code>
+<Br/><Code>( IsCLoop, IsExtraLoop )</Code>
+<Br/><Code>( IsExtraLoop, IsMoufangLoop and IsLeftNuclearSquareLoop )</Code>
+<Br/><Code>( IsExtraLoop, IsMoufangLoop and IsMiddleNuclearSquareLoop )</Code>
+<Br/><Code>( IsExtraLoop, IsMoufangLoop and IsRightNuclearSquareLoop )</Code>
+<Br/><Code>( IsLeftBolLoop, IsMoufangLoop )</Code>
+<Br/><Code>( IsRightBolLoop, IsMoufangLoop )</Code>
+<Br/><Code>( IsDiassociative, IsMoufangLoop )</Code>
+<Br/><Code>( IsMoufangLoop, IsLeftBolLoop and IsRightBolLoop )</Code>
+<Br/><Code>( IsLCLoop, IsCLoop )</Code>
+<Br/><Code>( IsRCLoop, IsCLoop )</Code>
+<Br/><Code>( IsDiassociative, IsCLoop and IsFlexible)</Code>
+<Br/><Code>( IsCLoop, IsLCLoop and IsRCLoop )</Code>
+<Br/><Code>( IsRightBolLoop, IsLeftBolLoop and IsCommutative )</Code>
+<Br/><Code>( IsLeftPowerAlternative, IsLeftBolLoop )</Code>
+<Br/><Code>( IsLeftBolLoop, IsRightBolLoop and IsCommutative )</Code>
+<Br/><Code>( IsRightPowerAlternative, IsRightBolLoop )</Code>
+<Br/><Code>( IsLeftPowerAlternative, IsLCLoop )</Code>
+<Br/><Code>( IsLeftNuclearSquareLoop, IsLCLoop )</Code>
+<Br/><Code>( IsMiddleNuclearSquareLoop, IsLCLoop )</Code>
+<Br/><Code>( IsRCLoop, IsLCLoop and IsCommutative )</Code>
+<Br/><Code>( IsRightPowerAlternative, IsRCLoop )</Code>
+<Br/><Code>( IsRightNuclearSquareLoop, IsRCLoop )</Code>
+<Br/><Code>( IsMiddleNuclearSquareLoop, IsRCLoop )</Code>
+<Br/><Code>( IsLCLoop, IsRCLoop and IsCommutative )</Code>
+<Br/><Code>( IsRightNuclearSquareLoop, IsLeftNuclearSquareLoop and IsCommutative )</Code>
+<Br/><Code>( IsLeftNuclearSquareLoop, IsRightNuclearSquareLoop and IsCommutative )</Code>
+<Br/><Code>( IsLeftNuclearSquareLoop, IsNuclearSquareLoop )</Code>
+<Br/><Code>( IsRightNuclearSquareLoop, IsNuclearSquareLoop )</Code>
+<Br/><Code>( IsMiddleNuclearSquareLoop, IsNuclearSquareLoop )</Code>
+<Br/><Code>( IsNuclearSquareLoop, IsLeftNuclearSquareLoop and IsRightNuclearSquareLoop</Code>
+<Br/><Code> and IsMiddleNuclearSquareLoop )</Code>
+<Br/><Code>( IsFlexible, IsCommutative )</Code>
+<Br/><Code>( IsRightAlternative, IsLeftAlternative and IsCommutative )</Code>
+<Br/><Code>( IsLeftAlternative, IsRightAlternative and IsCommutative )</Code>
+<Br/><Code>( IsLeftAlternative, IsAlternative )</Code>
+<Br/><Code>( IsRightAlternative, IsAlternative )</Code>
+<Br/><Code>( IsAlternative, IsLeftAlternative and IsRightAlternative )</Code>
+<Br/><Code>( IsLeftAlternative, IsLeftPowerAlternative )</Code>
+<Br/><Code>( HasLeftInverseProperty, IsLeftPowerAlternative )</Code>
+<Br/><Code>( IsPowerAssociative, IsLeftPowerAlternative )</Code>
+<Br/><Code>( IsRightAlternative, IsRightPowerAlternative )</Code>
+<Br/><Code>( HasRightInverseProperty, IsRightPowerAlternative )</Code>
+<Br/><Code>( IsPowerAssociative, IsRightPowerAlternative )</Code>
+<Br/><Code>( IsLeftPowerAlternative, IsPowerAlternative )</Code>
+<Br/><Code>( IsRightPowerAlternative, IsPowerAlternative )</Code>
+<Br/><Code>( IsAssociative, IsLCCLoop and IsCommutative )</Code>
+<Br/><Code>( IsExtraLoop, IsLCCLoop and IsMoufangLoop )</Code>
+<Br/><Code>( IsAssociative, IsRCCLoop and IsCommutative )</Code>
+<Br/><Code>( IsExtraLoop, IsRCCLoop and IsMoufangLoop )</Code>
+<Br/><Code>( IsLCCLoop, IsCCLoop )</Code>
+<Br/><Code>( IsRCCLoop, IsCCLoop )</Code>
+<Br/><Code>( IsCCLoop, IsLCCLoop and IsRCCLoop )</Code>
+<Br/><Code>( IsOsbornLoop, IsMoufangLoop )</Code>
+<Br/><Code>( IsOsbornLoop, IsCCLoop )</Code>
+<Br/><Code>( HasAutomorphicInverseProperty, IsLeftBruckLoop )</Code>
+<Br/><Code>( IsLeftBolLoop, IsLeftBruckLoop )</Code>
+<Br/><Code>( IsRightBruckLoop, IsLeftBruckLoop and IsCommutative )</Code>
+<Br/><Code>( IsLeftBruckLoop, IsLeftBolLoop and HasAutomorphicInverseProperty )</Code>
+<Br/><Code>( HasAutomorphicInverseProperty, IsRightBruckLoop )</Code>
+<Br/><Code>( IsRightBolLoop, IsRightBruckLoop )</Code>
+<Br/><Code>( IsLeftBruckLoop, IsRightBruckLoop and IsCommutative )</Code>
+<Br/><Code>( IsRightBruckLoop, IsRightBolLoop and HasAutomorphicInverseProperty )</Code>
+<Br/><Code>( IsCommutative, IsSteinerLoop )</Code>
+<Br/><Code>( IsCLoop, IsSteinerLoop )</Code>
+<Br/><Code>( IsLeftAutomorphicLoop, IsAutomorphicLoop )</Code>
+<Br/><Code>( IsRightAutomorphicLoop, IsAutomorphicLoop )</Code>
+<Br/><Code>( IsMiddleAutomorphicLoop, IsAutomorphicLoop )</Code>
+<Br/><Code>( IsMiddleAutomorphicLoop, IsCommutative )</Code>
+<Br/><Code>( IsAutomorphicLoop, IsLeftAutomorphicLoop and IsCommutative )</Code>
+<Br/><Code>( IsAutomorphicLoop, IsRightAutomorphicLoop and IsCommutative )</Code>
+<Br/><Code>( IsLeftAutomorphicLoop, IsRightAutomorphicLoop and HasAntiautomorphicInverseProperty )</Code>
+<Br/><Code>( IsRightAutomorphicLoop, IsLeftAutomorphicLoop and HasAntiautomorphicInverseProperty )</Code>
+<Br/><Code>( IsFlexible, IsMiddleAutomorphicLoop )</Code>
+<Br/><Code>( HasAntiautomorphicInverseProperty, IsFlexible and IsLeftAutomorphicLoop )</Code>
+<Br/><Code>( HasAntiautomorphicInverseProperty, IsFlexible and IsRightAutomorphicLoop )</Code>
+<Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and IsLeftAlternative )</Code>
+<Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and IsRightAlternative )</Code>
+<Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and HasLeftInverseProperty )</Code>
+<Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and HasRightInverseProperty )</Code>
+<Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and HasWeakInverseProperty )</Code>
+<Br/><Code>( IsLeftAutomorphicLoop, IsLeftBruckLoop )</Code>
+<Br/><Code>( IsLeftAutomorphicLoop, IsLCCLoop )</Code>
+<Br/><Code>( IsRightAutomorphicLoop, IsRightBruckLoop )</Code>
+<Br/><Code>( IsRightAutomorphicLoop, IsRCCLoop )</Code>
+<Br/><Code>( IsAutomorphicLoop, IsCommutative and IsMoufangLoop )</Code>
+
+</Appendix>
+
+<Bibliography Databases="loops_bib.xml" />
+
+<TheIndex/>
+
+</Book> 

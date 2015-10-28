@@ -54,7 +54,7 @@ gap> DirectProduct( L, Group( (1,2,3) ) );
 <loop of order 36>
 gap> DirectProduct( Group( (1,2,3) ), L, Group( (1,2,3,4) ) );
 <loop of order 144>
-gap> Opposite( L );
+gap> OppositeLoop( L );
 <loop of order 12>
 
 # TESTING BASIC ATTRIBUTES
@@ -67,6 +67,8 @@ gap> CayleyTable( Q );
 [ [ 2, 1 ], [ 1, 2 ] ]
 gap> Exponent( L );
 6
+gap> Opposite( L );
+<loop of order 12>
 
 # TESTING BASIC ARITHMETIC OPERATIONS
 

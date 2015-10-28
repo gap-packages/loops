@@ -2,7 +2,7 @@
 ##
 #W  steiner.tbl    Small Steiner loops           G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: steiner.tbl, v 2.2.0 2012/06/28 gap Exp $
+#H  @(#)$Id: steiner.tbl, v 3.1.0 2015/09/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -18,21 +18,29 @@ LOOPS_steiner_data := [
 [ 1, 1,  1,  2, 80],
 # the loops
 [
+# order 4
+[
 #4,1
 [   "0",
     "1",
-    "2" ],
-
+    "2" ]
+],
+# order 8
+[
 #8,1
 [   "0001123",
     "1242534",
-    "3654656" ],
-
+    "3654656" ]
+],
+# order 10
+[
 #10,1
 [   "000011122236",
     "134534534547",
-    "268787676858" ],
-
+    "268787676858" ]
+],
+# order 14
+[
 #14,1
 [   "00000011111222223334445556",
     "13579b3469a3467867868a7897",
@@ -40,8 +48,10 @@ LOOPS_steiner_data := [
 #14,2
 [   "00000011111222223334445556",
     "13579b3469a3467867868a7897",
-    "2468ac578bc95abcbcac9babc9" ],
-
+    "2468ac578bc95abcbcac9babc9" ]
+],
+# order 16
+[
 #16,1
 [   "00000001111112222223333444455556666",
     "13579bd3478bc3478bc789a789a789a789a",
@@ -362,6 +372,7 @@ LOOPS_steiner_data := [
 [   "00000001111112222223333444455566678",
     "13579bd3469ac34578b678a58ab78979c9a",
     "2468ace578bde96aecdbcded9cebecaeddb" ]
+]
 # end of the loops
 ]
 ];

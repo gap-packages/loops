@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gi  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: creation.gi, v 3.0.0 2015/06/12 gap Exp $
+#H  @(#)$Id: creation.gi, v 3.1.0 2015/10/28 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -334,7 +334,7 @@ end );
 ##  Given a set <perms> of n permutations of an n-element set X, returns
 ##  n by n Cayley table ct such that ct[i][j] = X[j]^perms[i].
 ##  The operation is safe only if at most one permutation of <perms> is
-##  is the identity permutation, and all other permutations of <perms>
+##  the identity permutation, and all other permutations of <perms>
 ##  move all points of X.
 
 InstallMethod( CayleyTableByPerms,
@@ -697,7 +697,31 @@ function( list, dummy )
 
 #############################################################################
 ##
-#O  Opposite( Q )
+#O  OppositeQuasigroup( Q )
+##
+##  Returns the quasigroup opposite to the quasigroup <Q>. 
+
+InstallMethod( OppositeQuasigroup, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    return QuasigroupByCayleyTable( TransposedMat( CayleyTable( Q ) ) );
+end );
+
+#############################################################################
+##
+#O  OppositeLoop( Q )
+##
+##  Returns the loop opposite to the loop <Q>. 
+
+InstallMethod( OppositeLoop, "for loop",
+    [ IsLoop ],
+function( Q )
+    return LoopByCayleyTable( TransposedMat( CayleyTable( Q ) ) );
+end );
+
+#############################################################################
+##
+#A  Opposite( Q )
 ##
 ##  Returns the quasigroup opposite to the quasigroup <Q>. When
 ##  <Q> is a loop, a loop is returned.

@@ -15,7 +15,7 @@ gap> START_TEST("LOOPS, bol: testing methods for Bol loops");
 gap> Q := LeftBolLoop(15,2);;
 gap> B := AssociatedLeftBruckLoop(Q);;
 gap> IsomorphismLoops(B,LeftBolLoop(15,1));
-(4,12,15,11)(5,9)(6,14)
+(7,9,10,8)(12,13,15,14)
 
 gap> Q := RightBolLoop(15,1);;
 gap> AssociatedRightBruckLoop( Q );

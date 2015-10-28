@@ -2,7 +2,7 @@
 ##
 #W  paige.tbl    Paige loops                     G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: paige.tbl, v 2.2.0 2012/06/28 gap Exp $
+#H  @(#)$Id: paige.tbl, v 3.1.0 2015/09/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -16,6 +16,8 @@ LOOPS_paige_data := [
 # number of loops of given order
 [ 1 ],  
 # the loops
+[
+# order 120
 [
 # Paige loop over GF( 2 )
 [ [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
@@ -862,6 +864,7 @@ LOOPS_paige_data := [
       59, 29, 104, 14, 74, 47, 107, 6, 67, 39, 98, 40, 96, 5, 61, 48, 117, 
       13, 88, 71, 2, 92, 26, 78, 10, 113, 56, 111, 55, 84, 9, 102, 25, 57, 1 
      ] ]
+]
 # end of the loops
 ]
 ];
