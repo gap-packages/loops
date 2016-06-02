@@ -467,7 +467,6 @@ InstallMethod( Subloop, "for loop and list of elements",
     [ IsLoop, IsList ],
 function( L, gens )
     local sl, pos_of_gens;
-    # NG: another small change
     if gens<>[] and ( gens[1] in L ) then
         pos_of_gens := Union( [1], PosInParent( gens ) );
     else
@@ -505,68 +504,90 @@ end );
 
 #############################################################################
 ##
-#0  AllSubloops( L, S )
+#0  AllSubquasigroups( Q )
+##
+##  Returns a set of all subquasigroups of a quasigroup <Q>.
+
+InstallMethod( AllSubquasigroups, "for a quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    # MATH:
+    # If S is a subquasigroup of L and x is in L\S, then the cosets S and Sx are disjoint.
+    # If S is a proper subquasigroup of L then |L| is at least 2|S|.
+    # If S is a proper subquasigroup of L and |S| > |L|/4 then S is maximal in L.
+    # If S is a subloop of a power-associative loop L and x  is in L\S then <S,x> = <S,x^m> whenever m is relatively prime to |x|.
+    # If S is a subloop of a LIP loop L and x is in L\S then <S,zx> = <S,x> for every z in S.
+    # If S is a subloop of a LIP power associative loop L and x is in L\S then <S,z(x^m)> = <S,x> for every z in S and every m relatively prime to |x|.
+
+    local All, Last, New, A, Out, B, x, coprime_powers, n, m;
+
+    # initialization
+    All := [];   #all subquasigroups
+    if IsLoop( Q ) then
+        New := [ Subloop( Q, [ One( Q ) ] ) ]; # the trivial subloop
+    else
+        New := Set( Elements( Q ), x -> Subquasigroup( Q, [ x ] ) ); # all mono-generated subquasigroups 
+    fi;
+
+    # rounds
+    repeat
+        Append( All, New );
+        Last := Filtered( New, A -> Size( A ) <= Size( Q )/4 ); # subquasigroups found in the previous round that are possibly not maximal in Q
+        New := [];   # subquasigroups generated in this round
+        for A in Last do
+            Out := Difference( Elements( Q ), Elements( A ) );
+            while not IsEmpty(Out) do
+                x := Out[ 1 ];
+                Out := Out{[2..Length(Out)]};
+                if IsLoop( Q ) then
+                    B := Subloop( Q, Union( Elements( A ), [ x ] ) );
+                else
+                    B := Subquasigroup( Q, Union( Elements( A ), [ x ] ) );
+                fi;
+                if not B in New and not B in All then
+                    Add( New, B );   # new subquasigroup found
+                fi;
+                # attempting to reduce the number of elements to be checked. This is critical for speed.
+                if Size( B ) < 4*Size( A ) then # A is maximal in B, removing everything in B
+                    Out := Difference( Out, Elements( B ) );
+                elif IsLoop( Q ) then # additional removal methods for loops
+                    coprime_powers := [ 1 ];
+                    if IsPowerAssociative( Q ) then
+                        n := Order( x );
+                        coprime_powers := Filtered( [1..n], m -> Gcd(m,n) = 1 );
+                    fi;
+                    Out := Difference( Out, List( coprime_powers, m -> x^m ) );
+                    if HasLeftInverseProperty( Q ) then
+                        for m in coprime_powers do
+                            Out := Difference( Out, Elements(A)*(x^m) );
+                        od;
+                    fi;
+                    if HasRightInverseProperty( Q ) then
+                        for m in coprime_powers do
+                            Out := Difference( Out, (x^m)*Elements(A) );
+                        od;
+                    fi;
+                fi; # end of removal
+            od; # end of cycle for x
+        od; # end of cycle for A
+    until IsEmpty( New );
+
+    # finishing
+    if not Q in All then Add( All, Q ); fi;
+    return All;
+
+end);
+
+#############################################################################
+##
+#0  AllSubloops( L )
 ##
 ##  Returns a set of all subloops of a loop <L>.
 
 InstallMethod( AllSubloops, "for a loop",
     [ IsLoop ],
 function( L )
-   # MATH:
-   # 1) If S is a subloop of L and x is in L\S, then the cosets S and Sx are disjoint.
-   # 2) If S is a proper subloop of L then |L| is at least 2|S|.
-   # 3) If S is a proper subloop of L and |S| >= |L|/3 then S is maximal in L.
-   # 4) If S is a subloop of a LIP loop L and x is in L\S then <S,zx> = <S,x> for every z in S.
-   # 5) If S is a subloop of a LIP power associative loop L and x is in L\S then <S,z(x^m)> = <S,x> for every z in S and every m relatively prime to |x|.
-
-   local All, Last, New, A, Out, B, x, coprime_powers, n, m;
-
-   # initialization
-   All := [];   #all subloops
-   New := [ Subloop( L, [ One( L ) ] ) ];
-
-   # rounds
-   repeat
-      Append( All, New );
-      Last := Filtered( New, A -> Size( A ) < Size( L )/3 ); # subloop found in previous round that are possibly not maximal in L
-      New := [];   #subloops generated in this round
-      for A in Last do
-         Out := Difference( Elements( L ), Elements( A ) );
-     while not IsEmpty(Out) do
-            x := Out[ 1 ];
-            Out := Difference( Out, [ x ] );
-            B := Subloop( L, Union( Elements( A ), [ x ] ) );
-            if not B in New and not B in All then
-           Add( New, B );   # new subloop found
-            fi;
-            #attempting to reduce the number of elements to be checked. This is critical for speed.
-        if Size( B ) <= 3*Size( A ) then
-               # A is maximal in B
-           Out := Difference( Out, Elements( B ) );
-            fi;
-            coprime_powers := [ 1 ];
-        if IsPowerAssociative( L ) then
-           n := Order( x );
-           coprime_powers := Filtered( [1..n], m -> Gcd(m,n) = 1 );
-            fi;
-        if HasLeftInverseProperty( L ) then
-           for m in coprime_powers do
-              Out := Difference( Out, Elements(A)*(x^m) );
-           od;
-        fi;
-        if HasRightInverseProperty( L ) then
-           for m in coprime_powers do
-              Out := Difference( Out, (x^m)*Elements(A) );
-           od;
-        fi;
-         od;
-      od;
-   until IsEmpty( New );
-
-   # finishing
-   if not L in All then Add( All, L ); fi;
-   return All;
-
+    return AllSubquasigroups( L );
 end);
 
 #############################################################################

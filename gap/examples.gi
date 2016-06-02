@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples [loops]
 ##  
-#H  @(#)$Id: examples.gi, v 3.1.0 2015/10/28 gap Exp $
+#H  @(#)$Id: examples.gi, v 3.2.0 2015/11/29 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -677,7 +677,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     elif name = "small" then
         loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
     elif name = "interesting" then
-        if [n,m] = [92,1] then # simple Bol loop of order 92
+        if [n,m] = [96,1] then # simple Bol loop of order 96
             g := Group((1,4)(2,9)(3,10)(6,11)(7,12)(13,21)(14,22)(15,24)(16,23)(17,30)(18,29)(19,31)(20,32)(33,35)(38,40), 
                 (1,2,4,6,8,7,5,3)(9,13,25,18,10,14,26,17)(11,15,27,20,12,16,28,19)(21,30,38,34,23,31,40,35)(22,32,39,36,24,29,37,33));
             h := Normalizer( g, SylowSubgroup( g, 5) );

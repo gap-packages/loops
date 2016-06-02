@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gd  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: quasigroups.gd, v 3.1.0 2015/10/28 gap Exp $
+#H  @(#)$Id: quasigroups.gd, v 3.2.0 2016/05/02 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -52,6 +52,7 @@ DeclareOperation( "QuasigroupByCayleyTable", [ IsMatrix ] );
 DeclareOperation( "LoopByCayleyTable", [ IsMatrix ] );
 DeclareOperation( "SetQuasigroupElmName", [ IsQuasigroup, IsString ] );
 DeclareSynonym( "SetLoopElmName", SetQuasigroupElmName );
+DeclareOperation( "CanonicalCopy", [ IsQuasigroup ] );
 
 #############################################################################
 ##  CREATING QUASIGROUPS AND LOOPS FROM A FILE
@@ -83,7 +84,7 @@ DeclareOperation( "IntoLoop", [ IsMagma ] );
 DeclareOperation( "IntoGroup", [ IsMagma ] );
 
 #############################################################################
-## PRODUCTS OF LOOPS
+## PRODUCTS OF QUASIGROUPS AND LOOPS
 ## --------------------------------------------------------------------------
 
 #DirectProduct already declared for groups.

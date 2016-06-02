@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gi  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: creation.gi, v 3.1.0 2015/10/28 gap Exp $
+#H  @(#)$Id: creation.gi, v 3.2.0 2015/11/22 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -209,6 +209,24 @@ function( Q, name )
     F := FamilyObj( Elements( Q )[ 1 ] );
     F!.names := name;
 end);
+
+#############################################################################
+##
+#O  CanonicalCopy( Q )
+##
+##  Returns a canonical copy of <Q>, that is, an isomorphic object <O> with
+##  canonical multiplication table and Parent( <O> ) = <O>.
+##  (PROG) Properties and attributes are lost!
+
+InstallMethod( CanonicalCopy, "for quasigroup or loop",
+    [ IsQuasigroup ],
+function( Q )
+    if IsLoop( Q ) then
+        return LoopByCayleyTable( CayleyTable( Q ) );
+    fi;
+    return QuasigroupByCayleyTable( CayleyTable( Q ) );
+end);
+
 
 #############################################################################
 ##  CREATING QUASIGROUPS AND LOOPS FROM A FILE
@@ -595,26 +613,27 @@ function( M )
 end); 
 
 #############################################################################
-##  PRODUCTS OF LOOPS
+##  PRODUCTS OF QUASIGROUPS AND LOOPS
 ##  -------------------------------------------------------------------------
 
 #############################################################################
 ##
-#F  DirectProduct( L1, L2, ..., Ln )
+#F  DirectProduct( Q1, Q2, ..., Qn )
 ##
-##  Returns the direct product of loops <L1>, <L2>, ... , <Ln>. The loops can
-##  be declared as loops or as groups.
+##  Returns the direct product of quasigroups <Q1>, <Q2>, ... , <Qn>.
+##  The quasigroups can be declared as quasigroups, loops or groups.
 
 # The following is necessary due to implementation of DirectProduct for
 # groups in GAP. The idea is as follows:
-# We want to calculate direct product of loops and groups.
+# We want to calculate direct product of quasigroups, loops and groups.
 # If only groups are on the list, standard GAP DirectProduct will take care
-# of it. If there are also some loops on the list, WE must take care of it.
+# of it. If there are also some quasigroups or loops on the list,
+# we must take care of it.
 # However, we do not know if such a list will be processed with
-# DirectProductOp( <IsList>, <IsGroup> ) or with
-# DirectProductOp( <IsList>, <IsLoop>), since this depends on whether
-# a group or a loop is listed first. We therefore take care of both
-# situations.
+# DirectProductOp( <IsList>, <IsGroup> ), or
+# DirectProductOp( <IsList>, <IsQuasigroup> ),
+# since this depends on which algebra is listed first.
+# We therefore take care of both situations.
 
 InstallOtherMethod( DirectProductOp, "for DirectProduct( <IsList>, <IsGroup> )",
     [ IsList, IsGroup],
@@ -623,16 +642,16 @@ function( list, first )
 
     # Check the arguments.
     if IsEmpty( list ) then Error( "LOOPS: <1> must be nonempty." ); fi;
-    if not ForAny( list, IsLoop ) then
-    # there are no loops on the list
-    TryNextMethod();
+    if not ForAny( list, IsQuasigroup ) then
+        # there are no quasigroups or loops on the list
+        TryNextMethod();
     fi;
-    if ForAny( list, G -> (not IsGroup( G )) and (not IsLoop( G ) ) ) then
-    # there are other objects beside groups and loops on the list
+    if ForAny( list, G -> (not IsGroup( G )) and (not IsQuasigroup( G ) ) ) then
+        # there are other objects beside groups, loops and quasigroups on the list
         TryNextMethod();
     fi;
 
-    # all arguments are groups or loops, and there is at least one loop
+    # all arguments are groups, quasigroups or loops, and there is at least one loop
     # making sure that a loop is listed first so that this method is not called again
     for L in list do
         if not IsGroup( L ) then
@@ -646,49 +665,57 @@ function( list, first )
     return DirectProductOp( list, list[ 1 ] );
 end);
 
-InstallOtherMethod( DirectProductOp, "for DirectProduct( <IsList>, <IsLoop> )",
-    [ IsList, IsLoop ],
+InstallOtherMethod( DirectProductOp, "for DirectProduct( <IsList>, <IsQuasigroup> )",
+    [ IsList, IsQuasigroup ],
 function( list, dummy )
 
-    local group_list, loop_list, group_product, n, i, nL, nM, TL, TM, T, j, k, s;
+    local group_list, quasigroup_list, group_product, are_all_loops,
+        n, i, nL, nM, TL, TM, T, j, k, s;
 
-    # Check the arguments.
+    # check the arguments
     if IsEmpty( list ) then
-      Error( "LOOPS: <1> must be nonempty." );
-    elif ForAny( list, G -> (not IsGroup( G )) and (not IsLoop( G ) ) ) then
-      TryNextMethod();
+        Error( "LOOPS: <1> must be nonempty." );
+    elif ForAny( list, G -> (not IsGroup( G )) and (not IsQuasigroup( G ) ) ) then
+        TryNextMethod();
     fi;
 
-    # only groups and loops are on the list, and there is at least one loop
+    # only groups, quasigroups and loops are on the list, with at least one non-group
     group_list := Filtered( list, G -> IsGroup( G ) );
-    loop_list := Filtered( list, G -> IsLoop( G ) );
-    if not IsEmpty( group_list ) then   # some groups on the list
+    quasigroup_list := Filtered( list, G -> IsQuasigroup( G ) );
+    if not IsEmpty( group_list ) then   # some groups are on the list
         group_product := DirectProductOp( group_list, group_list[ 1 ] );
-        Add( loop_list, IntoLoop( group_product ) );
+        Add( quasigroup_list, IntoLoop( group_product ) );
     fi;
+    # keeping track of whether all algebras are in fact loops
+    are_all_loops := ForAll( quasigroup_list, IsLoop );
 
-    # now only loops are on the list
-    n := Length( loop_list );
-    if n=1 then return loop_list[ 1 ]; fi;
-    # at least 2 loops, don't want to use recursion.
-    # We make sure that all Cayley tables are canonical.
+    # now only quasigroups and loops are on the list
+    n := Length( quasigroup_list );
+    if n=1 then
+        return quasigroup_list[ 1 ];
+    fi;
+    # at least 2 quasigroups and loops; we will not use recursion
+    # making all Cayley tables cannonical
     for s in [1..n] do
-    loop_list[ s ] := LoopByCayleyTable( CanonicalCayleyTable( CayleyTable( loop_list[ s ] ) ) );
+        quasigroup_list[ s ] := QuasigroupByCayleyTable( CanonicalCayleyTable( CayleyTable( quasigroup_list[ s ] ) ) );
     od;
     for s in [2..n] do
-        nL := Size( loop_list[ 1 ] );
-        nM := Size( loop_list[ s ] );
-        TL := CayleyTable( loop_list[ 1 ] );
-        TM := CayleyTable( loop_list[ s ] );
+        nL := Size( quasigroup_list[ 1 ] );
+        nM := Size( quasigroup_list[ s ] );
+        TL := CayleyTable( quasigroup_list[ 1 ] );
+        TM := CayleyTable( quasigroup_list[ s ] );
         T := List( [1..nL*nM], j->[] );
 
         # not efficient, but it does the job
         for i in [1..nM] do for j in [1..nM] do for k in [1..nL] do
             Append( T[ (i-1)*nL + k ], TL[ k ] + nL*(TM[i][j]-1) );
         od; od; od;
-        loop_list[ 1 ] := LoopByCayleyTable( T );
+        quasigroup_list[ 1 ] := QuasigroupByCayleyTable( T );
     od;
-    return loop_list[ 1 ];
+    if are_all_loops then
+        return IntoLoop( quasigroup_list[1] );
+    fi;
+    return quasigroup_list[ 1 ];
  end );
 
 #############################################################################

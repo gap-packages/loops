@@ -64,6 +64,7 @@ DeclareOperation( "Subquasigroup", [ IsQuasigroup, IsList ] );
 DeclareOperation( "Subloop", [ IsLoop, IsList ] );
 DeclareOperation( "IsSubquasigroup", [ IsQuasigroup, IsQuasigroup ] );
 DeclareOperation( "IsSubloop", [ IsLoop, IsLoop ] );
+DeclareOperation( "AllSubquasigroups", [ IsQuasigroup ] );
 DeclareOperation( "AllSubloops", [ IsLoop ] );
 # RightCosets already declared in GAP
 DeclareOperation( "RightTransversal", [ IsLoop, IsLoop ] );

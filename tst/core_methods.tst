@@ -2,7 +2,7 @@
 ##
 #W  core_methods.tst   Testing core methods      G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: core_methods.tst, v 3.0.0 2015/06/15 gap Exp $
+#H  @(#)$Id: core_methods.tst, v 3.2.0 2016/06/02 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -42,6 +42,8 @@ gap> IntoLoop( Group( (1,2,3), (1,2), (1,4) ) );
 <loop of order 24>
 gap> PrincipalLoopIsotope( Q, Elements(Q)[1], Elements(Q)[1] );
 <loop of order 2>
+gap> CanonicalCopy( QuasigroupByCayleyTable( [[2,3],[3,2]] ) );
+<quasigroup of order 2>
 
 # TESTING DIRECT PRODUCTS AND OPPOSITES
 
@@ -54,6 +56,11 @@ gap> DirectProduct( L, Group( (1,2,3) ) );
 <loop of order 36>
 gap> DirectProduct( Group( (1,2,3) ), L, Group( (1,2,3,4) ) );
 <loop of order 144>
+gap> Q := QuasigroupByCayleyTable([[2,1],[1,2]]);;
+gap> DirectProduct( Q, Q );
+<quasigroup of order 4>
+gap> DirectProduct( Q, L, Group((1,2)) );
+<quasigroup of order 48>
 gap> OppositeLoop( L );
 <loop of order 12>
 
@@ -183,6 +190,8 @@ gap> RandomNilpotentLoop( [2, CyclicGroup(3), 6] );
 # TESTING SUBQUASIGROUPS AND SUBLOOPS
 
 gap> L := MoufangLoop( 32, 5 );;
+gap> Length( AllSubloops( L ) );
+90
 gap> S := Subloop( L, [ Elements( L )[ 2 ], Elements( L )[ 25 ] ] );
 <loop of order 8>
 gap> L = Parent( S );
@@ -208,6 +217,8 @@ gap> CayleyTable( SS );
 [ [ 1, 2, 5, 8 ], [ 2, 5, 8, 1 ], [ 5, 8, 1, 2 ], [ 8, 1, 2, 5 ] ]
 gap> IsSubloop( S, SS );
 true
+gap> AllSubquasigroups( QuasigroupByCayleyTable( [[2,1],[1,2]] ) );
+[ <quasigroup of order 2>, <quasigroup of order 1> ]
 
 # TESTING NUCLEUS, COMMUTANT, CENTER
 

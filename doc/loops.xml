@@ -24,7 +24,7 @@
 
 <TitlePage>
         <Title>The <Package>LOOPS</Package> Package</Title>
-        <Version>Version 3.1.0</Version>
+        <Version>Version 3.2.0</Version>
         <Subtitle>Computing with quasigroups and loops in &GAP;</Subtitle>
         <Author>G&#225;bor P. Nagy
                 <Email>nagyg@math.u-szeged.hu</Email>
@@ -34,7 +34,7 @@
                 <Email>petr@math.du.edu</Email>
                 <Address>Department of Mathematics, University of Denver</Address>
         </Author>
-        <Copyright>&copyright; 2015 G&#225;bor P. Nagy and Petr Vojt&#283;chovsk&#253;.
+        <Copyright>&copyright; 2016 G&#225;bor P. Nagy and Petr Vojt&#283;chovsk&#253;.
         </Copyright>
 </TitlePage>
 
@@ -403,6 +403,12 @@ Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <
 </ManSection>
 
 <ManSection>
+<Oper Name="CanonicalCopy" Arg="Q"/>
+<Returns>A canonical copy of the quasigroup or loop <Arg>Q</Arg>.</Returns>
+<Description>This is a shorthand for <Code>QuasigroupByCayleyTable(CanonicalCayleyTable(<Arg>Q</Arg>)</Code> when <Arg>Q</Arg> is a declared quasigroup, and <Code>LoopByCayleyTable(CanonicalCayleyTable(<Arg>Q</Arg>)</Code> when <Arg>Q</Arg> is a loop.</Description>
+</ManSection>
+
+<ManSection>
 <Oper Name="NormalizedQuasigroupTable" Arg="T"/>
 <Returns>A normalized version of the Cayley table <Arg>T</Arg>.</Returns>
 <Description>A given Cayley table <Arg>T</Arg> is normalized in three steps as follows: first, <Code>CanonicalCayleyTable</Code> is called to rename entries to <M>1</M>, <M>\dots</M>, <M>n</M>, then the columns of <Arg>T</Arg> are permuted so that the first row reads <M>1</M>, <M>\dots</M>, <M>n</M>, and finally the rows of <Arg>T</Arg> are permuted so that the first column reads <M>1</M>, <M>\dots</M>, <M>n</M>.</Description>
@@ -710,12 +716,12 @@ An algorithm is said to select a latin square of order <M>n</M> <Emph>at random<
 
 <!-- Section:  Products of Loops ------------------------------------------------------------------------- -->
 
-<Section Label="Sec:ProductsOfLoops"> <Heading>Products of Loops</Heading>
+<Section Label="Sec:ProductsOfLoops"> <Heading>Products of Quasigroups and Loops</Heading>
 
 <ManSection>
 
-<Oper Name="DirectProduct" Arg="L1, ..., Ln"/>
-<Returns>If each <Arg>Li</Arg> is either a declared loop or a declared group, the direct product of <Arg>L1</Arg>, <M>\dots</M>, <Arg>Ln</Arg> is returned. If every <Arg>Li</Arg> is a declared group, a group is returned, otherwise a loop is returned.</Returns>
+<Oper Name="DirectProduct" Arg="Q1, ..., Qn"/>
+<Returns>If each <Arg>Qi</Arg> is either a declared quasigroup, declared loop or a declared group, the direct product of <Arg>Q1</Arg>, <M>\dots</M>, <Arg>Qn</Arg> is returned. If every <Arg>Qi</Arg> is a declared group, a group is returned; if every <Arg>Qi</Arg> is a declared loop, a loop is returned; otherwise a quasigroup is returned.</Returns>
 
 </ManSection>
 
@@ -960,6 +966,11 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 <Oper Name="IsSubloop" Arg="Q, S"/>
 
 <Returns><Code>true</Code> if <Arg>S</Arg> is a subquasigroup (resp. subloop) of a quasigroup (resp. loop) <Arg>Q</Arg>, <Code>false</Code> otherwise. In other words, returns <Code>true</Code> if <Arg>S</Arg> and <Arg>Q</Arg> are quasigroups (resp. loops) with the same parent and <Arg>S</Arg> is a subset of <Arg>Q</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="AllSubquasigroups" Arg="Q"/>
+<Returns>A list of all subquasigroups of a loop <Arg>Q</Arg>.</Returns>
 </ManSection>
 
 <ManSection>
@@ -1278,9 +1289,19 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvab
 <Section Label="Sec:IsomorphismsAndAutomorphisms"> <Heading>Isomorphisms and Automorphisms</Heading>
 
 <ManSection>
+<Oper Name="IsomorphismQuasigroups" Arg="Q, L"/>
+<Returns>An isomorphism from a quasigroup <Arg>Q</Arg> to a quasigroup <Arg>L</Arg> if the quasigroups are isomorphic, <Code>fail</Code> otherwise.</Returns>
+<Description>If an isomorphism exists, it is returned as a permutation <M>f</M> of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M>, where <M>i^f=j</M> means that the <M>i</M>th element of <Arg>Q</Arg> is mapped onto the <M>j</M>th element of <Arg>L</Arg>. Note that this convention is used even if the underlying sets of <Arg>Q</Arg>, <Arg>L</Arg> are not indexed by consecutive integers.</Description>
+</ManSection>
+
+<ManSection>
 <Oper Name="IsomorphismLoops" Arg="Q, L"/>
-<Returns>An isomorphism from a loop <Arg>Q</Arg> to a loop <Arg>L</Arg> if the loops are isomorphic, <Code>fail</Code> otherwise.</Returns>
-<Description>If an isomorphism exists, it is returned as a permutation <M>f</M> of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M>, where <M>i^f=j</M> means that the <M>i</M>th element of <Arg>Q</Arg> is mapped onto the <M>j</M>th element of <Arg>L</Arg>. Note that this convention is used even if the underlying sets of <Arg>L</Arg>, <Arg>M</Arg> are not indexed by consecutive integers.</Description>
+<Returns>An isomorphism from a loop <Arg>Q</Arg> to a loop <Arg>L</Arg> if the loops are isomorphic, <Code>fail</Code> otherwise, with the same convention as in <Code>IsomorphismQuasigroups</Code>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="QuasigroupsUpToIsomorphism" Arg="ls"/>
+<Returns>Given a list <Arg>ls</Arg> of quasigroups, returns a sublist of <Arg>ls</Arg> consisting of representatives of isomorphism classes of quasigroups from <Arg>ls</Arg>.</Returns>
 </ManSection>
 
 <ManSection>
@@ -1290,10 +1311,10 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvab
 
 <ManSection>
 <Attr Name="AutomorphismGroup" Arg="Q"/>
-<Returns>The automorphism group of a loop <Arg>Q</Arg>, with the same convention on permutations as in the case of <Code>IsomorphismLoops</Code>.<Br/></Returns>
+<Returns>The automorphism group of a loop or quasigroups <Arg>Q</Arg>, with the same convention on permutations as in <Code>IsomorphismQuasigroups</Code>.<Br/></Returns>
 </ManSection>
 
-<P/><B>Remark:</B> Since two isomorphisms differ by an automorphism, all isomorphisms from <Arg>Q</Arg> to <Arg>L</Arg> can be obtained by a combination of <Code>IsomorphismLoops(<Arg>Q</Arg>,<Arg>L</Arg>)</Code> and <Code>AutomorphismGroup(<Arg>L</Arg>)</Code>.
+<P/><B>Remark:</B> Since two isomorphisms differ by an automorphism, all isomorphisms from <Arg>Q</Arg> to <Arg>L</Arg> can be obtained by a combination of <Code>IsomorphismLoops(<Arg>Q</Arg>,<Arg>L</Arg>)</Code> (or  <Code>IsomorphismQuasigroups(<Arg>Q</Arg>,<Arg>L</Arg>)</Code>) and <Code>AutomorphismGroup(<Arg>L</Arg>)</Code>.
 
 <Br/><P/>While dealing with Cayley tables, it is often useful to rename or reorder the elements of the underlying quasigroup without changing the isomorphism type of the quasigroups. <Package>LOOPS</Package> contains several functions for this purpose.
 
@@ -1311,7 +1332,8 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvab
 
 <ManSection>
 <Oper Name="Discriminator" Arg="Q"/>
-<Returns>A data structure with isomorphism invariants of a loop <Arg>Q</Arg>. See <Cite Key="Vo"/> or the file <File>iso.gi</File> for more details.</Returns>
+<Returns>A data structure with isomorphism invariants of a loop <Arg>Q</Arg>.</Returns>
+<Description>See <Cite Key="Vo"/> or the file <File>iso.gi</File> for more details. The format of the discriminator has been changed from version 3.2.0 up to accommodate isomorphism searches for quasigroups.</Description>
 </ManSection>
 
 <P/>If two loops have different discriminators, they are not isomorphic. If they

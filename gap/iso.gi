@@ -2,7 +2,7 @@
 ##
 #W  iso.gi  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: iso.gi, v 3.1.0 2015/10/12 gap Exp $
+#H  @(#)$Id: iso.gi, v 3.2.0 2016/04/22 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -14,153 +14,168 @@
 
 #############################################################################
 ##  
-#O  Discriminator( L ) 
+#O  Discriminator( Q ) 
 ##    
-##  Returns the dicriminator of a loop <L>.
-##  Discriminator must be cheap to calculate, yet it is supposed to 
-##  provide such invariants that result in a fine partition of <L> 
-##  preserved under isomorphisms.
+##  Returns the dicriminator of a quasigroup <Q>.
+##  It is a list [ A, B ], where A is a list of the form
+##  [ [I1,n1], [I2,n2],.. ], where the invariant Ii occurs ni times in Q,
+##  and where B[i] is a subset of [1..Order(Q)] corresponding to elements of
+##  Q with invariant Ii.
 
-InstallMethod( Discriminator, "for loop",
-    [ IsLoop ],
-function( L )
-    local n, T, I, i, j, k, ebo, c, J, counter, A, P, B, FrequencySet;
-    
-    # making sure loop table is canonical
-    if L = Parent( L ) then T := CayleyTable( L );
-    else T := CanonicalCayleyTable( CayleyTable( L ) ); fi;
-    n := Size( L );
-    # Calculating invariants.
-    if not IsPowerAssociative( L ) then 
-        # not power associative loop, hence crude discriminator
-        # Element x asks: Am I neutral element? (Cost: linear)
-        # PROG: This is needed to make sure that the neutral element will be in a block by itself.
-        I := List( [1..n], i -> [false, 0, 0, 0, 0, 0, 0 ] );
-        I[1] := [true, 0, 0, 0, 0, 0, 0 ];
-        # Element x asks: Am I an involution? (Cost: linear)
-        for i in [1..n] do
-            I[ i ][ 2 ] := T[ i ][ i ] = 1;
-        od;
-        # Element x asks: How many times am I a square? (Cost: linear)
-        for i in [1..n] do
-            j := T[ i ][ i ];
-            I[ j ][ 3 ] := I[ j ][ 3 ] + 1;
-        od;
-        # Element x asks: With how many elements do I commute? (Cost: quadratic)
-        for i in [1..n] do
-            for j in [1..n] do if T[ i ][ j ] = T[ j ][ i ] then 
-                I[ i ][ 4 ] := I[ i ][ 4 ] + 1; 
-            fi; od;
-        od;
-        # Element x asks: For how many elements y is (x*x)*y = x*(x*y)? (Cost: quadratic)
-        for i in [1..n] do
-            for j in [1..n] do if T[ T[ i ][ i ] ][ j ] = T[ i ][ T[ i ][ j ] ] then
-                I[ i ][ 5 ] := I[ i ][ 5 ] + 1;
-            fi; od;
-        od;
-        # Element x asks: is it true that (x*x)*x = x*(x*x)? (Cost: linear)
-        for i in [1..n] do
-            I[ i ][ 6 ] :=  T[ T[ i ][ i ] ][ i ] = T[ i ][ T[ i ][ i ] ];
-        od;
-	# Element x asks: with how many elements do I associate in the first position (x*(y*z) = (x*y)*z ?)
-	for i in [1..n] do
-		for j in [1..n] do for k in [1..n] do
-			if T[ i ][ T[ j ][ k ] ] = T[ T[ i ][ j ] ][ k ] then
-				I[ i ][ 7 ] := I[ i ][ 7 ] + 1;
-			fi;
-		od; od;
-	od;
-    else    
-        #power associative loop, hence refined discriminator
-        # Element x asks: What is my order?
-        I := List( L, x -> [Order(x), 0, 0, 0, 0, false, 0] );
-        # Element x asks: How many times am I a square, third power, fourth power?
-        for i in [1..n] do
-            j := T[ i ][ i ];
-            I[ j ][ 2 ] := I[ j ][ 2 ] + 1;
-            j := T[ i ][ j ];
-            I[ j ][ 3 ] := I[ j ][ 3 ] + 1;
-            j := T[ i ][ j ];
-            I[ j ][ 4 ] := I[ j ][ 4 ] + 1;
-        od; 
-        # Element x asks: With how many elements of given order do I commute?
-        ebo := List( [1..n], i -> []); # elements by order
-        for i in [1..n] do Add( ebo[ I[ i ][ 1 ] ], i ); od;
-        ebo := Filtered( ebo, i -> not IsEmpty( i ) );
-        for i in [1..n] do
-            c := [];
-            for J in ebo do 
-                counter := 0;
-                for j in J do if T[ i ][ j ] = T[ j ][ i ] then 
-                    counter := counter + 1; 
-                fi; od;
-                Add( c, counter );
-            od;
-            I[i][5] := c;
-        od;
-        # Element x asks: Am I central?
-        for i in [1..n] do
-            I[ i ][ 6 ] := Elements( L )[ i ] in Center( L );
-        od;
-	# Element x asks: with how many elements do I associate in the first position (x*(y*z) = (x*y)*z ?)
-	for i in [1..n] do
-		for j in [1..n] do for k in [1..n] do
-			if T[ i ][ T[ j ][ k ] ] = T[ T[ i ][ j ] ][ k ] then
-				I[ i ][ 7 ] := I[ i ][ 7 ] + 1;
-			fi;
-		od; od;
-	od;
-    fi; # All invariants have been calculated at this point.
-    
-    FrequencySet := function (L)
-    # Auxiliary function. 
-    # Given a list L, returns [ S, F ], where S = Set( L ),
-    # and where F[ i ] is the number of occurences of Elements( S )[ i ] in L
-        local S, F, x, i;
-        S := Set( L );
-        F := 0*[ 1..Size( S ) ];
-        for x in L do
-            i := Position( S, x );
-            F[ i ] := F[ i ] + 1;
-        od;
-        return [S, F];
-    end;
+InstallMethod( Discriminator, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    local n, T, I, i, j, k, ebo, A, P, B, perm, p;
 
-    # Setting up the first part of discriminator (invariants).
-    A := FrequencySet( I );
-    P := Sortex( A[ 2 ] ); #small invariant sets will be listed first
-    A[ 1 ] := Permuted( A[ 1 ], P );
+    # making sure the quasigroup is canonical
+    if not Q = Parent( Q ) then Q := CanonicalCopy( Q ); fi;
+    n := Size( Q );
     
-    # Setting up the second part of discriminator (blocks of elements invariant under isomorphisms).
-    B := List( A[ 1 ], i -> [] ); #for every invariant get a list of elements    
+    # converting a non-declared loop into a loop
+    perm := ();
+    if (not IsLoop( Q )) and (not MultiplicativeNeutralElement( Q )=fail) then
+        p := Position( Elements( Q ), MultiplicativeNeutralElement( Q ) );
+        if p<>1 then
+            perm := (1,p);
+        fi;
+        Q := IntoLoop( Q );
+    fi;
+    
+    T := CayleyTable( Q );
+           
+    # Calculating 9 invariants for three cases: quasigroup, loop, power associative loop
+    # I[i] will contain the invariant vector for ith element of Q
+    I := List( [1..n], i -> 0*[1..9] );
+
+    # invariant 1
+    # to distinguish the 3 cases
+    if (not IsLoop( Q ) ) then
+        for i in [1..n] do I[i][1] := 1; od;
+    elif (not IsPowerAssociative( Q )) then
+        for i in [1..n] do I[i][1] := 2; od;
+    else
+        for i in [1..n] do I[i][1] := 3; od;
+    fi;
+
+    # invariant 2
+    # for given x, cycle structure of L_x, R_x
     for i in [1..n] do
-        Add( B[ Position( A[ 1 ], I[ i ] ) ],  Elements( L )[ i ] );
+        I[i][2] := [
+            CycleStructurePerm( PermList( List( [1..n], j -> T[i][j]) ) ),
+            CycleStructurePerm( PermList( List( [1..n], j -> T[j][i]) ) )
+        ];
     od;
+
+    # invariant 3
+    if (not IsLoop( Q )) then # am I an idempotent?
+        for i in [1..n] do I[i][3] := T[i][i]=i; od;
+    elif (not IsPowerAssociative( Q )) then # am I an involution?
+        for i in [1..n] do I[i][3] := T[i][i]=1; od;
+    else # what's my order?
+        for i in [1..n] do I[i][3] := Order( Elements( Q )[ i ] ); od;
+    fi;
+
+    # invariant 4
+    if ( not IsLoop( Q ) ) or ( not IsPowerAssociative( Q ) ) then # how many times am I a square ?
+        for i in [1..n] do j := T[ i ][ i ]; I[ j ][ 4 ] := I[ j ][ 4 ] + 1; od;
+    else # how many times am I a square, third power, fourth power?
+        for i in [1..n] do I[i][4] := [0,0,0]; od;
+        for i in [1..n] do
+            j := T[ i ][ i ]; I[ j ][ 4 ][ 1 ] := I[ j ][ 4 ][ 1 ] + 1;
+            j := T[ i ][ j ]; I[ j ][ 4 ][ 2 ] := I[ j ][ 4 ][ 2 ] + 1;
+            j := T[ i ][ j ]; I[ j ][ 4 ][ 3 ] := I[ j ][ 4 ][ 3 ] + 1;
+        od;
+    fi;
+
+    # invariant 5
+    # is it true that (x*x)*x = x*(x*x)?
+    for i in [1..n] do
+        I[ i ][ 5 ] :=  T[ T[ i ][ i ] ][ i ] = T[ i ][ T[ i ][ i ] ];
+    od;
+
+    # invariant 6
+    # for how many elements y is (x*x)*y = x*(x*y)?
+    for i in [1..n] do
+        for j in [1..n] do if T[ T[ i ][ i ] ][ j ] = T[ i ][ T[ i ][ j ] ] then
+            I[ i ][ 6 ] := I[ i ][ 6 ] + 1;
+        fi; od;
+    od;
+
+    # invariant 7
+    if ( not IsLoop( Q ) ) or ( not IsPowerAssociative( Q ) ) then #  with how many elements do I commute?
+        for i in [1..n] do
+            for j in [1..n] do if T[ i ][ j ] = T[ j ][ i ] then
+                I[ i ][ 7 ] := I[ i ][ 7 ] + 1;
+            fi; od;
+        od;
+    else # with how many elements of given order do I commute?
+        ebo := List( [1..n], i -> Filtered( [1..n], j -> I[j][1]=i ) ); # elements by order
+        ebo := Filtered( ebo, x -> not IsEmpty( x ) );
+        for i in [1..n] do
+            I[i][7] := List( ebo, J -> Length( Filtered( J, j -> T[ i ][ j ] = T[ j ][ i ] ) ) );
+        od;
+    fi;
+
+    # invariant 8
+    # with how many elements y, z do I associate in the first position ?
+    for i in [1..n] do
+		for j in [1..n] do for k in [1..n] do
+			if T[ i ][ T[ j ][ k ] ] = T[ T[ i ][ j ] ][ k ] then
+				I[ i ][ 8 ] := I[ i ][ 8 ] + 1;
+			fi;
+		od; od;
+	od;
+
+    # invariant 9
+    # am I central?
+    for i in [1..n] do I[ i ][ 9 ] := Elements( Q )[ i ] in Center( Q ); od;
+	
+    # all invariants have now been calculated
+
+    # setting up the first part of the discriminator (invariants with the number of occurence)
+    A := Collected( I );
+    P := Sortex( List( A, x -> x[2] ) ); # rare invariants will be listed first, but the set ordering of A is otherwise not disrupted
+    A := Permuted( A, P );
+
+    # setting up the second part of the discriminator (blocks of elements invariant under isomorphisms)
+    B := List( [1..Length(A)], j -> Filtered( [1..n], i -> I[i] = A[j][1] ) );
     
-    # Returning the discriminator.
+    # if a non-declared loop was converted into a loop, correcting for this
+    if not perm = () then
+        B := List( B, x -> Set( x, i -> i^perm ) );
+    fi;
+    
     return [ A, B ];
+
 end);
 
 #############################################################################
 ##  
-#F  LOOPS_EfficientGenerators( L, D ) 
+#F  LOOPS_EfficientGenerators( Q, D ) 
 ##    
 ##  Auxiliary function. 
-##  Given a loop <L> with discriminator <D>, it returns a list of generators 
-##  of <L> obtained by greedy algorithm from the partition <D>[ 2 ] of <L>.
+##  Given a quasigroup <Q> with discriminator <D>, it returns a list of
+##  indices of generators of <Q> obtained by a greedy algorithm from
+##  the partition <D>[2] of <L>.
 
 InstallGlobalFunction( LOOPS_EfficientGenerators,
-function( L, D ) 
+function( Q, D ) 
     local A, i, gens, S;
-    if Size( L ) = 1 then return [ One( L ) ]; fi;
-    A := [];
-    for i in [2..Length( D[ 2 ] )] do Append( A, D[ 2 ][ i ] ); od;
+    A := Concatenation( D[2] );
     gens := [];
     while not IsEmpty( A ) do
         Add( gens, A[ 1 ] );
-        S := Subloop( L, gens );
-        A := Filtered( A, x -> not x in S );
+        if IsLoop( Q ) then 
+            S := Subloop( Q, gens );
+        else 
+            S := Subquasigroup( Q, gens );
+        fi;
+        A := Filtered( A, i -> not Elements(Q)[i] in S );
     od;
+    # remove identity element if Q is a nontrivial loop
+    if IsLoop( Q ) and Size( Q )>1 then
+        gens := Filtered( gens, x -> not x=1 );
+    fi;
     return gens;
 end);
 
@@ -168,10 +183,8 @@ end);
 ##  
 #O  AreEqualDicriminators( D, E ) 
 ##    
-##  Returns true if the loops corresponding to <D> and <E> are possibly
-##  isomorphic. Returns false if the loops are certainly nonisomorphic.
-##  It boils dwn to this: Discriminators are considered equal if they contain
-##  the same invariants with the same frequency.
+##  Returns true if the invarinats of the two discriminators are the same,
+##  including number of occurrences of each invariant.
   
 InstallMethod( AreEqualDiscriminators, "for two lists (discrimninators)",
     [ IsList, IsList ],
@@ -183,7 +196,7 @@ end);
 ##  EXTENDING MAPPINS (AUXILIARY)
 ##  -------------------------------------------------------------------------
 
-# Here, we identity the map map f: A --> B  with the triple [ m, a, b ], 
+# Here, we identity the map f: A --> B  with the triple [ m, a, b ], 
 # where a is a subset of A, b[ i ] is the image of a[ i ], and m[ i ] > 0
 # if and only if i is in a.
 
@@ -192,10 +205,10 @@ end);
 #F  LOOPS_ExtendHomomorphismByClosingSource( f, L, M ) 
 ##
 ##  Auxiliary.    
-##  <L>, <M> are multiplication tables of loops, <f> is a partial map
+##  <L>, <M> are multiplication tables of quasigroups, <f> is a partial map
 ##  from a subset of elements of <L> to a subset of elements of <M>. 
-##  This function attempts to extend <f> into a homomorphism of loops by 
-##  extending the source of <f> into (the smallest possible) subloop of <L>.
+##  This function attempts to extend <f> into a homomorphism of quasigroups by 
+##  extending the source of <f> into (the smallest possible) subqusigroup of <L>.
 
 InstallGlobalFunction( LOOPS_ExtendHomomorphismByClosingSource,
 function( f, L, M )
@@ -251,10 +264,10 @@ end);
 #F  LOOPS_ExtendIsomorphism( f, L, GenL, DisL, M, DisM ) 
 ##  
 ##  Auxiliary.  
-##  Given a partial map <f> from loop <L> to loop <M>, it attempts to extend
-##  <f> into an isomorphism betweem <L> and <M>.
-##  <GenL>, <DisL> and <DisM> are precalculated and mean:
-##  efficient generators of <L>, disriminator of <L>, efficient generators
+##  Given a partial map <f> from a quasigroup <L> to a quasigroup <M>,
+##  it attempts to extend <f> into an isomorphism betweem <L> and <M>.
+##  <GenL>, <DisL> and <DisM> are precalculated and stand for:
+##  efficient generators of <L>, invariant subsets of <L>, efficient generators
 ##  of <M>, respectively.
 
 InstallGlobalFunction( LOOPS_ExtendIsomorphism,
@@ -265,7 +278,7 @@ function( f, L, GenL, DisL, M, DisM )
     if Length( f[ 2 ] ) = Length( L ) then return f; fi; #isomorphism found
     
     x := GenL[ 1 ];
-    GenL := List( [ 2..Length( GenL ) ], i -> GenL[ i ] ); 
+    GenL := GenL{[2..Length(GenL)]}; 
     possible_images := Filtered( DisM[ LOOPS_SublistPosition( DisL, x ) ], y -> not y in f[ 3 ] );    
     for y in possible_images do
         g := StructuralCopy( f );
@@ -282,48 +295,128 @@ end);
 
 #############################################################################
 ##  
-#O  IsomorphismLoopsNC( L, GenL, DisL, M, DisM ) 
+#O  IsomorphismQuasigroupsNC( L, GenL, DisL, M, DisM ) 
 ##    
-##  Auxiliary. Given a loop <L>, its efficient generators <DisL>, the 
+##  Auxiliary. Given a quasigroup <L>, its efficient generators <GenL>, the 
 ##  disciminator <DisL> of <L>, and another loop <M> with discriminator
 ##  <DisM>, it returns an isomorophism from <L> onto <M>, or it fails.
 
-InstallGlobalFunction( IsomorphismLoopsNC,
+InstallGlobalFunction( IsomorphismQuasigroupsNC,
 function( L, GenL, DisL, M, DisM )
     local map, iso;
     if not AreEqualDiscriminators( DisL, DisM ) then return fail; fi;
 
-    #convert everything to numbers here (faster in GAP)
-    DisL := List( DisL[2], D -> List( D, x -> Position( Elements( L ), x ) ) );
-    DisM := List( DisM[2], D -> List( D, x -> Position( Elements( M ), x ) ) );
-    GenL := List( GenL, x -> Position( Elements( L ), x ) );
-
     #mapping
-    map := 0 * [ 1.. Size( L ) ]; map[ 1 ] := 1;
-   
-    iso := LOOPS_ExtendIsomorphism( [ map, [ 1 ], [ 1 ] ], CayleyTable( L ), GenL, DisL, CayleyTable( M ), DisM );
+    map := 0 * [ 1.. Size( L ) ]; 
+    
+    if IsLoop( L ) and IsLoop( M ) then
+        map[ 1 ] := 1; # identity element is certainly preserved
+        iso := LOOPS_ExtendIsomorphism( [ map, [ 1 ], [ 1 ] ], CayleyTable( L ), GenL, DisL[2], CayleyTable( M ), DisM[2] ); 
+    else
+        iso := LOOPS_ExtendIsomorphism( [ map, [ ], [ ] ], CayleyTable( L ), GenL, DisL[2], CayleyTable( M ), DisM[2] );
+    fi;
     if not iso = fail then return SortingPerm( iso[ 1 ] ); fi;
     return fail;
 end);
 
 #############################################################################
 ##  
-#O  IsomorphismLoops( L, M ) 
+#O  IsomorphismQuasigroups( L, M ) 
 ##
-##  If the loops <L>, <M> are isomorophic, it returns an isomorphism from
-##  <L> onto <M>. Fails otherwise.
+##  If the quasigroups <L>, <M> are isomorophic, it returns an isomorphism
+##  from <L> onto <M>. Fails otherwise.
 
-InstallMethod( IsomorphismLoops, "for two loops",
-    [ IsLoop, IsLoop ],
+InstallMethod( IsomorphismQuasigroups, "for two quasigroups",
+    [ IsQuasigroup, IsQuasigroup ],
 function( L, M )
-    local GenL, DisL, DisM;
-    # making sure the loops have canonical Cayley tables
-    if not L = Parent( L ) then L := LoopByCayleyTable( CayleyTable( L ) ); fi;    
-    if not M = Parent( M ) then M := LoopByCayleyTable( CayleyTable( M ) ); fi;    
+    local GenL, DisL, DisM, permL, permM, p, iso; 
+   
+    # making sure the quasigroups have canonical Cayley tables
+    if not L = Parent( L ) then L := CanonicalCopy( L ); fi;
+    if not M = Parent( M ) then M := CanonicalCopy( M ); fi;
+    
+    # turning non-declared loops into loops
+    permL := ();
+    if (not IsLoop( L )) and (not MultiplicativeNeutralElement( L )=fail) then
+        p := Position( Elements( L ), MultiplicativeNeutralElement( L ) );
+        if p<>1 then
+            permL := (1,p);
+        fi;
+        L := IntoLoop( L );
+    fi;
+    permM := ();
+    if (not IsLoop( M )) and (not MultiplicativeNeutralElement( M )=fail) then
+        p := Position( Elements( M ), MultiplicativeNeutralElement( M ) );
+        if p<>1 then
+            permM := (1,p);
+        fi;
+        M := IntoLoop( M );
+    fi;
+   
     DisL := Discriminator( L );
     GenL := LOOPS_EfficientGenerators( L, DisL );
     DisM := Discriminator( M );
-    return IsomorphismLoopsNC( L, GenL, DisL, M, DisM );
+    iso := IsomorphismQuasigroupsNC( L, GenL, DisL, M, DisM );
+    if not iso = fail then
+        iso := permL*iso*permM; # accounting for possible internal conversions to loops
+    fi;
+    return iso;
+end);
+
+#############################################################################
+##  
+#O  IsomorphismLoops( L, M ) 
+##
+##  If the loops <L>, <M> are isomorophic, it returns an isomorphism
+##  from <L> onto <M>. Fails otherwise.
+
+InstallMethod( IsomorphismLoops, "for loops",
+    [ IsLoop, IsLoop ],
+function( L, M )
+    return IsomorphismQuasigroups( L, M );
+end);
+
+#############################################################################
+##  
+#O  QuasigroupsUpToIsomorphism( ls ) 
+##
+##  Given a list <ls> of quasigroups, returns a sublist of <ls> consisting
+##  of represenatives of isomorphism classes of <ls>.
+
+InstallMethod( QuasigroupsUpToIsomorphism, "for a list of quasigroups",
+    [ IsList ],
+function( ls )
+    local i, quasigroups, L, D, G, with_same_D, is_new_quasigroup, K;
+    
+    # making sure only quasigroups are on the list
+    if not IsEmpty( Filtered( ls, x -> not IsQuasigroup( x ) ) ) then
+        Error("LOOPS: <1> must be a list of quasigroups");
+    fi;        
+    # making everything canonical
+    ls := ShallowCopy( ls ); # otherwise a side efect occurs in ls
+    for i in [1..Length(ls)] do
+        if not Parent(ls[i]) = ls[i] then
+            ls[i] := CanonicalCopy( ls[i] );
+        fi;
+    od;
+    
+    quasigroups := [];
+    for L in ls do
+        D := Discriminator( L );
+        G := LOOPS_EfficientGenerators( L, D );
+        # will be testing only quasigroups with the same discriminator
+        with_same_D := Filtered( quasigroups, K -> AreEqualDiscriminators( K[2], D ) );
+        is_new_quasigroup := true;
+        for K in with_same_D do
+            if not IsomorphismQuasigroupsNC( L, G, D, K[1], K[2] ) = fail then
+                is_new_quasigroup := false;
+                break;
+            fi;
+        od;
+        if is_new_quasigroup then Add( quasigroups, [ L, D ] ); fi;
+    od;
+    # returning only quasigroups, not their discriminators
+    return List( quasigroups, L -> L[1] );
 end);
 
 #############################################################################
@@ -336,28 +429,11 @@ end);
 InstallMethod( LoopsUpToIsomorphism, "for a list of loops",
     [ IsList ],
 function( ls )
-    local loops, L, D, G, with_same_D, is_new_loop, K;
-    # making sure only loops are on the list
-    if not IsEmpty( Filtered( ls, x -> not IsLoop( x ) ) ) then
-        Error("LOOPS: <1> must be a list of loops");
+    # making sure only quasigroups are on the list
+    if not IsEmpty( Filtered( ls, x -> not IsQuasigroup( x ) ) ) then
+        Error("LOOPS: <1> must be a list of quasigroups");
     fi;        
-    loops := [];
-    for L in ls do
-        D := Discriminator( L );
-        G := LOOPS_EfficientGenerators( L, D );
-        # will be testing only loops with the same discriminator
-        with_same_D := Filtered( loops, K -> AreEqualDiscriminators( K[2], D ) );
-        is_new_loop := true;
-        for K in with_same_D do
-            if not IsomorphismLoopsNC( L, G, D, K[1], K[2] ) = fail then
-                is_new_loop := false;
-                break;
-            fi;
-        od;
-        if is_new_loop then Add( loops, [ L, D ] ); fi;
-    od;
-    # returning only loops, not their discriminators
-    return List( loops, L -> L[1] );
+    return QuasigroupsUpToIsomorphism( ls );
 end);
 
 #############################################################################
@@ -406,40 +482,43 @@ function( L, S )
 end);
 
 
-
 #############################################################################
 ##  AUTOMORPHISMS AND AUTOMORPHISM GROUPS
 ##  -------------------------------------------------------------------------
 
 #############################################################################
 ##  
-#F  LOOPS_AutomorphismsFixingSet( S, L, GenL, DisL ) 
+#F  LOOPS_AutomorphismsFixingSet( S, Q, GenQ, DisQ ) 
 ##
 ##  Auxiliary function. 
-##  Given a loop <L>, its subset <S>, the efficient generators <GenL> of <L>
-##  and the discriminator <DisL> of <L>, it returns all automorphisms of <L>
-##  fixing the set <S> pointwise.
+##  Given a quasigroup <Q>, its subset <S>, the efficient generators
+##  <GenQ> of <Q> and and invariant subsets <DisQ> of <Q>, it returns all
+##  automorphisms of <Q> fixing the set <S> pointwise.
 
 InstallGlobalFunction( LOOPS_AutomorphismsFixingSet,
-function( S, L, GenL, DisL )
+function( S, Q, GenQ, DisQ )
     local n, x, A, possible_images, y, i, map, g;
     
     # this is faster than extending a map
-    n := Size( L );
-    S := Subloop( L, List( S, i -> Elements( L )[ i ] ) );
+    n := Size( Q );
+    if IsLoop( Q ) then
+        S := Subloop( Q, S );
+    else
+        S := Subquasigroup( Q, S ); # can be empty
+    fi;
     if Size( S ) = n then return []; fi; # identity, no need to return
-    S := List( S, x -> Position( Elements( L ), x ) );
+    S := List( S, x -> Position( Elements( Q ), x ) );
     
     #pruning blocks
-    DisL := List( DisL, B -> Filtered( B, x -> not x in S ) );
+    DisQ := List( DisQ, B -> Filtered( B, x -> not x in S ) );
     
     # first unmapped generator
-    x := GenL[ 1 ]; 
-    GenL := List( [2..Length( GenL )], i -> GenL[ i ] );
+    x := GenQ[ 1 ]; 
+    GenQ := GenQ{[2..Length(GenQ)]};
     
     A := [];
     
-    possible_images :=  Difference( DisL[ LOOPS_SublistPosition( DisL, x ) ], [ x ] ); 
+    possible_images := Filtered( DisQ[ LOOPS_SublistPosition( DisQ, x ) ], y -> y <> x );   
     for y in possible_images do
         # constructing map
         map := 0*[1..n];
@@ -447,32 +526,35 @@ function( S, L, GenL, DisL )
         map[ x ] := y;
         g := [ map, Union( S, [ x ] ), Union( S, [ y ] ) ];
         # extending map
-        g := LOOPS_ExtendIsomorphism( g, CayleyTable( L ), GenL, DisL, CayleyTable( L ), DisL );
+        g := LOOPS_ExtendIsomorphism( g, CayleyTable( Q ), GenQ, DisQ, CayleyTable( Q ), DisQ );
         if not g = fail then AddSet( A, g[ 1 ] ); fi;
     od;
     
     S := Union( S, [ x ] );
-    return Union( A, LOOPS_AutomorphismsFixingSet( S, L, GenL, DisL ) );  
+    return Union( A, LOOPS_AutomorphismsFixingSet( S, Q, GenQ, DisQ ) );  
 end);
 
 #############################################################################
 ##  
-#F  AutomorphismGroup( L ) 
+#F  AutomorphismGroup( Q ) 
 ##
-##  Returns the automorphism group of a loop <L>, as a permutation group
-##  on [1..Size(L)].
+##  Returns the automorphism group of a quasigroup <Q>,
+##  as a permutation group on [1..Size(Q)].
 
-InstallOtherMethod( AutomorphismGroup, "for loop",
-    [ IsLoop ],
-function( L )
-    local DisL, GenL, A;
-    # making sure L has canonical Cayley table
-    if not L = Parent( L ) then L := LoopByCayleyTable( CayleyTable( L ) ); fi;
-    DisL := Discriminator( L );
-    GenL := List( LOOPS_EfficientGenerators( L, DisL ), x -> Position( Elements( L ), x ) );
-    DisL := List( Discriminator( L )[ 2 ], B -> List( B, x -> Position( Elements( L ), x ) ) );
-    
-    A := LOOPS_AutomorphismsFixingSet( [ 1 ], L, GenL, DisL );
+InstallOtherMethod( AutomorphismGroup, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    local DisQ, GenQ, A;
+    # making sure Q has canonical Cayley table
+    if not Q = Parent( Q ) then Q := CanonicalCopy( Q ); fi;
+    DisQ := Discriminator( Q );
+    GenQ := LOOPS_EfficientGenerators( Q, DisQ );
+        
+    if IsLoop( Q ) then
+        A := LOOPS_AutomorphismsFixingSet( [ 1 ], Q, GenQ, DisQ[2] );
+    else
+        A := LOOPS_AutomorphismsFixingSet( [ ], Q, GenQ, DisQ[2] );
+    fi;
     
     if IsEmpty( A ) then return Group( () ); fi; # no notrivial automorphism
     return Group( List( A, p -> SortingPerm( p ) ) );
