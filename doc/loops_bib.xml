@@ -25,6 +25,26 @@
   <other type="fjournal">Proceedings of the American Mathematical
       Society</other>
 </article></entry>
+<entry id="BaGrVo"><article>
+  <author>
+    <name><first>Dylene Agda Souza</first><last>De Barros</last></name>
+    <name><first>Alexander</first><last>Grishkov</last></name>
+    <name><first>Petr</first><last>Vojtěchovský</last></name>
+  </author>  
+  <title>Commutative automorphic loops of order <C><M>p^3</M></C></title>
+  <journal>J. Algebra Appl.</journal>
+  <year>2012</year>
+  <volume>11</volume>
+  <number>5</number>
+  <pages>1250100, 15</pages>
+  <issn>0219-4988</issn>
+  <mrnumber>2983192</mrnumber>
+  <mrclass>20N05 (20G40)</mrclass>
+  <mrreviewer>Ágota Figula</mrreviewer>
+  <url>http://dx.doi.org/10.1142/S0219498812501009</url>
+  <other type="doi">10.1142/S0219498812501009</other>
+  <other type="fjournal">Journal of Algebra and its Applications</other>
+</article></entry>
 <entry id="Br"><book>
   <author>
     <name><first>Richard Hubert</first><last>Bruck</last></name>
@@ -40,6 +60,22 @@
   <mrreviewer>L. J. Paige</mrreviewer>
   <other type="pages">viii+185</other>
 </book></entry>
+<entry id="BrPa"><article>
+  <author>
+    <name><first>R. H.</first><last>Bruck</last></name>
+    <name><first>Lowell J.</first><last>Paige</last></name>
+  </author>  
+  <title>Loops whose inner mappings are automorphisms</title>
+  <journal>Ann. of Math. (2)</journal>
+  <year>1956</year>
+  <volume>63</volume>
+  <pages>308–323</pages>
+  <issn>0003-486X</issn>
+  <mrnumber>0076779</mrnumber>
+  <mrclass>20.0X</mrclass>
+  <mrreviewer>R. Moufang</mrreviewer>
+  <other type="fjournal">Annals of Mathematics. Second Series</other>
+</article></entry>
 <entry id="ChPfSm"><book>
   <editor>
     <name><first>O.</first><last>Chein</last></name>
@@ -184,6 +220,27 @@
   <mrclass>20N05</mrclass>
   <other type="pages">xviii+287</other>
 </book></entry>
+<entry id="GrKiNa"><article>
+  <author>
+    <name><first>Alexander</first><last>Grishkov</last></name>
+    <name><first>Michael</first><last>Kinyon</last></name>
+    <name><first>Gábor P.</first><last>Nagy</last></name>
+  </author>  
+  <title>Solvability of commutative automorphic loops</title>
+  <journal>Proc. Amer. Math. Soc.</journal>
+  <year>2014</year>
+  <volume>142</volume>
+  <number>9</number>
+  <pages>3029–3037</pages>
+  <issn>0002-9939</issn>
+  <mrnumber>3223359</mrnumber>
+  <mrclass>20N05 (17B99)</mrclass>
+  <mrreviewer>J. D. Phillips</mrreviewer>
+  <url>http://dx.doi.org/10.1090/S0002-9939-2014-12053-3</url>
+  <other type="doi">10.1090/S0002-9939-2014-12053-3</other>
+  <other type="fjournal">Proceedings of the American Mathematical
+      Society</other>
+</article></entry>
 <entry id="JaMa"><article>
   <author>
     <name><first>Mark T.</first><last>Jacobson</last></name>
@@ -203,6 +260,46 @@
   <other
       type="doi">10.1002/(SICI)1520-6610(1996)4:6&lt;405::AID-JCD3>3.0.CO;2-J</other>
   <other type="fjournal">Journal of Combinatorial Designs</other>
+</article></entry>
+<entry id="JeKiVo"><article>
+  <author>
+    <name><first>P{\v{r}}emysl</first><last>Jedlička</last></name>
+    <name><first>Michael</first><last>Kinyon</last></name>
+    <name><first>Petr</first><last>Vojtěchovský</last></name>
+  </author>  
+  <title>Nilpotency in automorphic loops of prime power order</title>
+  <journal>J. Algebra</journal>
+  <year>2012</year>
+  <volume>350</volume>
+  <pages>64–76</pages>
+  <issn>0021-8693</issn>
+  <mrnumber>2859875</mrnumber>
+  <mrclass>20N05</mrclass>
+  <mrreviewer>Mohammad Shahryari</mrreviewer>
+  <url>http://dx.doi.org/10.1016/j.jalgebra.2011.09.034</url>
+  <other type="coden">JALGA4</other>
+  <other type="doi">10.1016/j.jalgebra.2011.09.034</other>
+  <other type="fjournal">Journal of Algebra</other>
+</article></entry>
+<entry id="JoKiNaVo"><article>
+  <author>
+    <name><first>Kenneth W.</first><last>Johnson</last></name>
+    <name><first>Michael K.</first><last>Kinyon</last></name>
+    <name><first>Gábor P.</first><last>Nagy</last></name>
+    <name><first>Petr</first><last>Vojtěchovský</last></name>
+  </author>  
+  <title>Searching for small simple automorphic loops</title>
+  <journal>LMS J. Comput. Math.</journal>
+  <year>2011</year>
+  <volume>14</volume>
+  <pages>200–213</pages>
+  <issn>1461-1570</issn>
+  <mrnumber>2831230</mrnumber>
+  <mrclass>20N05 (20B15 20B40)</mrclass>
+  <mrreviewer>Tuval S. Foguel</mrreviewer>
+  <url>http://dx.doi.org/10.1112/S1461157010000173</url>
+  <other type="doi">10.1112/S1461157010000173</other>
+  <other type="fjournal">LMS Journal of Computation and Mathematics</other>
 </article></entry>
 <entry id="KiKuPh"><article>
   <author>
@@ -224,6 +321,28 @@
   <other type="coden">PAMYAR</other>
   <other type="doi">10.1090/S0002-9939-01-06090-7</other>
   <other type="fjournal">Proceedings of the American Mathematical
+      Society</other>
+</article></entry>
+<entry id="KiKuPhVo"><article>
+  <author>
+    <name><first>Michael K.</first><last>Kinyon</last></name>
+    <name><first>Kenneth</first><last>Kunen</last></name>
+    <name><first>J. D.</first><last>Phillips</last></name>
+    <name><first>Petr</first><last>Vojtěchovský</last></name>
+  </author>  
+  <title>The structure of automorphic loops</title>
+  <journal>Trans. Amer. Math. Soc.</journal>
+  <year>2016</year>
+  <volume>368</volume>
+  <number>12</number>
+  <pages>8901–8927</pages>
+  <issn>0002-9947</issn>
+  <mrnumber>3551593</mrnumber>
+  <mrclass>20N05</mrclass>
+  <url>http://dx.doi.org/10.1090/tran/6622</url>
+  <other type="coden">TAMTAM</other>
+  <other type="doi">10.1090/tran/6622</other>
+  <other type="fjournal">Transactions of the American Mathematical
       Society</other>
 </article></entry>
 <entry id="KiNaVo2015"><article>
@@ -404,6 +523,22 @@
   <url>http://dx.doi.org/10.1016/j.ejc.2004.10.003</url>
   <other type="doi">10.1016/j.ejc.2004.10.003</other>
   <other type="fjournal">European Journal of Combinatorics</other>
+</article></entry>
+<entry id="VoQRS"><article>
+  <author>
+    <name><first>Petr</first><last>Vojtěchovský</last></name>
+  </author>  
+  <title>Three lectures on automorphic loops</title>
+  <journal>Quasigroups Related Systems</journal>
+  <year>2015</year>
+  <volume>23</volume>
+  <number>1</number>
+  <pages>129–163</pages>
+  <issn>1561-2848</issn>
+  <mrnumber>3353114</mrnumber>
+  <mrclass>20N05</mrclass>
+  <mrreviewer>Ágota Figula</mrreviewer>
+  <other type="fjournal">Quasigroups and Related Systems</other>
 </article></entry>
 <entry id="Wi"><article>
   <author>

@@ -2,7 +2,7 @@
 ##
 #W  classes.gd  Testing varieties [loops]
 ##
-#H  @(#)$Id: classes.gd, v 3.0.0 2015/06/12 gap Exp $
+#H  @(#)$Id: classes.gd, v 3.3.0 2016/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -14,8 +14,8 @@
 
 DeclareProperty( "IsAssociative", IsLoop );
 DeclareProperty( "IsCommutative", IsQuasigroup );
-DeclareProperty( "IsPowerAssociative", IsLoop );
-DeclareProperty( "IsDiassociative", IsLoop );
+DeclareProperty( "IsPowerAssociative", IsQuasigroup );
+DeclareProperty( "IsDiassociative", IsQuasigroup );
 
 #############################################################################
 ##  INVERSE PROPERTIES

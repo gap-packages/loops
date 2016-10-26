@@ -24,7 +24,7 @@
 
 <TitlePage>
         <Title>The <Package>LOOPS</Package> Package</Title>
-        <Version>Version 3.2.0</Version>
+        <Version>Version 3.3.0</Version>
         <Subtitle>Computing with quasigroups and loops in &GAP;</Subtitle>
         <Author>G&#225;bor P. Nagy
                 <Email>nagyg@math.u-szeged.hu</Email>
@@ -126,9 +126,9 @@ We welcome all comments and suggestions on <Package>LOOPS</Package>, especially 
 
 We thank the following people for sending us remarks and comments, and for suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Steve Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov, Frank L&#252;beck and Jonathan D.H. Smith.
 
-<P/>The library of Moufang loops of order 243 was generated from data provided by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy closed loops of order less than 28 was generated from data provided by Katharina Artic.
+<P/>The library of Moufang loops of order 243 was generated from data provided by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy closed loops of order less than 28 was generated from data provided by Katharina Artic. The library of commutative automorphic loops of order 27, 81 and 243 was obtained jointly with Izabella Stuhl.
 
-<P/>G&#225;bor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr Vojt&#283;chovsk&#253; was supported by the 2006 PROF grant of the University of Denver and by the Simons Foundation Collaboration Grant 210176.
+<P/>G&#225;bor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr Vojt&#283;chovsk&#253; was supported by the 2006 and 2016 University of Denver PROF grants and the Simons Foundation Collaboration Grant 210176.
 
 </Section>
 
@@ -894,6 +894,12 @@ See Section <Ref Sect="Sec:AssociatorsAndCommutators"/> for definitions of assoc
 <Returns>A generating set <M>\{q_0</M>, <M>\dots</M>, <M>q_m\}</M> of <Arg>Q</Arg> such that
 <M>Q_0=\emptyset</M>, <M>Q_m=</M><Arg>Q</Arg>, <M>Q_i=\langle q_1</M>, <M>\dots</M>, <M>q_i \rangle</M>, and <M>q_{i+1}</M> is the least element of <Arg>Q</Arg><M>\setminus Q_i</M>.</Returns>
 </ManSection>
+
+<ManSection>
+<Attr Name="SmallGeneratingSet" Arg="Q"/>
+<Returns>A small generating set <M>\{q_0</M>, <M>\dots</M>, <M>q_m\}</M> of <Arg>Q</Arg> obtained as follows: <M>q_0</M> is the least element for which <M>\langle q_0\rangle</M> is largest possible, <M>q_1</M>$ is the least element for which <M>\langle q_0,q_1</M> is largest possible, and so on.</Returns>
+</ManSection>
+
 </Section>
 
 </Chapter>
@@ -946,18 +952,19 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 
 <ManSection>
 <Oper Name="Subquasigroup" Arg="Q, S"/>
-<Returns>When <Arg>S</Arg> is a subset (of elements or indices) of a quasigroup <Arg>Q</Arg>, returns the smallest subquasigroup (resp. subloop) of <Arg>Q</Arg> containing <Arg>S</Arg>.</Returns>
+<Returns>When <Arg>S</Arg> is a subset of elements or indices of a quasigroup (resp. loop) <Arg>Q</Arg>, returns the smallest subquasigroup (resp. subloop) of <Arg>Q</Arg> containing <Arg>S</Arg>.</Returns>
 
 <Description>We allow <Arg>S</Arg> to be a list of elements of <Arg>Q</Arg>, or a list of integers representing the positions of the respective elements in the parent quasigroup (resp. loop) of <Arg>Q</Arg>.
 
-<P/>If <Arg>S</Arg> is empty, <Code>Subloop(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> returns the one-element subloop of <Arg>Q</Arg>, while <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> returns the empty set.
+<P/>If <Arg>S</Arg> is empty, <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> returns the empty set if <Arg>Q</Arg> is a quasigroup, and it returns the one-element subloop of <Arg>Q</Arg> if <Arg>Q</Arg> is a loop.
 
 <P/><B>Remark:</B> The empty set is sometimes considered to be a subquasigroup of <Arg>Q</Arg> (although not in <Package>LOOPS</Package>). The above convention is useful for handling certain situations, for instance when the user calls <Code>Center(<Arg>Q</Arg>)</Code> for a quasigroup <Arg>Q</Arg> with empty center.</Description>
 </ManSection>
 
 <ManSection>
 <Oper Name="Subloop" Arg="Q, S"/>
-<Description>This is a loop analog of <Code>IsSubquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code>.</Description>
+<Description>This is an analog of <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> that can be used only when <Arg>Q</Arg> is a loop. Since there is no difference in the outcome while calling <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> or <Code>Subloop(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> when <Arg>Q</Arg> is a loop, it is safe to always call <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code>, whether <Arg>Q</Arg> is a loop or not.
+</Description>
 </ManSection>
 
 <ManSection>
@@ -1392,14 +1399,14 @@ Although loops are quasigroups, it is often the case in the literature that a pr
 
 <ManSection>
 <Prop Name="IsPowerAssociative" Arg="Q"/>
-<Returns><Code>true</Code> if <Arg>Q</Arg> is a power associative loop.</Returns>
-<Description>A loop <M>Q</M> is said to be <Emph>power associative</Emph><Index Subkey="power associative">loop</Index><Index>power associative loop</Index> if every element of <M>Q</M> generates an associative loop.</Description>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a power associative quasigroup.</Returns>
+<Description>A quasigroup <M>Q</M> is said to be <Emph>power associative</Emph><Index Subkey="power associative">quasigroup</Index><Index>power associative quasigroup</Index> if every element of <M>Q</M> generates an associative quasigroup, that is, a group.</Description>
 </ManSection>
 
 <ManSection>
 <Prop Name="IsDiassociative" Arg="Q"/>
-<Returns><Code>true</Code> if <Arg>Q</Arg> is a diassociative loop.</Returns>
-<Description>A loop <M>Q</M> is said to be <Emph>diassociative</Emph><Index Subkey="diassociative">loop</Index><Index>diassociative loop</Index> if any two elements of <M>Q</M> generate an associative sublop.</Description>
+<Returns><Code>true</Code> if <Arg>Q</Arg> is a diassociative quasigroup.</Returns>
+<Description>A quasigroup <M>Q</M> is said to be <Emph>diassociative</Emph><Index Subkey="diassociative">quasigroup</Index><Index>diassociative quasigroup</Index> if any two elements of <M>Q</M> generate an associative quasigroup, that is, a group. Note that a diassociative quasigroup is necessarily a loop, but it need not be so declared in <Package>LOOPS</Package>.</Description>
 </ManSection>
 
 </Section>
@@ -1690,7 +1697,20 @@ A loop <M>Q</M> whose all left (resp. middle, resp. right) inner mappings are au
 
 <P/>Automorphic loops are also known as <Emph>A loops</Emph>, and similar terminology exists for left, right and middle automorphic loops.
 
-<P/>Diassociative automorphic loops are Moufang by <Cite Key="KiKuPh"/>. See the built-in filters for additional properties of automorphic loops.
+<P/>The following results hold for automorphic loops:
+<List>
+        <Item>automorphic loops are power associative <Cite Key="BrPa"/></Item>
+        <Item>in an automorphic loop <M>Q</M> we have <M>{\rm Nuc}(Q) = {\rm Nuc}_{\lambda}(Q) = {\rm Nuc}_{\rho}(Q)\le {\rm Nuc}_{\mu}(Q)</M> and all nuclei are normal <Cite Key="BrPa"/></Item>
+        <Item>a loop that is left automorphic and right automorphic satisfies the anti-automorphic inverse property and is automorphic <Cite Key="JoKiNaVo"/></Item>
+        <Item>diassociative automorphic loops are Moufang <Cite Key="KiKuPh"/></Item>
+        <Item>automorphic loops of odd order are solvable <Cite Key="KiKuPhVo"/></Item>
+        <Item>finite commutative automorphic loops are solvable <Cite Key="GrKiNa"/></Item>
+        <Item>commutative automorphic loops of order <M>p</M>, <M>2p</M>, <M>4p</M>, <M>p^2</M>, <M>2p^2</M>, <M>4p^2</M> (<M>p</M> an odd prime) are abelian groups <Cite Key="VoQRS"/></Item>
+        <Item>commutative automorphic loops of odd prime power order are centrally nilpotent <Cite Key="JeKiVo"/></Item>
+        <Item>for any prime <M>p</M>, there are <M>7</M> commutative automorphic loops of order <M>p^3</M> up to isomorphism <Cite Key="BaGrVo"/></Item>
+</List>
+
+See the built-in filters and the survey <Cite Key="VoQRS"/> for additional properties of automorphic loops.
 
 <ManSection>
 <Prop Name="IsLeftAutomorphicLoop" Arg="Q"/>
@@ -2121,7 +2141,7 @@ are 2623755 nilpotent loops of order 12, and 123794003928541545927226368 nilpote
 
 <Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
 
-The library named <Emph>automorphic</Emph> contains all nonassociative automorphic loops of order less than 16 up to isomorphism. There is 1 such loop of order 6, 7 of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15.
+The library named <Emph>automorphic</Emph> contains all nonassociative automorphic loops of order less than 16 up to isomorphism (there is 1 such loop of order 6, 7 of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15), all commutative automorphic loops of order 3, 9, 27 and 81 (there are 1, 2, 7 and 72 such loops, respectively, including abelian groups), and commutative automorphic loops <M>Q</M> of order 243 possessing a central subloop <M>S</M> of order 3 such that <M>Q/S</M> is not the elementary abelian group of order 81 (there are 118451 such loops).
 
 <ManSection>
 <Func Name="AutomorphicLoop" Arg="n, m"/>
@@ -2183,6 +2203,7 @@ Below is a list of all relevant files forming the <Package>LOOPS</Package> packa
 <Br/><File>PackageInfo.g</File> (loading info for GAP 4.4)
 <Br/><File>read.g</File> (implementations)
 <Br/><File>data/automorphic.tbl</File> (library of automorphic loops)
+<Br/><File>data/automorphic/*.*</File> (addition files for the library of automorphic loops)
 <Br/><File>data/cc.tbl</File> (library of conjugacy closed loops)
 <Br/><File>data/code.tbl</File> (library of code loops)
 <Br/><File>data/interesting.tbl</File> (library of interesting loops)
@@ -2233,7 +2254,7 @@ Many implications among properties of loops are built directly into <Package>LOO
 <Code>( IsExtraLoop, IsAssociative and IsLoop )</Code>
 <Br/><Code>( IsExtraLoop, IsCodeLoop )</Code>
 <Br/><Code>( IsCCLoop, IsCodeLoop )</Code>
-<Br/><Code>( HasTwosidedInverses, IsPowerAssociative )</Code>
+<Br/><Code>( HasTwosidedInverses, IsPowerAssociative and IsLoop )</Code>
 <Br/><Code>( IsPowerAlternative, IsDiassociative )</Code>
 <Br/><Code>( IsFlexible, IsDiassociative )</Code>
 <Br/><Code>( HasAntiautomorphicInverseProperty, HasAutomorphicInverseProperty and IsCommutative )</Code>

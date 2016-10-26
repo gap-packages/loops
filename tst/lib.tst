@@ -2,7 +2,7 @@
 ##
 #W  lib.tst   Testing libraries of loops         G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: lib.tst, v 3.0.0 2015/06/15 gap Exp $
+#H  @(#)$Id: lib.tst, v 3.3.0 2016/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -231,19 +231,34 @@ gap> CodeLoop( 64, 80 );
 # AUTOMORPHIC LOOPS
 
 gap> DisplayLibraryInfo("automorphic");
-The library contains all nonassociative automorphic loops
-of order less than 16.
+The library contains:
+ - all nonassociative automorphic loops of order less than 16,
+ - all commutative automorphic loops of order 3, 9, 27, 81,
+ - all commutative automorphic loops of order 243 that are central
+   extensions of Z_3 by F, where F is not the elem. ab. 3-group.
+Note: Abelian groups are included among the commutative loops.
 ------
 Extent of the library:
+   1 loop of order 3
    1 loop of order 6
    7 loops of order 8
+   2 loops of order 9
    3 loops of order 10
    2 loops of order 12
    5 loops of order 14
    2 loops of order 15
+   7 loops of order 27
+   72 loops of order 81
+   118451 loops of order 243
 true
 
 gap> AutomorphicLoop(15,2);
 <automorphic loop 15/2>
+
+gap> AutomorphicLoop(27,1);
+<automorphic loop 27/1>
+
+gap> AutomorphicLoop(243,100);
+<automorphic loop 243/100>
 
 gap> STOP_TEST( "lib.tst", 10000000 );

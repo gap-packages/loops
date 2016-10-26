@@ -2,14 +2,14 @@
 ##
 #W  examples.gi              Examples [loops]
 ##  
-#H  @(#)$Id: examples.gi, v 3.2.0 2015/11/29 gap Exp $
+#H  @(#)$Id: examples.gi, v 3.3.0 2016/10/19 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
 #############################################################################
-##  Binding gobal variable LOOPS_aux 
+##  Binding global variable LOOPS_aux 
 ##
 ##  The variable is used for temporary storage throughout the package. 
 ##  We therefore do not want the variable to be read only.
@@ -101,7 +101,12 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     elif name = "nilpotent" then
         s := "The library contains all nonassociative nilpotent loops \nof order less than 12.";
     elif name = "automorphic" then
-        s := "The library contains all nonassociative automorphic loops \nof order less than 16.";
+        s := "The library contains:\n";
+        s := Concatenation(s," - all nonassociative automorphic loops of order less than 16,\n");
+        s := Concatenation(s," - all commutative automorphic loops of order 3, 9, 27, 81,\n");
+        s := Concatenation(s," - all commutative automorphic loops of order 243 that are central\n");
+        s := Concatenation(s,"   extensions of Z_3 by F, where F is not the elem. ab. 3-group.\n");
+        s := Concatenation(s,"Note: Abelian groups are included among the commutative loops.");
     # up to isotopism
     elif name = "itp small" then
         s := "The library contains all nonassociative loops of order less than 7 up to isotopism.";
@@ -249,30 +254,17 @@ end);
 
 InstallGlobalFunction( LOOPS_ActivateMoufangLoop,
 function( n, pos_n, m )
-    local d, UnpackCocycle, parent_m, parent, S, a, h, e, f, G, ret, x, row, y, b, c, z;
+    local d, parent_m, parent, S, a, h, e, f, G, ret, x, row, y, b, c, z;
     
     d := LOOPS_moufang_data[ 3 ][ pos_n ][ m ]; #data
     
     # orders 81 and 243 are represented as central extensions
     if n = 81 or n = 243 then 
-        # auxiliary routine for unpacking cocycle from strings to arrays
-        UnpackCocycle := function( s )
-            local n, coc, i, j;
-            s := List( s, char -> Position( "123456789", char ) );
-            n := Sqrt( Length( s ) );
-            coc := List([1..n], i -> 0*[1..n]);
-            for i in [1..n] do for j in [1..n] do
-                coc[i][j] := s[ (i-1)*n + j ];
-            od; od;
-            return coc;
-        end;
-        
-        # calling LOOPS routine "LoopByExtension"
         return LoopByExtension( 
-            IntoLoop( SmallGroup( d[1], d[2] ) ), # K
-            IntoLoop( SmallGroup( d[3], d[4] ) ), # F
-            List([1..d[3]], i -> () ), # trivial action F -> Aut( K )
-            UnpackCocycle( d[ 5 ] ) # cocycle
+            IntoLoop( SmallGroup( d[1], d[2] ) ),                       # K
+            IntoLoop( SmallGroup( d[3], d[4] ) ),                       # F
+            List([1..d[3]], i -> () ),                                  # trivial action F -> Aut( K )
+            LOOPS_DecodeCocycle( [ n/d[1], false, d[5] ], [1..d[1]] )   # cocycle
         );
     fi;
     
@@ -541,7 +533,50 @@ function( data )
     # constructing the loop
     return LoopByExtension( K, F, phi, theta );
 
-end);     
+end);
+
+#############################################################################
+##  
+#F  LOOPS_ActivateAutomorphicLoop( n, m ) 
+##    
+##  Activates an automorphic loop from the library.
+
+InstallGlobalFunction( LOOPS_ActivateAutomorphicLoop,
+function( n, m )
+    local i, pos_n, factor_id, F, dim, coords, basis, coc;
+    if IsEmpty( LOOPS_automorphic_cocycles ) then # only read on demand
+        ReadPackage( "loops", "data/automorphic/automorphic_cocycles.tbl");
+        # decode cocycles 
+        for i in [1..3] do
+            LOOPS_automorphic_cocycles[ i ] := List( LOOPS_automorphic_cocycles[ i ],
+                c -> LOOPS_DecodeCocycle( [ 3^(i+2), true, c ], [0,1,2] )
+            );
+        od;
+        # separate coordinates (from a long string )
+        for i in [1..3] do
+            LOOPS_automorphic_coordinates[ i ] := SplitString( LOOPS_automorphic_coordinates[ i ], " " );
+        od;
+    fi;
+    # factor loop
+    pos_n := Position( [27,81,243], n );
+    factor_id := LOOPS_CharToDigit( LOOPS_automorphic_coordinates[ pos_n ][ m ][ 1 ] );
+    F := AutomorphicLoop( n/3, factor_id );
+    # coordinates determining the cocycle
+    dim := Length( LOOPS_automorphic_bases[ pos_n ][ factor_id ] );
+    coords := LOOPS_automorphic_coordinates[ pos_n ][ m ];
+    coords := coords{[2..Length(coords)]}; # remove the character that determines factor id
+    coords := LOOPS_ConvertBase( coords, 91, 3, dim );
+    coords := List( coords, LOOPS_CharToDigit );
+    # basis
+    basis := List( LOOPS_automorphic_bases[ pos_n ][ factor_id ],
+        i -> LOOPS_automorphic_cocycles[ pos_n ][ i ]
+    );
+    # calculate cocycle
+    coc := (coords*basis) mod 3;
+    coc := List( coc, i -> i+1 );
+    # return extension of Z_3 by F using cocycle and trivial action
+    return LoopByExtension( AutomorphicLoop(3,1), F, List([1..n/3], i -> () ), coc );
+end);  
 
 #############################################################################
 ##  READING LOOPS FROM THE LIBRARY - GENERIC METHOD
@@ -690,9 +725,12 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     elif name = "nilpotent" then
         loop := LOOPS_ActivateNilpotentLoop( lib[ 3 ][ pos_n ][ m ] );
     elif name = "automorphic" then
-        loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
+        if not n in [27,81,243] then # use Cayley table
+            loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
+        else # use cocycles
+            loop := LOOPS_ActivateAutomorphicLoop( n, m );            
+        fi;
         SetIsAutomorphicLoop( loop, true );
-    
     # up to isotopism        
     elif name = "itp small" then
         return LibraryLoop( "small", n, lib[ 3 ][ pos_n ][ m ] );

@@ -51,3 +51,4 @@ DeclareGlobalFunction( "LOOPS_ActivateSteinerLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateRCCLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateCCLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateNilpotentLoop" );
+DeclareGlobalFunction( "LOOPS_ActivateAutomorphicLoop" );

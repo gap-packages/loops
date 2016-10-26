@@ -2,18 +2,40 @@
 ##
 #W  automorphic.tbl    Automorphic loops         G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: automorphic.tbl, v 3.1.0 2015/09/23 gap Exp $
+#H  @(#)$Id: automorphic.tbl, v 3.3.0 2016/10/20 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
+
+#############################################################################
+## Binding global variables 
+## LOOPS_automorphic_cocycles
+## LOOPS_automorphic_bases
+## LOOPS_automorphic_coordinates
+
+# Many small automorphic loops are represtented by encoded Cayley tables.
+#
+# Commutative automorphic loops of order 243 are represtented as central
+# extensions of the cyclic group of order 3.
+# The necessary data is only loaded on demand and consists of:
+# - LOOPS_automorphic_cocycles, a list of encoded bases of the
+#   space of cocycles modulo coboundaries for every factor loop F needed.
+# - LOOPS_automorphic_coordinates, a list that for every loop
+#   points to the factor loop and gives coordinates of the required cocycle
+#   with respect to the relevant basis.
+
 LOOPS_automorphic_data := [  
 #implemented orders
-[6,8,10,12,14,15],
+[3,6,8,9,10,12,14,15,27,81,243],
 #number of nonassociative loops of given order
-[1,7,3,2,5,2],
+[1,1,7,2,3,2,5,2,7,72,118451],
 #the loops
 [
+#order 3 (Z_3)
+[
+"201"
+],
 #order 6
 [
 "2045301534540123520143120"
@@ -28,6 +50,12 @@ LOOPS_automorphic_data := [
 "0325476301675421076455760132467102374523106543201",
 "0325476310674520176545761023467013275432106452301"
 ],
+#order 9 (two abelian groups)
+[
+"204537861534867678012861207201345534",
+"204537861534867678120862017012453345"
+]
+,
 #order 10
 [
 "234067895340178956401289567012395678987601234598740123659834012765923401876512340",
@@ -51,6 +79,21 @@ LOOPS_automorphic_data := [
 [
 "234068597BDAEC340189675DEBCA401297856ECDAB012375968CAEBD6897ADECB041328975DCABE430215689EABDC102439756CBDEA324107568BECAD21304BDEC0413258976DECA4302187569ABDE1024395687ECAB3241076895CABD2130469758",
 "234067895BCDEA340178956CDEAB401289567DEABC012395678EABCD7968ADBEC012348579ECADB340129685DBECA123405796CADBE401236857BECAD23401DBEC0432156789ECAD3210478956ADBE1043295678BECA4321067895CADB2104389567"
+],
+#order 27 (commutative only, placeholder)
+[
+]
+, 
+#order 81 (commutative only, placeholder)
+[
+]
+,
+#order 243 (commutative only, placeholder)
+[
 ]
 ]
 ];
+
+LOOPS_automorphic_cocycles := [];
+LOOPS_automorphic_bases := [];
+LOOPS_automorphic_coordinates := [];

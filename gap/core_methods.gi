@@ -2,7 +2,7 @@
 ##
 #W  core_methods.gi Most common structural methods [loops]
 ##
-#H  @(#)$Id: core_methods.gi, v 3.0.0 2015/06/12 gap Exp $
+#H  @(#)$Id: core_methods.gi, v 3.3.0 2016/09/21 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -28,8 +28,8 @@ InstallMethod( GeneratorsOfQuasigroup, "for quasigroup",
 ##
 #A  GeneratorsSmallest( Q )
 ##
-##  Returns a small generating set of quasigroup <Q>. When <Q> has order n,
-##  the set has size at most log_2( n ).
+##  Returns a smallest generating set of a quasigroup <Q> with respect
+##  to lexicographic ordering of elements.
 
 InstallOtherMethod( GeneratorsSmallest, "for a quasigroup",
         [ IsQuasigroup ],
@@ -39,15 +39,44 @@ function( Q )
     diff := Elements( Q );
     while diff <> [ ] do
         Add( gens, diff[ Length(diff) ] );
-        if IsLoop( Q ) then
-            diff := Difference( diff, Subloop( Q, gens ) );
-        else
-            diff := Difference( diff, Subquasigroup( Q, gens ) );
-        fi;
+        diff := Difference( diff, Subquasigroup( Q, gens ) );
     od;
     return Set( gens );
 end );
 
+#############################################################################
+##
+#A  SmallGeneratingSet( Q )
+##
+##  Returns a small generating set of a quasigroup <Q>. There is no
+##  guarantee that the set is of minimal cardinality.
+
+InstallOtherMethod( SmallGeneratingSet, "for a quasigroup",
+        [ IsQuasigroup ],
+function( Q )
+    local gens, sub, candidates, max, S, best_gen, best_S;
+    
+    gens := [];         # generating set to be returned
+    sub := [];          # substructure generated so far
+    while sub <> Q do
+        # find an element not in sub that most enlarges sub
+        candidates := Difference( Elements(Q), sub );
+        max := 0;
+        while not IsEmpty( candidates ) do
+            S := Subquasigroup( Q, Union( gens, [candidates[1]] ) );
+            if Size(S) > max then
+                max := Size( S );
+                best_gen := candidates[1];
+                best_S := S;
+            fi;
+            # discard elements of S since they cannot do better
+            candidates := Difference( candidates, Elements( S ) );
+        od;
+        AddSet( gens, best_gen );
+        sub := best_S;
+    od;
+    return gens;
+end );
 
 #############################################################################
 ##  COMPARING QUASIGROUPS WITH COMMON PARENT
@@ -408,6 +437,9 @@ function( Q, pos_of_gens )
     SetSize( subqg, Length( pos_of_gens ) );
     SetAsSSortedList( subqg, elms );
     SetParent( subqg, Q );
+    if IsLoop( Q ) then
+        SetOne( subqg, One( Q ) );
+    fi;
     return subqg;
 end );
 
@@ -423,22 +455,25 @@ InstallMethod( Subquasigroup, "for quasigroup and list of elements",
 function( Q, gens )
     local pos_gens, transl, pos_of_elms, relmultgr, subqg;
     # NG: we allow list of indices as well
-    # PV: we allow gens to be empty, too. This will never happen when Subquasigroup is called from Subloop,
-    # but it can happen when Q is a quasigroup. For instance, when Q has empty nucleus, it makes sense
-    # to return [] rather than an error message when calling Nuc(Q).
+    # PV: we allow gens to be empty, too. When Q is a loop, the trivial subloop is returned.
+    # When Q is a quasigroup, we return []. This is useful when Nuc(Q) is empty in a quasigroup,
+    # for instance. 
     if IsEmpty( gens ) then
+        if IsLoop( Q ) then
+            return SubquasigroupNC( Q, [1] ); # trivial subloop
+        fi;
         return [];
     fi;
     if not( ForAll( gens, g -> g in Q ) or ForAll( gens, g-> g in PosInParent( Q ) ) ) then
         Error("LOOPS: <2> must be a list of elements of quasigroup <1> or their indices.");
     fi;
-    if not IsInt( gens[1] ) then
+    if not IsInt( gens[1] ) then # convert elements to indices
         pos_gens := PosInParent( gens );
     else
         pos_gens := ShallowCopy( gens );
         gens := Elements( Parent( Q ) ){ gens };
     fi;
-    # P.V. ... must iterate this
+    # calculating the subquasigroup
     pos_of_elms := [];
     while pos_gens<>pos_of_elms do
         pos_of_elms := pos_gens;
@@ -447,11 +482,7 @@ function( Q, gens )
         pos_gens := Set( Orbits( relmultgr, pos_gens )[ 1 ] );
     od;
     subqg := SubquasigroupNC( Parent( Q ), Set( pos_of_elms ) );
-    if IsLoop( Q ) and Size( Q ) > 1 then
-        SetGeneratorsOfMagma( subqg, Difference( gens, [ One( Q ) ] ) );
-    else
-        SetGeneratorsOfMagma( subqg, gens );
-    fi;
+    SetGeneratorsOfMagma( subqg, gens );
     return subqg;
 end );
 
@@ -466,15 +497,7 @@ end );
 InstallMethod( Subloop, "for loop and list of elements",
     [ IsLoop, IsList ],
 function( L, gens )
-    local sl, pos_of_gens;
-    if gens<>[] and ( gens[1] in L ) then
-        pos_of_gens := Union( [1], PosInParent( gens ) );
-    else
-        pos_of_gens := Union( [1], gens );
-    fi;
-    sl := Subquasigroup( L, pos_of_gens );
-    SetOne( sl, One( L ) );
-    return sl;
+    return Subquasigroup( L, gens );
 end );
 
 #############################################################################
@@ -539,11 +562,7 @@ function( Q )
             while not IsEmpty(Out) do
                 x := Out[ 1 ];
                 Out := Out{[2..Length(Out)]};
-                if IsLoop( Q ) then
-                    B := Subloop( Q, Union( Elements( A ), [ x ] ) );
-                else
-                    B := Subquasigroup( Q, Union( Elements( A ), [ x ] ) );
-                fi;
+                B := Subquasigroup( Q, Union( Elements( A ), [ x ] ) );
                 if not B in New and not B in All then
                     Add( New, B );   # new subquasigroup found
                 fi;
@@ -648,11 +667,9 @@ function( Q )
     e := Elements( Q );
     S := Filtered( [ 1..n ], i -> ForAll( [ 1..n ], j ->
         LS[ j ]*LS[ i ] = LS[ Position( e, e[ i ]*e[ j ] ) ] ) );
-    if IsLoop( Q ) then
-        S := Subloop( Q, Elements( Q ){ S } );
+    S := Subquasigroup( Q, Elements( Q ){ S } );
+    if Size(S)>0 then
         SetIsAssociative( S, true );
-    else
-        S := Subquasigroup( Q, Elements( Q ){ S } );
     fi;
     return S;
 end);
@@ -672,12 +689,10 @@ function( Q )
     e := Elements( Q );
     S := Filtered( [ 1..n ], i -> ForAll( [ 1..n ], j ->
         LS[ i ]*LS[ j ] = LS[ Position( e, e[ j ]*e[ i ] ) ] ) );
-    if IsLoop( Q ) then
-        S := Subloop( Q, Elements( Q ){ S } );
+    S := Subquasigroup( Q, Elements( Q ){ S } );
+    if Size(S)>0 then
         SetIsAssociative( S, true );
-    else
-        S := Subquasigroup( Q, Elements( Q ){ S } );
-    fi;
+    fi;   
     return S;
 end);
 
@@ -696,11 +711,9 @@ function( Q )
     e := Elements( Q );
     S := Filtered( [ 1..n ], i -> ForAll( [ 1..n ], j ->
         RS[ j ]*RS[ i ] = RS[ Position( e, e[ j ]*e[ i ] ) ] ) );
-    if IsLoop( Q ) then
-        S := Subloop( Q, Elements( Q ){ S } );
+    S := Subquasigroup( Q, Elements( Q ){ S } );
+    if Size(S)>0 then
         SetIsAssociative( S, true );
-    else
-        S := Subquasigroup( Q, Elements( Q ){ S } );
     fi;
     return S;
 end);
@@ -717,11 +730,9 @@ function( Q )
     local N, S;
     N := Intersection( Elements( LeftNucleus( Q ) ),
         Elements( RightNucleus( Q ) ), Elements( MiddleNucleus( Q ) ) );
-    if IsLoop( Q ) then
-        S := Subloop( Q, N );
+    S := Subquasigroup( Q, N );    
+    if Size(S)>0 then 
         SetIsAssociative( S, true );
-    else
-        S := Subquasigroup( Q, N );
     fi;
     return S;
 end);
@@ -750,16 +761,14 @@ end);
 InstallOtherMethod( Center, "for quasigroup",
     [ IsQuasigroup ], 1*SUM_FLAGS + 20,
 function( Q )
-    local S, L;
+    local S;
     S := Intersection( Nuc( Q ), Commutant( Q ) );
-    if IsLoop( Q ) then
-        L := Subloop( Q, S );
-        SetIsAssociative( L, true );
-    else
-        L := Subquasigroup( Q, S );
+    S := Subquasigroup( Q, S );
+    if Size( S ) > 0 then
+        SetIsAssociative( S, true );
+        SetIsCommutative( S, true );
     fi;
-    SetIsCommutative( L, true );
-    return L;
+    return S;
 end);
 
 #############################################################################

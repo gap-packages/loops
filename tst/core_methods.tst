@@ -2,7 +2,7 @@
 ##
 #W  core_methods.tst   Testing core methods      G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: core_methods.tst, v 3.2.0 2016/06/02 gap Exp $
+#H  @(#)$Id: core_methods.tst, v 3.3.0 2016/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -101,6 +101,8 @@ gap> GeneratorsOfLoop( L );
 [ l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12 ]
 gap> GeneratorsSmallest( L );
 [ l10, l11, l12 ]
+gap> SmallGeneratingSet( L );
+[ l2, l3, l7 ]
 
 # TESTING SECTIONS AND TRANSLATIONS
 

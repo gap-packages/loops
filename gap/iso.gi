@@ -2,7 +2,7 @@
 ##
 #W  iso.gi  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: iso.gi, v 3.2.0 2016/04/22 gap Exp $
+#H  @(#)$Id: iso.gi, v 3.3.0 2016/10/26 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -19,13 +19,15 @@
 ##  Returns the dicriminator of a quasigroup <Q>.
 ##  It is a list [ A, B ], where A is a list of the form
 ##  [ [I1,n1], [I2,n2],.. ], where the invariant Ii occurs ni times in Q,
-##  and where B[i] is a subset of [1..Order(Q)] corresponding to elements of
+##  and where B[i] is a subset of [1..Size(Q)] corresponding to elements of
 ##  Q with invariant Ii.
+##  
+##  PROG: Invariants 8, 9 can be slow for large quasigroups.
 
 InstallMethod( Discriminator, "for quasigroup",
     [ IsQuasigroup ],
 function( Q )
-    local n, T, I, i, j, k, ebo, A, P, B, perm, p;
+    local n, T, I, case, i, j, k, ebo, js, ks, count1, count2, A, P, B, perm, p;
 
     # making sure the quasigroup is canonical
     if not Q = Parent( Q ) then Q := CanonicalCopy( Q ); fi;
@@ -49,14 +51,15 @@ function( Q )
 
     # invariant 1
     # to distinguish the 3 cases
-    if (not IsLoop( Q ) ) then
-        for i in [1..n] do I[i][1] := 1; od;
-    elif (not IsPowerAssociative( Q )) then
-        for i in [1..n] do I[i][1] := 2; od;
+    if (not IsLoop( Q ) )
+        then case := 1;
+    elif (not IsPowerAssociative( Q ))
+        then case := 2;
     else
-        for i in [1..n] do I[i][1] := 3; od;
+        case := 3;
     fi;
-
+    for i in [1..n] do I[i][1] := case; od;
+    
     # invariant 2
     # for given x, cycle structure of L_x, R_x
     for i in [1..n] do
@@ -67,70 +70,81 @@ function( Q )
     od;
 
     # invariant 3
-    if (not IsLoop( Q )) then # am I an idempotent?
+    if case = 1 then # am I an idempotent?
         for i in [1..n] do I[i][3] := T[i][i]=i; od;
-    elif (not IsPowerAssociative( Q )) then # am I an involution?
+    elif case = 2 then # am I an involution?
         for i in [1..n] do I[i][3] := T[i][i]=1; od;
     else # what's my order?
-        for i in [1..n] do I[i][3] := Order( Elements( Q )[ i ] ); od;
+        for i in [1..n] do I[i][3] := Order( Elements( Q )[i] ); od;
     fi;
 
     # invariant 4
-    if ( not IsLoop( Q ) ) or ( not IsPowerAssociative( Q ) ) then # how many times am I a square ?
-        for i in [1..n] do j := T[ i ][ i ]; I[ j ][ 4 ] := I[ j ][ 4 ] + 1; od;
+    if case <> 3 then # how many times am I a square ?
+        for i in [1..n] do j := T[i][i]; I[j][4] := I[j][4] + 1; od;
     else # how many times am I a square, third power, fourth power?
         for i in [1..n] do I[i][4] := [0,0,0]; od;
         for i in [1..n] do
-            j := T[ i ][ i ]; I[ j ][ 4 ][ 1 ] := I[ j ][ 4 ][ 1 ] + 1;
-            j := T[ i ][ j ]; I[ j ][ 4 ][ 2 ] := I[ j ][ 4 ][ 2 ] + 1;
-            j := T[ i ][ j ]; I[ j ][ 4 ][ 3 ] := I[ j ][ 4 ][ 3 ] + 1;
+            j := T[i][i]; I[j][4][1] := I[j][4][1] + 1;
+            j := T[i][j]; I[j][4][2] := I[j][4][2] + 1;
+            j := T[i][j]; I[j][4][3] := I[j][4][3] + 1;
+        od;
+    fi;
+    
+    # invariant 5
+    if case <> 3 then #  with how many elements do I commute?
+        for i in [1..n] do
+            I[i][5] := Length( Filtered( [1..n], j -> T[i][j] = T[j][i] ) );
+        od;
+    else # with how many elements of given order do I commute?
+        ebo := List( [1..n], i -> Filtered( [1..n], j -> I[j][3]=i ) ); # elements by order. PROG: must point to order invariant
+        ebo := Filtered( ebo, x -> not IsEmpty( x ) );
+        for i in [1..n] do
+            I[i][5] := List( ebo, J -> Length( Filtered( J, j -> T[ i ][ j ] = T[ j ][ i ] ) ) );
         od;
     fi;
 
-    # invariant 5
+    # invariant 6
     # is it true that (x*x)*x = x*(x*x)?
     for i in [1..n] do
-        I[ i ][ 5 ] :=  T[ T[ i ][ i ] ][ i ] = T[ i ][ T[ i ][ i ] ];
-    od;
-
-    # invariant 6
-    # for how many elements y is (x*x)*y = x*(x*y)?
-    for i in [1..n] do
-        for j in [1..n] do if T[ T[ i ][ i ] ][ j ] = T[ i ][ T[ i ][ j ] ] then
-            I[ i ][ 6 ] := I[ i ][ 6 ] + 1;
-        fi; od;
+        I[i][6] :=  T[T[i][i]][i] = T[i][T[i][i]];
     od;
 
     # invariant 7
-    if ( not IsLoop( Q ) ) or ( not IsPowerAssociative( Q ) ) then #  with how many elements do I commute?
+    if case <> 3 then # for how many elements y is (x*x)*y = x*(x*y)?
         for i in [1..n] do
-            for j in [1..n] do if T[ i ][ j ] = T[ j ][ i ] then
-                I[ i ][ 7 ] := I[ i ][ 7 ] + 1;
-            fi; od;
+            I[i][7] := Length( Filtered( [1..n], j -> T[T[i][i]][j] = T[i][T[i][j]] ) );
         od;
-    else # with how many elements of given order do I commute?
-        ebo := List( [1..n], i -> Filtered( [1..n], j -> I[j][1]=i ) ); # elements by order
-        ebo := Filtered( ebo, x -> not IsEmpty( x ) );
+    else # for how many elements y of given order is (x*x)*y=x*(x*y)
         for i in [1..n] do
-            I[i][7] := List( ebo, J -> Length( Filtered( J, j -> T[ i ][ j ] = T[ j ][ i ] ) ) );
+            I[i][7] := List( ebo, J -> Length( Filtered( J, j -> T[T[i][i]][j] = T[i][T[j][i]] ) ) );
         od;
     fi;
 
-    # invariant 8
-    # with how many elements y, z do I associate in the first position ?
-    for i in [1..n] do
-		for j in [1..n] do for k in [1..n] do
-			if T[ i ][ T[ j ][ k ] ] = T[ T[ i ][ j ] ][ k ] then
-				I[ i ][ 8 ] := I[ i ][ 8 ] + 1;
-			fi;
-		od; od;
-	od;
-
-    # invariant 9
-    # am I central?
-    for i in [1..n] do I[ i ][ 9 ] := Elements( Q )[ i ] in Center( Q ); od;
-	
+    # invariants 8 and 9 (these take longer)
+    if case <> 3 then # with how many pairs of elements do I associate in the first, second position?
+        for i in [1..n] do
+            for j in [1..n] do for k in [1..n] do
+                if T[i][T[j][k]] = T[T[i][j]][k] then I[i][8] := I[i][8] + 1; fi;
+                if T[j][T[i][k]] = T[T[j][i]][k] then I[i][9] := I[i][9] + 1; fi;
+            od; od;
+        od;
+    else # for how many pairs of elements of given orders do I associate in the first, second position?
+        for i in [1..n] do
+            I[i][8] := []; I[i][9] := [];
+            for js in ebo do for ks in ebo do
+                count1 := 0; count2 := 0;
+                for j in js do for k in ks do
+                    if T[i][T[j][k]] = T[T[i][j]][k] then count1 := count1 + 1; fi;
+                    if T[j][T[i][k]] = T[T[j][i]][k] then count2 := count2 + 1; fi;
+                od; od;
+                Add( I[i][8], count1 ); Add( I[i][9], count2 );
+            od; od;
+        od;   
+    fi;
+        	
     # all invariants have now been calculated
+    
+    # note that it can be deduced from the invariants when an element is central, for instance 
 
     # setting up the first part of the discriminator (invariants with the number of occurence)
     A := Collected( I );
@@ -155,28 +169,38 @@ end);
 ##    
 ##  Auxiliary function. 
 ##  Given a quasigroup <Q> with discriminator <D>, it returns a list of
-##  indices of generators of <Q> obtained by a greedy algorithm from
-##  the partition <D>[2] of <L>.
+##  indices of generators of <Q> deemed best for an isomorphism filter.
+##  It mimics the function SmallGeneratingSet, but it considers
+##  the elements in order determined by block size of the disciminator.
 
 InstallGlobalFunction( LOOPS_EfficientGenerators,
 function( Q, D ) 
-    local A, i, gens, S;
-    A := Concatenation( D[2] );
-    gens := [];
-    while not IsEmpty( A ) do
-        Add( gens, A[ 1 ] );
-        if IsLoop( Q ) then 
-            S := Subloop( Q, gens );
-        else 
-            S := Subquasigroup( Q, gens );
-        fi;
-        A := Filtered( A, i -> not Elements(Q)[i] in S );
+    local gens, sub, elements, candidates, max, S, best_gen, best_S;
+
+    gens := [];                             # generating set to be returned
+    sub := [];                              # substructure generated so far
+    elements := Concatenation( D[2] );      # all elements ordered by block size
+    candidates := ShallowCopy( elements );  # candidates for next generator
+    while sub <> Q do
+        # find an element not in sub that most enlarges sub
+        max := 0;
+        while not IsEmpty( candidates ) do
+            S := Subquasigroup( Q, Union( gens, [candidates[1]] ) );
+            if Size(S) > max then
+                max := Size( S );
+                best_gen := candidates[1];
+                best_S := S;
+            fi;
+            # discard elements of S since they cannot do better
+            candidates := Filtered( candidates, x -> not Elements(Q)[x] in S );
+        od;
+        Add( gens, best_gen );
+        sub := best_S;
+        # reset candidates for next round
+        candidates := Filtered( elements, x -> not Elements(Q)[x] in sub );
     od;
-    # remove identity element if Q is a nontrivial loop
-    if IsLoop( Q ) and Size( Q )>1 then
-        gens := Filtered( gens, x -> not x=1 );
-    fi;
     return gens;
+
 end);
 
 #############################################################################
@@ -329,7 +353,7 @@ end);
 InstallMethod( IsomorphismQuasigroups, "for two quasigroups",
     [ IsQuasigroup, IsQuasigroup ],
 function( L, M )
-    local GenL, DisL, DisM, permL, permM, p, iso; 
+    local GenL1, GenL2, GenL, DisL, DisM, permL, permM, p, iso; 
    
     # making sure the quasigroups have canonical Cayley tables
     if not L = Parent( L ) then L := CanonicalCopy( L ); fi;
@@ -392,6 +416,10 @@ function( ls )
     if not IsEmpty( Filtered( ls, x -> not IsQuasigroup( x ) ) ) then
         Error("LOOPS: <1> must be a list of quasigroups");
     fi;        
+    # special case: one quasigroup
+    if Length( ls ) = 1 then
+        return ls;
+    fi;
     # making everything canonical
     ls := ShallowCopy( ls ); # otherwise a side efect occurs in ls
     for i in [1..Length(ls)] do
@@ -501,11 +529,7 @@ function( S, Q, GenQ, DisQ )
     
     # this is faster than extending a map
     n := Size( Q );
-    if IsLoop( Q ) then
-        S := Subloop( Q, S );
-    else
-        S := Subquasigroup( Q, S ); # can be empty
-    fi;
+    S := Subquasigroup( Q, S ); # can be empty if Q is not a loop
     if Size( S ) = n then return []; fi; # identity, no need to return
     S := List( S, x -> Position( Elements( Q ), x ) );
     

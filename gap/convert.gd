@@ -2,7 +2,7 @@
 ##
 #W  convert.gd              Converting between numerical bases [loops]
 ##  
-#H  @(#)$Id: convert.gd, v 3.0.0 2015/06/02 gap Exp $
+#H  @(#)$Id: convert.gd, v 3.3.0 2016/10/19 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -16,4 +16,5 @@ DeclareOperation( "LOOPS_DecodeCayleyTable", [ IsString ] );
 DeclareOperation( "LOOPS_ConvertToDecimal", [ IsString, IsInt ] );
 DeclareGlobalFunction( "LOOPS_ConvertFromDecimal" ); # has variable number of arguments
 DeclareGlobalFunction( "LOOPS_ConvertBase" ); # has variable number of arguments 
-
+DeclareOperation( "LOOPS_EncodeCocycle", [ IsList, IsList ] );
+DeclareOperation( "LOOPS_DecodeCocycle", [ IsList, IsList ] );

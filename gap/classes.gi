@@ -2,7 +2,7 @@
 ##
 #W  classes.gi  Testing properties/varieties [loops]
 ##
-#H  @(#)$Id: classes.gi, v 3.0.0 2015/06/12 gap Exp $
+#H  @(#)$Id: classes.gi, v 3.3.0 2016/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -13,8 +13,8 @@
 ##  -------------------------------------------------------------------------
 
 # (PROG) IsAssociative is already implemented for magmas, but we provide
-# a new method (from version 1.5.0) based on sections. This new method is
-# much faster for groups, and a bit slower for nonassociative loops.
+# a new method based on sections. This new method is much faster for groups,
+# and a bit slower for nonassociative loops.
 
 InstallOtherMethod( IsAssociative, "for loops",
     [ IsLoop ], 0,
@@ -46,31 +46,54 @@ end );
 
 #############################################################################
 ##
-#P  IsPowerAssociative( L )
+#P  IsPowerAssociative( Q )
 ##
-##  Returns true if <L> is a power associative loop.
+##  Returns true if <Q> is a power associative quasigroup.
 
-InstallOtherMethod( IsPowerAssociative, "for loop",
-    [ IsLoop ],
-function( L )
-    return ForAll( L, x -> IsAssociative( Subloop( L, [ x ] ) ) );
+InstallOtherMethod( IsPowerAssociative, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    local checked, x, S;
+    checked := [];
+    repeat
+        x := Difference( Elements(Q), checked );
+        if IsEmpty( x ) then
+            return true;
+        fi;
+        S := Subquasigroup( Q, [x[1]] );
+        if not IsAssociative( S ) then
+            return false;
+        fi;
+        checked := Union( checked, Elements( S ) ); # S is a group, so every subquasigroup of S is a group
+    until 0=1;
 end );
 
 # implies
-InstallTrueMethod( HasTwosidedInverses, IsPowerAssociative );
+InstallTrueMethod( HasTwosidedInverses, IsPowerAssociative and IsLoop );
 
 #############################################################################
 ##
-#P  IsDiassociative( L )
+#P  IsDiassociative( Q )
 ##
-##  Returns true if <L> is a diassociative loop.
+##  Returns true if <Q> is a diassociative quasigroup.
 
-InstallOtherMethod( IsDiassociative, "for loop",
-    [ IsLoop ],
-function( L )
-    # BETTER ALGORITHM LATER
-    return ForAll( L, x -> ForAll( L, y ->
-        IsAssociative( Subloop( L, [ x, y ] ) ) ) );
+InstallOtherMethod( IsDiassociative, "for quasigroup",
+    [ IsQuasigroup ],
+function( Q )
+    local checked, all_pairs, x, S;
+    checked := [];
+    all_pairs := Combinations( PosInParent( Elements( Q ) ), 2 ); # it is faster to work with integers
+    repeat
+        x := Difference( all_pairs, checked );
+        if IsEmpty( x ) then
+            return true;
+        fi;
+        S := Subquasigroup( Q, x[1] );
+        if not IsAssociative( S ) then
+            return false;
+        fi;
+        checked := Union( checked, Combinations( PosInParent( Elements( S ) ), 2 ) );
+    until 0=1;
 end );
 
 # implies
