@@ -1,0 +1,94 @@
+#############################################################################
+##
+#W  rightbruck.tbl    Right Bruck loops          G. P. Nagy / P. Vojtechovsky
+##  
+#H  @(#)$Id: rightbruck.tbl, v 3.4.0 2017/10/24 gap Exp $
+##  
+#Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
+#Y                        P. Vojtechovsky (University of Denver, USA)
+##
+
+# Right Bruck loops of order 243 are represtented as central
+# extensions of the cyclic group of order 3.
+# The necessary data consists of:
+# - LOOPS_right_bruck_cocycles, a basis for a superspace of cocycles
+#   for all factors
+# - LOOPS_right_bruck_coordinates, a list that for every loop
+#   points to the factor loop and gives coordinates of the required cocycle
+#   with respect to the relevant basis.
+
+LOOPS_right_bruck_data := [  
+#implemented orders
+[3,9,27,81],
+#number of nonassociative loops of given order
+[1,2,7,72],
+#the loops
+[
+#order 3 (Z_3)
+[
+"201"
+],
+#order 9 (two abelian groups)
+[
+"204537861534867678012861207201345534",
+"204537861534867678120862017012453345"
+]
+,
+#order 27 (placeholder)
+[
+]
+, 
+#order 81 (placeholder)
+[
+]
+]
+];
+
+LOOPS_right_bruck_cocycles :=
+[
+# cocycles for factors of order 9 
+[
+[ 9, true, "2'pwq" ],
+[ 9, false, "ZBj[+>~vni@o7" ],
+[ 9, true, "3#QhSwvJx" ],
+[ 9, true, "JP_g" ]
+],
+# cocycles for factors of order 27
+[
+[ 27, true, "3@1Aju?P%w:;@a,0x-#3WF%=<0|[/XeKIur8%Myq" ],
+[ 27, false, "~r]%_p(/($qr{(,=pRww5eIAxf6AV2ya(q-<Q`=n*o?{:aQFYs^Z67D/j;fk~4cBp:8U7M)C|fm@FqBGk,iDTH89oS54Uw9{:O0CIT;,eT`V*E8$nTS/($" ],
+[ 27, true, "12.W./ADP*t:.tkW}cA50,w,lViI;q+2X/xlnaF,#}?)usJ9w~~kTglq[qJ~&]L+JcPn<)2OxD1F82f{73:MP(" ],
+[ 27, false, "vcV(GHJH0z&v@Sob,UDrLY,WD58fYB|3t0OVb*SbDq,Os1y;[wh2$(r^(U^m@Yz*0EJwD_MM7p/:+?DN|B6@}lcIo#9_Tq,qrV=`$yv;#Ao$@E&ez3zv4WCL/0U%Z=r1*MmY9WL*_rMtFFIWg-9x>" ],
+[ 27, false, "AZDm2AKcJkMsQcdWFt+aLX[xZ(r8UY1'fG3@c4[6W~[>TmU0@q1WmzP%~/s[81]q,Q4%z9D/f{Aw;|D'4I3JJA8]#SJw/2{zF*.$LfX)p:H`d4PJpjh5.Ff13Ri*~8y-)#nE&R(U#=p1|MkWN'StZ4n]d?x<_h>7aa,k" ],
+[ 27, false, "1M,aaVut'THt&#I8$eX`/zd6Y61SWR*J/0w}.GTnhbAq*[xNs%%~,8d06kof'{(&R;Yp7V^N7}-CM^-xbO@'FOJN$,xA5[(Y-t~7#u>6`}5xnm`[`w&zEv2CDzM/)'l~qj|B*5n[~*p/LX`2bhF^Ni]^|%r{XWec*B)" ],
+[ 27, false, "92DM|aq*TP]rsR*EQ$z6je~2'=+_OdSB-n=+e+sX|h9%<-GHVfygl4=MRL`~Z1%WDlExwz:Pkf|&l#$,;gkB~%&6>IN8g9l,W>w0>i^lHKrckmJKMW}vB&" ],
+[ 27, true, "2Fn}rAZjS5%1++ZJQ=]$[rHW:=|k`14E44FV{vleOG?HDkycql}DTzo{rNK{449-dI|`]P$~d" ],
+[ 27, false, "3No|.dC2S{f$z41B,@,dWo#Pbn^j05+;^BdD%qT#J-Y0A3aX;~]~?]AJFrZ]Lc6,F%(0lQP;2JWtRkAxgwm5hqDjEaOxuA@)*UEuS1i_|neKW>]Gc^f$*hriOT&$W{H5@(Q53QHK$/+BBuv@7Nt57S:GX$#^" ], [ 27, true, "RL7.:Q{l+0K.vFgjWJ>:Al+5-'HV|x-3W6oKPe}" ],
+[ 27, false, "S||kz0&UY#`u{sajCjc?q~9uh`&f8x~qY{I{&?E%/NEhWR%Rrs~'rJp7IVUF)rN7Kpk'hTt5)4nz#*IlRw>tDb1TPF[C.&FdB)<(;#XCDP.M/[rnMcXC{j>6:+d6rSyuLodfc*Y=" ],
+[ 27, false, "G`EoVUtm{j0}G'NaLnI`~6j6Ihy#JaaR,E`T%O?v--xeZ[QR/sU4VS*ln./35g[m+|KE(R8>HFEuK%~/{<zXhJ93?q46Aa{|;$sjmJUof>//(PsGRw&tu;d4ap8m=Bm<8r&wu^4gQq'V_NXRbh6p#=$1uH$0" ],
+[ 27, false, "(m6f.dLaPEH6f9>wYlYw'C=3nMc4C~0l1VkV8t#tpU#m}aQ=/PZv.Npk9aeW4.edR=ISNyLR]dKN?kb#EYl,z0gM^m4$#Fd0nQI5I+P|LWT5wSmhg`9o0" ]
+]
+];
+
+# The first character of every coordinate determines the factor, 
+# the remaining characters coorespond to coordinates with respect to the
+# above bases.
+
+LOOPS_right_bruck_coordinates :=
+[
+# coordinates for factors of order 9
+[ "1", "1R", "1a", "1C", "1d", "1m", "24" ]
+,
+# coordinates for factors of order 27
+[
+"1", "1%G1", "1_p#", "1Slp", "111$q", "11N8M", "1N*|", "1{_}", "11)M?",
+"1U@=", "1|(7", "11z]8", "11JB)", "11]R*", "1j`(", "11elc", "13Fa",
+"1(Vb", "11QNw", "11lxS", "1ARQ", "11XZm", "1mU3", "11Lk4", "1tf^",
+"1#r/", "1`W,", "11xm-", "1MG+", "11?^g", "1hqe", "11G)f", "11jP1",
+"11'y#", "11N?V", "1o%U", "11.-q", "11cbE", "11NeQ", "13Nb", "11l(T",
+"11=wG", "1fQE", "128|k", "1@&>", "14*i", "1)_j", "27CH", "281",
+"27KI", "22z", "2A#", "2I$", "2GB", "27SS", "2Eej", "2I-", "31bWB",
+"39", "3%GA", "31bY-", "32+", "41&>u", "4Stt", "411,u", "423iK",
+"41bmD", "4S$&", "411>'", "41'4(", "6%GA", "77B`"
+]
+];

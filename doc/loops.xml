@@ -6,7 +6,8 @@
 
 <!-- Read the file pkg/loops/etc/gapdoc.txt for instructions on how to produce the documentation. -->
 
-<!-- Typesetting rules for this document that produce acceptable outcome in both html and pdf:
+<!-- Typesetting rules for this document that produce acceptable outcome in
+both html and pdf:
 
 * Use <Br/><P/> at the beginning of paragraphs that are supposed to have an empty line just before them for greater emphasis, eg., before Remark, Example, and to break up the text. (This has no effect on html.)
 
@@ -24,7 +25,7 @@
 
 <TitlePage>
         <Title>The <Package>LOOPS</Package> Package</Title>
-        <Version>Version 3.3.0</Version>
+        <Version>Version 3.4.0</Version>
         <Subtitle>Computing with quasigroups and loops in &GAP;</Subtitle>
         <Author>G&#225;bor P. Nagy
                 <Email>nagyg@math.u-szeged.hu</Email>
@@ -34,7 +35,7 @@
                 <Email>petr@math.du.edu</Email>
                 <Address>Department of Mathematics, University of Denver</Address>
         </Author>
-        <Copyright>&copyright; 2016 G&#225;bor P. Nagy and Petr Vojt&#283;chovsk&#253;.
+        <Copyright>&copyright; 2017 G&#225;bor P. Nagy and Petr Vojt&#283;chovsk&#253;.
         </Copyright>
 </TitlePage>
 
@@ -65,7 +66,7 @@
 
 <Section Label="Sec:Installation"> <Heading>Installation</Heading>
 
-Have <Package>GAP 4.7</Package> or newer installed on your computer.
+Have <Package>GAP 4.8</Package> or newer installed on your computer.
 
 <P/>If you do not see the subfolder <File>pkg/loops</File> in the main directory of &GAP; then download the <Package>LOOPS</Package> package from the distribution website <URL>http://www.math.du.edu/loops</URL> and unpack the downloaded file into the <File>pkg</File> subfolder.
 
@@ -124,9 +125,9 @@ We welcome all comments and suggestions on <Package>LOOPS</Package>, especially 
 
 <Section Label="Sec:Acknowledgment"> <Heading>Acknowledgment</Heading>
 
-We thank the following people for sending us remarks and comments, and for suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Steve Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov, Frank L&#252;beck and Jonathan D.H. Smith.
+We thank the following people for sending us remarks and comments, and for suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Graham Ellis, Steve Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov, Frank L&#252;beck, Jonathan D.H. Smith, David Stanovsk&#253; and Glen Whitney. 
 
-<P/>The library of Moufang loops of order 243 was generated from data provided by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy closed loops of order less than 28 was generated from data provided by Katharina Artic. The library of commutative automorphic loops of order 27, 81 and 243 was obtained jointly with Izabella Stuhl.
+<P/>The library of Moufang loops of order 243 was generated from data provided by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy closed loops of order less than 28 was generated from data provided by Katharina Artic. The library of right Bruck loops of order 27, 81 was obtained jointly with Izabella Stuhl.
 
 <P/>G&#225;bor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr Vojt&#283;chovsk&#253; was supported by the 2006 and 2016 University of Denver PROF grants and the Simons Foundation Collaboration Grant 210176.
 
@@ -260,8 +261,8 @@ DeclareCategory( "IsLoopElement",
 DeclareRepresentation( "IsLoopElmRep",
     IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
 ## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
-DeclareCategory( "IsLatin", IsObject );
-DeclareCategory( "IsQuasigroup", IsMagma and IsLatin );
+DeclareCategory( "IsLatinMagma", IsObject );
+DeclareCategory( "IsQuasigroup", IsMagma and IsLatinMagma );
 DeclareCategory( "IsLoop", IsQuasigroup and
     IsMultiplicativeElementWithInverseCollection);
 </Verb>
@@ -1326,8 +1327,18 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvab
 <Br/><P/>While dealing with Cayley tables, it is often useful to rename or reorder the elements of the underlying quasigroup without changing the isomorphism type of the quasigroups. <Package>LOOPS</Package> contains several functions for this purpose.
 
 <ManSection>
+<Oper Name="QuasigroupIsomorph" Arg="Q, f"/>
+<Returns>When <Arg>Q</Arg> is a quasigroup and <Arg>f</Arg> is a permutation of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M>, returns the quasigroup defined on the same set as <Arg>Q</Arg> with multiplication <M>*</M> defined by <M>x*y = </M><Arg>f</Arg><M>(</M><Arg>f</Arg><M>{}^{-1}(x)</M><Arg>f</Arg><M>{}^{-1}(y))</M>.</Returns>
+</ManSection>
+
+<ManSection>
+<Oper Name="LoopIsomorph" Arg="Q, f"/>
+<Returns>When <Arg>Q</Arg> is a loop and <Arg>f</Arg> is a permutation of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M> fixing <M>1</M>, returns the loop defined on the same set as <Arg>Q</Arg> with multiplication <M>*</M> defined by <M>x*y = </M><Arg>f</Arg><M>(</M><Arg>f</Arg><M>{}^{-1}(x)</M><Arg>f</Arg><M>{}^{-1}(y))</M>. If <Arg>f</Arg><M>(1)=c\ne 1</M>, the isomorphism <M>(1,c)</M> is applied after <Arg>f</Arg>.</Returns>
+</ManSection>
+
+<ManSection>
 <Oper Name="IsomorphicCopyByPerm" Arg="Q, f"/>
-<Returns>When <Arg>Q</Arg> is a quasigroup and <Arg>f</Arg> is a permutation of <M>1,\dots,|</M><Arg>Q</Arg><M>|</M>, returns a quasigroup defined on the same set as <Arg>Q</Arg> with multiplication <M>*</M> defined by <M>x*y = </M><Arg>f</Arg><M>(</M><Arg>f</Arg><M>{}^{-1}(x)</M><Arg>f</Arg><M>{}^{-1}(y))</M>. When <Arg>Q</Arg> is a declared loop, a loop is returned. Consequently, when <Arg>Q</Arg> is a declared loop and <Arg>f</Arg><M>(1) = k\ne 1</M>, then <Arg>f</Arg> is first replaced with <Arg>f</Arg><M>\circ (1,k)</M>, to make sure that the resulting Cayley table is normalized.</Returns>
+<Returns><Code>LoopIsomorphism(<Arg>Q</Arg>,<Arg>f</Arg>)</Code> if <Arg>Q</Arg> is a loop, and <Code>QuasigroupIsomorphism(<Arg>Q</Arg>,<Arg>f</Arg>)</Code> if <Arg>Q</Arg> is a quasigroup.</Returns>
 </ManSection>
 
 <ManSection>
@@ -1971,6 +1982,26 @@ The library named <Emph>left Bol</Emph> contains all nonassociative left Bol loo
 
 </Section>
 
+<!-- Section:  Left Bruck Loops and Right Bruck Loops --------------------------------------------------- -->
+
+<Section Label="Sec:BruckLoops"> <Heading>Left Bruck Loops and Right Bruck Loops</Heading>
+
+The emmerging library named <Emph>left Bruck</Emph> contains all left Bruck loops of orders <M>3</M>, <M>9</M>, <M>27</M> and <M>81</M> (there are <M>1</M>, <M>2</M>, <M>7</M> and <M>72</M> such loops, respectively).
+
+<P/>For an odd prime <M>p</M>, left Bruck loops of order <M>p^k</M> are centrally nilpotent and hence central extensions of the cyclic group of order <M>p</M> by a left Bruck loop of order <M>p^{k-1}</M>. It is known that left Bruck loops of order <M>p</M> and <M>p^2</M> are abelian groups; we have included them in the library because of the iterative nature of the construction of nilpotent loops.
+
+<ManSection>
+<Func Name="LeftBruckLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th left Bruck loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="RightBruckLoop" Arg="n, m"/>
+<Returns>The <Arg>m</Arg>th right Bruck loop of order <Arg>n</Arg> in the library.</Returns>
+</ManSection>
+
+</Section>
+
 <!-- Section:  Moufang Loops ---------------------------------------------------------------------------- -->
 
 <Section Label="Sec:MoufangLoops"> <Heading>Moufang Loops</Heading>
@@ -2072,7 +2103,7 @@ The following table summarizes the number of right conjugacy closed loops of a g
 <Description><B>Remark:</B> Only the right conjugacy closed loops are stored in the library. Left conjugacy closed loops are obtained from right conjugacy closed loops via <Code>Opposite</Code>.<Br/></Description>
 </ManSection>
 
-<P/>The library named <Emph>CC</Emph> contains all nonassociative conjugacy closed loops of order <M>n\le 27</M> and also of orders <M>2p</M> and <M>p^2</M> for all primes <M>p</M>.
+<P/>The library named <Emph>CC</Emph> contains all CC loops of order <M>2\le 2^k\le 64</M>, <M>3\le 3^k\le 81</M>, <M>5\le 5^k\le 125</M>, <M>7\le 7^k\le 343</M>, all nonassociative CC loops of order less than 28, and all nonassociative CC loops of order <M>p^2</M> and <M>2p</M> for any odd prime <M>p</M>.
 
 <P/>By results of Kunen <Cite Key="Kun"/>, for every odd prime <M>p</M> there are precisely 3 nonassociative conjugacy closed loops of order <M>p^2</M>. Cs&#246;rg&#337; and Dr&#225;pal <Cite Key="CsDr"/> described these 3 loops by multiplicative formulas on <M>\mathbb{Z}_{p^2}</M> and <M>\mathbb{Z}_p \times \mathbb{Z}_p</M> as follows:
 <List>
@@ -2141,7 +2172,9 @@ are 2623755 nilpotent loops of order 12, and 123794003928541545927226368 nilpote
 
 <Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
 
-The library named <Emph>automorphic</Emph> contains all nonassociative automorphic loops of order less than 16 up to isomorphism (there is 1 such loop of order 6, 7 of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15), all commutative automorphic loops of order 3, 9, 27 and 81 (there are 1, 2, 7 and 72 such loops, respectively, including abelian groups), and commutative automorphic loops <M>Q</M> of order 243 possessing a central subloop <M>S</M> of order 3 such that <M>Q/S</M> is not the elementary abelian group of order 81 (there are 118451 such loops).
+The library named <Emph>automorphic</Emph> contains all nonassociative automorphic loops of order less than 16 up to isomorphism (there is 1 such loop of order 6, 7 of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15) and all commutative automorphic loops of order 3, 9, 27 and 81 (there are 1, 2, 7 and 72 such loops).
+
+<P/>It turns out that commutative automorphic loops of order 3, 9, 27 and 81 (but not 243) are in one-to-on correspondence with left Bruck loops of the respective orders, see <Cite Key="Greer"/>, <Cite Key="StuhlVojtechovsky"/>. Only the left Bruck loops are stored in the library.
 
 <ManSection>
 <Func Name="AutomorphicLoop" Arg="n, m"/>
@@ -2343,9 +2376,6 @@ Many implications among properties of loops are built directly into <Package>LOO
 <Br/><Code>( IsLeftAutomorphicLoop, IsAutomorphicLoop )</Code>
 <Br/><Code>( IsRightAutomorphicLoop, IsAutomorphicLoop )</Code>
 <Br/><Code>( IsMiddleAutomorphicLoop, IsAutomorphicLoop )</Code>
-<Br/><Code>( IsMiddleAutomorphicLoop, IsCommutative )</Code>
-<Br/><Code>( IsAutomorphicLoop, IsLeftAutomorphicLoop and IsCommutative )</Code>
-<Br/><Code>( IsAutomorphicLoop, IsRightAutomorphicLoop and IsCommutative )</Code>
 <Br/><Code>( IsLeftAutomorphicLoop, IsRightAutomorphicLoop and HasAntiautomorphicInverseProperty )</Code>
 <Br/><Code>( IsRightAutomorphicLoop, IsLeftAutomorphicLoop and HasAntiautomorphicInverseProperty )</Code>
 <Br/><Code>( IsFlexible, IsMiddleAutomorphicLoop )</Code>
@@ -2356,11 +2386,15 @@ Many implications among properties of loops are built directly into <Package>LOO
 <Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and HasLeftInverseProperty )</Code>
 <Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and HasRightInverseProperty )</Code>
 <Br/><Code>( IsMoufangLoop, IsAutomorphicLoop and HasWeakInverseProperty )</Code>
+<Br/><Code>( IsMiddleAutomorphicLoop, IsCommutative )</Code>
 <Br/><Code>( IsLeftAutomorphicLoop, IsLeftBruckLoop )</Code>
 <Br/><Code>( IsLeftAutomorphicLoop, IsLCCLoop )</Code>
 <Br/><Code>( IsRightAutomorphicLoop, IsRightBruckLoop )</Code>
 <Br/><Code>( IsRightAutomorphicLoop, IsRCCLoop )</Code>
 <Br/><Code>( IsAutomorphicLoop, IsCommutative and IsMoufangLoop )</Code>
+<Br/><Code>( IsAutomorphicLoop, IsLeftAutomorphicLoop and IsMiddleAutomorphicLoop )</Code>
+<Br/><Code>( IsAutomorphicLoop, IsRightAutomorphicLoop and IsMiddleAutomorphicLoop )</Code>
+<Br/><Code>( IsAutomorphicLoop, IsAssociative )</Code>
 
 </Appendix>
 
@@ -2368,4 +2402,4 @@ Many implications among properties of loops are built directly into <Package>LOO
 
 <TheIndex/>
 
-</Book> 
+</Book>

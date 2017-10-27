@@ -1,31 +1,52 @@
 #############################################################################
 ##
-#W  cc.tbl    CC-loops p^2, 2p, for p odd prime  G. P. Nagy / P. Vojtechovsky
+#W  cc.tbl    Library of CC loops                G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: cc.tbl, v 3.0.0 2015/06/10 gap Exp $
+#H  @(#)$Id: cc.tbl, v 3.4.0 2015/06/10 gap Exp $
 ##  
 #Y  Copyright (C)  2005,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
 
+#############################################################################
+## Binding global variables 
+## LOOPS_cc_used_factors
+## LOOPS_cc_cocycles
+## LOOPS_cc_bases
+## LOOPS_cc_coordinates
+
 # CC loops are activated as follows:
-# If n = 2p or p^2, where p is a prime, then we call a method for
-# cosntructing these loops.
+# If n = 2p, where p is an odd prime, then we call an algebraic method for
+# constructing these loops.
+# If n = p^2, where p>3 is a prime, then we call an algebraic method for
+# construction these loops.
+# If n is a power of 2 or 3, then we use cocycles located in cc/cc_cocycles_n.tbl.
 # For all other orders, we point to the library of RCC loops.
 
 LOOPS_cc_data := [ 
 #implemented orders
-[ 8, 12, 16, 18, 20, 21, 24, 27],
-#number of nonassociative loops of given order
-[ 2,  3, 28,  7,  3,  1, 14, 55],
-#the numbers of the loops in the RCC library
+[ 2, 3, 4, 5, 7, 8, 9, 12, 16, 18, 20, 21, 24, 25, 27,  32, 49,    64,   81,  125, 343],
+#number of loops of given order in the library
+[ 1, 1, 2, 1, 1, 7, 5,  3, 42,  7,  3,  1, 14,  5, 60, 437,  5, 14854, 5406,   84, 122],
 [
-#order 8
-[2,7],
+#order 2 (Z_2)
+["010"],
+#order 3 (Z_3)
+["201"],
+#order 4 (placeholder only)
+,
+# order 5 (Z_5)
+["2340401123"],
+# order 7 (Z_7)
+["234560456016012123345"],
+#order 8 (placeholder only)
+,
+#order 9 (placeholder only)
+,
 #order 12
 [53,73,89],
-#order 16
-[9,35,107,228,243,292,437,440,1043,1883,1936,2332,2420,2636,2645,2750,2753,2794,2797,2847,3682,3730,3739,3848,3949,4735,4904,4925],
+#order 16 (placeholder only)
+,
 #order 18
 [22,29,77,292,360,377,1133],
 #order 20
@@ -33,18 +54,12 @@ LOOPS_cc_data := [
 #order 21
 [104],
 #order 24
-[302,1025,2119,2182,2335,3066,4569,5176,5589,5997,7495,194830,225705,243216],
-#order 27
-[78,86,317,319,361,571,711,1080,1085,1624,1665,2217,2219,3614,3624,8579,8582,15059,15072,15503,15512,19439,23177,23214,26331,26348,52978,55027,55055,59116,59123,75864,78970,79011,83042,83104,83155,104913,106081,106144,110854,110892,110930,114102,117212,119407,134858,136370,140791,148160,148892,149330,151792,152090,152515]
+[302,1025,2119,2182,2335,3066,4569,5176,5589,5997,7495,194830,225705,243216]
 ]
 ];
 
-# The following can be used to point to CC loops of order 2p and p^2 in the library of RCC loops.
-# order 6, [3]
-# order 9, [5,4,3]
-# order 10, [16]
-# order 14, [97]
-# order 22, [10346]
-# order 25, [86,93,118]
-# order 26, [151964]
+LOOPS_cc_used_factors := [];
+LOOPS_cc_cocycles := [];
+LOOPS_cc_bases := [];
+LOOPS_cc_coordinates := [];
 

@@ -22,7 +22,7 @@ chooser.html
 When files are ready, run the following in GAP:
 
 # path to files, change as needed
-path := Directory("c:/cygwin64/opt/gap4r7/pkg/loops/doc");;
+path := Directory("c:/cygwin64/opt/gap4r8/pkg/loops/doc");;
 main := "loops.xml";;
 files := [];;
 bookname := "loops";;
@@ -52,7 +52,7 @@ GAPDoc2HTMLPrintHTMLFiles(h, path);
 # h := GAPDoc2HTML(r, path );;
 # GAPDoc2HTMLPrintHTMLFiles(h, path);
 
-# now produce .ps, .dvi from .tex,
-# and copy loops.* as manual.* for extensions pdf, ps, dvi
+# now produce .ps from .tex
+# and copy loops.* as manual.* for extensions pdf, ps
 
 # delete auxiliary files

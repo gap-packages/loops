@@ -2,7 +2,7 @@
 ##
 #W  examples.gi              Examples [loops]
 ##  
-#H  @(#)$Id: examples.gi, v 3.3.0 2016/10/19 gap Exp $
+#H  @(#)$Id: examples.gi, v 3.4.0 2017/10/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -32,6 +32,7 @@ ReadPackage("loops", "data/small.tbl");         # small loops
 ReadPackage("loops", "data/interesting.tbl");   # interesting loops
 ReadPackage("loops", "data/nilpotent.tbl");     # nilpotent loops
 ReadPackage("loops", "data/automorphic.tbl");   # automorphic loops
+ReadPackage("loops", "data/rightbruck.tbl");    # right Bruck loops
 
 # up to isotopism
 ReadPackage("loops", "data/itp_small.tbl");     # small loops up to isotopism
@@ -60,6 +61,7 @@ function( name )
     elif name = "interesting" then return LOOPS_interesting_data;
     elif name = "nilpotent" then return LOOPS_nilpotent_data;
     elif name = "automorphic" then return LOOPS_automorphic_data;
+    elif name = "right Bruck" then return LOOPS_right_bruck_data;
     #up to isotopism
     elif name = "itp small" then return LOOPS_itp_small_data;
     fi;
@@ -74,11 +76,8 @@ end);
 InstallGlobalFunction( DisplayLibraryInfo, function( name )
     local s, lib, k;
     # up to isomorphism
-    if name = "left Bol" then
-        s := "The library contains all nonassociative left Bol loops of order less than 17\nand all nonassociative left Bol loops of order p*q, where p>q>2 are primes.";
-    elif name = "right Bol" then
-        s := "The library contains all nonassociative right Bol loops of order less than 17\nand all nonassociative left Bol loops of order p*q, where p>q>2 are primes.";
-        name := "left Bol"; # using dual data
+    if name = "left Bol" or name = "right Bol" then
+        s := Concatenation( "The library contains all nonassociative ", name, " loops of order less than 17\nand all nonassociative ", name, " loops of order p*q, where p>q>2 are primes." );
     elif name = "Moufang" then
         s := "The library contains all nonassociative Moufang loops \nof order less than 65, and all nonassociative Moufang \nloops of order 81 and 243.";
     elif name = "Paige" then
@@ -88,12 +87,9 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     elif name = "Steiner" then
         s := "The library contains all nonassociative Steiner loops \nof order less or equal to 16. It also contains the \nassociative Steiner loops of order 4 and 8.";
     elif name = "CC" then
-        s := "The library contains all nonassociative CC loops of order less than 28 \nand all nonassociative CC loops of order p^2 and 2*p for any odd prime p.";
-    elif name = "RCC" then
-        s := "The library contains all nonassociative RCC loops of order less than 28.";
-    elif name = "LCC" then
-        s := "The library contains all nonassociative LCC loops of order less than 28.";
-        name := "RCC"; # using dual data
+        s := "The library contains all CC loops of order\n2<=2^k<=64, 3<=3^k<=81, 5<=5^k<=125, 7<=7^k<=343,\nall nonassociative CC loops of order less than 28,\nand all nonassociative CC loops of order p^2 and 2*p for any odd prime p.";
+    elif name = "RCC" or name = "LCC" then
+        s := Concatenation( "The library contains all nonassociative ", name, " loops of order less than 28." );
     elif name = "small" then
         s := "The library contains all nonassociative loops of order less than 7.";
     elif name = "interesting" then
@@ -103,22 +99,26 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
     elif name = "automorphic" then
         s := "The library contains:\n";
         s := Concatenation(s," - all nonassociative automorphic loops of order less than 16,\n");
-        s := Concatenation(s," - all commutative automorphic loops of order 3, 9, 27, 81,\n");
-        s := Concatenation(s," - all commutative automorphic loops of order 243 that are central\n");
-        s := Concatenation(s,"   extensions of Z_3 by F, where F is not the elem. ab. 3-group.\n");
-        s := Concatenation(s,"Note: Abelian groups are included among the commutative loops.");
+        s := Concatenation(s," - all commutative automorphic loops of order 3, 9, 27, 81.");
+    elif name = "left Bruck" or name = "right Bruck" then
+        s := Concatenation( "The library contains all ", name, " loops of orders 3, 9, 27 and 81." );
     # up to isotopism
     elif name = "itp small" then
         s := "The library contains all nonassociative loops of order less than 7 up to isotopism.";
     else
         Info( InfoWarning, 1, Concatenation(
             "The admissible names for loop libraries are: \n",
-            "[ \"left Bol\", \"right Bol\", \"Moufang\", \"Paige\", \"code\", \"Steiner\", \"CC\", \"RCC\", \"LCC\", \"small\", \"itp small\", \"interesting\", \"nilpotent\", \"automorphic\" ]."
+            "\"automorphic\", \"CC\", \"code\",  \"interesting\", \"itp small\", \"LCC\", \"left Bol\",  \"left Bruck\", \"Moufang\", \"nilpotent\", \"Paige\", \"right Bol\", \"right Bruck\", \"RCC\", \"small\", \"Steiner\"."
         ) );
         return fail;
     fi;
     
     s := Concatenation( s, "\n------\nExtent of the library:" );
+    
+    # renaming for data access
+    if name = "right Bol" then name := "left Bol"; fi;
+    if name = "LCC" then name := "RCC"; fi;
+    if name = "left Bruck" then name := "right Bruck"; fi;
     
     lib := LOOPS_LibraryByName( name );
     for k in [1..Length( lib[ 1 ] ) ] do
@@ -128,12 +128,12 @@ InstallGlobalFunction( DisplayLibraryInfo, function( name )
             s := Concatenation( s, "\n   ", String( lib[ 2 ][ k ] ), " loops of order ", String( lib[ 1 ][ k ] ) );
         fi;
     od;
-    if name = "left Bol" or name = "right Bol" then
+    if name = "left Bol" then
         s := Concatenation( s, "\n   (p-q)/2 loops of order p*q for primes p>q>2 such that q divides p-1");
         s := Concatenation( s, "\n   (p-q+2)/2 loops of order p*q for primes p>q>2 such that q divides p+1" );
     fi;
     if name = "CC" then
-        s := Concatenation( s, "\n   3 loops of order p^2 for every odd prime p,\n   1 loop of order 2*p for every odd prime p" );
+        s := Concatenation( s, "\n   3 loops of order p^2 for every prime p>7,\n   1 loop of order 2*p for every odd prime p" );
     fi;
     s := Concatenation( s, "\n" );
     Print( s );
@@ -436,7 +436,48 @@ end);
 
 InstallGlobalFunction( LOOPS_ActivateCCLoop,
 function( n, pos_n, m, case )
-    local T, x, y, k, a, b, p;
+    local powers, p, i, k, F, basis, coords, coc, T, a, b, x, y;
+    powers := [ ,[4,8,16,32,64],[9,27,81],,[25,125],,[49,343]];
+    if n in Union( powers ) then # use cocycles
+        # determine p and position of n in database
+        p := Filtered([2,3,5,7], x -> n in powers[x])[1];
+        pos_n := Position( powers[p], n );
+        if not IsBound( LOOPS_cc_cocycles[p] ) then
+            # data not read yet, activate once
+            ReadPackage( "loops", Concatenation( "data/cc/cc_cocycles_", String(p), ".tbl" ) );
+            # decode cocycles and separate coordinates from a long string
+            for i in [1..Length(powers[p])] do
+                LOOPS_cc_cocycles[ p ][ i ] := List( LOOPS_cc_cocycles[ p ][ i ],
+                    c -> LOOPS_DecodeCocycle( [ p^i, c[1], c[2] ], [0..p-1] )
+                );
+                LOOPS_cc_coordinates[ p ][ i ] := List( LOOPS_cc_coordinates[ p ][ i ],
+                    c -> SplitString( c, " " )
+                );
+            od;
+        fi;
+        # data is now read
+        # determine position of loop in the database
+        k := 1;
+        while m > Length( LOOPS_cc_coordinates[ p ][ pos_n ][ k ] ) do
+            m := m - Length( LOOPS_cc_coordinates[ p ][ pos_n ][ k ] );
+            k := k + 1;
+        od;
+        # factor loop
+        F := CCLoop( n/p, LOOPS_cc_used_factors[ p ][ pos_n ][ k ] );
+        # basis
+        basis := List( LOOPS_cc_bases[ p ][ pos_n ][ k ],
+            i -> LOOPS_cc_cocycles[ p ][ pos_n ][ i ]
+        );
+        # coordinates 
+        coords := LOOPS_cc_coordinates[ p ][ pos_n ][ k ][ m ];
+        coords := LOOPS_ConvertBase( coords, 91, p, Length( basis ) );
+        coords := List( coords, LOOPS_CharToDigit );
+        # cocycle
+        coc := (coords*basis) mod p;
+        coc := List( coc, i -> i+1 ); 
+        # return extension of Z_p by F using cocycle and trivial action
+        return LoopByExtension( CCLoop(p,1), F, List([1..n/p], i -> () ), coc );
+    fi;
     
     if case=false then # use library of RCC loops, must recalculate pos_n
         return LOOPS_ActivateRCCLoop( n, Position(LOOPS_rcc_data[ 1 ], n), LOOPS_cc_data[ 3 ][ pos_n ][ m ] ); 
@@ -543,39 +584,52 @@ end);
 
 InstallGlobalFunction( LOOPS_ActivateAutomorphicLoop,
 function( n, m )
-    local i, pos_n, factor_id, F, dim, coords, basis, coc;
-    if IsEmpty( LOOPS_automorphic_cocycles ) then # only read on demand
-        ReadPackage( "loops", "data/automorphic/automorphic_cocycles.tbl");
-        # decode cocycles 
-        for i in [1..3] do
-            LOOPS_automorphic_cocycles[ i ] := List( LOOPS_automorphic_cocycles[ i ],
-                c -> LOOPS_DecodeCocycle( [ 3^(i+2), true, c ], [0,1,2] )
-            );
-        od;
-        # separate coordinates (from a long string )
-        for i in [1..3] do
-            LOOPS_automorphic_coordinates[ i ] := SplitString( LOOPS_automorphic_coordinates[ i ], " " );
-        od;
-    fi;
+    # returns the associated Gamma loop (which here always happens to be automorphic)
+    # improve later
+    local P, L, s, Ls, ct, i, j, pos, f;
+    P := LeftBruckLoop( n, m );
+    L := LeftMultiplicationGroup( P );;
+    s := List(Elements(L), x -> x^2 );;
+    Ls := List([1..n], i -> LeftTranslation( P, Elements(P)[i] ) );;
+    ct := List([1..n],i->0*[1..n]);;
+    for i in [1..n] do for j in [1..n] do
+	   pos := Position( s, Ls[i]*Ls[j]*Ls[i]^(-1)*Ls[j]^(-1) );
+	   f := Elements(L)[pos];
+	   ct[i][j] := 1^(f*Ls[j]*Ls[i]);
+    od; od;
+    return LoopByCayleyTable(ct);
+end);
+
+#############################################################################
+##  
+#F  LOOPS_ActivateRightBruckLoop( n, m ) 
+##    
+##  Activates a right Bruck loop from the library.
+
+InstallGlobalFunction( LOOPS_ActivateRightBruckLoop,
+function( n, m )
+    local pos_n, factor_id, F, basis, coords, coc;
     # factor loop
-    pos_n := Position( [27,81,243], n );
-    factor_id := LOOPS_CharToDigit( LOOPS_automorphic_coordinates[ pos_n ][ m ][ 1 ] );
-    F := AutomorphicLoop( n/3, factor_id );
+    pos_n := Position( [27,81], n );
+    factor_id := LOOPS_CharToDigit( LOOPS_right_bruck_coordinates[ pos_n ][ m ][ 1 ] );
+    F := RightBruckLoop( n/3, factor_id );
+    # basis (only decode cocycles at first usage)
+    if IsString( LOOPS_right_bruck_cocycles[ pos_n ][ 1 ][ 3 ] ) then # not converted yet
+        LOOPS_right_bruck_cocycles[ pos_n ] := List( LOOPS_right_bruck_cocycles[ pos_n ],
+            coc -> LOOPS_DecodeCocycle( coc, [0,1,2] )
+        );
+    fi;
+    basis := LOOPS_right_bruck_cocycles[ pos_n ];
     # coordinates determining the cocycle
-    dim := Length( LOOPS_automorphic_bases[ pos_n ][ factor_id ] );
-    coords := LOOPS_automorphic_coordinates[ pos_n ][ m ];
+    coords := LOOPS_right_bruck_coordinates[ pos_n ][ m ];
     coords := coords{[2..Length(coords)]}; # remove the character that determines factor id
-    coords := LOOPS_ConvertBase( coords, 91, 3, dim );
+    coords := LOOPS_ConvertBase( coords, 91, 3, Length( basis ) );
     coords := List( coords, LOOPS_CharToDigit );
-    # basis
-    basis := List( LOOPS_automorphic_bases[ pos_n ][ factor_id ],
-        i -> LOOPS_automorphic_cocycles[ pos_n ][ i ]
-    );
     # calculate cocycle
     coc := (coords*basis) mod 3;
-    coc := List( coc, i -> i+1 );
+    coc := coc + 1;
     # return extension of Z_3 by F using cocycle and trivial action
-    return LoopByExtension( AutomorphicLoop(3,1), F, List([1..n/3], i -> () ), coc );
+    return LoopByExtension( RightBruckLoop(3,1), F, List([1..n/3], i -> () ), coc );
 end);  
 
 #############################################################################
@@ -593,13 +647,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     local lib, implemented_orders, NOL, loop, pos_n, p, q, divs, PG, m_inv, root, half, case, g, h;
 
     # selecting data library
-    if name = "right Bol" then # using dual data
-        lib := LOOPS_LibraryByName( "left Bol" );
-    elif name = "LCC" then # using dual data
-        lib := LOOPS_LibraryByName( "RCC" );
-    else
-        lib := LOOPS_LibraryByName( name );
-    fi;
+    lib := LOOPS_LibraryByName( name );
 
     # extent of the library
     implemented_orders := lib[ 1 ];
@@ -614,7 +662,7 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     # parameters for handling systematic cases, such as CCLoop( p^2, 1 )
     pos_n := fail;
     case := false; 
-    if name="left Bol" or name="right Bol" then
+    if name="left Bol" then
         divs := DivisorsInt( n );
         if Length( divs ) = 4 and not IsInt( divs[3]/divs[2] ) then # case n = p*q
             q := divs[ 2 ];
@@ -633,13 +681,13 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     fi;
     if name="CC" then 
         divs := DivisorsInt( n );
-        if Length( divs ) = 3 then # case p^2
+        if Length( divs ) = 3 and divs[ 2 ] > 7 then # case p^2, p>7
             p := divs[ 2 ];
             case := [p,"p^2"];
             if not m in [1..3] then
                 Error("LOOPS: There are only 3 nonassociative CC-loops of order p^2 for an odd prime p.");
             fi;
-        elif Length( divs ) = 4 and not IsInt( divs[3]/divs[2] ) then # p*q
+        elif Length( divs ) = 4 and not IsInt( divs[3]/divs[2] ) and not n=21 then # p*q
             p := divs[ 3 ];
             case := [p,"2*p"];
             if not divs[2] = 2 then
@@ -670,9 +718,6 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     if name = "left Bol" then 
         loop := LOOPS_ActivateLeftBolLoop( pos_n, m, case );
         SetIsLeftBolLoop( loop, true );
-    elif name = "right Bol" then
-        loop := OppositeLoop( LOOPS_ActivateLeftBolLoop( pos_n, m, case ) );
-        SetIsRightBolLoop( loop, true );
     elif name = "Moufang" then
         # renaming loops so that they agree with Goodaire's classification
         PG := List([1..243], i->());
@@ -701,14 +746,15 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
         loop := LOOPS_ActivateSteinerLoop( n, pos_n, m );
         SetIsSteinerLoop( loop, true );
     elif name = "CC" then
-        loop := LOOPS_ActivateCCLoop( n, pos_n, m, case );
+        if n in [2,3,5,7] then # use Cayley table for canonical cyclic group
+            loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
+        else
+            loop := LOOPS_ActivateCCLoop( n, pos_n, m, case );
+        fi;
         SetIsCCLoop( loop, true );
     elif name = "RCC" then
         loop := LOOPS_ActivateRCCLoop( n, pos_n, m );
         SetIsRCCLoop( loop, true );
-    elif name = "LCC" then
-        loop := OppositeLoop( LOOPS_ActivateRCCLoop( n, pos_n, m ) );
-        SetIsLCCLoop( loop, true );     
     elif name = "small" then
         loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
     elif name = "interesting" then
@@ -725,12 +771,19 @@ InstallGlobalFunction( LibraryLoop, function( name, n, m )
     elif name = "nilpotent" then
         loop := LOOPS_ActivateNilpotentLoop( lib[ 3 ][ pos_n ][ m ] );
     elif name = "automorphic" then
-        if not n in [27,81,243] then # use Cayley table
+        if not n in [3, 9, 27, 81] then # use Cayley table
             loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
-        else # use cocycles
-            loop := LOOPS_ActivateAutomorphicLoop( n, m );            
+        else # use associated left Bruck loop
+            loop := LOOPS_ActivateAutomorphicLoop( n, m );
         fi;
         SetIsAutomorphicLoop( loop, true );
+    elif name = "right Bruck" then
+        if not n in [27,81] then # use Cayley table
+            loop := LoopByCayleyTable( LOOPS_DecodeCayleyTable( lib[ 3 ][ pos_n ][ m ] ) );
+        else # use cocycles
+            loop := LOOPS_ActivateRightBruckLoop( n, m );
+        fi;
+        SetIsRightBruckLoop( loop, true );
     # up to isotopism        
     elif name = "itp small" then
         return LibraryLoop( "small", n, lib[ 3 ][ pos_n ][ m ] );
@@ -762,6 +815,8 @@ end);
 #F  InterestingLoop( n, m ) 
 #F  NilpotentLoop( n, m ) 
 #F  AutomorphicLoop( n, m )
+#F  LeftBruckLoop( n, m )
+#F  RightBruckLoop( n, m )
 #F  ItpSmallLoop( n, m ) 
 ##    
 
@@ -770,7 +825,11 @@ InstallGlobalFunction( LeftBolLoop, function( n, m )
 end);
 
 InstallGlobalFunction( RightBolLoop, function( n, m )
-   return LibraryLoop( "right Bol", n, m );
+    local loop;
+    loop := Opposite( LeftBolLoop( n, m ) );
+    SetIsRightBolLoop( loop, true );
+    SetName( loop, Concatenation( "<right Bol loop ", String( n ), "/", String( m ), ">" ) );
+    return loop;
 end);
 
 InstallGlobalFunction( MoufangLoop, function( n, m )
@@ -808,11 +867,15 @@ InstallGlobalFunction( RightConjugacyClosedLoop, function( n, m )
 end);
 
 InstallGlobalFunction( LCCLoop, function( n, m )
-    return LibraryLoop( "LCC", n, m );
+    local loop;
+    loop := Opposite( RCCLoop( n, m ) );
+    SetIsLCCLoop( loop, true );
+    SetName( loop, Concatenation( "<LCC loop ", String( n ), "/", String( m ), ">" ) );
+    return loop;
 end);
 
 InstallGlobalFunction( LeftConjugacyClosedLoop, function( n, m )
-    return LibraryLoop( "LCC", n, m );
+    return LCCLoop( n, m );
 end);
 
 InstallGlobalFunction( SmallLoop, function( n, m )
@@ -829,6 +892,18 @@ end);
 
 InstallGlobalFunction( AutomorphicLoop, function( n, m )
     return LibraryLoop( "automorphic", n, m );
+end);
+
+InstallGlobalFunction( RightBruckLoop, function( n, m )
+    return LibraryLoop( "right Bruck", n, m );
+end);
+
+InstallGlobalFunction( LeftBruckLoop, function( n, m )
+    local loop;
+    loop := Opposite( RightBruckLoop( n, m ) );
+    SetIsLeftBruckLoop( loop, true );
+    SetName( loop, Concatenation( "<left Bruck loop ", String( n ), "/", String( m ), ">" ) );
+    return loop;
 end);
 
 InstallGlobalFunction( ItpSmallLoop, function( n, m )

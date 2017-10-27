@@ -1,0 +1,74 @@
+#############################################################################
+##
+#W  cc_cocycles_5.tbl                            G. P. Nagy / P. Vojtechovsky
+##
+#H  @(#)$Id: cc_cocycles_5.tbl,                   v 3.4.0 2016/11/2 gap Exp $
+##
+#Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
+#Y                        P. Vojtechovsky (University of Denver, USA)
+##
+
+# cocycles for CC loops of orders 25, 125
+
+LOOPS_cc_used_factors[5] := 
+[
+# factors of order 5
+[1],
+# factors of order 25
+[1,2,3]
+];
+# end of used_factors
+
+LOOPS_cc_cocycles[5] :=
+[
+# for factos of order 5
+[
+[false,"Rw/*u"],
+[true,"1}Q"]
+],
+# for factors of order 25
+[
+[false,"OB:_wPw=gcg28[}yWf2ey+Z^a|z'1V'7>:(U12L]NduxhqC9%,^lAJ$lGd+R&xY-MqDpp$|#k&O4;LJP,/;?HXv|,rf/D$@QWIYw)00]/z12+A^-T4'a;q[6kygZiInW<D6*"],
+[false,"5zn,d/|kkGgr%mcn_WHG3*0,ASnvRTxKtN3H{sAfeZWm+hXd4Pir?wn?i&ofWgj9;Xc)S1(~da)Seu)&-N0}O)2(Ba@O})-wc~I=^[B?bo]7Dd=`Ewx,fcQ])TH}(3Ja-1v@]*pk:GWpgRlBlS:_GcQ{e%Bb}Q[A#o%Npw~B"],
+[true,"3UiB~MDkk697Yh?ShcYJeyp/|.`D@M+V9qeR^]C/aUU_noye{VyHW{?v:X6@e:z#_ekgzg"],
+[false,"X%yesf}wK3UZMQ*xIK.GD?Sxv(}[jQ2q$FS|ieoo1k-y3WDsv+XBZI<su/=f9#Mmyi6~'JYd:HVgUh?sO[^q1.{>[@Nn&c%0Q-FD}lch1U%7@Oo[j_R8yst}2j{WKEdidN}Yl&|3eGR+:84/Nabq]`X&QKwK&vZ-sie?M/BC>Tmrc^/a$T"],
+[false,"X%yesf}wK3UZMQ*xIK.GD?Sxv(}[jQ2q$FS|ieoo1k-y3WDtKij(unBRDF=K]Z@_|wuO):aV9yhoF2b:5Bs97*L<}5FmM%dw;'|6T@_7H[$Ct8?-CP,n.X}Nn5/:2G_%LcBfYvg%:0q]<{qmQ~/<i9CAE9ftlgD}Oqm#c5]BoTXcSK<%M&"],
+[false,"1UkuTqX=UnGoF4NH%>croy[i,GD]ZRNsMLN|KV{vh*9Lwv-)6:Cc,`6iV59@|1U93Tq^l)+1ijGcYs=z_YHH+e:@|_H9U'#7}QY4AR?&5)*v>YjLVkgi0k<=2SCh`CF-K)+x1Gs@#$Tb&XLToQ?iFyh%~EbvIr)I.W-URMAN*ZNfNc8cfW$G/acm=*tinG0@'4{Wx?1:30.E"],
+[false,"BdI9~-PG:lXzbHWaF^p8SC$6zN:}=6PxaofDoilEd$w~oOR]>|xP@e'^89q2{uqI6Kw5>vT>-/UMS+d_+?aHbF(#4]O5{+:'LcAL*|N(L`eC`1BY-V+Z_%YQ'7N[w(*}/L1tP|k1,m9DP51]@JgMu,1fH5G.zH%w>(TD9Q<kpxZ+kD2@4wz~9Y:n(5+Tc@BIyC-$xGrTL}y%}"],
+[true,"F$)1]6{~(SKUfTbwmVWma(rR`jHYTl,=Sh,}Nr58.oA1y6;4J%5tB7jn[gLrY2|L-?v73j:S^LUfY'g(447])_x-;1//p^O$%iT)$9wEtL"],
+[true,"F$)1]6{~(SKUfTbwmVWma(rR`jHYTl,=Sh,}a]tN[5jFS9+S$-r)Mef2P4LwK{31_+}]3A].$F$ceo0}^EO:.;,E)C6/sD[W&7,$H(tkwN"]
+]
+];
+# end of cocycles
+
+LOOPS_cc_bases[5] := 
+[
+# for factors of order 5
+[
+[1,2]
+],
+# for factors of order 25
+[
+[2,1,7,6,9,4,3],
+[1,8],
+[5,3]
+]
+];
+# end of bases
+
+LOOPS_cc_coordinates[5] := 
+[
+# for factors of order 5
+[
+" 1 5 6 7"
+],
+# for factors of order 25
+[
+" 1 5 6 1Y 1Z 1a 1c 1b 1s 1t 1u 1x 1y 1z 1$ 1# 1> 1? 1] 8M 8N 8R 8S 8m 8r 8/ 8\
+> Z& Z' Z( Z* Z) Z_ Z` Z{ Z~ a0 a1 a3 a2 aJ aK aN aO aP aQ aS aR ai aj ak b8 b\
+9 bA bC bB bN bO bP bX bY bm bn fJ fK fL fN fM fT fU fV fk fl fp fq fu fv",
+"1 5 6 7",
+"5 6"
+]
+];
+# end of coordinates

@@ -2,7 +2,7 @@
 ##
 #W  lib.tst   Testing libraries of loops         G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: lib.tst, v 3.3.0 2016/10/26 gap Exp $
+#H  @(#)$Id: lib.tst, v 3.4.0 2017/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -156,19 +156,34 @@ gap> LCCLoop(6,3); LCCLoop(25,119);
 # CC LOOPS
 
 gap> DisplayLibraryInfo("CC");
-The library contains all nonassociative CC loops of order less than 28
+The library contains all CC loops of order
+2<=2^k<=64, 3<=3^k<=81, 5<=5^k<=125, 7<=7^k<=343,
+all nonassociative CC loops of order less than 28,
 and all nonassociative CC loops of order p^2 and 2*p for any odd prime p.
 ------
 Extent of the library:
-   2 loops of order 8
+   1 loop of order 2
+   1 loop of order 3
+   2 loops of order 4
+   1 loop of order 5
+   1 loop of order 7
+   7 loops of order 8
+   5 loops of order 9
    3 loops of order 12
-   28 loops of order 16
+   42 loops of order 16
    7 loops of order 18
    3 loops of order 20
    1 loop of order 21
    14 loops of order 24
-   55 loops of order 27
-   3 loops of order p^2 for every odd prime p,
+   5 loops of order 25
+   60 loops of order 27
+   437 loops of order 32
+   5 loops of order 49
+   14854 loops of order 64
+   5406 loops of order 81
+   84 loops of order 125
+   122 loops of order 343
+   3 loops of order p^2 for every prime p>7,
    1 loop of order 2*p for every odd prime p
 true
 
@@ -233,10 +248,7 @@ gap> CodeLoop( 64, 80 );
 gap> DisplayLibraryInfo("automorphic");
 The library contains:
  - all nonassociative automorphic loops of order less than 16,
- - all commutative automorphic loops of order 3, 9, 27, 81,
- - all commutative automorphic loops of order 243 that are central
-   extensions of Z_3 by F, where F is not the elem. ab. 3-group.
-Note: Abelian groups are included among the commutative loops.
+ - all commutative automorphic loops of order 3, 9, 27, 81.
 ------
 Extent of the library:
    1 loop of order 3
@@ -249,7 +261,6 @@ Extent of the library:
    2 loops of order 15
    7 loops of order 27
    72 loops of order 81
-   118451 loops of order 243
 true
 
 gap> AutomorphicLoop(15,2);
@@ -258,7 +269,24 @@ gap> AutomorphicLoop(15,2);
 gap> AutomorphicLoop(27,1);
 <automorphic loop 27/1>
 
-gap> AutomorphicLoop(243,100);
-<automorphic loop 243/100>
+gap> AutomorphicLoop(81,10);
+<automorphic loop 81/10>
+
+# RIGHT BRUCK LOOPS
+
+gap> DisplayLibraryInfo("right Bruck");
+The library contains all right Bruck loops of orders 3, 9, 27 and 81.
+------
+Extent of the library:
+   1 loop of order 3
+   2 loops of order 9
+   7 loops of order 27
+   72 loops of order 81
+true
+
+gap> RightBruckLoop(81,3);
+<right Bruck loop 81/3>
+
+
 
 gap> STOP_TEST( "lib.tst", 10000000 );

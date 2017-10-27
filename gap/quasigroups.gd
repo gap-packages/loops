@@ -2,7 +2,7 @@
 ##
 #W  quasigroups.gd  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: quasigroups.gd, v 3.2.0 2016/05/02 gap Exp $
+#H  @(#)$Id: quasigroups.gd, v 3.4.0 2017/10/17 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -24,10 +24,10 @@ DeclareRepresentation( "IsLoopElmRep",
     IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
 
 ## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
-DeclareCategory( "IsLatin", IsObject );
+DeclareCategory( "IsLatinMagma", IsObject );
 
 ## quasigroup
-DeclareCategory( "IsQuasigroup", IsMagma and IsLatin );
+DeclareCategory( "IsQuasigroup", IsMagma and IsLatinMagma );
 
 ## loop
 DeclareCategory( "IsLoop", IsQuasigroup and IsMultiplicativeElementWithInverseCollection);

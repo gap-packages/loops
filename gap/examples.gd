@@ -2,7 +2,7 @@
 ##
 #W  examples.gd           Examples [loops]
 ##  
-#H  @(#)$Id: examples.gd, v 3.1.0 2015/09/23 gap Exp $
+#H  @(#)$Id: examples.gd, v 3.4.0 2015/09/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -36,6 +36,8 @@ DeclareGlobalFunction( "SmallLoop" );
 DeclareGlobalFunction( "InterestingLoop" );
 DeclareGlobalFunction( "NilpotentLoop" );
 DeclareGlobalFunction( "AutomorphicLoop" );
+DeclareGlobalFunction( "LeftBruckLoop" );
+DeclareGlobalFunction( "RightBruckLoop" );
 
 # up to isotopism
 
@@ -52,3 +54,4 @@ DeclareGlobalFunction( "LOOPS_ActivateRCCLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateCCLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateNilpotentLoop" );
 DeclareGlobalFunction( "LOOPS_ActivateAutomorphicLoop" );
+DeclareGlobalFunction( "LOOPS_ActivateRightBruckLoop" );

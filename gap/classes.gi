@@ -2,7 +2,7 @@
 ##
 #W  classes.gi  Testing properties/varieties [loops]
 ##
-#H  @(#)$Id: classes.gi, v 3.3.0 2016/10/26 gap Exp $
+#H  @(#)$Id: classes.gi, v 3.4.0 2017/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -887,16 +887,14 @@ end);
 InstallMethod( IsALoop, "for loop",
    [ IsLoop ],
 function( Q )
-   return IsLeftALoop(Q) and IsRightALoop(Q) and IsMiddleALoop(Q);
+   return IsRightALoop(Q) and IsMiddleALoop(Q); 
+   # Theorem: rigth A-loop + middle A-loop implies left A-loop
 end);
 
 # implies
 InstallTrueMethod( IsLeftALoop, IsALoop );
 InstallTrueMethod( IsRightALoop, IsALoop );
 InstallTrueMethod( IsMiddleALoop, IsALoop );
-InstallTrueMethod( IsMiddleALoop, IsCommutative );
-InstallTrueMethod( IsALoop, IsLeftALoop and IsCommutative );
-InstallTrueMethod( IsALoop, IsRightALoop and IsCommutative );
 InstallTrueMethod( IsLeftALoop, IsRightALoop and HasAntiautomorphicInverseProperty );
 InstallTrueMethod( IsRightALoop, IsLeftALoop and HasAntiautomorphicInverseProperty );
 InstallTrueMethod( IsFlexible, IsMiddleALoop );
@@ -909,8 +907,12 @@ InstallTrueMethod( IsMoufangLoop, IsALoop and HasRightInverseProperty );
 InstallTrueMethod( IsMoufangLoop, IsALoop and HasWeakInverseProperty );
 
 # is implied by
+InstallTrueMethod( IsMiddleALoop, IsCommutative );
 InstallTrueMethod( IsLeftALoop, IsLeftBruckLoop );
 InstallTrueMethod( IsLeftALoop, IsLCCLoop );
 InstallTrueMethod( IsRightALoop, IsRightBruckLoop );
 InstallTrueMethod( IsRightALoop, IsRCCLoop );
 InstallTrueMethod( IsALoop, IsCommutative and IsMoufangLoop );
+InstallTrueMethod( IsALoop, IsLeftALoop and IsMiddleALoop );
+InstallTrueMethod( IsALoop, IsRightALoop and IsMiddleALoop );
+InstallTrueMethod( IsALoop, IsAssociative );

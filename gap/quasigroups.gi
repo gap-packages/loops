@@ -789,32 +789,34 @@ end );
 InstallMethod( ViewObj, "for loop",
     [ IsLoop ],
 function( L )
-    if HasIsAssociative( L ) and IsAssociative( L ) then
-        Print( "<associative loop of order ", Size( L ), ">");
-    elif HasIsExtraLoop( L ) and IsExtraLoop( L ) then
-        Print( "<extra loop of order ", Size( L ), ">");
-    elif HasIsMoufangLoop( L ) and IsMoufangLoop( L ) then
-        Print( "<Moufang loop of order ", Size( L ), ">");
-    elif HasIsCLoop( L ) and IsCLoop( L ) then
-        Print( "<C loop of order ", Size( L ), ">");
-    elif HasIsLeftBolLoop( L ) and IsLeftBolLoop( L ) then
-        Print( "<left Bol loop of order ", Size( L ), ">");
-    elif HasIsRightBolLoop( L ) and IsRightBolLoop( L ) then
-        Print( "<right Bol loop of order ", Size( L ), ">");
-    elif HasIsLCLoop( L ) and IsLCLoop( L ) then
-        Print( "<LC loop of order ", Size( L ), ">");
-    elif HasIsRCLoop( L ) and IsRCLoop( L ) then
-        Print( "<RC loop of order ", Size( L ), ">");
+    local PrintMe;
+    
+    PrintMe := function( name, L )
+        Print( "<", name, " loop of order ", Size( L ), ">");
+    
+    end;
+    if HasIsAssociative( L ) and IsAssociative( L ) then PrintMe( "associative", L ); 
+    elif HasIsExtraLoop( L ) and IsExtraLoop( L ) then PrintMe( "extra", L ); 
+    elif HasIsMoufangLoop( L ) and IsMoufangLoop( L ) then PrintMe( "Moufang", L ); 
+    elif HasIsCLoop( L ) and IsCLoop( L ) then PrintMe( "C", L ); 
+    elif HasIsLeftBruckLoop( L ) and IsLeftBruckLoop( L ) then PrintMe( "left Bruck", L );
+    elif HasIsRightBruckLoop( L ) and IsRightBruckLoop( L ) then PrintMe( "right Bruck", L );
+    elif HasIsLeftBolLoop( L ) and IsLeftBolLoop( L ) then PrintMe( "left Bol", L );
+    elif HasIsRightBolLoop( L ) and IsRightBolLoop( L ) then PrintMe( "right Bol", L );
+    elif HasIsAutomorphicLoop( L ) and IsAutomorphicLoop( L ) then PrintMe( "automorphic", L );
+    elif HasIsLeftAutomorphicLoop( L ) and IsLeftAutomorphicLoop( L ) then PrintMe( "left automorphic", L );
+    elif HasIsRightAutomorphicLoop( L ) and IsRightAutomorphicLoop( L ) then PrintMe( "right automorphic", L );
+    elif HasIsLCLoop( L ) and IsLCLoop( L ) then PrintMe( "LC", L );
+    elif HasIsRCLoop( L ) and IsRCLoop( L ) then PrintMe( "RC", L );
     elif HasIsLeftAlternative( L ) and IsLeftAlternative( L ) then
         if HasIsRightAlternative( L ) and IsRightAlternative( L ) then
-            Print( "<alternative loop of order ", Size( L ), ">");
-        else
-            Print( "<left alternative loop of order ", Size( L ), ">");
+            PrintMe("alternative", L );
+        else 
+            PrintMe("left alternative", L );
         fi;
-    elif HasIsRightAlternative( L ) and IsRightAlternative( L ) then
-        Print( "<right alternative loop of order ", Size( L ), ">");
-    elif HasIsFlexible( L ) and IsFlexible( L ) then
-        Print( "<flexible loop of order ", Size( L ), ">");
+    elif HasIsRightAlternative( L ) and IsRightAlternative( L ) then PrintMe( "right alternative", L );
+    elif HasIsCommutative( L ) and IsCommutative( L ) then PrintMe( "commutative", L );
+    elif HasIsFlexible( L ) and IsFlexible( L ) then PrintMe( "flexible", L);
     else
         # MORE ??
         Print( "<loop of order ", Size( L ), ">" );

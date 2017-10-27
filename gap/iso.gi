@@ -2,7 +2,7 @@
 ##
 #W  iso.gi  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: iso.gi, v 3.3.0 2016/10/26 gap Exp $
+#H  @(#)$Id: iso.gi, v 3.4.0 2017/08/24 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -466,28 +466,52 @@ end);
 
 #############################################################################
 ##  
-#O  IsomorphicCopyByPerm( Q, p ) 
+#O  QuasigroupIsomorph( Q, p ) 
 ##
 ##  If <Q> is a quasigroup of order n and <p> a permutation of [1..n], returns
 ##  the quasigroup (Q,*) such that p(xy) = p(x)*p(y).
-##  If <Q> is a loop, p is first composed with (1,1^p) to make sure
-##  that the neutral element of (Q,*) remains 1.
 
-InstallMethod( IsomorphicCopyByPerm, "for a quasigroup and permutation",
+InstallMethod( QuasigroupIsomorph, "for a quasigroup and permutation",
     [ IsQuasigroup, IsPerm ],
 function( Q, p )
     local ctQ, ct, inv_p;
     ctQ := CanonicalCayleyTable( CayleyTable( Q ) );
-    # if Q is a loop and 1^p > 1, must normalize
-    if (IsLoop( Q ) and (not 1^p = 1)) then 
-        p := p * (1, 1^p );
-    fi;        
     inv_p := Inverse( p );
     ct := List([1..Size(Q)], i-> List([1..Size(Q)], j -> 
         ( ctQ[ i^inv_p ][ j^inv_p ] )^p 
     ) );
-    if IsLoop( Q ) then return LoopByCayleyTable( ct ); fi;
     return QuasigroupByCayleyTable( ct );
+end);
+
+#############################################################################
+##  
+#O  LoopIsomorph( Q, p ) 
+##
+##  If <Q> is a loop of order n and <p> a permutation of [1..n] such that
+##  p(1)=1, returns the loop (Q,*) such that p(xy)=p(x)*p(y).
+##  If p(1)=c<>1, then the quasigroup (Q,*) is converted into loop
+##  via the isomorphism (1,c).
+
+InstallMethod( LoopIsomorph, "for a loop and permutation",
+    [ IsLoop, IsPerm ],
+function( Q, p )
+    return IntoLoop( QuasigroupIsomorph( Q, p ) );
+end);
+
+#############################################################################
+##  
+#O  IsomorphicCopyByPerm( Q, p ) 
+##
+##  Calls LoopIsomorph( Q, p ) if <Q> is a loop,
+##  else QuasigroupIsotope( Q, p ).
+
+InstallMethod( IsomorphicCopyByPerm, "for a quasigroup and permutation",
+    [ IsQuasigroup, IsPerm ],
+function( Q, p )
+    if IsLoop( Q ) then 
+        return LoopIsomorph( Q, p );
+    fi;
+    return QuasigroupIsomorph( Q, p );
 end);
 
 #############################################################################
@@ -594,15 +618,13 @@ end);
 ##
 ##  If L1, L2 are isotopic loops, returns true, else fail.
 
-# (MATH) First we calculate all principal loop isotopes of L1 of the form
-# PrincipalLoopIsotope(L1, f, g), where f, g, are elements of L1. 
-# Then we filter these up to isomorphism. If L2 is isotopic to L1, then
-# L2 is isomorphic to one of these principal isotopes.
+# (MATH) We check for isomorphism of L2 against all principal
+# isotopes of L1.
 
 InstallMethod( IsotopismLoops, "for two loops",
     [ IsLoop, IsLoop ],
 function( L1, L2 )
-    local istps, fg, f, g, L, phi, pos, alpha, beta, gamma, p;
+    local f, g, L, phi, alpha, beta, gamma, p;
     
     # make all loops canonical to be able to calculate isotopisms
     if not L1 = Parent( L1 ) then L1 := LoopByCayleyTable( CayleyTable( L1 ) ); fi;
@@ -619,20 +641,11 @@ function( L1, L2 )
     if not Size(InnerMappingGroup(L1)) = Size(InnerMappingGroup(L2)) then return fail; fi;
     
     # now trying to construct an isotopism
-    istps := [];
-    fg := [];
     for f in L1 do for g in L1 do 
-        Add(istps, PrincipalLoopIsotope( L1, f, g ));
-        Add(fg, [ f, g ] );
-    od; od;
-    for L in LoopsUpToIsomorphism( istps ) do 
+        L := PrincipalLoopIsotope( L1, f, g );
         phi := IsomorphismLoops( L, L2 );
         if not phi = fail then 
             # must reconstruct the isotopism (alpha, beta, gamma)
-            # first figure out what f and g were
-            pos := Position( istps, L );
-            f := fg[ pos ][ 1 ]; 
-            g := fg[ pos ][ 2 ];
             alpha := RightTranslation( L1, g );
             beta := LeftTranslation( L1, f );
             # we also applied an isomorphism (1,f*g) inside PrincipalLoopIsotope           
@@ -649,7 +662,7 @@ function( L1, L2 )
             gamma := gamma * phi;
             return [ alpha, beta, gamma ];
         fi; 
-    od;            
+    od; od;           
     return fail;
 end);
 

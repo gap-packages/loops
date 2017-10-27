@@ -1,0 +1,453 @@
+#############################################################################
+##
+#W  cc_cocycles_3.tbl                            G. P. Nagy / P. Vojtechovsky
+##
+#H  @(#)$Id: cc_cocycles_3.tbl,                   v 3.4.0 2016/11/2 gap Exp $
+##
+#Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
+#Y                        P. Vojtechovsky (University of Denver, USA)
+##
+
+# cocycles for CC loops of orders 9, 27, 81
+
+LOOPS_cc_used_factors[3] := 
+[
+# factors of order 3
+[1],
+# factors of order 9
+[1,2,4,5],
+# factors of order 27
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,55,56,57,58,60]
+];
+# end of used_factors
+
+LOOPS_cc_cocycles[3] :=
+[
+# for factors of order 3
+[
+[false,"5"],
+[false,"T"]
+],
+# for factors of order 9
+[
+[false,"Nb0XtD"],
+[false,"1fMILI.euf?"],
+[false,"A;R74)[>|%3D"],
+[false,"YzxT&R77j7`jU"],
+[false,"YzxT&R77(#k5t"],
+[false,"8Jdd+{q'dYbah1x"],
+[false,"~>hcUjmC(H{:6o#"],
+[false,"dG.#{L(3kJl81+o4j"],
+[true,"3#QhS<]EA"]
+],
+# for factors of order 27
+[
+[false,"hor~xnV^xMC5^'b9L&H<Q6<:}V9;#mn&98_0m=8A[H14j{yyKnG42|V4D"],
+[false,"3&[N:Yq_~|RL'@B]s},@?,;Fq~B[I=:/@LdKq:nU3b.zc^f>FJroWT-;Qg*ugzyQ}6lZ^:7G1($3|i?Ut@6i3c^|R`M,n^N[d"],
+[false,"7YpFoEn@TI$ke4t,QM]Xvq,.CVsRhg]7gu2XuPY3t[|Bf~$UMJ;#CQ5FfUpOEKpsQv7S5pXU.InvA;ZH5yZfw<-=(.[#?Y4B6%BAiCvwtr2MDV"],
+[false,"f#y$l~9J2y[s%%JH0oTRODr]:>h~At1:wo}6niz#D:'#n-wM2V<vTnqvLy(NOKlk8_up6NzIavSp6RnpBq:V)#5Fg*i5+gt@Sn8Z$j`|RsP^yNnphD"],
+[false,"929<Q3%|NK5~el_rNRioOfG@::OAICGt#Jq`Y}KwmbT7&aaAk$r|T&)lvOw:MoM:mWmkG|b$43Kj}UN6<+N]q9$}515#<OhPkRQy~Q7TIPKbqC))ute:2&"],
+[false,"929<(pVnV`td-l5UUbV^aGx,t3/8g=0#CdP#6v@:>6p$N3lL{wx87,33DiqgK8T^]a&vAV~U~s3Z|7(%P=k>bBDOUWw4y1UvYBR'#a4<:G-L3/K@-#sS`Q"],
+[false,"929=D-7<K`w|l<w@`~BH&m0{m{LvBz%<Uoy<^+t9:Gxb'w**?cl}[Mcf&LxSRRK6Z,K$sDfL?[hFC2:E7eF2xfp~K~$XTQ~dvIxHNT^7poT8/nuuW7d_c0"],
+[false,"~r)g={i|nz_lmzSdBw2HrA>vY'~11)L`zMpNGE,WhU&9[s*S-1$]`&ZOv`#NDuD:@SX.18KP1sj_~N-=l7CjkgGnyn.oWF68{#%*7bmM|.yn-yZ]TBU9sN"],
+[false,"~r)hW<}U{W|e2n[Z4TF<@&6G((v7Rf;T&y/KwK#Plv:m;jTCDw^wzM#>X+6`6(J#DJBF85R.__#$kFCUrFmTH,he+%ZeQfh)ftpHN#L-`^k/;2m<RwCi]t"],
+[false,"18>/j@C>0~&JPL:xR--6+3_tO4w3SFrN;v^{E.a<>]}?S`[.b]>f}xCXulCW#~+[[J;IX:5mge-Hi4u$yH+EC]'X~y8kn|6C*nE^dd0}=,sChCc*_d-u-:q"],
+[false,"S||kz0&UY#`u{sajCjcN]cv9zc/9$4Ic_i8|b(@6+{>]As_$O{3eQ@E<]}M,Drn_9=82EO}}#ld}[,G)etB._Yj`g?o_6j:z1szyjt]U7%JH4xWghJ2LJ'ea_@ayts[#k7jqu+Fq"],
+[false,"S||kz0&UY#`u{sajCjcN]d7-VBV8-NL8<7.zu^@v9OCjQ)KHn&eZZ)BvK7Me0wk`r[kC:(p#_?-?GVsZB8jF&wu%$Hz<LX2(C=+UA@S(O>r=#KqI^3<i9tC82(uB4.Fyp)`vW=0="],
+[false,"S||kz0&UY#`u{sajCjcN]dni0/>7@gN*)#lY;A[GcpLZz(9]TpYJjOd].?0dr`3ZIi^J^U6o'+VsyLEOf][DP0?Z?3n^&XBj]I6^GuTB`1(6Pi$KNp7SsGWq21BYdw~Z~Pb/p~4q"],
+[false,"S||kz0&UY#`u{sajCjlQ2O]DZa6T*3w`?6WO[RBUhWOdj0*'Cm{Vp$<VD3:unLnM7p)8t>.g[Bw`]t+}AC#UrV@2K=Mj90He}(+,yJ7dw(C;`zBQ,1:E+2s)GGe9gS^7,s{EFNwq"],
+[false,"S||kz0&UY#`u{sajCjlQ2PXz1|F5Rh~_~/dY*zN5`L>{M:wzg#_eP8?l9^^uk)zB.&I|<kT5vbCf<k)qlQwgb$Z$VSZw{@U<K#-<}4+C%J}}TJ6EWwzMc`XH.@F0s+bu3-I?Sh4q"],
+[false,"S||kz0&UY#`u{sajCjtYHYrDq<nA8l7c=WCX=RSxtb/GB[Yc:E[SgRm3y*?0?UhqZoPC_b5ZmzpTyZ-A8j86ZW<_-u25U3|,(b}VWvCv1i[E^qCNdrpHA+2QKX'MeR|GDzm0j$WQ"],
+[false,"S||kz0&UY#`u{sajCjtYHY~YTEcAC4.*e])`vpv~{r]V*X}aLhQJ*,&e*Suu5O9~jcUB(x/2eg.B'fhkJrs'OD2^Dr;>aJiH.e@SF?O^JZi0[5TAt_`lx_Qiq%{eEX|BWZKc(4Wd"],
+[false,"2w9Ib8}nu`J@6?NAm7pVjr|A2c?hiaRc][Mc*;|Hll;9UKxV%8]S%H|-9uB`s2f9A#I5xYn1H9Y-s;3-r`z|umADfUQK3cxXRrCVUB@}4}@eAC%sLHwgVD$E_Z7_0NsZxe3Q[|>]HD"],
+[false,"2w9Ib8}nu`J@6?NAm7pVjr|AiAoG1Zav`qE2hoGYm7EasYMOm|aR/-~u)GA2ClB,Mr96e2CG#TJX1L3=Un<+?,;72I38^?d2}MJ?50i]Q.K9J`oaOl[FSb*[U~S~+l1^66ixJIN+d&"],
+[false,"2w9Ib8}nu`J@6?NAm7pVjr|A_.J>nYj;}M5vHNZpmvh$=l;HX;?Q_b1fZ(88#0.f:MYdgxpid9fLy)2JIOTOH.BOEp)-%D/MrAS]>t.v1EiOK;n&ID9WI-}H&y_xeR[Qv&>~KxFyFq"],
+[false,"2w9Ib8}nu`J@6?NAm7pV#%M5}g,[Ja$@-[FQ.Mb)^iW;z6jfv$aX@+.A0x3~#{qcTBR2eBS,R^^NecD.h2l;]60(b#~f{UqfNg1(I:jY7YtFWtOxlr^)TZn&,XyU[xHr~OtC@Rvlp0"],
+[false,"2w9Ib8}nu`J@6?NAm7pV#%M6Z$mJ8a(dmL)=c:H2M:&1s}]~Ql9n8[HP=,)Ox6yDX@~>?6aua{^d#H/^^G#'M2pj<6Dxf^]((rH<X:1QREXNdf/C^<EO*;?HJuNPZlgHLfpYrYRTSD"],
+[false,"2w9Ib8}nu`J@6?NAm7pV#%M6<KE,HCP>?K>tj_4aYpG[YIg|pL^toA@1oecf}'[)^g`#8Fj.$EL1ApUCZ-T&xSOPJJ.5yY4GbiR/~>VlXw$}zPG1$;.JbmX8Gsh6Hnu<Fi/r1Vx(vQ"],
+[false,"2w$_X%jBW_:33wQ_~Rcgm.%.$cV[,+CrJz0ar`re$WU_uHB)&2)c4eIBOO30@`W[~-c-4`;B7@AJ-1N+T~~t@]wAd{DWO7t^N3p%F5u,baza.bZC4eU?-V=OaRw'$xbM8$*[z{uS:0"],
+[false,"2w$_X%jBW_:33wQ_~Rcgm.%/t-#R;)V0P0/t1X0/%f}m|y#??M.2ZJajnT][xs.P3iD6xE+3]@)Efk2_GZ%wyU%)oXTO*[o%a7g|nf5AVtJ#I)G1VX7q/lzizP)aiB=oOa>`7:*QFD"],
+[false,"2w$_X%jBW_:33wQ_~Rcgv:/x}g5?3~IqyH_}<N6}}c:o4dp5cR0Ga`BFAa8Wi5~{JosMg#Unx+yo$(aHAL>gr3`WEq%,kMIQ]|MpV*/Fn#BL3s3'}f|jCun[ek].j^fFh5a)ztzGFq"],
+[false,"vcV(GHJH0z&v@Sob,UDrLY,WD58fYB}h^&xXvP..:eNOSvp`m<LP-3@duJ?v,$(IsB+Um0w(WH~d;{EArq6tj6D%(A/UmfP<D7D7rbsreEnf2Qz3`1TFxh,Ce3fVk9I_RL&IW(H,+6<vUC/HBI&Gu"],
+[false,"5K+)0Z*`w$G2qfi4xTU00@?6p*|6ao<W/y0,8uP,hnQ~:'y@0@[98u5|Z-S_RU({d{Q`o9as~$$k8PrPZT=v;z$CG&q,A@iDP|)NumbJ[<-e+-8m{&Vpkro$nX'+)<7&R$;x#_SI_wVKAVC4u,Du7*V"],
+[false,"2cS7HhXqGrQp62Y~HIm$xV?eT1`zhe?U>FvD9M$F%y>-)Jgg%lXb=AW36[%3R[8g%HpOzGOJ$5wC5baNW*89XgezHQd1^O{dbz1OEzXV~@b''Z$iG>cXF[f.CgEKqq&@U7W{X]Xu-lTrl[(`qCL]/@%A|wTUD"],
+[false,"2cS7HhXqGrQp62Y~HIm$xV?eT1`zhe?U>FvD9M$F%y?Nd?E~$uqem1`(,A@3=KZ'<,i9nyNUR7g+uZg-<d+LOXff:?slD9l;.z70)<FuNuVRsCqYwx83:}~m158J-jHOfn6PP:6%YSHH.EQ#ch=8goqg&4{D&"],
+[false,"2cS7HhXqGrQp62Y~HIm$xV?eT1`zhe?U>FvD9M$F%y?&Bn=l#&,hH^ofiU74bn#~d{vZ3_1(MGT(Z#p-kQ~z>AN>gGX#E[OSh4Fi}#j'.Az<[enhE@)jCqKgr9IX&nPLRHTY{UllcZf}E1U2F=eO*KB)7fD(q"],
+[false,"2cS7HhXqGrQp62Y~HIm$xV?eT1`zhe?U>FvD9M$O'+'7,^d&^rW=Z4_QYaNOpsh=Kp|8%3<CsUe/nvj6_Tt~g^>?4(LI.pKXAYh.]jQQ5nO5ap;kgt^]-J=/F^KhAD9`9Ip9*yoA{0Y#M8kBpcM+~__HI*xjd"],
+[false,"2cS7HhXqGrQp62Y~HIm$xV?eT1`zhe?U>FvD9M$O'+'`nRS$yFU_%*M~62@&wcnp]{Nqu,SjsVU4B#^]nha%`QbY`1&wyQ4R{rju9W<U0o@Szyp&&Hs-LnfMd-/7k,,vv^K9X]G3%74D,=f=T]Zn^0>($'tUq"],
+[false,"2cS7HhXqGrQp62Y~HIm'1t/}Ol&OzBw?|XJk-k*w0`Yn5RtAPpE~$*YhpEic%h97M4*SGl_.quvI;2dZl55/T3LKpK#KsSskT7aqgQp1jjKY*5`j,ob@>/mnG)m=;1fCGS7Bk#MT@D&;f,bvQ*,{jgOb7vTkH"],
+[false,"2cS7HhXqGrQp62Y~HIm'1t/}Ol&OzBw?|XJk-k+;&^i0GfP1n+HR.(<3J*PCp}g52-+GX$8BBo|r6L_cn_HevYa$;.VaPtx>Q5R9(A3eZ?wZ8X/L?8i|UycNzt`?(jeWpXD@q0U6=;0#rmr98eWrHTk^DC'0."],
+[false,"7(>#S~Y335|CZBoN,?]q=#)UWD$8,7Qk{tLFa+gDl>Mn9u2O]7CI*0n>z_i8+t#QCS$$P(r8U`1,FO}.&l.g2YY7w_/?T;|ZBm9FRhh{g^BLktifQc5X_kuEv:]hEt'&J7+,;=i?,Hv7+P8#($$m)4}]3@MY20"],
+[false,"7(>#S~Y335|CZBoN,?]q=&RECObN62xohkH6VM)O4%a~lMqv7`C[T[#*d>ySa.?N&7w/6R/QQ#m@}%n=dBz+bi[Qfzb.wJ`y.hLJ-*jsu'%~mR=AQ]o%$CFYZe2HbunVKP?FZcMUZgP_R)d=[^5Tkys'LJ=%NR"],
+[false,"7(>#S~Y335|CZBoN,?]q=&RECObN62xohkH6VM)O51&qZs7-#8Z6~^VH^tkEz:br>Q|$9rlSo4IHu8|mnnH_&}(3cUpMb/OCgVoBx+ZB&0v8*h&2a_wFu4y1)yc},B?A@+I]h8qH.l,bPeYT?T'nmJv|6Ci^v["],
+[false,"7(>#S~Y6}APr]H||%#HA`x'}[]_cfa,ZThm`.fJL$62WOvs]s/>yz+9GeTU9`PyXWQdH~K(Eg&4nt9qa$&T((H15zi+V`o~~=,bX=dRrB1prZ6z{|^jBe1jD?Gd;}]||G{aU#w&@m^'S?4yp5Ccca66e8OUn2y"],
+[false,"1M,aaVut'THt&#I8$eX`/zd6Y61SWR*J/0w}.GTnhbAq+k0VLwcc~&V+K*{_?-i/i`sfjE6qXjcoDcz)i3urwEngn[Ybj(oq%Mm%^zna/@?13MK/h{EQ6ryi|tGlIgn0N8Ntso]-D5z.yy}]'JDGum+l>brv_|S_BKO"],
+[false,"AZDm2AHIgA;[|NfzI$dR(Dj^~S.sLOgyds,.>cn4wrBU@c:k]-g?eJ#hXXHGHoYF[dzO#~HKy9c8J0Uwa=ZTl0Of?_op*pZG/:wca8oWBajYfd:~F5u9jegk_||NXYC6pWK:i#pIbiM|l550M8()EG3SA?FX-@,t[^wp"],
+[false,"1D2'6&,i(NNf~B^3D:i*Msb{*6lG#2TREWZ?q`[{=o'9P295`Xv&Dn]$kMK~bJ,{-1%6P:~kD~&<m?wa{&-M}3fU7D%$s3F>G>1=i1FPJ>|3]0Rgpj$H^N9-injHgbZWZA7]vUg(`_YA)gmI$;6<*l_G/Rm<yF@TlyeW~"],
+[false,"36W4^H}F[+ubNCk8T&m?=Ddd`0KpjQsOyx+(o211g0ldXyrLqTYcEmv55b`%|BlBI);|SXLGj'#BNK/:/Ybb0K|3'*-pv(2x*9r(TN[w8sT6)r>.Yj,~7JAKn_J>y0LS^[e)o2]7gl3vmUXiFdl(udUiK[Mpl'lmP>)}^.?,g|?"],
+[false,"36W4^H}vk^d:-(%z#7%Tve<CAop8bgx[sdKnvX$6)4Y:AnX)~/1YGkNrLM&uZ.XpI,q9s^S<,6(*,sdtB96P`m~qx&]za91{[j,kWug$:c:C/c6Zxc')AL#Z40k5qY5f}$4iW(_aD[slw.g`hT[+g8H>`V%/[}`6/Z#:khNb&0e"],
+[true,"12.W./ADP*t:.tzo:SH>)sYG#t5nqzGr8ye0W<OmT^ev;19=H'^4;;|O~4CUgkUBNtwSscxvk=YP/uk$`A>nw="],
+[true,"12.W./ADP*t:.tzo:SH>)sYG#t5nqzGr8ye0W<OmT^ev;19=L0/bwXp-IwNmkRRfx'qV<[)&PIU)t-Ed2~;Wil"],
+[false,"36W4^H}vk^d:-(%=vMNy|5Z8tpnPC'5DCwGm$=*PK&63k_znE*V7fhM26AX^uSy7uhdU'2OE}R+GS9WZesF<;inFIE~Vxthf^nN&z{uImANt'dI=:MD,U|#WP{],};5X9>J?][ZhMgUv0+?t.`Wuck6gqW;)2{gy))^A%ll]Y}p"],
+[false,"36W4^H}vk^d:-(&cg&]$|?~}8sh-?C&#dDX26wud{gA',cEWN.ai06sWB&;..LC.$?WG_;`+JDROHwnS')?U/,4^dab*a&G,2xbs41q$t[OtxyI-S6c%R3wxJP`K]pyH2}~R6:u)c>*ZQt.MW;:4G0T,z0ufpl%%LRBn9yfI46S"]
+]
+];
+# end of cocycles
+
+LOOPS_cc_bases[3] := 
+[
+# for factors of order 3
+[
+[1,2]
+],
+# for factors of order 9
+[
+[2,1,7,6,8,4,3],
+[1],
+[1,9],
+[1,5]
+],
+# for factors of order 27
+[
+[2,3,1,26,14,39,27,33,28,5,41,42,40,43,8,4],
+[2,1,26,14,32,5],
+[2,1,24,11,31,36,9,4],
+[2,1,25,13,30,4],
+[2,1,26,14,5,4],
+[2,1,26,14,5,4],
+[2,1,21,33,5,4],
+[2,1,22,4,32,5],
+[2,1,18,5,31,4],
+[2,1,19,6,30,4],
+[2,1,26,14,4,5],
+[2,1,26,14,7,4],
+[2,1,14,33,5,4],
+[2,1,4,14,32,5],
+[2,1,4,14,32,5],
+[2,1,5,11,31,4],
+[2,1,6,13,30,4],
+[2,1,7,12,29,4],
+[2,1,26,14,5,4],
+[2,1,26,14,4,5],
+[2,1,26,14,4,5],
+[2,1,26,14,5,4],
+[2,1,26,14,6,4],
+[2,1,26,14,7,4],
+[2,1,26,14,5,4],
+[2,1,26,14,4,5],
+[2,1,26,14,4,5],
+[2,1,26,14,5,4],
+[2,1,26,14,7,4],
+[2,1,26,14,6,4],
+[2,1,14,33,5,4],
+[2,1,15,4,32,5],
+[2,1,16,5,31,4],
+[2,1,17,6,30,4],
+[2,1,26,14,5,4],
+[2,1,26,14,4,5,45],
+[2,1,26,14,5,4],
+[2,1,26,14,6,4],
+[2,1,26,14,5,4],
+[2,1,26,14,4,5,38],
+[2,1,26,14,5,4],
+[2,1,26,14,6,4,37],
+[2,1,21,33,5,4],
+[2,1,22,4,32,5],
+[2,1,23,4,32,5],
+[2,1,18,5,31,4],
+[2,1,19,6,30,4],
+[2,1,20,7,29,4],
+[2,1,21,33,5,4],
+[44,10,34],
+[1,46],
+[1,47],
+[1,48],
+[1,35]
+]
+];
+# end of bases
+
+LOOPS_cc_coordinates[3] := 
+[
+# for factors of order 3
+[
+" 1 3 4 5"
+],
+# for factors of order 9
+[
+" 1 3 4 9 F R S U V b h @ [ ] ^ _ ` ~ 10 11 12 13 14 18 19 1A 1E 1F 1G 1H 1I 1\
+K 1L 1Q 1R 1T 1U 1Z 1b 1f 1h 2| 2} 2~ 30 31 32 3O 3P 3Q 3R 3S 3T",
+"1",
+"1 4 5",
+"1 4"
+],
+# for factors of order 27
+[
+" 1 3 4 9 F R S U V b h @ [ ] ^ _ ` ~ 10 11 12 13 14 18 19 1A 1E 1F 1G 1H 1I 1\
+K 1L 1Q 1R 1T 1U 1Z 1b 1f 1h 2# 2% 2& 2' 2+ 2, 2- 2; 3p 3q 3r 3w 3y 3z 3# 3$ 3\
+* 3- 3. 3/ 8A 8B 8S 8T 8U 8b 8c 8[ 8] 8^ 90 91 92 99 9A 9B 9I 9J 9R 9S 9a 9c A\
+$ A, A. Br Bs Bz B$ B+ B, OC OD OE OI OK OL OM OO OP OQ OU OV OW OY OZ Od Oe O\
+f Oj Ol Om On Oo Op Oq Ow Ox Oz O# O' O) O- O/ O: O; O= O> O^ O_ O` O| O} P2 P\
+3 P4 P5 P7 PB PC PD PH PI PK PL PM PN PO PP PT PU PV PW PX PY Pc Pd Pe Pi Pj P\
+k Pm Pn Pp Pq Pu Pw Px Pz P& P' P, P- P/ P: P; P@ P[ P] P^ P_ P` P| Q1 Q2 Q3 Q\
+4 Q5 QB QC QH QI QJ QL QM QO QS QT QV QW Qb Qc Qd Qh Qi Qj Qk Ql Qm Qn Qo Qp Q\
+t Qu Qv Qw Qx Qy Q& Q' Q) Q* Q. Q: Q; Q= Q] Q| Q} R1 R4 R9 RC RI Rt Ru Rz R# R\
+$ R& R' R) R- R. R: R; SI SO SQ ST SZ Sc Sj Sm Sr Sx S# S& S- S. S: S; S? S[ S\
+` S| S} S~ T1 T2 eE eK eW eX eY eZ ea eb ef eg eh el em en eo eq er et e` e{ e\
+| e} e~ f0 f4 f5 f6 f7 f8 f9 fD fE fF fJ fK fL fM fN fP fQ fV fW fY fZ fe fg f\
+k fm f; f< f= f[ f] f^ f_ f` f{ f| f} f~ g3 g4 g5 g6 g7 g8 gd ge gj gk gm gn g\
+p gq gv gx gy g# g( g) g- g. g/ g: g< g= g> g? g^ g_ g` g| h9 hB hE hK hu hv h\
+w hy hz h& h( h, h- h. h/ h: h< h= h> iJ iK iN iS iY iZ ib ie ig il in io it i\
+u iw i% i+ i- i/ i: i; i< i= i[ i] i^ i_ i{ j0 j1 j6 j7 j8 -p -~ .1 .2 .3 .4 .\
+5 .7 .8 .9 .A .B .C .E .F .I .J .L .M .N .O .P .Q .R .T .W .X .Z .c .e .f .h .\
+i .j .l .m .p /+ /. /; /> /[ /_ :1 :4 :y :# :$ :& :' :) :* :+ :- :. :: :; :> :\
+? :[ :] :_ :` :{ :} ;1 ;2 ;4 ;5 ;8 ;9 ;B ;C ;F ;G ;I ;J ;L ;Q ;R ;S ;T ;U ;V ;\
+W ;X ;Y ;Z ;a ;b ;f ;g ;h ;l ;m ;n <e <h <k =U =V =W =X =Y =Z =d =e =f =j =k =\
+l =p =q =r =s =t =u =v =y =$ =& =( =* =+ =. =; =< =? =] =} =~ >1 >2 >5 >6 >C >\
+D >I |r }1 }3 }4 }5 }6 }A }B }C }D }E }K }L }P }Q }R }S }T }V }b }e }g }k }l }\
+r ~- ~: ~= ~` 10# 10$ 10% 10& 10( 10) 10+ 10, 10- 10/ 10: 10< 10= 10> 10@ 10[ \
+10] 10^ 10_ 10{ 10| 11S 11T 11U 11Y 11Z 11a 11h 11i 11j 12g 12m 13W 13X 13Y 13\
+f 13g 13h 13r 13s 13t 13x 13# 13& 13( 13* 13, 13- 13: 13= 13> 13[ 13_ 18' 18) \
+18- 18. 18| 18} 19Q 19W 19c 19f 19j 19m 1Ba 1Bc 1Bd 1Bg 1Bh 1Bk 1Bq 1Br 1Bw 1B\
+# 1B: 1B[ 1B{ 1CC 1CJ 1F? 1G2 1G% 1G' 1G> 1G? 1G` 1G{ 1HU 1Ha 1Hk 1JY 1Ja 1Jh \
+1Ji 1Ju 1Jv 1J* 1J. 1J? 2YR 2YS 2YU 2ZH 2ZI 2ZJ 2ZK 2ZL 2ZQ 2ZR 2ZT 2ZU 2ZV 2Z\
+Z 2Za 2Zb 2Zf 2Zh 2gV 2gW 2hI 2hJ 2hO 2hP 2hR 2hS 2hU 2hV 2ha 2hc 2hd 2hf 2j> \
+2j? 2j@ 2j] 2j^ 2j_ 2j` 2j{ 2j| 2k0 2k1 2k3 2k4 2k8 2kB 2q~ 2r@ 2r[ 2r] 2r^ 2r\
+_ 2r` 2r{ 2r| 2r} 2r~ 2s0 2s1 2s2 2s3 2s4 2s6 2s7 2s8 2s9 2sA 2sB 2sD 2sE 2sF \
+3F. 3F; 3GQ 3GS 3GW 3GY 3GZ 3Ga 3Gc 3Gd 3Gj 3Gk 3Gm 3Gn 3Gr 3Gt 3Gx 3Gz 3G# 3G\
+$ 3G& 3G' 3G- 3G. 3G: 3G; 3G? 3G[ 3G` 3G| 3G} 3G~ 3H1 3H2 3H8 3H9 3HB 3HC 3IE \
+3I{ 3I} 3I~ 3J1 3J2 3J4 3J5 3J6 3J8 3J9 3JB 3JC 3JF 3JG 3JI 3JJ 3JL 3JM 3JN 3J\
+P 3JQ 3JS 3JT 3JV 3JW 3JX 3JZ 3Ja 3Jc 3Jd 3Jg 3Jh 3Jj 3Jk 3Jm 3Jn 3Jo 3Jq 3Ju \
+3Jw 3J# 3J$ 3J& 3J' 3J* 3J+ 3J- 3J. 3K: 3Le 3Lk 3Ly 3L# 3L$ 3L& 3L' 3L( 3L* 3L\
++ 3L; 3L< 3L[ 3L] 3L^ 3L` 3L{ 3L~ 3M3 3M6 3M8 3M9 3MD 3MF 3MG 3MJ 3MK 3MM 3MP \
+3MS 3MT 3MW 3MZ 3Ma 3Md 3Mg 3Mh 3Mj 3OR 3OT 3OU 3OW 3OX 3OZ 3Oa 3Ob 3Od 3Oe 3O\
+g 3Oh 3Ok 3Ol 3On 3Oo 3Oq 3Or 3Os 3Ou 3Ov 3Ox 3Oy 3O# 3O$ 3O% 3O' 3O( 3O* 3O+ \
+3O. 3O/ 3O; 3O< 3O> 3O? 3O@ 3O] 3O^ 3O` 3O{ 3O} 3O~ 3P0 3P2 3P3 3P5 3P6 3P9 3P\
+A 3PC 3PD 3PF 3PG 3Q| 3Q~ 3R0 3R2 3R3 3R5 3R6 3R7 3R9 3RA 3RC 3RD 3RG 3RH 3RJ \
+3RK 3RM 3RN 3RO 3RQ 3RR 3RT 3RU 3RW 3RX 3RY 3Ra 3Rb 3Rd 3Re 3Rh 3Ri 3Rk 3Rl 3R\
+n 3Ro 3Rp 3Rr 3Rv 3Rx 3R$ 3R% 3R' 3R( 3R+ 3R, 3R. 3R/ 3Tz 3T$ 3T% 3T' 3T( 3T) \
+3T+ 3T, 3T< 3T= 3T] 3T^ 3T_ 3T{ 3T| 3U0 3U2 3U4 3U6 3U7 3U9 3UA 3UD 3UE 3UG 3U\
+H 3UK 3UL 3UN 3UO 3UQ 3UT 3UU 3UV 3UX 3Ua 3Ub 3Ue 3Uh 3Ui 3Uk 3Ul 3Z1 3Z3 3Z4 \
+3Z6 3Z7 3Z8 3ZA 3ZB 3ZH 3ZI 3ZN 3ZO 3ZP 3ZR 3ZS 3ZU 3ZY 3ZZ 3Ze 3Zf 3Zl 3Zm 3Z\
+o 3Zp 3Zq 3Zs 3Zw 3Zy 3Z% 3Z& 3Z( 3Z) 3Z, 3Z- 3Z/ 3Z: 3b# 3b% 3b& 3b( 3b) 3b* \
+3b, 3b- 3b= 3b> 3b^ 3b_ 3b` 3b| 3b} 3c5 3cA 3cB 3cH 3cI 3cL 3cM 3cO 3cU 3cY 3c\
+b 3cc 3cf 3ci 3cj 3h2 3h4 3h5 3h7 3h8 3h9 3hB 3hC 3hI 3hJ 3hO 3hP 3hQ 3hS 3hf \
+3hg 3hm 3hn 3hr 3ht 3h) 3h* 3h: 3h; 3j' 3j. 3j? 3j{ 3j} 3j~ 3k1 3k5 3k6 3kB 3k\
+C 3kI 3kJ 3kL 3kM 3kV 3kZ 3kg 3r% 3r, 3r{ 3r| 3s5 3s9 3sD 3sG 3sK 3sT 3sX 3sn \
+3x1 3x3 3xD 3xE 3xK 3xL 3xV 3xX 3xb 3xc 3xr 3xs 3xw 3xy 3x% 3x& 3x? 3x@ 3z# 3z\
+= 3z_ 3#1 3#3 3#4 3#6 3#7 3#8 3#A 3#B 3#H 3#I 3#N 3#O 3#R 3#e 3#l 8H_ 8I7 8IE \
+8IJ 8IZ 8Ig 8P} 8Q2 8QI 8QN 8QU 8Qk AqJ AqZ Aqg A)R A)Y A)f LZ| La0 Lap Laq La\
+s Lat Laz La# La% La& La* La, La: La< La= La> La@ La[ La| La} Lb0 Lb1 Lb5 Lb7 \
+LbB LbD LbE LbF LbH LbI LbO LbP LbR LbS LbW LbY Lbc Lbe Lc_ Ld0 LdL LdM LdO Ld\
+P LdS LdV LdW LdZ Ldb Ldc Ldd Ldg Ldi Ldj Ldl Ldm Ldn Ldq Lds Ldt Ldx Ldz Ld# \
+Ld% Ld& Ld' Ld) Ld* Ld, Ld- Ld: Ld; Ld= Ld> Ld[ Ld_ Ld` Ld} Le0 Le1 Le2 Le4 Le\
+5 Le7 Le8 Liq Lir Lit Liu Li# Li$ Li& Li' Li+ Li- Li; Li= Li> Li? Li[ Li] Li} \
+Li~ Lj1 Lj2 Lj6 Lj8 LjC LjE LjF LjG LjI LjJ LjP LjQ LjS LjT LjX LjZ Ljd Ljf Ll\
+M LlN LlP LlQ LlT LlW LlX Lla Llc Lld Lle Llh Llj Llk Llm Lln Llo Llr Llt Llu \
+Lly Ll# Ll$ Ll& Ll' Ll( Ll* Ll+ Ll- Ll. Ll; Ll< Ll> Ll? Ll[ Ll] Ll` Ll{ Ll} Ll\
+~ Lm1 Lm2 Lm3 Lm5 Lm6 Lm8 Lm9 LmB LmD LmF LmG LmJ LmM LmN LmQ LmT LmU LmX Lma \
+Lmc Lme Lmg Lmh Lmj Lmk Lmn Lmo Lmq Lmr Lmu Lmv Lmx Lmy Lm$ Lm& Lm' Lm( Lm* Lm\
++ Lm. Lm; Lm< Lm? Lm[ Lm] Lm^ Lm{ Lm} Lm~ Ln1 Lyt Lyw Ly& Ly) Ly- Ly= Ly[ Ly^ \
+Ly_ Lz0 Lz1 Lz4 Lz8 LzE LzG LzI LzL LzS LzV LzZ Lzf Lzj Lzp Lzt Lzw Lz# Lz& Lz\
+- Lz= Lz[ Lz_ Lz} L#1 L#8 L#D L#E L#I L#K L#L L#P L#R L#S L$P L$S L$V L$Z L$c \
+L$f L$g L$j L$m L$q L$t L$w L$# L$& L$) L$* L$- L$: L$> L$[ L$_ L$} L%1 L%4 L%\
+5 L%8 L%B L%F L%I L%L L%P L%S L%V L%W L%Z L%c L%g L%j L%m L%q L%t L%w L%x L%# \
+L%& L%* L%- L%: L%> L%[ L%_ L%` L%} L&1 L&` L&} L'0 L'1 L'5 L'7 L'8 L'B L'C L'\
+E L'F L'I L'M L'P L'S L'W L'Z L'c L'd L'g L'j L'n L'q L't L'x L'# L'& L'' L'* \
+L'- L'; L'> L'[ L'` L'} L(1 L(2 L(5 L(8 L(C L(F L(I L(M L(P L(S L(T L(W L(Z L(\
+d L(g L(j L(n L(q L(t L(u L(x L(# L)u L)x L)' L)* L). L)> L)] L)` L*2 L*5 L*9 \
+L*F L*J L*M L*T L*W L*a L*g L*k L*q L*u L*x L*$ L*' L*. L*> L*] L*` L*~ L+2 L+\
+9 L+F L+J L+M L+Q L+T L.{ L.~ L/2 L/6 L/9 L/C L/D L/G L/J L/N L/Q L/T L/X L/a \
+L/d L/e L/h L/k L/o L/r L/u L/y L/$ L/' L/( L/+ L/. L/< L/? L/] L/{ L/~ L:2 L:\
+3 L:6 L:9 L:D L:G L:J L:N L:Q L:T L:U L:X L:a L:e L:h L:k L:o L:r L:u L:v L:y \
+L:$ L;v L;y L;( L;+ L;/ L;? L;^ L;` L;{ L<2 L<3 L<6 L<A L<G L<I L<K L<N L<U L<\
+X L<b L<h L<l L<r L<v L<y L<% L<( L</ L<? L<^ L<{ L=0 L=3 L=A L=G L=K L=N L=R \
+L=U L>R L>U L>b L>h L>i L>l L>s L>v L>% L>+ L>, L>/ L>? L>@ L>^ L?0 L?5 L?6 L?\
+7 L?A L?C L?H L?K L?R L?U L?Y L?e L?i L?l L?s L?v L?z L?( L?, L?/ L?@ L?^ L?| \
+L@3 L@| L[0 L[3 L[7 L[A L[D L[E L[H L[K L[O L[R L[U L[Y L[b L[e L[f L[i L[l L[\
+p L[s L[v L[z L[% L[( L[) L[, L[/ L[= L[@ L[^ L[| L]0 L]3 L]4 L]7 L]A L]E L]H \
+L]K L]O L]R L]U L]V L]Y L]b L]f L]i L]l L]p L]s L]v L]w L]z L]% MHz MH# MH$ MH\
+% MH& MH( MH) MH* MH+ MH, MH- MH/ MH: MH< MH= MH> MH@ MH[ MH^ MH_ MH` MH{ MH| \
+MI0 MI2 MI3 MI5 MI8 MI9 MIB MIC MIE MIG MIH MIJ MIK MKV MKW MKX MKY MKZ MKc MK\
+d MKe MKf MKg MKj MKl MKn MKp MKq MKs MKt MKu MKv MKw MKx MK$ MK% MK& MK* MK+ \
+MK, MK- MK. MK/ MK: MK; MK< MK= MK> MK? MK_ MK{ MK} ML1 ML2 ML3 ML5 MLA MLC ML\
+E MLI MLJ MN1 MN3 MN4 MN5 MN7 MN9 MNA MNB MNE MNH MNI MNL MNO MNP MNQ MNR MNS \
+MNX MNZ MNd MNe MNh MNi MNk MNl MNm MNo MNu MNv MNw MN% MN& MN* MN; MN= MN? MX\
+$ MX% MX& MX' MX( MX, MX- MX. MX/ MX; MX? MX@ MX` MX{ MX| MX} MX~ MY2 MY7 MYA \
+MYB MYG MYI MYM MaX MaY MaZ Maa Mae Maf Mag Mah Mai Man Map Mar Mas Mau Maw Ma\
+x May Maz Ma, Ma- Ma. Ma< Ma= Ma> Md3 Md5 Md7 Md9 MdB MdC MdD MdG MdK MdN MdR \
+MdS MdT MdU Mdf Mdg Mdm Mdn Mf& Mf' Mf) Mf, Mf- Mf. Mf: Mf= Mf[ Mf_ Mf| Mf} Mg\
+1 Mg4 Mg7 Mg8 MgB MgE MgI MgL MgO MgV MgY MgZ Mgc Mgj Mgp Mgt Mgw Mgz Mg# Mg& \
+Mg) Mg- Mg: Mg= Mg[ Mg_ Mg` Mg| Mg} Mh1 Mh2 Mh4 Mh8 Mh9 MhB MhE MhI MhL MhP Mh\
+V Mhc Mhf MiZ Mia Mic Mif Mig Mih Mij Mim Miq Mit Miw Mix Mi# Mi) Mi- Mi: Mi> \
+Mi[ Mj1 Mj4 Mj5 Mj8 MjF MjL MjP MjV MjZ Mjc Mjg Mjj Mjq Mjt Mju Mjw Mjx Mj# Mj\
+$ Mj& Mj* Mj+ Mj- Mj: Mj> Mj[ Mj` Mk1 Mk8 MkB Ml5 Ml6 Ml8 MlC MlD MlI MlP MlS \
+MlT MlW Mlc Mlg Mlj Mln Mlq Ml# Ml& Ml' Ml* Ml; Ml[ Ml` Mm1 Mm5 Mm8 MmC MmF Mm\
+P MmQ MmS MmT MmW MmX Mmd Mme Mmj Mmn Mmq Mmu Mm# Mm* Mm- Mn% Mn' Mn* Mn- Mn. \
+Mn; Mn> Mn? Mn] Mn` Mn{ Mn} Mo2 Mo4 Mo5 Mo8 Mo9 MoB MoC MoF MoJ MoM MoO MoP Mo\
+T Mog Mon Mou Mox Mo# Mo$ Mo' Mo* Mo. Mo; Mo> Mo] Mo^ Mo` Mo} Mo~ Mp0 Mp2 Mp5 \
+Mp9 MpC MpF MpG MpP MpT Mpa MqY Mqa Mqd Mqh Mqn Mqo Mqr Mqu Mqv Mq' Mq+ Mq? Mq\
+} Mq~ MrC MrE MrI MrJ MrT MrX Mrn Mrr Mrs Mru Mry Mrz Mr$ Mr+ Mr; Mr< Mr? Mr~ \
+Ms6 Mt4 MtC MtG MtK MtN MtR Mta Mte Mtu Mt~ Mu3 MuJ MuO MuV Mul Muu Muy Mu( Mv\
+, Mv. Mv< Mv= Mv^ Mv_ Mw3 Mw5 MwC MwG MwN MwP Mw$ Mw( Mw/ Mw[ Mw^ Mx6 Mx7 MxD \
+MxE MxP MxW Mxa M$7 M$B M$C M$I M$J M$K M$N M$P M$R M$b M$f M$v M$| M%A M%H M%\
+M M%c M%j M%v M%z M%) M)g M)i M)m M)n M)t M)u M*r M*t M*) M** M*: M*; M,C M,D \
+M,E M,I M,J M,K M,O M,P M,Q M,} M-B M-I M-N M-d M-k M;b M;d M;q M;r M;x M;y M<\
+1 M<H M<L M<v M<x M<$ M<% M<> M<? M_6 M_A M_Q M_a M_e M_l Qm` Qn2 Qn6 Qo6 QoM \
+QoQ RM2 RM9 RMG RMN RMX RMk RO$ RO+ RO< RO^ RP3 RPG RU0 RU7 RUN RUO RUU RUb RU\
+e RUi RUl RWz RW) RW^ RW_ RX0 RX7 RXA RXE RXH RXO RXV RXl T5s T5z T5& T6& T6@ \
+T6_ T8m T8t T8) TDq TDx TD- TGk TG# TG' 2A-X 2A-Y 2A-Z 2A-a 2A-b 2A-c 2A-y 2A-\
+z 2A-# 2A-$ 2A-% 2A-& 2A.7 2A.A 2A.F 2A.L 2A.N 2A.Q 2A.g 2A.m 2A.o 2A.r 2A.z 2\
+A.% 2A.< 2A.] 2A/4 2A/7 2A/M 2A/P 2A/V 2A/Y 2A/e 2A/k 2A/n 2A/q 2A/( 2A/* 2A/+\
+ 2A/- 2A:U 2A:W 2A:X 2A:Z 2A:$ 2A;C 2A;F 2A;K 2A;d 2A;g 2A;l 2A;o 2A;u 2A;# 2A\
+;/ 2A;< 2A<J 2A<P 2A<b 2A<d 2A<h 2A<j 2A<% 2A<' 2A<+ 2A<- 2A=R 2A=U 2A=k 2A=n \
+2A=s 2A=v 2A>9 2A>C 2A>T 2A>i 2A>l 2A>r 2A>, 2A>/ 2A|Z 2A|a 2A|b 2A|c 2A|d 2A|\
+e 2A|# 2A|$ 2A|% 2A|& 2A|' 2A|( 2A}H 2A}N 2A}i 2A}o 2A}> 2A}_ 2A~g 2A~m 2A~* 2\
+A~+ 2A~, 2A~: 2A~; 2A~< 2B0W 2B0X 2B0Y 2B0c 2B0d 2B0e 2B0x 2B1E 2B1H 2B1M 2B1f\
+ 2B1i 2B1n 2B1q 2B1w 2B1; 2B1> 2B2L 2DFz 2DF( 2DF| 2DG3 2DI4 2DI7 2DIV 2DIY 2D\
+N) 2DN} 2DPc 2DQ1 2V^0 2V^1 2V^2 2V^3 2V^4 2V^5 2V_S 2V_V 2V`} 2V{1 2V{4 2V{Z \
+2V{c 2V{f 2V{h 2V{k 2V{= 2V{^ 2W14 2W15 2W16 2W2W 2W3~ 2W45 2W4a 2W4d 2W4g 2W4\
+i 2W4o 2W4> 2W4[ 2W5F 2W5p 2W5y 2W5$ 2WH; 2WH[ 2WH^ 2WH{ 2WIV 2WIY 2WI& 2WI) 2\
+WKR 2WKU 2WKX 2WL? 2WL] 2WME 2WNO 2WN~ 2WV[ 2WV| 2WW0 2WX` 2WYX 2Wa9 2WaT 2WbE\
+ 2Wb[ 2a}' 2d%L 6r0f 6r0i 6r0l 6r31 6r34 6r9* 6r9: 6rB2 6rD9 6rDC 6rfC 6rfn A/\
+5k A/kH",
+"1 3 5 9 A C E R S U V X Z a b d e g i @ [ ^ ` ~ 10 12 14 18 19 1K 1L 1N 1P 1Q\
+ 1R 1W 1Y 1Z 1a 1c 1d 2z 2$ 2( 2) 33 34 36 37 39 3B 3L 3M 3O 3P 3m 3o 4f 4h 4l\
+ 4m",
+"3 4 9 A B C D R U Y a b g @ [ ^ _ ` ~ 10 11 12 13 14 18 19 1E 1F 1G 1I 1K 1L \
+1M 1N 1O 1P 1Q 1R 1S 1T 1U 1V 1Y 1e 1f 1g 1h 2z 2# 2$ 2% 2& 2' 2( 2+ 2, 2- 2. \
+2< 2> 2] 2^ 2| 2} 2~ 30 31 32 36 37 3A 3E 3G 3I 3K 3L 3O 3P 3Q 3S 3T 3W 3Y 3Z \
+3c 3d 3j 3k 3n 3p 3q 3s 3t 3y 3z 3# 3$ 3) 3= 3> 3@ 3] 3_ 3{ 3| 40 41 4E 4G 4I \
+4O 4P 4Q 4T 8[ 8] 8^ 8{ 90 91 92 93 9F 9G 9H 9- 9. 9/ 9< 9@ 9[ 9] 9^ A5 A6 A7 \
+A) A* A+ A/ A: A< A= A> B4 B5 B6 BB BC BD BJ BV BW Bb Bd Bf Bw Bx B% B( B) B* \
+B` B{ CL C; C[ C~ DJ",
+"3 9 A B C D R S T U V W X Y Z a c d e g h @ [ ] ^ _ ` ~ 10 11 12 13 14 18 19 \
+1A 1K 1L 1M 1N 1P 1Q 1R 1S 1W 1X 1Y 1Z 1b 1c 1d 1e 2z 2# 2$ 2( 2) 2* 33 34 36 \
+37 38 39 3A 3L 3M 3N 3O 3Q 3m 3n 4f 4g 4l 4n",
+"9 A B C D E F G R S T U V W X Y Z a b c d e f g h i j k l m n o p q r ~ 10 11\
+ 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 1G 1H 1I 1J 1K 1L 1M 1N 1O 1P 1Q 1R\
+ 1S 1T 1V 1X 1Z 1a 1b 1c 1d 1e 1f 1g 1h 1i 1j 1k 1l 1m 1n 1o 1p 1q 1r 1s 1t 1u\
+ 1v 1w 1x 1y 1z 1# 1$ 1% 1& 1' 1) 2+ 2, 2- 2. 2/ 2: 2; 2< 2= 2> 2? 2@ 2[ 2] 2^\
+ 2_ 2` 2{ 2| 2} 2~ 30 31 32 33 34 35 3F 3G 3H 3I 3J 3N 3O 3P 3Q 3R 3S 3T 3U 3V\
+ 3W 3X 3Y 3Z 3a 3b 3d 3y 3z 3# 3$ 3% 3& 3' 3( 3) 3* 3+ 3, 3- 3. 3/ 3: 3; 3< 3=\
+ 3> 3? 3@ 3[ 3^ 4E 4F 4G 4H 4J 4L 4o 4q 4t 4u 4y",
+"9 A B C D R S T U V W a b c d e f j k l m n o ~ 10 11 12 13 14 18 19 1A 1B 1C\
+ 1D 1H 1I 1J 1K 1L 1M 1Q 1R 1S 1T 1U 1V 1Z 1a 1b 1c 1d 1e 1i 1j 1k 1o 1p 1q 1r\
+ 1s 1t 1x 1y 1z 1# 1$ 1) 1* 2+ 2, 2- 2; 2< 2= 2> 2? 2@ 2_ 2` 2{ 2| 2} 2~ 30 31\
+ 32 3F 3G 3H 3I 3J 3K 3O 3P 3Q 3R 3S 3T 3X 3Y 3a 3b 3y 3z 3# 3' 3( 3) 3* 3+ 3,\
+ 3: 3; 3< 3= 3> 3@ 3[ 4E 4F 4G 4H 4I 4J 4u 4w",
+"R S U V a b d e j l p r @ [ ] ^ _ ` ~ 10 11 15 16 17 1H 1J 1K 1M 1Q 1R 1T 1U \
+1a 1b 1g 1h 2# 2) 2- 2: 2> 2[ 4f 4l 4p 4s 4) 4, 4= 4^ 4| 50 54 57 5E 5H 5O 5U"\
+,
+"R S U V X Z j k m n p r @ [ ^ ` ~ 10 12 14 18 19 1B 1D 1H 1I 1K 1L 1N 1P 1Q 1\
+R 1T 1U 1W 1Y 1Z 1a 1c 1d 1f 1h 2z 2$ 2% 2& 2( 2) 2+ 2- 2. 2/ 2; 2< 2> 2@ 2[ 2\
+] 2_ 2` 2| 2} 30 32 33 34 36 37 39 3B 3C 3D 3F 3G 3I 3K 3L 3M 3O 3P 3R 3S 3U 3\
+W 3X 3Y 3a 3b 3d 3f 3g 3h 3j 3k 3m 3o 4f 4i 4j 4) 4* 4, 4. 4/ 4: 4` 4{ 4} 50 5\
+1 52 54 55 57 58 5A 5C 5D 5E 5G 5H 5J 5L",
+"R S U V X Z a b c d e f g h i @ [ ] ^ _ ` ~ 10 11 12 13 14 18 19 1A 1B 1C 1D \
+1H 1J 1K 1L 1O 1P 1Q 1S 1T 1U 1X 1Y 1Z 1b 1c 1d 1g 1h 2# 2' 2( 2, 2: 2; 2? 2^ \
+2_ 4) 4- 4; 54 58 5C",
+"R T U V X Y a b c d e f g h i @ [ ] ^ _ ` ~ 10 11 12 13 14 18 19 1A 1B 1C 1D \
+1H 1I 1J 1K 1L 1M 1N 1O 1P 1Q 1R 1S 1T 1U 1V 1W 1X 1Y 1Z 1a 1b 1c 1d 1e 1f 1g \
+1h 2z 2# 2$ 2% 2& 2' 2( 2) 2* 2+ 2, 2- 2. 2/ 2: 2; 2< 2= 2> 2? 2@ 2[ 2] 2^ 2_ \
+2` 2{ 2| 2} 2~ 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F 3G 3H 3I 3J 3K \
+3L 3M 3N 3O 3P 3Q 3R 3S 3T 3U 3V 3W 3X 3Y 3Z 3a 3b 3c 3d 3e 3f 3g 3h 3i 3j 3k \
+3l 3m 3n 3o 4) 4* 4+ 4, 4- 4. 4/ 4: 4; 4` 4{ 4} 50 51 52 54 55 56 57 58 59 5A \
+5B 5C 5M 5O 5P 5Q 5S 5T",
+"R S T U V W X Y Z a b c d e f g h i j k l m n o p q r @ [ ] ^ _ ` { | } ~ 10 \
+11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 1G 1H 1I 1J 1N 1O 1P 1Q 1R 1S 1W \
+1X 1Y 1Z 1a 1b 1f 1g 1h 1i 1j 1k 1o 1p 1q 1r 1s 1t 1x 1y 1z 1# 1$ 1% 1) 1* 1+ \
+2% 2& 2' 2. 2/ 2: 2[ 2] 2^ 3v 3w 3x 3' 3( 3) 3: 3; 3< 4) 4* 4+ 54 55 56",
+"R S T U V W a b c d e f j k l m n o @ [ ] ^ _ ` ~ 10 11 12 13 14 18 19 1A 1B \
+1C 1D 1H 1J 1K 1L 1Q 1S 1T 1U 1Z 1b 1c 1d 1i 1k 1p 1q 1r 1t 1y 1z 1# 1% 1* 1+ \
+2# 2( 2, 2; 2? 2_ 3r 3w 3# 3( 3, 3; 4) 4- 54 58",
+"@ [ ] ^ _ ` { | } ~ 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 1G 1H 1J \
+1M 1N 1P 1Q 1R 1T 1U 1W 1X 1a 1b 1d 1e 1g 1h 1i 1k 1l 1n 1o 1q 1r 1s 1u 1v 1x \
+1y 1$ 1% 1' 1( 1* 1+ 2# 2& 2) 2} 31 34 3P 3S 3V 3r 3u 3x 3y 3$ 3' 3+ 3. 3;",
+"@ [ ] ^ _ ` { | } ~ 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 1G 1H 1I \
+1J 1K 1L 1M 1N 1O 1P 1S 1T 1U 1V 1W 1X 1Y 1Z 1a 1b 1c 1d 1e 1f 1g 1h 1j 1l 1m \
+1n 1o 1p 1q 1r 1s 1t 1u 1v 1w 1x 1y 1z 1# 1$ 1% 1& 1' 1( 1) 1* 1+ 2$ 2% 2& 2' \
+2( 2) 2+ 2, 2- 2. 2/ 2: 2; 2< 2= 2> 2? 2@ 2[ 2] 2^ 2_ 2` 2{ 2| 2} 2~ 30 31 32 \
+33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3G 3I 3L 3M 3N 3O 3P 3Q 3R 3S 3T 3U 3V 3W \
+3X 3Y 3Z 3b 3d 3e 3f 3g 3h 3i 3j 3k 3l 3m 3n 3o 3r 3u 3v 3w 3x 3y 3z 3# 3$ 3% \
+3& 3' 3( 3) 3+ 3- 3. 3/ 3: 3; 3< 3= 3> 3? 3@ 3[ 3] 3^ 3_ 3{ 3| 3} 3~ 40 41 42 \
+43 44 46 48 4A 4B 4C 4D 4E 4F 4G 4H 4I 4J 4K 4L 4M 4N 4O 4P 4R 4T 4U 4V 4W 4X \
+4Y 4Z 4a 4b 4c 4d 4e",
+"[ ^ _ ` { | } ~ 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 1G 1I 1K 1N 1\
+O 1P 1S 1T 1U 1V 1W 1X 1Y 1Z 1a 1b 1c 1d 1e 1g 1i 1j 1k 1l 1m 1n 1o 1q 1t 1u 1\
+v 1x 1# 1$ 1% 1& 1' 1( 1) 1* 1+ 2$ 2% 2& 2( 2+ 2, 2- 2. 2/ 2: 2; 2< 2= 2? 2^ 2\
+_ 2` 2{ 2| 2} 2~ 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F 3G 3H 3J 3L 3\
+N 3O 3P 3Q 3R 3S 3T 3U 3V 3W 3X 3Y 3Z 3b 3d 3e 3f 3h 3j 3r 3s 3t 3u 3y 3z 3# 3\
+$ 3% 3& 3' 3( 3) 3+ 3- 3. 3/ 3< 3= 3> 3? 3@ 3[ 3] 3^ 3_ 3` 3{ 3| 3} 3~ 40 41 4\
+2 43 44 46 49 4B 4C 4D 4E 4F 4G 4J 4K 4L 4M 4N 4O 4P 4R 4T 4U 4V 4X 4Z 4e",
+"@ [ ] ^ _ ` { | } 15 18 1A 1B 1C 1F 1G 1K 1O 1Q 1S 1T 1U 1X 1Y 1# 1% 1& 1' 1*\
+ 1+ 2# 2, 37 3G 3P 3r 3s 3# 3$ 3(",
+"@ [ ^ _ ` { | } 12 17 18 19 1A 1B 1C 1E 1G 1L 1M 1O 1Q 1S 1T 1U 1V 1W 1X 1Y 1\
+# 1$ 1% 1& 1' 1( 1) 1* 1+ 2# 2$ 2% 2& 2( 2* 2+ 2, 2- 2. 2/ 2; 2< 2= 2[ 2] 2{ 3\
+6 37 38 39 3B 3C 3D 3E 3F 3G 3I 3J 3K 3L 3M 3N 3O 3Q 3R 3S 3T 3U 3V 3W 3q 3r 3\
+s 3t 3v 3y 3z 3# 3$ 3% 3' 3( 3) 3- 3. 3: 3{ 3| 3} 3~ 41 42 43 44 45 48 49 4A 4\
+B 4C 4D 4E 4G 4I 4J 4K 4L 4M",
+"] ^ ` { | } 12 15 17 18 19 1A 1B 1C 1E 1F 1K 1L 1O 1Q 1T 1U 1V 1W 1X 1# 1$ 1%\
+ 1& 1' 1( 1) 1+ 2# 2$ 2& 2' 2) 2* 2+ 2, 2- 2. 2: 2; 2< 2= 2` 36 37 38 39 3A 3C\
+ 3D 3E 3F 3L 3N 3O 3P 3R 3S 3T 3U 3V 3q 3r 3t 3w 3x 3y 3z 3# 3$ 3& 3' 3( 3) 3.\
+ 3< 3{ 3| 3} 3~ 40 42 43 44 4A 4B 4E 4F 4H 4J 4K 4L",
+"@ ] ^ ` ~ 10 12 13 18 19 1A 1B 1C 1D 1Q 1T 1a 1b 1d 1e 1j 1p 1# 1$ 1) 1* 2# 2\
+$ 2) 2* 2+ 2, 2- 2; 2< 2= 2| 2} 30 31 36 37 38 39 3A 3B 3F 3H 3I 3K 3O 3Q 3T 3\
+Y 3Z 3b 3c 3q 3w 3y 3z 3# 3' 3( 3) 3+ 3; 3= 3> 3@ 3[ 3{ 3| 3} 3~ 40 41 45 47 4\
+8 4A 4E 4G 4H 4J 4O 4P 4R",
+"^ _ { | 15 16 18 19 1E 1F 1Z 1a 1f 1o 1q 1# 1% 1) 2% 2' 2. 2: 2[ 2^ 30 31 39 \
+3A 3I 3J 3R 3a 3b 3v 3x 3^ 3_",
+"@ [ ^ _ ~ 10 15 16 18 19 1B 1C 1E 1F 1T 1Z 1c 1d 1i 1k 1& 1) 1+ 2% 2( 2+ 2- 2\
+. 2: 2; 2= 2_ 2{ 2| 2} 33 34 36 37 39 3A 3C 3D 3F 3G 3I 3J 3O 3R 3X 3Y 3d 3e 3\
+s 3u 3v 3y 3$ 3& 3' 3* 3, 3= 3> 3^ 3_ 3{ 3| 40 42 43 45 46 48 49 4H 4N 4T",
+"@ ] ^ ` { } ~ 10 12 13 15 16 18 19 1A 1B 1C 1D 1E 1F 1G 1Q 1T 1W 1b 1d 1e 1h \
+1j 1m 1p 1# 1$ 1' 1) 1* 2* 2+ 2, 2- 2. 2/ 2: 2; 2< 2= 2| 31 33 34 36 37 38 39 \
+3A 3B 3C 3D 3E 3F 3H 3I 3K 3L 3N 3Z 3b 3c 3e 3f 3q 3t 3w 3$ 3% 3& 3' 3( 3) 3+ \
+3; 3= 3> 3@ 3^ 3_ 3{ 3| 3} 3~ 40 41 43 44 45 48 4A 4B 4D 4G 4H 4J 4K 4M 4O",
+"[ ] ^ _ { } 11 13 15 18 1A 1C 1D 1E 1F 1e 1g 1k 1m 1o 1# 1( 1* 2, 2? 37 3G 3Y\
+ 3r 3t 3? 3^",
+"@ [ _ ` { } ~ 11 12 13 16 17 18 19 1A 1B 1C 1D 1E 1F 1G 1a 1e 1f 1i 1m 1q 1% \
+2+ 2, 2- 2. 2/ 2: 2; 2< 2= 2@ 2[ 2` 2| 2~ 31 36 37 38 39 3A 3B 3C 3D 3E 3F 3G \
+3J 3K 3L 3N 3X 3a 3b 3e 3f 3q 3u 3v 3& 3' 3* 3< 3= 3? 3@ 3_ 3` 3{ 3} 3~ 40 43 \
+44 45 46 49 4A 4B 4D",
+"[ _ | ~ 12 15 18 1A 1B 1D 1E 1G 1a 1d 1g 1i 1k 1l 1n 1o 1q 2+ 2, 2- 2. 2/ 2: \
+2; 2< 2= 2@ 2^ 2{ 38 3X 3Y 3Z 3a 3b 3c 3d 3e 3f 3# 3% 3& 3) 3* 3- 3: 3` 4E 4H \
+4K 4N 4Q 4T",
+"@ [ ] 18 19 1A 1D 1Q 1R 1S 1f 1g 1i 1j 1k 1l 1n 1& 2+ 2, 2- 2. 2/ 2: 2< 2> 2?\
+ 2@ 2[ 2] 2^ 37 3M 3X 3Y 3Z 3d 3f 3s 3t 3u 3z 3' 3( 3) 3= 3> 3? 4P",
+"{ | } 15 16 17 1D 1E 1G 1b 1q 1$ 2/",
+"[ ~ 12 18 1A 1d 1i 1o 1q 2; 2< 2= 2@ 2{ 38 3Z 3a 3b 3c 3) 3* 3: 4H 4N 4Q",
+"@ 18 1U 1c 1i 1o 1q 2; 2= 2> 2? 2_ 2{ 3X 3a 3b 3v 3( 3=",
+"] 11 13 1A",
+"@ [ ^ _ ~ 12 15 1H 1K",
+"^ _ ` { | 15 16 17 18 19 1A 1B 1C 1D 2| 2} 2~ 3g 3h 3i 3{ 3| 3} 4B 4C 4D 4W 4\
+X 4Y",
+"@ [ ^ 10 12 1H 1Z",
+"] _ ` | } 10 12 16 38 3Q 3Y 3> 3^ 3{ 44 4G",
+"[ ] _ ` 11 14 1Q 1T 1# 1) 2~ 32 48",
+"1 4 A D S V b e k n [ ] _ ` 10 11 13 14 19 1A 1C 1D 1I 1J 1L 1M 1R 1S 1U 1V 2\
++ 2. 2[ 2| 30 36 39 3X 3a 3{ 8B 8C 8H 8I 91 92 94 95 9[ 9] 9_ 9`",
+"] 11 14 17 1Q 1T 1& 1) 32",
+"~ 10 14 19",
+"2? 2] 2` 3y 3$ 3'",
+"1 A B S T b c k l 10 19 1R 1a 1s 1$ 2# 2$ 2, 2- 2> 2? 2@ 2[ 2} 2~ 37 38 3G 3H\
+ 3P 3Q 3Y 3Z 3g 3h 3i 3j 3q 3z 3+ 3> 3| 46 4F 4O 4X 4h 4z 4+ 4| 56 5O 8B 8C 8d\
+ 8' 91 9[ DX DY Dy",
+"2` 3'",
+"1 4 S V Y [ _ | 1I 1L 2# 2& 2( 2) 2} 31 34 3P 3S 3U 3V 3a 3q 3w 3> 3_ 4F 4L 8\
+5 86 8X DX DY EN",
+"2| 30 54",
+"3m 3o 4} 50",
+"4] 4^ 5P 5Q",
+"3F",
+"3U 4-",
+"59 5Q",
+"54 57",
+"1 3 4 9 A B D E F",
+"1 4 5",
+"1",
+"1",
+"1 4 5"
+]
+];
+# end of coordinates

@@ -2,7 +2,7 @@
 ##
 #W  iso.tst   Testing isomorphisms             G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: iso.tst, v 3.2.0 2016/06/02 gap Exp $
+#H  @(#)$Id: iso.tst, v 3.4.0 2017/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
@@ -34,6 +34,11 @@ Group([ (1,2,3), (1,3,2) ])
 
 gap> Q := DirectProduct( MoufangLoop( 32, 5 ) );;
 gap> Qp := IsomorphicCopyByPerm( Q, (2,3,4)(17,20) );;
+gap> Qq := LoopIsomorph( Q, (2,3,4)(17,20) );;
+gap> Qp = Qq;
+false
+gap> CayleyTable( Qp ) = CayleyTable( Qq );
+true
 gap> IsomorphismLoops( Q, Qp );
 (2,3,4)(18,23)(19,25)(21,27)(22,28)(24,30)(26,31)(29,32)
 gap> LoopsUpToIsomorphism( [Q,Qp] );

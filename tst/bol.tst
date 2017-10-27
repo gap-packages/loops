@@ -19,7 +19,7 @@ gap> IsomorphismLoops(B,LeftBolLoop(15,1));
 
 gap> Q := RightBolLoop(15,1);;
 gap> AssociatedRightBruckLoop( Q );
-<right Bol loop of order 15>
+<right Bruck loop of order 15>
 
 # TESTING EXACT GROUP FACTORIZATIONS
 

@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "3.3.0",
-Date := "26/10/2016",
-ArchiveURL := "http://www.math.du.edu/loops/loops-3.3.0",
+Version := "3.4.0",
+Date := "27/10/2017",
+ArchiveURL := "http://www.math.du.edu/loops/loops-3.4.0",
 ArchiveFormats := "-win.zip .tar.gz",
 
 Persons := [
@@ -83,7 +83,7 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "This version of LOOPS is ready for GAP 4.7.\n",
+BannerString := "This version of LOOPS is ready for GAP 4.8.\n",
 
 Autoload := false,  # false for deposited packages
 TestFile := "tst/testall.g",
