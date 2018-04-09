@@ -1,0 +1,50 @@
+  
+  [1XA [33X[0;0YFiles[133X[101X
+  
+  [33X[0;0YBelow  is  a  list  of  all  relevant  files forming the [5XLOOPS[105X package. Some
+  technical  files  are not included. A typical user will not need to know any
+  of this information. All paths are relative to the [11Xpkg/loops[111X folder.[133X
+  [33X[0;0Y[11X../README.loops[111X (installation and usage instructions)[133X
+  [33X[0;0Y[11Xinit.g[111X (declarations)[133X
+  [33X[0;0Y[11XPackageInfo.g[111X (loading info for GAP 4.4)[133X
+  [33X[0;0Y[11Xread.g[111X (implementations)[133X
+  [33X[0;0Y[11Xdata/automorphic.tbl[111X (library of automorphic loops)[133X
+  [33X[0;0Y[11Xdata/automorphic/*.*[111X (addition files for the library of automorphic loops)[133X
+  [33X[0;0Y[11Xdata/cc.tbl[111X (library of conjugacy closed loops)[133X
+  [33X[0;0Y[11Xdata/code.tbl[111X (library of code loops)[133X
+  [33X[0;0Y[11Xdata/interesting.tbl[111X (library of interesting loops)[133X
+  [33X[0;0Y[11Xdata/itp_small.tbl[111X (library of small loops up to isotopism)[133X
+  [33X[0;0Y[11Xdata/leftbol.tbl[111X (library of left Bol loops)[133X
+  [33X[0;0Y[11Xdata/moufang.tbl[111X (library of Moufang loops)[133X
+  [33X[0;0Y[11Xdata/nilpotent.tbl[111X (library of small nilpotent loops)[133X
+  [33X[0;0Y[11Xdata/rcc.tbl[111X (library of right conjugacy closed loops)[133X
+  [33X[0;0Y[11Xdata/rcc/*.*[111X  (additional  files  for  the library of right conjugacy closed
+  loops)[133X
+  [33X[0;0Y[11Xdata/paige.tbl[111X (library of Paige loops)[133X
+  [33X[0;0Y[11Xdata/small.tbl[111X (library of small loops)[133X
+  [33X[0;0Y[11Xdata/steiner.tbl[111X (library of Steiner loops)[133X
+  [33X[0;0Y[11Xdoc/*.*[111X (all documentation files)[133X
+  [33X[0;0Y[11Xdoc/loops.xml[111X (the main documentation file for GAPDoc)[133X
+  [33X[0;0Y[11Xdoc/loops.bib[111X (the main bibliography file for documentation)[133X
+  [33X[0;0Y[11Xgap/banner.g[111X (banner of LOOPS)[133X
+  [33X[0;0Y[11Xgap/bol_core_methods.gd .gi[111X (core methods for Bol loops)[133X
+  [33X[0;0Y[11Xgap/classes.gd .gi[111X (properties of quasigroups and loops)[133X
+  [33X[0;0Y[11Xgap/convert.gd .gi[111X (methods for data conversion and compression)[133X
+  [33X[0;0Y[11Xgap/core_methods.gd .gi[111X (core methods for quasigroups and loops)[133X
+  [33X[0;0Y[11Xgap/elements.gd .gi[111X (elements and basic arithmetic operations)[133X
+  [33X[0;0Y[11Xgap/examples.gd .gi[111X (methods for libraries of loops)[133X
+  [33X[0;0Y[11Xgap/extensions.gd .gi[111X (methods for extensions of loops)[133X
+  [33X[0;0Y[11Xgap/iso.gd .gi[111X (methods for isomorphisms and isotopisms of loops)[133X
+  [33X[0;0Y[11Xgap/memory.gd .gi[111X (memory management)[133X
+  [33X[0;0Y[11Xgap/mlt_search.gd .gi[111X (realizing groups as multiplication groups of loops)[133X
+  [33X[0;0Y[11Xgap/moufang_modifications.gd .gi[111X (methods for Moufang modifications)[133X
+  [33X[0;0Y[11Xgap/moufang_triality.gd .gi[111X (methods for triality of Moufang loops)[133X
+  [33X[0;0Y[11Xgap/quasigroups.gd .gi[111X (representing, creating and displaying quasigroups)[133X
+  [33X[0;0Y[11Xgap/random.gd .gi[111X (random quasigroups and loops)[133X
+  [33X[0;0Y[11Xtst/bol.tst[111X (test file for Bol loops)[133X
+  [33X[0;0Y[11Xtst/core_methods.tst[111X (test file for core methods)[133X
+  [33X[0;0Y[11Xtst/iso.tst[111X (test file for isomorphisms and automorphisms)[133X
+  [33X[0;0Y[11Xtst/lib.tst[111X (test file for libraries of loops, except Moufang loops)[133X
+  [33X[0;0Y[11Xtst/nilpot.tst[111X (test file for nilpotency and triality)[133X
+  [33X[0;0Y[11Xtst/testall.g[111X (batch for all tets files)[133X
+  

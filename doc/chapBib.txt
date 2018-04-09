@@ -1,0 +1,69 @@
+  
+  
+  [1XReferences[101X
+  
+  [[20XArt59[120X] [16XArtzy, R.[116X, [17XOn automorphic-inverse properties in loops[117X, [18XProc. Amer. Math. Soc.[118X, [19X10[119X (1959), 588–591.
+  
+  [[20XArt15[120X] [16XArtic, K.[116X, [17XOn conjugacy closed loops and conjugacy closed loop folders[117X, Ph.D. thesis, RWTH Aachen University (2015).
+  
+  [[20XBP56[120X] [16XBruck, R. H. and Paige, L. J.[116X, [17XLoops whose inner mappings are automorphisms[117X, [18XAnn. of Math. (2)[118X, [19X63[119X (1956), 308–323.
+  
+  [[20XBru58[120X]  [16XBruck,  R.  H.[116X,  [17XA  survey of binary systems[117X, Springer Verlag, Ergebnisse der Mathematik und ihrer Grenzgebiete. Neue Folge, Heft 20. Reihe: Gruppentheorie, Berlin
+  (1958), viii+185 pages.
+  
+  [[20XCD05[120X] [16XCsörgő, P. and Drápal, A.[116X, [17XLeft conjugacy closed loops of nilpotency class two[117X, [18XResults Math.[118X, [19X47[119X, 3-4 (2005), 242–265.
+  
+  [[20XCR99[120X] [16XColbourn, C. J. and Rosa, A.[116X, [17XTriple systems[117X, The Clarendon Press Oxford University Press, Oxford Mathematical Monographs, New York (1999), xvi+560 pages.
+  
+  [[20XDBGV12[120X] [16XDe Barros, D. A. S., Grishkov, A. and Vojtěchovský, P.[116X, [17XCommutative automorphic loops of order p^3[117X, [18XJ. Algebra Appl.[118X, [19X11[119X, 5 (2012), 1250100, 15.
+  
+  [[20XDr{\a'a}03[120X] [16XDrápal, A.[116X, [17XCyclic and dihedral constructions of even order[117X, [18XComment. Math. Univ. Carolin.[118X, [19X44[119X, 4 (2003), 593–614.
+  
+  [[20XDV06[120X]  [16XDrápal,  A.  and  Vojtěchovský,  P.[116X,  [17XMoufang  loops that share associator and three quarters of their multiplication tables[117X, [18XRocky Mountain J. Math.[118X, [19X36[119X, 2 (2006),
+  425–455.
+  
+  [[20XDV09[120X] [16XDaly, D. and Vojtěchovský, P.[116X, [17XEnumeration of nilpotent loops via cohomology[117X, [18XJ. Algebra[118X, [19X322[119X, 11 (2009), 4080–4098.
+  
+  [[20XFen69[120X] [16XFenyves, F.[116X, [17XExtra loops. II. On loops with identities of Bol-Moufang type[117X, [18XPubl. Math. Debrecen[118X, [19X16[119X (1969), 187–192.
+  
+  [[20XGKN14[120X] [16XGrishkov, A., Kinyon, M. and Nagy, G. P.[116X, [17XSolvability of commutative automorphic loops[117X, [18XProc. Amer. Math. Soc.[118X, [19X142[119X, 9 (2014), 3029–3037.
+  
+  [[20XGMR99[120X] [16XGoodaire, E. G., May, S. and Raman, M.[116X, [17XThe Moufang loops of order less than 64[117X, Nova Science Publishers Inc., Commack, NY (1999), xviii+287 pages.
+  
+  [[20XJKNV11[120X] [16XJohnson, K. W., Kinyon, M. K., Nagy, G. P. and Vojtěchovský, P.[116X, [17XSearching for small simple automorphic loops[117X, [18XLMS J. Comput. Math.[118X, [19X14[119X (2011), 200–213.
+  
+  [[20XJKV12[120X] [16XJedlička, P., Kinyon, M. and Vojtěchovský, P.[116X, [17XNilpotency in automorphic loops of prime power order[117X, [18XJ. Algebra[118X, [19X350[119X (2012), 64–76.
+  
+  [[20XJM96[120X] [16XJacobson, M. T. and Matthews, P.[116X, [17XGenerating uniformly distributed random Latin squares[117X, [18XJ. Combin. Des.[118X, [19X4[119X, 6 (1996), 405–437.
+  
+  [[20XKKP02[120X] [16XKinyon, M. K., Kunen, K. and Phillips, J. D.[116X, [17XEvery diassociative A-loop is Moufang[117X, [18XProc. Amer. Math. Soc.[118X, [19X130[119X, 3 (2002), 619–624.
+  
+  [[20XKKPV16[120X] [16XKinyon, M. K., Kunen, K., Phillips, J. D. and Vojtěchovský, P.[116X, [17XThe structure of automorphic loops[117X, [18XTrans. Amer. Math. Soc.[118X, [19X368[119X, 12 (2016), 8901–8927.
+  
+  [[20XKNV15[120X] [16XKinyon, M. K., Nagy, G. P. and Vojtěchovský, P.[116X, [17XBol loops and Bruck loops of order pq[117X, [18X[118X (2015), ((preprint)).
+  
+  [[20XKun00[120X] [16XKunen, K.[116X, [17XThe structure of conjugacy closed loops[117X, [18XTrans. Amer. Math. Soc.[118X, [19X352[119X, 6 (2000), 2889–2911.
+  
+  [[20XLie87[120X] [16XLiebeck, M. W.[116X, [17XThe classification of finite simple Moufang loops[117X, [18XMath. Proc. Cambridge Philos. Soc.[118X, [19X102[119X, 1 (1987), 33–47.
+  
+  [[20XMoo[120X] [16XMoorhouse, G. E.[116X, [17XBol loops of small order[117X, ((http://www.uwyo.edu/moorhouse/pub/bol/)).
+  
+  [[20XNV03[120X] [16XNagy, G. P. and Vojtěchovský, P.[116X, [17XOctonions, simple Moufang loops and triality[117X, [18XQuasigroups Related Systems[118X, [19X10[119X (2003), 65–94.
+  
+  [[20XNV07[120X] [16XNagy, G. P. and Vojtěchovský, P.[116X, [17XThe Moufang loops of order 64 and 81[117X, [18XJ. Symbolic Comput.[118X, [19X42[119X, 9 (2007), 871–883.
+  
+  [[20XPfl90[120X] [16XPflugfelder, H. O.[116X, [17XQuasigroups and loops: introduction[117X, Heldermann Verlag, Sigma Series in Pure Mathematics, [19X7[119X, Berlin (1990), viii+147 pages.
+  
+  [[20XPV05[120X] [16XPhillips, J. D. and Vojtěchovský, P.[116X, [17XThe varieties of loops of Bol-Moufang type[117X, [18XAlgebra Universalis[118X, [19X54[119X, 3 (2005), 259–271.
+  
+  [[20XSZ12[120X] [16XSlattery, M. and Zenisek, A.[116X, [17XMoufang loops of order 243[117X, [18XCommentationes Mathematicae Universitatis Carolinae[118X, [19X53[119X, 3 (2012), 423–428.
+  
+  [[20XVoj06[120X] [16XVojtěchovský, P.[116X, [17XToward the classification of Moufang loops of order 64[117X, [18XEuropean J. Combin.[118X, [19X27[119X, 3 (2006), 444–460.
+  
+  [[20XVoj15[120X] [16XVojtěchovský, P.[116X, [17XThree lectures on automorphic loops[117X, [18XQuasigroups Related Systems[118X, [19X23[119X, 1 (2015), 129–163.
+  
+  [[20XWJ75[120X] [16XWilson Jr., R. L.[116X, [17XQuasidirect products of quasigroups[117X, [18XComm. Algebra[118X, [19X3[119X, 9 (1975), 835–850.
+  
+  
+  
+  [32X

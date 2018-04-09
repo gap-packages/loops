@@ -1,1 +1,285 @@
-Placeholder
+  
+  
+                               [1XThe [5XLOOPS[105X Package[101X
+  
+  
+                  [1XComputing with quasigroups and loops in [5XGAP[105X[101X
+  
+  
+                                 Version 3.3.0
+  
+  
+                                 Gábor P. Nagy
+  
+                               Petr Vojtěchovský
+  
+  
+  
+  Gábor P. Nagy
+      Email:    [7Xmailto:nagyg@math.u-szeged.hu[107X
+      Address:  [33X[0;14YDepartment of Mathematics, University of Szeged[133X
+  
+  
+  Petr Vojtěchovský
+      Email:    [7Xmailto:petr@math.du.edu[107X
+      Address:  [33X[0;14YDepartment of Mathematics, University of Denver[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2016 Gábor P. Nagy and Petr Vojtěchovský.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (Loops)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YLicense[133X
+    1.2 [33X[0;0YInstallation[133X
+    1.3 [33X[0;0YDocumentation[133X
+    1.4 [33X[0;0YTest Files[133X
+    1.5 [33X[0;0YMemory Management[133X
+    1.6 [33X[0;0YFeedback[133X
+    1.7 [33X[0;0YAcknowledgment[133X
+  2 [33X[0;0YMathematical Background[133X
+    2.1 [33X[0;0YQuasigroups and Loops[133X
+    2.2 [33X[0;0YTranslations[133X
+    2.3 [33X[0;0YSubquasigroups and Subloops[133X
+    2.4 [33X[0;0YNilpotence and Solvability[133X
+    2.5 [33X[0;0YAssociators and Commutators[133X
+    2.6 [33X[0;0YHomomorphism and Homotopisms[133X
+  3 [33X[0;0YHow the Package Works[133X
+    3.1 [33X[0;0YRepresenting Quasigroups[133X
+    3.2 [33X[0;0YConversions between magmas, quasigroups, loops and groups[133X
+    3.3 [33X[0;0YCalculating with Quasigroups[133X
+    3.4 [33X[0;0YNaming, Viewing and Printing Quasigroups and their Elements[133X
+      3.4-1 [33X[0;0YSetQuasigroupElmName and SetLoopElmName[133X
+  4 [33X[0;0YCreating Quasigroups and Loops[133X
+    4.1 [33X[0;0YAbout Cayley Tables[133X
+    4.2 [33X[0;0YTesting Cayley Tables[133X
+      4.2-1 [33X[0;0YIsQuasigroupTable and IsQuasigroupCayleyTable[133X
+      4.2-2 [33X[0;0YIsLoopTable and IsLoopCayleyTable[133X
+    4.3 [33X[0;0YCanonical and Normalized Cayley Tables[133X
+      4.3-1 CanonicalCayleyTable
+      4.3-2 CanonicalCopy
+      4.3-3 NormalizedQuasigroupTable
+    4.4 [33X[0;0YCreating Quasigroups and Loops From Cayley Tables[133X
+      4.4-1 [33X[0;0YQuasigroupByCayleyTable and LoopByCayleyTable[133X
+    4.5 [33X[0;0YCreating Quasigroups and Loops from a File[133X
+      4.5-1 [33X[0;0YQuasigroupFromFile and LoopFromFile[133X
+    4.6 [33X[0;0YCreating Quasigroups and Loops From Sections[133X
+      4.6-1 CayleyTableByPerms
+      4.6-2 [33X[0;0YQuasigroupByLeftSection and LoopByLeftSection[133X
+      4.6-3 [33X[0;0YQuasigroupByRightSection and LoopByRightSection[133X
+    4.7 [33X[0;0YCreating Quasigroups and Loops From Folders[133X
+      4.7-1 [33X[0;0YQuasigroupByRightFolder and LoopByRightFolder[133X
+    4.8 [33X[0;0YCreating Quasigroups and Loops By Nuclear Extensions[133X
+      4.8-1 NuclearExtension
+      4.8-2 LoopByExtension
+    4.9 [33X[0;0YRandom Quasigroups and Loops[133X
+      4.9-1 [33X[0;0YRandomQuasigroup and RandomLoop[133X
+      4.9-2 RandomNilpotentLoop
+    4.10 [33X[0;0YConversions[133X
+      4.10-1 IntoQuasigroup
+      4.10-2 PrincipalLoopIsotope
+      4.10-3 IntoLoop
+      4.10-4 IntoGroup
+    4.11 [33X[0;0YProducts of Quasigroups and Loops[133X
+      4.11-1 DirectProduct
+    4.12 [33X[0;0YOpposite Quasigroups and Loops[133X
+      4.12-1 [33X[0;0YOpposite, OppositeQuasigroup and OppositeLoop[133X
+  5 [33X[0;0YBasic Methods And Attributes[133X
+    5.1 [33X[0;0YBasic Attributes[133X
+      5.1-1 Elements
+      5.1-2 CayleyTable
+      5.1-3 One
+      5.1-4 Size
+      5.1-5 Exponent
+    5.2 [33X[0;0YBasic Arithmetic Operations[133X
+      5.2-1 [33X[0;0YLeftDivision and RightDivision[133X
+      5.2-2 [33X[0;0YLeftDivisionCayleyTable and RightDivisionCayleyTable[133X
+    5.3 [33X[0;0YPowers and Inverses[133X
+      5.3-1 [33X[0;0YLeftInverse, RightInverse and Inverse[133X
+    5.4 [33X[0;0YAssociators and Commutators[133X
+      5.4-1 Associator
+      5.4-2 Commutator
+    5.5 [33X[0;0YGenerators[133X
+      5.5-1 [33X[0;0YGeneratorsOfQuasigroup and GeneratorsOfLoop[133X
+      5.5-2 GeneratorsSmallest
+      5.5-3 SmallGeneratingSet
+  6 [33X[0;0YMethods Based on Permutation Groups[133X
+    6.1 [33X[0;0YParent of a Quasigroup[133X
+      6.1-1 Parent
+      6.1-2 Position
+      6.1-3 PosInParent
+    6.2 [33X[0;0YSubquasigroups and Subloops[133X
+      6.2-1 Subquasigroup
+      6.2-2 Subloop
+      6.2-3 [33X[0;0YIsSubquasigroup and IsSubloop[133X
+      6.2-4 AllSubquasigroups
+      6.2-5 AllSubloops
+      6.2-6 RightCosets
+      6.2-7 RightTransversal
+    6.3 [33X[0;0YTranslations and Sections[133X
+      6.3-1 [33X[0;0YLeftTranslation and RightTranslation[133X
+      6.3-2 [33X[0;0YLeftSection and RightSection[133X
+    6.4 [33X[0;0YMultiplication Groups[133X
+      6.4-1 [33X[0;0YLeftMutliplicationGroup, RightMultiplicationGroup and
+      MultiplicationGroup[133X
+      6.4-2 [33X[0;0YRelativeLeftMultiplicationGroup, RelativeRightMultiplicationGroup
+      and RelativeMultiplicationGroup[133X
+    6.5 [33X[0;0YInner Mapping Groups[133X
+      6.5-1 [33X[0;0YLeftInnerMapping, RightInnerMapping, MiddleInnerMapping[133X
+      6.5-2 [33X[0;0YLeftInnerMappingGroup, RightInnerMappingGroup,
+      MiddleInnerMappingGroup[133X
+      6.5-3 InnerMappingGroup
+    6.6 [33X[0;0YNuclei, Commutant, Center, and Associator Subloop[133X
+      6.6-1 [33X[0;0YLeftNucles, MiddleNucleus, and RightNucleus[133X
+      6.6-2 [33X[0;0YNuc, NucleusOfQuasigroup and NucleusOfLoop[133X
+      6.6-3 Commutant
+      6.6-4 Center
+      6.6-5 AssociatorSubloop
+    6.7 [33X[0;0YNormal Subloops and Simple Loops[133X
+      6.7-1 IsNormal
+      6.7-2 NormalClosure
+      6.7-3 IsSimple
+    6.8 [33X[0;0YFactor Loops[133X
+      6.8-1 FactorLoop
+      6.8-2 NaturalHomomorphismByNormalSubloop
+    6.9 [33X[0;0YNilpotency and Central Series[133X
+      6.9-1 IsNilpotent
+      6.9-2 NilpotencyClassOfLoop
+      6.9-3 IsStronglyNilpotent
+      6.9-4 UpperCentralSeries
+      6.9-5 LowerCentralSeries
+    6.10 [33X[0;0YSolvability, Derived Series and Frattini Subloop[133X
+      6.10-1 IsSolvable
+      6.10-2 DerivedSubloop
+      6.10-3 DerivedLength
+      6.10-4 [33X[0;0YFrattiniSubloop and FrattinifactorSize[133X
+      6.10-5 FrattinifactorSize
+    6.11 [33X[0;0YIsomorphisms and Automorphisms[133X
+      6.11-1 IsomorphismQuasigroups
+      6.11-2 IsomorphismLoops
+      6.11-3 QuasigroupsUpToIsomorphism
+      6.11-4 LoopsUpToIsomorphism
+      6.11-5 AutomorphismGroup
+      6.11-6 IsomorphicCopyByPerm
+      6.11-7 IsomorphicCopyByNormalSubloop
+      6.11-8 Discriminator
+      6.11-9 AreEqualDiscriminators
+    6.12 [33X[0;0YIsotopisms[133X
+      6.12-1 IsotopismLoops
+      6.12-2 LoopsUpToIsotopism
+  7 [33X[0;0YTesting Properties of Quasigroups and Loops[133X
+    7.1 [33X[0;0YAssociativity, Commutativity and Generalizations[133X
+      7.1-1 IsAssociative
+      7.1-2 IsCommutative
+      7.1-3 IsPowerAssociative
+      7.1-4 IsDiassociative
+    7.2 [33X[0;0YInverse Propeties[133X
+      7.2-1 [33X[0;0YHasLeftInverseProperty, HasRightInverseProperty and
+      HasInverseProperty[133X
+      7.2-2 HasTwosidedInverses
+      7.2-3 HasWeakInverseProperty
+      7.2-4 HasAutomorphicInverseProperty
+      7.2-5 HasAntiautomorphicInverseProperty
+    7.3 [33X[0;0YSome Properties of Quasigroups[133X
+      7.3-1 IsSemisymmetric
+      7.3-2 IsTotallySymmetric
+      7.3-3 IsIdempotent
+      7.3-4 IsSteinerQuasigroup
+      7.3-5 IsUnipotent
+      7.3-6 [33X[0;0YIsLeftDistributive, IsRightDistributive, IsDistributive[133X
+      7.3-7 [33X[0;0YIsEntropic and IsMedial[133X
+    7.4 [33X[0;0YLoops of Bol Moufang Type[133X
+      7.4-1 IsExtraLoop
+      7.4-2 IsMoufangLoop
+      7.4-3 IsCLoop
+      7.4-4 IsLeftBolLoop
+      7.4-5 IsRightBolLoop
+      7.4-6 IsLCLoop
+      7.4-7 IsRCLoop
+      7.4-8 IsLeftNuclearSquareLoop
+      7.4-9 IsMiddleNuclearSquareLoop
+      7.4-10 IsRightNuclearSquareLoop
+      7.4-11 IsNuclearSquareLoop
+      7.4-12 IsFlexible
+      7.4-13 IsLeftAlternative
+      7.4-14 IsRightAlternative
+      7.4-15 IsAlternative
+    7.5 [33X[0;0YPower Alternative Loops[133X
+      7.5-1 [33X[0;0YIsLeftPowerAlternative, IsRightPowerAlternative and
+      IsPowerAlternative[133X
+    7.6 [33X[0;0YConjugacy Closed Loops and Related Properties[133X
+      7.6-1 IsLCCLoop
+      7.6-2 IsRCCLoop
+      7.6-3 IsCCLoop
+      7.6-4 IsOsbornLoop
+    7.7 [33X[0;0YAutomorphic Loops[133X
+      7.7-1 IsLeftAutomorphicLoop
+      7.7-2 IsMiddleAutomorphicLoop
+      7.7-3 IsRightAutomorphicLoop
+      7.7-4 IsAutomorphicLoop
+    7.8 [33X[0;0YAdditonal Varieties of Loops[133X
+      7.8-1 IsCodeLoop
+      7.8-2 IsSteinerLoop
+      7.8-3 [33X[0;0YIsLeftBruckLoop and IsLeftKLoop[133X
+      7.8-4 [33X[0;0YIsRightBruckLoop and IsRightKLoop[133X
+  8 [33X[0;0YSpecific Methods[133X
+    8.1 [33X[0;0YCore Methods for Bol Loops[133X
+      8.1-1 [33X[0;0YAssociatedLeftBruckLoop and AssociatedRightBruckLoop[133X
+      8.1-2 IsExactGroupFactorization
+      8.1-3 RightBolLoopByExactGroupFactorization
+    8.2 [33X[0;0YMoufang Modifications[133X
+      8.2-1 LoopByCyclicModification
+      8.2-2 LoopByDihedralModification
+      8.2-3 LoopMG2
+    8.3 [33X[0;0YTriality for Moufang Loops[133X
+      8.3-1 TrialityPermGroup
+      8.3-2 TrialityPcGroup
+    8.4 [33X[0;0YRealizing Groups as Multiplication Groups of Loops[133X
+      8.4-1 AllLoopTablesInGroup
+      8.4-2 AllProperLoopTablesInGroup
+      8.4-3 OneLoopTableInGroup
+      8.4-4 OneProperLoopTableInGroup
+      8.4-5 AllLoopsWithMltGroup
+      8.4-6 OneLoopWithMltGroup
+  9 [33X[0;0YLibraries of Loops[133X
+    9.1 [33X[0;0YA Typical Library[133X
+      9.1-1 LibraryLoop
+      9.1-2 MyLibraryLoop
+      9.1-3 DisplayLibraryInfo
+    9.2 [33X[0;0YLeft Bol Loops and Right Bol Loops[133X
+      9.2-1 LeftBolLoop
+      9.2-2 RightBolLoop
+    9.3 [33X[0;0YMoufang Loops[133X
+      9.3-1 MoufangLoop
+    9.4 [33X[0;0YCode Loops[133X
+      9.4-1 CodeLoop
+    9.5 [33X[0;0YSteiner Loops[133X
+      9.5-1 SteinerLoop
+    9.6 [33X[0;0YConjugacy Closed Loops[133X
+      9.6-1 [33X[0;0YRCCLoop and RightConjugacyClosedLoop[133X
+      9.6-2 [33X[0;0YLCCLoop and LeftConjugacyClosedLoop[133X
+      9.6-3 [33X[0;0YCCLoop and ConjugacyClosedLoop[133X
+    9.7 [33X[0;0YSmall Loops[133X
+      9.7-1 SmallLoop
+    9.8 [33X[0;0YPaige Loops[133X
+      9.8-1 PaigeLoop
+    9.9 [33X[0;0YNilpotent Loops[133X
+      9.9-1 NilpotentLoop
+    9.10 [33X[0;0YAutomorphic Loops[133X
+      9.10-1 AutomorphicLoop
+    9.11 [33X[0;0YInteresting Loops[133X
+      9.11-1 InterestingLoop
+    9.12 [33X[0;0YLibraries of Loops Up To Isotopism[133X
+      9.12-1 ItpSmallLoop
+  A [33X[0;0YFiles[133X
+  B [33X[0;0YFilters[133X
+  
+  
+  [32X

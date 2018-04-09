@@ -1,0 +1,173 @@
+  
+  [1X5 [33X[0;0YBasic Methods And Attributes[133X[101X
+  
+  [33X[0;0YIn  this  chapter  we  describe the basic core methods and attributes of the
+  [5XLOOPS[105X package.[133X
+  
+  
+  [1X5.1 [33X[0;0YBasic Attributes[133X[101X
+  
+  [33X[0;0YWe  associate  many  attributes  with  quasigroups  in  order  to  speed  up
+  computation.  This  section  lists  some basic attributes of quasigroups and
+  loops.[133X
+  
+  [1X5.1-1 Elements[101X
+  
+  [33X[1;0Y[29X[2XElements[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe list of elements of a quasigroup [3XQ[103X.[133X
+  
+  [33X[0;0YSee Section [14X3.4[114X for more information about element labels.[133X
+  
+  [1X5.1-2 CayleyTable[101X
+  
+  [33X[1;0Y[29X[2XCayleyTable[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe Cayley table of a quasigroup [3XQ[103X.[133X
+  
+  [33X[0;0YSee Section [14X4.1[114X for more information about quasigroup Cayley tables.[133X
+  
+  [1X5.1-3 One[101X
+  
+  [33X[1;0Y[29X[2XOne[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe identity element of a loop [3XQ[103X.[133X
+  
+  [33X[0;0Y[12XRemark:[112XIf  you want to know if a quasigroup [3XQ[103X has a neutral element, you can
+  find      out      with     the     standard     function     for     magmas
+  [10XMultiplicativeNeutralElement([3XQ[103X[10X)[110X.[133X
+  
+  [1X5.1-4 Size[101X
+  
+  [33X[1;0Y[29X[2XSize[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe size of a quasigroup [3XQ[103X.[133X
+  
+  [1X5.1-5 Exponent[101X
+  
+  [33X[1;0Y[29X[2XExponent[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  exponent  of a power associative loop [3XQ[103X. (The method does not
+            test if [3XQ[103X is power associative.)[133X
+  
+  [33X[0;0YWhen  [3XQ[103X  is  a  [13Xpower  associative loop[113X, that is, the powers of elements are
+  well-defined  in  [3XQ[103X, then the [13Xexponent[113X of [3XQ[103X is the smallest positive integer
+  divisible by the orders of all elements of [3XQ[103X.[133X
+  
+  
+  [1X5.2 [33X[0;0YBasic Arithmetic Operations[133X[101X
+  
+  [33X[0;0YEach  quasigroup  element in [5XGAP[105X knows to which quasigroup it belongs. It is
+  therefore possible to perform arithmetic operations with quasigroup elements
+  without   referring   to  the  quasigroup.  All  elements  involved  in  the
+  calculation must belong to the same quasigroup.[133X
+  
+  [33X[0;0YTwo elements [22Xx[122X, [22Xy[122X of the same quasigroup are multiplied by [22Xx*y[122X in [5XGAP[105X. Since
+  multiplication of at least three elements is ambiguous in the nonassociative
+  case,  we  parenthesize  elements by default from left to right, i.e., [22Xx*y*z[122X
+  means  [22X((x*y)*z)[122X. Of course, one can specify the order of multiplications by
+  providing parentheses.[133X
+  
+  
+  [1X5.2-1 [33X[0;0YLeftDivision and RightDivision[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftDivision[102X( [3Xx[103X, [3Xy[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightDivision[102X( [3Xx[103X, [3Xy[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  left  division  [3Xx[103X[22Xbackslash[122X[3Xy[103X (resp. the right division [3Xx[103X[22X/[122X[3Xy[103X) of
+            two elements [3Xx[103X, [3Xy[103X of the same quasigroup.[133X
+  
+  [33X[1;0Y[29X[2XLeftDivision[102X( [3XS[103X, [3Xx[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLeftDivision[102X( [3Xx[103X, [3XS[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightDivision[102X( [3XS[103X, [3Xx[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightDivision[102X( [3Xx[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe   list  of  elements  obtained  by  performing  the  specified
+            arithmetical  operation elementwise using a list [3XS[103X of elements and
+            an element [3Xx[103X.[133X
+  
+  [33X[0;0Y[12XRemark:[112X  We  support  [22X/[122X  in  place  of  [10XRightDivision[110X. But we do not support
+  [22Xbackslash[122X in place of [10XLeftDivision[110X.[133X
+  
+  
+  [1X5.2-2 [33X[0;0YLeftDivisionCayleyTable and RightDivisionCayleyTable[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftDivisionCayleyTable[102X( [3XQ[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightDivisionCayleyTable[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  Cayley  table  of  the  respective  arithmetic operation of a
+            quasigroup [3XQ[103X.[133X
+  
+  
+  [1X5.3 [33X[0;0YPowers and Inverses[133X[101X
+  
+  [33X[0;0YPowers of elements are generally not well-defined in quasigroups. For magmas
+  and  a  positive  integral  exponent, [5XGAP[105X calculates powers in the following
+  way:  [22Xx^1=x[122X,  [22Xx^2k=(x^k)⋅(x^k)[122X and [22Xx^2k+1=(x^2k)⋅ x[122X. One can easily see that
+  this returns [22Xx^k[122X in about [22Xlog_2(k)[122X steps. For [5XLOOPS[105X, we have decided to keep
+  this  method,  but the user should be aware that the method is sound only in
+  power associative quasigroups.[133X
+  
+  [33X[0;0YLet  [22Xx[122X  be  an  element  of  a  loop [22XQ[122X with neutral element [22X1[122X. Then the [13Xleft
+  inverse[113X  [22Xx^λ[122X  of [22Xx[122X is the unique element of [22XQ[122X satisfying [22Xx^λ x=1[122X. Similarly,
+  the [13Xright inverse[113X [22Xx^ρ[122X satisfies [22Xxx^ρ=1[122X. If [22Xx^λ=x^ρ[122X, we call [22Xx^-1=x^λ=x^ρ[122X the
+  [13Xinverse[113X of [22Xx[122X.[133X
+  
+  
+  [1X5.3-1 [33X[0;0YLeftInverse, RightInverse and Inverse[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftInverse[102X( [3Xx[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightInverse[102X( [3Xx[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XInverse[102X( [3Xx[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  left inverse, right inverse and inverse, respectively, of the
+            quasigroup element [3Xx[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCayleyTable( Q );[127X[104X
+    [4X[28X[ [ 1, 2, 3, 4, 5 ],[128X[104X
+    [4X[28X  [ 2, 1, 4, 5, 3 ],[128X[104X
+    [4X[28X  [ 3, 4, 5, 1, 2 ],[128X[104X
+    [4X[28X  [ 4, 5, 2, 3, 1 ],[128X[104X
+    [4X[28X  [ 5, 3, 1, 2, 4 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xelms := Elements( Q );[127X[104X
+    [4X[25Xgap>[125X [27X[ l1, l2, l3, l4, l5 ];[127X[104X
+    [4X[25Xgap>[125X [27X[ LeftInverse( elms[3] ), RightInverse( elms[3] ), Inverse( elms[3] ) ];[127X[104X
+    [4X[28X[ l5, l4, fail ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X5.4 [33X[0;0YAssociators and Commutators[133X[101X
+  
+  [33X[0;0YSee Section [14X2.5[114X for definitions of associators and commutators.[133X
+  
+  [1X5.4-1 Associator[101X
+  
+  [33X[1;0Y[29X[2XAssociator[102X( [3Xx[103X, [3Xy[103X, [3Xz[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe associator of the elements [3Xx[103X, [3Xy[103X, [3Xz[103X of the same quasigroup.[133X
+  
+  [1X5.4-2 Commutator[101X
+  
+  [33X[1;0Y[29X[2XCommutator[102X( [3Xx[103X, [3Xy[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe commutator of the elements [3Xx[103X, [3Xy[103X of the same quasigroup.[133X
+  
+  
+  [1X5.5 [33X[0;0YGenerators[133X[101X
+  
+  
+  [1X5.5-1 [33X[0;0YGeneratorsOfQuasigroup and GeneratorsOfLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XGeneratorsOfQuasigroup[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XGeneratorsOfLoop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA  set of generators of a quasigroup (resp. loop) [3XQ[103X. (Both methods
+            are synonyms of [10XGeneratorsOfMagma[110X.)[133X
+  
+  [33X[0;0YAs  usual  in  [5XGAP[105X,  one can refer to the [10Xi[110Xth generator of a quasigroup [10XQ[110X by
+  [10XQ.i[110X.  Note that while it is often the case that [10X Q.i = Elements(Q)[i][110X, it is
+  not necessarily so.[133X
+  
+  [1X5.5-2 GeneratorsSmallest[101X
+  
+  [33X[1;0Y[29X[2XGeneratorsSmallest[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA  generating  set  [22X{q_0[122X,  [22Xdots[122X, [22Xq_m}[122X of [3XQ[103X such that [22XQ_0=∅[122X, [22XQ_m=[122X[3XQ[103X,
+            [22XQ_i=⟨ q_1[122X, [22Xdots[122X, [22Xq_i ⟩[122X, and [22Xq_i+1[122X is the least element of [3XQ[103X[22X∖ Q_i[122X.[133X
+  
+  [1X5.5-3 SmallGeneratingSet[101X
+  
+  [33X[1;0Y[29X[2XSmallGeneratingSet[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YA  small generating set [22X{q_0[122X, [22Xdots[122X, [22Xq_m}[122X of [3XQ[103X obtained as follows:
+            [22Xq_0[122X  is  the  least  element for which [22X⟨ q_0⟩[122X is largest possible,
+            [22Xq_1[122X$ is the least element for which [22X⟨ q_0,q_1[122X is largest possible,
+            and so on.[133X
+  

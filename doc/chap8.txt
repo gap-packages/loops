@@ -1,0 +1,190 @@
+  
+  [1X8 [33X[0;0YSpecific Methods[133X[101X
+  
+  [33X[0;0YThis  chapter  describes  methods of [5XLOOPS[105X that apply to specific classes of
+  loops, mostly Bol and Moufang loops.[133X
+  
+  
+  [1X8.1 [33X[0;0YCore Methods for Bol Loops[133X[101X
+  
+  
+  [1X8.1-1 [33X[0;0YAssociatedLeftBruckLoop and AssociatedRightBruckLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XAssociatedLeftBruckLoop[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XAssociatedRightBruckLoop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  left  (resp.  right)  Bruck  loop  associated with a uniquely
+            2-divisible left (resp. right) Bol loop [3XQ[103X.[133X
+  
+  [33X[0;0YLet [22XQ[122X be a left Bol loop such that the mapping [22Xx↦ x^2[122X is a permutation of [22XQ[122X.
+  Define  a  new  operation [22X*[122X on [22XQ[122X by [22Xx*y =(x(y^2x))^1/2[122X. Then [22X(Q,*)[122X is a left
+  Bruck  loop, called the [13Xassociated left Bruck loop[113X. (In fact, Bruck used the
+  isomorphic  operation  [22Xx*y  =  x^1/2(yx^1/2)[122X  instead.  Our approach is more
+  natural  in  the sense that the left Bruck loop associated with a left Bruck
+  loop  is  identical  to the original loop.) Associated right Bruck loops are
+  defined dually.[133X
+  
+  [1X8.1-2 IsExactGroupFactorization[101X
+  
+  [33X[1;0Y[29X[2XIsExactGroupFactorization[102X( [3XG[103X, [3XH1[103X, [3XH2[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if ([3XG[103X, [3XH1[103X, [3XH2[103X) is an exact group factorization.[133X
+  
+  [33X[0;0YMany right Bol loops can be constructed from exact group factorizations. The
+  triple [22X(G,H_1,H_2)[122X is an [13Xexact group factorization[113X if [22XH_1[122X, [22XH_2[122X are subgroups
+  of [22XG[122X such that [22XH_1H_2=G[122X and [22XH_1∩ H_2=1[122X.[133X
+  
+  [1X8.1-3 RightBolLoopByExactGroupFactorization[101X
+  
+  [33X[0;0YIf [22X(G,H_1,H_2)[122X is an exact group factorization then [22X(G× G, H_1× H_2, T)[122X with
+  [22XT={(x,x^-1)| x∈ G}[122X is a loop folder that gives rise to a right Bol loop.[133X
+  
+  [33X[1;0Y[29X[2XRightBolLoopByExactGroupFactorization[102X( [3Xarg[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YThe  right Bol loop constructed from an exact group factorization.
+            The  argument  [3Xarg[103X  can  either  be  an  exact group factorization
+            [10X[G,H1,H2][110X, or the tuple [10X[G,H][110X, where [10XH[110X is a regular subgroup of [10XG[110X.
+            We  also  allow  [3Xarg[103X  to be separate entries rather than a list of
+            entries.[133X
+  
+  
+  [1X8.2 [33X[0;0YMoufang Modifications[133X[101X
+  
+  [33X[0;0YDrápal  [Dr{\a'a}03]  described  two  prominent  families  of  extensions of
+  Moufang  loops.  It  turns  out  that these extensions suffice to obtain all
+  nonassociative  Moufang  loops  of  order  at  most  64  if  one starts with
+  so-called  Chein loops. We call the two constructions [13XMoufang modifications[113X.
+  The  library  of  Moufang  loops  included  in  [5XLOOPS[105X  is  based  on Moufang
+  modifications. See [DV06] for details.[133X
+  
+  [1X8.2-1 LoopByCyclicModification[101X
+  
+  [33X[1;0Y[29X[2XLoopByCyclicModification[102X( [3XQ[103X, [3XS[103X, [3Xa[103X, [3Xh[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YThe  cyclic  modification of a Moufang loop [3XQ[103X obtained from [3XS[103X, [3Xa[103X[22X=α[122X
+            and [3Xh[103X described below.[133X
+  
+  [33X[0;0YAssume  that  [22XQ[122X is a Moufang loop with a normal subloop [22XS[122X such that [22XQ/S[122X is a
+  cyclic  group  of  order [22X2m[122X. Let [22Xh∈ S∩ Z(L)[122X. Let [22Xα[122X be a generator of [22XQ/S[122X and
+  write  [22XQ  =  ⋃_i∈  M α^i[122X, where [22XM={-m+1[122X, [22Xdots[122X, [22Xm}[122X. Let [22Xσ:Z-> M[122X be defined by
+  [22Xσ(i)=0[122X  if  [22Xi∈  M[122X,  [22Xσ(i)=1[122X  if  [22Xi>m[122X,  and [22Xσ(i)=-1[122X if [22Xi<-m+1[122X. Introduce a new
+  multiplication  [22X*[122X on [22XQ[122X by [22Xx*y = xyh^σ(i+j)[122X, where [22Xx∈ α^i[122X, [22Xy∈α^j[122X, [22Xi∈ M[122X and [22Xj∈
+  M[122X. Then [22X(Q,*)[122X is a Moufang loop, a [13Xcyclic modification[113X of [22XQ[122X.[133X
+  
+  [1X8.2-2 LoopByDihedralModification[101X
+  
+  [33X[1;0Y[29X[2XLoopByDihedralModification[102X( [3XQ[103X, [3XS[103X, [3Xe[103X, [3Xf[103X, [3Xh[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YThe  dihedral modification of a Moufang loop [3XQ[103X obtained from [3XS[103X, [3Xe[103X,
+            [3Xf[103X and [3Xh[103X as described below.[133X
+  
+  [33X[0;0YLet  [22XQ[122X be a Moufang loop with a normal subloop [22XS[122X such that [22XQ/S[122X is a dihedral
+  group of order [22X4m[122X, with [22Xmge 1[122X. Let [22XM[122X and [22Xσ[122X be defined as in the cyclic case.
+  Let  [22Xβ[122X,  [22Xγ[122X  be  two  involutions  of  [22XQ/S[122X  such that [22Xα=βγ[122X generates a cyclic
+  subgroup  of  [22XQ/S[122X  of  order [22X2m[122X. Let [22Xe∈β[122X and [22Xf∈γ[122X be arbitrary. Then [22XQ[122X can be
+  written  as  a  disjoint  union  [22XQ=⋃_i∈ M(α^i∪ eα^i)[122X, and also [22XQ=⋃_i∈ M(α^i∪
+  α^if)[122X.  Let [22XG_0=⋃_i∈ Mα^i[122X, and [22XG_1=L∖ G_0[122X. Let [22Xh∈ S∩ N(L)∩ Z(G_0)[122X. Introduce
+  a  new  multiplication  [22X*[122X on [22XQ[122X by [22Xx*y = xyh^(-1)^rσ(i+j)[122X, where [22Xx∈α^i∪ eα^i[122X,
+  [22Xy∈α^j∪ α^jf[122X, [22Xi∈ M[122X, [22Xj∈ M[122X, [22Xy∈ G_r[122X and [22Xr∈{0,1}[122X. Then [22X(Q,*)[122X is a Moufang loop, a
+  [13Xdihedral modification[113X of [22XQ[122X.[133X
+  
+  [1X8.2-3 LoopMG2[101X
+  
+  [33X[1;0Y[29X[2XLoopMG2[102X( [3XG[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YThe Chein loop constructed from a group [3XG[103X.[133X
+  
+  [33X[0;0YLet  [22XG[122X  be  a  group.  Let  [22XoverlineG={overlineg|g∈ G}[122X be a disjoint copy of
+  elements  of  [22XG[122X.  Define  multiplication  [22X*[122X  on  [22XQ=G∪ overlineG[122X by [22Xg*h = gh[122X,
+  [22Xg*overlineh=overlinehg[122X,      [22Xoverlineg*h      =      overlinegh^-1}[122X      and
+  [22Xoverlineg*overlineh=h^-1g[122X,  where  [22Xg[122X, [22Xh∈ G[122X. Then [22X(Q,*)=M(G,2)[122X is a so-called
+  [13XChein  loop[113X,  which  is  always a Moufang loop, and it is associative if and
+  only if [22XG[122X is commutative.[133X
+  
+  
+  [1X8.3 [33X[0;0YTriality for Moufang Loops[133X[101X
+  
+  [33X[0;0YLet  [22XG[122X  be  a group and [22Xσ[122X, [22Xρ[122X be automorphisms of [22XG[122X satisfying [22Xσ^2 = ρ^3 = (σ
+  ρ)^2  =  1[122X. Below we write automorphisms as exponents and [22X[g,σ][122X for [22Xg^-1g^σ[122X.
+  We  say  that  the triple [22X(G,ρ,σ)[122X is a [13Xgroup with triality[113X if [22X[g, σ] [g,σ]^ρ
+  [g,σ]^ρ^2 =1[122X holds for all [22Xg ∈ G[122X. It is known that one can associate a group
+  with  triality  [22X(G,ρ,σ)[122X in a canonical way with a Moufang loop [22XQ[122X. See [NV03]
+  for more details.[133X
+  
+  [33X[0;0YFor any Moufang loop [22XQ[122X, we can calculate the triality group as a permutation
+  group acting on [22X3|Q|[122X points. If the multiplication group of [22XQ[122X is polycyclic,
+  then  we can also represent the triality group as a pc group. In both cases,
+  the automorphisms [22Xσ[122X and [22Xρ[122X are in the same family as the elements of [22XG[122X.[133X
+  
+  [1X8.3-1 TrialityPermGroup[101X
+  
+  [33X[1;0Y[29X[2XTrialityPermGroup[102X( [3XQ[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YA  record  with components [10XG[110X, [10Xrho[110X, [10Xsigma[110X, where [10XG[110X is the canonical
+            group  with  triality  associated  with a Moufang loop [3XQ[103X, and [10Xrho[110X,
+            [10Xsigma[110X are the corresponding triality automorphisms.[133X
+  
+  [1X8.3-2 TrialityPcGroup[101X
+  
+  [33X[1;0Y[29X[2XTrialityPcGroup[102X( [3XQ[103X ) [32X function[133X
+  
+  [33X[0;0YThis  is  a  variation  of  [10XTrialityPermGroup[110X in which [10XG[110X is returned as a pc
+  group.[133X
+  
+  
+  [1X8.4 [33X[0;0YRealizing Groups as Multiplication Groups of Loops[133X[101X
+  
+  [33X[0;0YIt is difficult to determine which groups can occur as multiplication groups
+  of loops.[133X
+  
+  [33X[0;0YThe  following  operations  search for loops whose multiplication groups are
+  contained  within  a  specified transitive permutation group [3XG[103X. In all these
+  operations,  one can speed up the search by increasing the optional argument
+  [3Xdepth[103X,  the price being a much higher memory consumption. The argument [3Xdepth[103X
+  is  optimally  chosen  if  in  the  permutation  group  [3XG[103X there are not many
+  permutations  fixing  [3Xdepth[103X elements. It is safe to omit the argument or set
+  it equal to 2.[133X
+  
+  [33X[0;0YThe  optional  argument  [3Xinfolevel[103X  determines  the  amount  of  information
+  displayed  during  the search. With [10X[3Xinfolevel[103X[10X=0[110X, no information is provided.
+  With  [10X[3Xinfolevel[103X[10X=1[110X,  you  get  some  information  on  timing  and  hits. With
+  [10X[3Xinfolevel[103X[10X=2[110X, the results are printed as well.[133X
+  
+  [1X8.4-1 AllLoopTablesInGroup[101X
+  
+  [33X[1;0Y[29X[2XAllLoopTablesInGroup[102X( [3XG[103X[, [3Xdepth[103X[, [3Xinfolevel[103X]] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YAll Cayley tables of loops whose multiplication group is contained
+            in the transitive permutation group [3XG[103X.[133X
+  
+  [1X8.4-2 AllProperLoopTablesInGroup[101X
+  
+  [33X[1;0Y[29X[2XAllProperLoopTablesInGroup[102X( [3XG[103X[, [3Xdepth[103X[, [3Xinfolevel[103X]] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YAll  Cayley  tables  of  nonassociative loops whose multiplication
+            group is contained in the transitive permutation group [3XG[103X.[133X
+  
+  [1X8.4-3 OneLoopTableInGroup[101X
+  
+  [33X[1;0Y[29X[2XOneLoopTableInGroup[102X( [3XG[103X[, [3Xdepth[103X[, [3Xinfolevel[103X]] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA  Cayley  table of a loop whose multiplication group is contained
+            in the transitive permutation group [3XG[103X.[133X
+  
+  [1X8.4-4 OneProperLoopTableInGroup[101X
+  
+  [33X[1;0Y[29X[2XOneProperLoopTableInGroup[102X( [3XG[103X[, [3Xdepth[103X[, [3Xinfolevel[103X]] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA Cayley table of a nonassociative loop whose multiplication group
+            is contained in the transitive permutation group [3XG[103X.[133X
+  
+  [1X8.4-5 AllLoopsWithMltGroup[101X
+  
+  [33X[1;0Y[29X[2XAllLoopsWithMltGroup[102X( [3XG[103X[, [3Xdepth[103X[, [3Xinfolevel[103X]] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA list of all loops (given as sections) whose multiplication group
+            is equal to the transitive permutation group [3XG[103X.[133X
+  
+  [1X8.4-6 OneLoopWithMltGroup[101X
+  
+  [33X[1;0Y[29X[2XOneLoopWithMltGroup[102X( [3XG[103X[, [3Xdepth[103X[, [3Xinfolevel[103X]] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YOne  loop (given as a section) whose multiplication group is equal
+            to the transitive permutation group [3XG[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xg:=PGL(3,3);[127X[104X
+    [4X[28XGroup([ (6,7)(8,11)(9,13)(10,12), (1,2,5,7,13,3,8,6,10,9,12,4,11) ])[128X[104X
+    [4X[25Xgap>[125X [27Xa:=AllLoopTablesInGroup(g,3,0);; Size(a);[127X[104X
+    [4X[28X56[128X[104X
+    [4X[25Xgap>[125X [27Xa:=AllLoopsWithMltGroup(g,3,0);; Size(a);[127X[104X
+    [4X[28X52[128X[104X
+  [4X[32X[104X
+  

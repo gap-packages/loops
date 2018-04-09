@@ -1,0 +1,457 @@
+  
+  [1X4 [33X[0;0YCreating Quasigroups and Loops[133X[101X
+  
+  [33X[0;0YIn  this chapter we describe several ways in which quasigroups and loops can
+  be created in [5XLOOPS[105X.[133X
+  
+  
+  [1X4.1 [33X[0;0YAbout Cayley Tables[133X[101X
+  
+  [33X[0;0YLet  [22XX={x_1,dots,x_n}[122X be a set and [22X⋅[122X a binary operation on [22XX[122X. Then an [22Xn[122X by [22Xn[122X
+  array  with rows and columns bordered by [22Xx_1[122X, [22Xdots[122X, [22Xx_n[122X, in this order, is a
+  [13XCayley  table[113X,  or  a [13Xmultiplication table[113X of [22X⋅[122X, if the entry in the row [22Xx_i[122X
+  and column [22Xx_j[122X is [22Xx_i⋅ x_j[122X.[133X
+  
+  [33X[0;0YA Cayley table is a [13Xquasigroup table[113X if it is a latin square, i.e., if every
+  entry [22Xx_i[122X appears in every column and every row exactly once.[133X
+  
+  [33X[0;0YAn unfortunate feature of multiplication tables in practice is that they are
+  often  not  bordered,  that is, it is up to the reader to figure out what is
+  meant.  Throughout this manual and in [5XLOOPS[105X, we therefore make the following
+  assumption:  [13XAll  distinct  entries  in  a quasigroup table must be positive
+  integers,  say [22Xx_1 < x_2 < ⋯ < x_n[122X, and if no border is specified, we assume
+  that the table is bordered by [22Xx_1[122X, [22Xdots[122X, [22Xx_n[122X, in this order.[113X Note that we do
+  not  assume  that  the  distinct entries [22Xx_1[122X, [22Xdots[122X, [22Xx_n[122X form the interval [22X1[122X,
+  [22Xdots[122X,  [22Xn[122X.  The significance of this observation will become clear in Chapter
+  [14X6[114X.[133X
+  
+  [33X[0;0YFinally, we say that a quasigroup table is a [13Xloop table[113X if the first row and
+  the  first  column  are  the  same,  and if the entries in the first row are
+  ordered in an ascending fashion.[133X
+  
+  
+  [1X4.2 [33X[0;0YTesting Cayley Tables[133X[101X
+  
+  
+  [1X4.2-1 [33X[0;0YIsQuasigroupTable and IsQuasigroupCayleyTable[133X[101X
+  
+  [33X[1;0Y[29X[2XIsQuasigroupTable[102X( [3XT[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsQuasigroupCayleyTable[102X( [3XT[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XT[103X is a quasigroup table as defined above, else [10Xfalse[110X.[133X
+  
+  
+  [1X4.2-2 [33X[0;0YIsLoopTable and IsLoopCayleyTable[133X[101X
+  
+  [33X[1;0Y[29X[2XIsLoopTable[102X( [3XT[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsLoopCayleyTable[102X( [3XT[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XT[103X is a loop table as defined above, else [10Xfalse[110X.[133X
+  
+  [33X[0;0Y[12XRemark:[112XThe  package  [5XGUAVA[105X  also  contains  operations  dealing  with  latin
+  squares. In particular, [10XIsLatinSquare[110X is declared in [5XGUAVA[105X.[133X
+  
+  
+  [1X4.3 [33X[0;0YCanonical and Normalized Cayley Tables[133X[101X
+  
+  [1X4.3-1 CanonicalCayleyTable[101X
+  
+  [33X[1;0Y[29X[2XCanonicalCayleyTable[102X( [3XT[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YCanonical   Cayley  table  constructed  from  Cayley  table  [3XT[103X  by
+            replacing entries [22Xx_i[122X with [22Xi[122X.[133X
+  
+  [33X[0;0YA  Cayley  table is said to be [13Xcanonical[113X if it is based on elements [22X1[122X, [22Xdots[122X,
+  [22Xn[122X. Although we do not assume that every quasigroup table is canonical, it is
+  often desirable to present quasigroup tables in canonical way.[133X
+  
+  [1X4.3-2 CanonicalCopy[101X
+  
+  [33X[1;0Y[29X[2XCanonicalCopy[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA canonical copy of the quasigroup or loop [3XQ[103X.[133X
+  
+  [33X[0;0YThis is a shorthand for [10XQuasigroupByCayleyTable(CanonicalCayleyTable([3XQ[103X[10X)[110X when
+  [3XQ[103X  is  a  declared quasigroup, and [10XLoopByCayleyTable(CanonicalCayleyTable([3XQ[103X[10X)[110X
+  when [3XQ[103X is a loop.[133X
+  
+  [1X4.3-3 NormalizedQuasigroupTable[101X
+  
+  [33X[1;0Y[29X[2XNormalizedQuasigroupTable[102X( [3XT[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA normalized version of the Cayley table [3XT[103X.[133X
+  
+  [33X[0;0YA  given  Cayley  table  [3XT[103X  is  normalized in three steps as follows: first,
+  [10XCanonicalCayleyTable[110X  is  called  to  rename entries to [22X1[122X, [22Xdots[122X, [22Xn[122X, then the
+  columns  of  [3XT[103X  are  permuted  so  that  the first row reads [22X1[122X, [22Xdots[122X, [22Xn[122X, and
+  finally  the  rows of [3XT[103X are permuted so that the first column reads [22X1[122X, [22Xdots[122X,
+  [22Xn[122X.[133X
+  
+  
+  [1X4.4 [33X[0;0YCreating Quasigroups and Loops From Cayley Tables[133X[101X
+  
+  
+  [1X4.4-1 [33X[0;0YQuasigroupByCayleyTable and LoopByCayleyTable[133X[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupByCayleyTable[102X( [3XT[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLoopByCayleyTable[102X( [3XT[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  quasigroup  (resp.  loop)  with  quasigroup table (resp. loop
+            table) [3XT[103X.[133X
+  
+  [33X[0;0YSince  [10XCanonicalCayleyTable[110X  is  called  within  the  above  operation,  the
+  resulting  quasigroup  will have Cayley table with distinct entries [22X1[122X, [22Xdots[122X,
+  [22Xn[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xct := CanonicalCayleyTable( [[5,3],[3,5]] );[127X[104X
+    [4X[28X[ [ 2, 1 ], [ 1, 2 ] ][128X[104X
+    [4X[25Xgap>[125X [27XNormalizedQuasigroupTable( ct );[127X[104X
+    [4X[28X[ [ 1, 2 ], [ 2, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XLoopByCayleyTable( last );[127X[104X
+    [4X[28X<loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27X[ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];[127X[104X
+    [4X[28X[ true, false ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X4.5 [33X[0;0YCreating Quasigroups and Loops from a File[133X[101X
+  
+  [33X[0;0YTyping  a large multiplication table manually is tedious and error-prone. We
+  have  therefore included a general method in [5XLOOPS[105X that reads multiplication
+  tables of quasigroups from a file.[133X
+  
+  [33X[0;0YInstead  of  writing  a  separate  algorithm  for  each  common  format, our
+  algorithm relies on the user to provide a bit of information about the input
+  file.  Here  is  an outline of the algorithm, with file named [3Xfilename[103X and a
+  string [3Xdel[103X as input (in essence, the characters of [3Xdel[103X will be ignored while
+  reading the file):[133X
+  
+  [30X    [33X[0;6Yread the entire content of [3Xfilename[103X into a string [3Xs[103X,[133X
+  
+  [30X    [33X[0;6Yreplace all end-of-line characters in [3Xs[103X by spaces,[133X
+  
+  [30X    [33X[0;6Yreplace by spaces all characters of [3Xs[103X that appear in [3Xdel[103X,[133X
+  
+  [30X    [33X[0;6Ysplit [3Xs[103X into maximal substrings without spaces, called [13Xchunks[113X here,[133X
+  
+  [30X    [33X[0;6Ylet [22Xn[122X be the number of distinct chunks,[133X
+  
+  [30X    [33X[0;6Yif the number of chunks is not [22Xn^2[122X, report error,[133X
+  
+  [30X    [33X[0;6Yconstruct  the  multiplication  table by assigning numerical values [22X1[122X,
+        [22Xdots[122X, [22Xn[122X to chunks, depending on their position among distinct chunks.[133X
+  
+  [33X[0;0YThe  following  examples clarify the algorithm and document its versatility.
+  All examples are of the form [22XF+D⟹ T[122X, meaning that an input file containing [22XF[122X
+  together with the deletion string [22XD[122X produce multiplication table [22XT[122X.[133X
+  
+  [33X[0;0Y[12XExample:[112X Data does not have to be arranged into an array of any kind.[133X
+  
+  
+  [24X[33X[0;6Y\begin{array}{cccc}  0&1&2&1\\  2&0&2& \\ 0&1& & \end{array}\quad + \quad ""
+  \quad   \Longrightarrow\quad   \begin{array}{ccc}   1&2&3\\   2&3&1\\  3&1&2
+  \end{array}[133X
+  
+  [124X
+  
+  [33X[0;0Y[12XExample:[112X Chunks can be any strings.[133X
+  
+  
+  [24X[33X[0;6Y\begin{array}{cc}   {\rm   red}&{\rm   green}\\   {\rm   green}&{\rm  red}\\
+  \end{array}\quad  + \quad "" \quad \Longrightarrow\quad \begin{array}{cc} 1&
+  2\\ 2& 1 \end{array}[133X
+  
+  [124X
+  
+  [33X[0;0Y[12XExample:[112X  A  typical  table  produced  by  [5XGAP[105X  is easily parsed by deleting
+  brackets and commas.[133X
+  
+  
+  [24X[33X[0;6Y[  [0,  1],  [1,  0]  ]  \quad  +  \quad  "[,]"  \quad  \Longrightarrow\quad
+  \begin{array}{cc} 1& 2\\ 2& 1 \end{array}[133X
+  
+  [124X
+  
+  [33X[0;0Y[12XExample:[112X  A  typical  TeX  table with rows separated by lines is also easily
+  converted.  Note that we have to use [22Xbackslashbackslash[122X to ensure that every
+  occurrence  of [22Xbackslash[122X is deleted, since [22Xbackslashbackslash[122X represents the
+  character [22Xbackslash[122X in [5XGAP[105X[133X
+  
+  
+  [24X[33X[0;6Y\begin{array}{lll}    x\&&   y\&&\   z\backslash\backslash\cr   y\&&   z\&&\
+  x\backslash\backslash\cr   z\&&   x\&&\   y   \end{array}   \quad   +  \quad
+  "\backslash\backslash\&"   \quad   \Longrightarrow\quad   \begin{array}{ccc}
+  1&2&3\cr 2&3&1\cr 3&1&2 \end{array}[133X
+  
+  [124X
+  
+  
+  [1X4.5-1 [33X[0;0YQuasigroupFromFile and LoopFromFile[133X[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupFromFile[102X( [3Xfilename[103X, [3Xdel[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLoopFromFile[102X( [3Xfilename[103X, [3Xdel[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  quasigroup (resp. loop) whose multiplication table data is in
+            file  [3Xfilename[103X,  ignoring  the  characters contained in the string
+            [3Xdel[103X.[133X
+  
+  
+  [1X4.6 [33X[0;0YCreating Quasigroups and Loops From Sections[133X[101X
+  
+  [1X4.6-1 CayleyTableByPerms[101X
+  
+  [33X[1;0Y[29X[2XCayleyTableByPerms[102X( [3XP[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf  [3XP[103X  is  a  set of [22Xn[122X permutations of an [22Xn[122X-element set [22XX[122X, returns
+            Cayley table [22XC[122X such that [22XC[i][j] = X[j]^P[i][122X.[133X
+  
+  [33X[0;0YThe  cardinality  of the underlying set is determined by the moved points of
+  the  first  permutation  in  [3XP[103X, unless the first permutation is the identity
+  permutation, in which case the second permutation is used.[133X
+  
+  [33X[0;0YIn   particular,   if   [3XP[103X   is   the   left   section  of  a  quasigroup  [3XQ[103X,
+  [10XCayleyTableByPerms([3XQ[103X[10X)[110X returns the multiplication table of [3XQ[103X.[133X
+  
+  
+  [1X4.6-2 [33X[0;0YQuasigroupByLeftSection and LoopByLeftSection[133X[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupByLeftSection[102X( [3XP[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLoopByLeftSection[102X( [3XP[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf   [3XP[103X  is  a  set  of  permutations  corresponding  to  the  left
+            translations   of   a   quasigroup   (resp.   loop),  returns  the
+            corresponding quasigroup (resp. loop).[133X
+  
+  [33X[0;0YThe  order  of permutations in [3XP[103X is important in the quasigroup case, but it
+  is  disregarded  in  the  loop  case,  since  then  the order of rows in the
+  corresponding  multiplication  table  is  determined  by the presence of the
+  neutral element.[133X
+  
+  
+  [1X4.6-3 [33X[0;0YQuasigroupByRightSection and LoopByRightSection[133X[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupByRightSection[102X( [3XP[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLoopByRightSection[102X( [3XP[103X ) [32X operation[133X
+  
+  [33X[0;0YThese    are    the   dual   operations   to   [10XQuasigroupByLeftSection[110X   and
+  [10XLoopByLeftSection[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;[127X[104X
+    [4X[25Xgap>[125X [27Xls := LeftSection( S );[127X[104X
+    [4X[28X[ (), (1,3,5), (1,5,3) ][128X[104X
+    [4X[25Xgap>[125X [27XCayleyTableByPerms( ls );[127X[104X
+    [4X[28X[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ][128X[104X
+    [4X[25Xgap>[125X [27XCayleyTable( LoopByLeftSection( ls ) );[127X[104X
+    [4X[28X[ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X4.7 [33X[0;0YCreating Quasigroups and Loops From Folders[133X[101X
+  
+  [33X[0;0YLet  [22XG[122X  be  a group, [22XH[122X a subgroup of [22XG[122X, and [22XT[122X a right transversal to [22XH[122X in [22XG[122X.
+  Let  [22Xτ:G->  T[122X  be  defined  by [22Xx∈ Hτ(x)[122X. Then the operation [22X∘[122X defined on the
+  right  cosets  [22XQ = {Ht|t∈ T}[122X by [22XHs∘ Ht = Hτ(st)[122X turns [22XQ[122X into a quasigroup if
+  and only if [22XT[122X is a right transversal to all conjugates [22Xg^-1Hg[122X of [22XH[122X in [22XG[122X. (In
+  fact, every quasigroup [22XQ[122X can be obtained in this way by letting [22XG= Mlt_ρ(Q)[122X,
+  [22XH= Inn_ρ(Q)[122X and [22XT={R_x|x∈ Q}[122X.)[133X
+  
+  [33X[0;0YWe call the triple [22X(G,H,T)[122X a [13Xright quasigroup (or loop) folder[113X.[133X
+  
+  
+  [1X4.7-1 [33X[0;0YQuasigroupByRightFolder and LoopByRightFolder[133X[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupByRightFolder[102X( [3XG[103X, [3XH[103X, [3XT[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLoopByRightFolder[102X( [3XG[103X, [3XH[103X, [3XT[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe quasigroup (resp. loop) from the right folder ([3XG[103X, [3XH[103X, [3XT[103X).[133X
+  
+  [33X[0;0Y[12XRemark:[112X  We  do  not support the dual operations for left sections since, by
+  default, actions in [5XGAP[105X act on the right.[133X
+  
+  [33X[0;0YHere  is  a  simple  example in which [22XT[122X is actually the right section of the
+  resulting loop.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XT := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;[127X[104X
+    [4X[25Xgap>[125X [27XG := Group( T );; H := Stabilizer( G, 1 );;[127X[104X
+    [4X[25Xgap>[125X [27XLoopByRightFolder( G, H, T );[127X[104X
+    [4X[28X<loop of order 5>[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X4.8 [33X[0;0YCreating Quasigroups and Loops By Nuclear Extensions[133X[101X
+  
+  [33X[0;0YLet  [22XK[122X, [22XF[122X be loops. Then a loop [22XQ[122X is an [13Xextension[113X of [22XK[122X by [22XF[122X if [22XK[122X is a normal
+  subloop  of  [22XQ[122X such that [22XQ/K[122X is isomorphic to [22XF[122X. An extension [22XQ[122X of [22XK[122X by [22XF[122X is
+  [13Xnuclear[113X if [22XK[122X is an abelian group and [22XKle N(Q)[122X.[133X
+  
+  [33X[0;0YA map [22Xθ:F× F-> K[122X is a [13Xcocycle[113X if [22Xθ(1,x) = θ(x,1) = 1[122X for every [22Xx∈ F[122X.[133X
+  
+  [33X[0;0YThe  following  theorem  holds for loops [22XQ[122X, [22XF[122X and an abelian group [22XK[122X: [22XQ[122X is a
+  nuclear extension of [22XK[122X by [22XF[122X if and only if there is a cocycle [22Xθ:F× F-> K[122X and
+  a  homomorphism [22Xφ:F-> Aut(Q)[122X such that [22XK× F[122X with multiplication [22X(a,x)(b,y) =
+  (aφ_x(b)θ(x,y),xy)[122X is isomorphic to [22XQ[122X.[133X
+  
+  [1X4.8-1 NuclearExtension[101X
+  
+  [33X[1;0Y[29X[2XNuclearExtension[102X( [3XQ[103X, [3XK[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  data  necessary  to construct [3XQ[103X as a nuclear extension of the
+            subloop  [3XK[103X  by [3XQ[103X[22X/[122X[3XK[103X, namely [22X[K, F, φ, θ][122X as above. Note that [3XK[103X must
+            be a commutative subloop of the nucleus of [3XQ[103X.[133X
+  
+  [33X[0;0YIf  [22Xn=|F|[122X and [22Xm=|[122X[3XK[103X[22X|[122X, the cocycle [22Xθ[122X is returned as an [22Xn× n[122X array with entries
+  in  [22X{1,dots,m}[122X,  and the homomorphism [22Xφ[122X is returned as a list of length [22Xn[122X of
+  permutations of [22X{1,dots,m}[122X.[133X
+  
+  [1X4.8-2 LoopByExtension[101X
+  
+  [33X[1;0Y[29X[2XLoopByExtension[102X( [3XK[103X, [3XF[103X, [3Xf[103X, [3Xt[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  extension  of  an abelian group [3XK[103X by a loop [3XF[103X, using action [3Xf[103X
+            and  cocycle  [3Xt[103X.  The arguments must be formatted as the output of
+            [10XNuclearExtension[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XF := IntoLoop( Group( (1,2) ) );[127X[104X
+    [4X[28X<loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27XK := DirectProduct( F, F );;[127X[104X
+    [4X[25Xgap>[125X [27Xphi := [ (), (2,3) ];;[127X[104X
+    [4X[25Xgap>[125X [27Xtheta := [ [ 1, 1 ], [ 1, 3 ] ];;[127X[104X
+    [4X[25Xgap>[125X [27XLoopByExtension( K, F, phi, theta );[127X[104X
+    [4X[28X<loop of order 8>[128X[104X
+    [4X[25Xgap>[125X [27XIsAssociative( last );[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X4.9 [33X[0;0YRandom Quasigroups and Loops[133X[101X
+  
+  [33X[0;0YAn  algorithm is said to select a latin square of order [22Xn[122X [13Xat random[113X if every
+  latin  square  of  order  [22Xn[122X  is  returned  by  the  algorithm  with the same
+  probability. Selecting a latin square at random is a nontrivial problem.[133X
+  
+  [33X[0;0YIn [JM96], Jacobson and Matthews defined a random walk on the space of latin
+  squares  and so-called improper latin squares that visits every latin square
+  with  the  same  probability.  The  diameter  of  the  space is no more than
+  [22X4(n-1)^3[122X  in  the sense that no more than [22X4(n-1)^3[122X properly chosen steps are
+  needed to travel from one latin square of order [22Xn[122X to another.[133X
+  
+  [33X[0;0YThe  Jacobson-Matthews  algorithm can be used to generate random quasigroups
+  as  follows:  (i)  select  any  latin  square  of  order [22Xn[122X, for instance the
+  canonical  multiplication table of the cyclic group of order [22Xn[122X, (ii) perform
+  sufficiently many steps of the random walk, stopping at a proper or improper
+  latin  square, (iii) if necessary, perform a few more steps to end up with a
+  proper  latin square. Upon normalizing the resulting latin square, we obtain
+  a random loop of order [22Xn[122X.[133X
+  
+  [33X[0;0YBy  the  above  result,  it suffices to use about [22Xn^3[122X steps to arrive at any
+  latin  square  of  order [22Xn[122X from the initial latin square. In fact, a smaller
+  number of steps is probably sufficient.[133X
+  
+  
+  [1X4.9-1 [33X[0;0YRandomQuasigroup and RandomLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XRandomQuasigroup[102X( [3Xn[103X[, [3Xiter[103X] ) [32X operation[133X
+  [33X[1;0Y[29X[2XRandomLoop[102X( [3Xn[103X[, [3Xiter[103X] ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA   random   quasigroup   (resp.   loop)  of  order  [3Xn[103X  using  the
+            Jacobson-Matthews  algorithm.  If  the  optional  argument [3Xiter[103X is
+            omitted, [3Xn[103X[22X^3[122X steps are used. Otherwise [3Xiter[103X steps are used.[133X
+  
+  [33X[0;0YIf  [3Xiter[103X  is small, the Cayley table of the returned quasigroup (resp. loop)
+  will be close to the canonical Cayley table of the cyclic group of order [3Xn[103X.[133X
+  
+  [1X4.9-2 RandomNilpotentLoop[101X
+  
+  [33X[1;0Y[29X[2XRandomNilpotentLoop[102X( [3Xlst[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA  random  nilpotent  loop  as  follows  (see Section [14X6.9[114X for more
+            information  on  nilpotency):  [3Xlst[103X  must  be  a  list  of positive
+            integers  and/or  finite  abelian groups. If [10X[3Xlst[103X[10X=[a1][110X and [10Xa1[110X is an
+            integer,  a  random abelian group of order [10Xa1[110X is returned, else [10Xa1[110X
+            is   an   abelian  group  and  [10XAsLoop(a1)[110X  is  returned.  If  [10X[3Xlst[103X[10X=
+            [a1,...,am][110X,      a      random      central      extension     of
+            [10XRandomNilpotentLoop([a1])[110X  by  [10XRandomNilpotentLoop([a2,...,am])[110X is
+            returned.[133X
+  
+  [33X[0;0YTo  determine  the nilpotency class [22Xc[122X of the resulting loop, assume that [3Xlst[103X
+  has  length  at  least 2, contains only integers bigger than 1, and let [22Xm[122X be
+  the  last  entry  of  [3Xlst[103X.  If [22Xm>2[122X then [22Xc[122X is equal to [10XLength([3Xlst[103X[10X)[110X, else [22Xc[122X is
+  equal to [10XLength([3Xlst[103X[10X)-1[110X.[133X
+  
+  
+  [1X4.10 [33X[0;0YConversions[133X[101X
+  
+  [33X[0;0Y[5XLOOPS[105X  contains  methods that convert between magmas, quasigroups, loops and
+  groups,  provided  such  conversions  are  possible.  Each of the conversion
+  methods [10XIntoQuasigroup[110X, [10XIntoLoop[110X and [10XIntoGroup[110X returns [10Xfail[110X if the requested
+  conversion is not possible.[133X
+  
+  [33X[0;0Y[12XRemark:[112X  Up to version 2.0.0 of [5XLOOPS[105X, we supported [10XAsQuasigroup[110X, [10XAsLoop[110X and
+  [10XAsGroup[110X in place of [10XIntoQuasigroup[110X, [10XIntoLoop[110X and [10XIntoGroup[110X, respectively. We
+  have  changed the terminology starting with version 2.1.0 in order to comply
+  with  [5XGAP[105X  naming rules for [10XAsSomething[110X, as explained in Chapter [14X3[114X. Finally,
+  the  method  [10XAsGroup[110X is a core method of [5XGAP[105X that returns an fp group if its
+  argument is an associative loop.[133X
+  
+  [1X4.10-1 IntoQuasigroup[101X
+  
+  [33X[1;0Y[29X[2XIntoQuasigroup[102X( [3XM[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf  [3XM[103X  is  a  declared  magma that happens to be a quasigroup, the
+            corresponding  quasigroup is returned. If [3XM[103X is already declared as
+            a quasigroup, [3XM[103X is returned.[133X
+  
+  [1X4.10-2 PrincipalLoopIsotope[101X
+  
+  [33X[1;0Y[29X[2XPrincipalLoopIsotope[102X( [3XM[103X, [3Xf[103X, [3Xg[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YAn  isomorphic  copy  of  the  principal  isotope  [22X([122X[3XM[103X,[22X∘)[122X  via  the
+            transposition  [22X(1[122X,[3Xf[103X[22X⋅[122X[3Xg[103X[22X)[122X. An isomorphic copy is returned rather than
+            [22X([122X[3XM[103X,[22X∘)[122X  because  in  [5XLOOPS[105X  all  loops have to have neutral element
+            labeled as [22X1[122X.[133X
+  
+  [33X[0;0YGiven  a  quasigroup  [22XM[122X  and  two  of  its elements [22Xf[122X, [22Xg[122X, the principal loop
+  isotope  [22Xx∘  y  =  R_g^-1(x)⋅ L_f^-1(y)[122X turns [22X(M,∘)[122X into a loop with neutral
+  element [22Xf⋅ g[122X (see Section [14X2.6[114X).[133X
+  
+  [1X4.10-3 IntoLoop[101X
+  
+  [33X[1;0Y[29X[2XIntoLoop[102X( [3XM[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf  [3XM[103X is a declared magma that happens to be a quasigroup (but not
+            necessarily  a  loop!),  a  loop  is  returned as follows: If [3XM[103X is
+            already  declared as a loop, [3XM[103X is returned. Else, if [3XM[103X possesses a
+            neutral  element  [22Xe[122X  and  if  [22Xf[122X is the first element of [3XM[103X, then an
+            isomorphic copy of [3XM[103X via the transposition [22X(e,f)[122X is returned. If [3XM[103X
+            does  not  posses  a neutral element, [10XPrincipalLoopIsotope([3XM[103X[10X, [3XM.1[103X[10X,
+            [3XM.1[103X[10X)[110X is returned.[133X
+  
+  [33X[0;0Y[12XRemark:[112X  One could obtain a loop from a declared magma [3XM[103X in yet another way,
+  by  normalizing  the  Cayley  table of [3XM[103X. The three approaches can result in
+  nonisomorphic loops in general.[133X
+  
+  [1X4.10-4 IntoGroup[101X
+  
+  [33X[1;0Y[29X[2XIntoGroup[102X( [3XM[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf  [3XM[103X  is  a  declared  magma  that  happens  to  be  a group, the
+            corresponding  group  is  returned  as  follows:  If  [3XM[103X is already
+            declared     as     a     group,     [3XM[103X     is    returned,    else
+            [10XRightMultiplicationGroup(IntoLoop([3XM[103X[10X))[110X  is  returned,  which  is  a
+            permutation group isomorphic to [3XM[103X.[133X
+  
+  
+  [1X4.11 [33X[0;0YProducts of Quasigroups and Loops[133X[101X
+  
+  [1X4.11-1 DirectProduct[101X
+  
+  [33X[1;0Y[29X[2XDirectProduct[102X( [3XQ1[103X, [3X...[103X, [3XQn[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf  each  [3XQi[103X  is  either a declared quasigroup, declared loop or a
+            declared group, the direct product of [3XQ1[103X, [22Xdots[122X, [3XQn[103X is returned. If
+            every  [3XQi[103X is a declared group, a group is returned; if every [3XQi[103X is
+            a  declared  loop,  a  loop is returned; otherwise a quasigroup is
+            returned.[133X
+  
+  
+  [1X4.12 [33X[0;0YOpposite Quasigroups and Loops[133X[101X
+  
+  [33X[0;0YWhen  [22XQ[122X  is a quasigroup with multiplication [22X⋅[122X, the [13Xopposite quasigroup[113X of [22XQ[122X
+  is  a quasigroup with the same underlying set as [22XQ[122X and with multiplication [22X*[122X
+  defined by [22Xx*y=y⋅ x[122X.[133X
+  
+  
+  [1X4.12-1 [33X[0;0YOpposite, OppositeQuasigroup and OppositeLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XOpposite[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XOppositeQuasigroup[102X( [3XQ[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XOppositeLoop[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  opposite  of  the  quasigroup  (resp.  loop)  [3XQ[103X. Note that if
+            [10XOppositeQuasigroup([3XQ[103X[10X)[110X  or  [10XOppositeLoop([3XQ[103X[10X)[110X  are  called,  then the
+            returned quasigroup or loop is not stored as an attribute of [3XQ[103X.[133X
+  

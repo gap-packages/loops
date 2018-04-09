@@ -1,0 +1,489 @@
+  
+  [1X7 [33X[0;0YTesting Properties of Quasigroups and Loops[133X[101X
+  
+  [33X[0;0YAlthough  loops are quasigroups, it is often the case in the literature that
+  a  property  of  the  same  name  can  differ for quasigroups and loops. For
+  instance, a Steiner loop is not necessarily a Steiner quasigroup.[133X
+  
+  [33X[0;0YTo  avoid such ambivalences, we often include the noun [10XLoop[110X or [10XQuasigroup[110X as
+  part   of  the  name  of  the  property,  e.g.,  [10XIsSteinerQuasigroup[110X  versus
+  [10XIsSteinerLoop[110X.[133X
+  
+  [33X[0;0YOn the other hand, some properties coincide for quasigroups and loops and we
+  therefore  do  not  include  [10XLoop[110X,  [10XQuasigroup[110X  as  part  of the name of the
+  property, e.g., [10XIsCommutative[110X.[133X
+  
+  
+  [1X7.1 [33X[0;0YAssociativity, Commutativity and Generalizations[133X[101X
+  
+  [1X7.1-1 IsAssociative[101X
+  
+  [33X[1;0Y[29X[2XIsAssociative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an associative quasigroup.[133X
+  
+  [1X7.1-2 IsCommutative[101X
+  
+  [33X[1;0Y[29X[2XIsCommutative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a commutative quasigroup.[133X
+  
+  [1X7.1-3 IsPowerAssociative[101X
+  
+  [33X[1;0Y[29X[2XIsPowerAssociative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a power associative quasigroup.[133X
+  
+  [33X[0;0YA  quasigroup  [22XQ[122X  is  said  to  be  [13Xpower  associative[113X if every element of [22XQ[122X
+  generates an associative quasigroup, that is, a group.[133X
+  
+  [1X7.1-4 IsDiassociative[101X
+  
+  [33X[1;0Y[29X[2XIsDiassociative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a diassociative quasigroup.[133X
+  
+  [33X[0;0YA quasigroup [22XQ[122X is said to be [13Xdiassociative[113X if any two elements of [22XQ[122X generate
+  an  associative  quasigroup,  that  is,  a  group. Note that a diassociative
+  quasigroup is necessarily a loop, but it need not be so declared in [5XLOOPS[105X.[133X
+  
+  
+  [1X7.2 [33X[0;0YInverse Propeties[133X[101X
+  
+  [33X[0;0YFor  an element [22Xx[122X of a loop [22XQ[122X, the [13Xleft inverse[113X of [22Xx[122X is the element [22Xx^λ[122X of [22XQ[122X
+  such  that [22Xx^λ ⋅ x = 1[122X, while the [13Xright inverse[113X of [22Xx[122X is the element [22Xx^ρ[122X of [22XQ[122X
+  such that [22Xx⋅ x^ρ = 1[122X.[133X
+  
+  
+  [1X7.2-1 [33X[0;0YHasLeftInverseProperty, HasRightInverseProperty and HasInverseProperty[133X[101X
+  
+  [33X[1;0Y[29X[2XHasLeftInverseProperty[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XHasRightInverseProperty[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XHasInverseProperty[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  a  loop  [3XQ[103X  has the left inverse property, right inverse
+            property, resp. inverse property.[133X
+  
+  [33X[0;0YA  loop  [22XQ[122X  has  the [13Xleft inverse property[113X if [22Xx^λ(xy)=y[122X for every [22Xx[122X, [22Xy[122X in [22XQ[122X.
+  Dually,  [22XQ[122X  has the [13Xright inverse property[113X if [22X(yx)x^ρ=y[122X for every [22Xx[122X, [22Xy[122X in [22XQ[122X.
+  If  [22XQ[122X  has both the left inverse property and the right inverse property, it
+  has the [13Xinverse property[113X.[133X
+  
+  [1X7.2-2 HasTwosidedInverses[101X
+  
+  [33X[1;0Y[29X[2XHasTwosidedInverses[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if a loop [3XQ[103X has two-sided inverses.[133X
+  
+  [33X[0;0YA loop [22XQ[122X is said to have [13Xtwo-sided inverses[113X if [22Xx^λ=x^ρ[122X for every [22Xx[122X in [22XQ[122X.[133X
+  
+  [1X7.2-3 HasWeakInverseProperty[101X
+  
+  [33X[1;0Y[29X[2XHasWeakInverseProperty[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if a loop [3XQ[103X has the weak inverse property.[133X
+  
+  [33X[0;0YA  loop  [22XQ[122X  has  the  [13Xweak inverse property[113X if [22X(xy)^λ x = y^λ[122X (equivalently,
+  [22Xx(yx)^ρ = y^ρ[122X) holds for every [22Xx[122X, [22Xy[122X in [22XQ[122X.[133X
+  
+  [1X7.2-4 HasAutomorphicInverseProperty[101X
+  
+  [33X[1;0Y[29X[2XHasAutomorphicInverseProperty[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if a loop [3XQ[103X has the automorphic inverse property.[133X
+  
+  [33X[0;0YAccording  to  [Art59],  a  loop  [22XQ[122X  has the [13Xautomorphic inverse property[113X if
+  [22X(xy)^λ = x^λ y^λ[122X, or, equivalently, [22X(xy)^ρ = x^ρ y^ρ[122X holds for every [22Xx[122X, [22Xy[122X in
+  [22XQ[122X.[133X
+  
+  [1X7.2-5 HasAntiautomorphicInverseProperty[101X
+  
+  [33X[1;0Y[29X[2XHasAntiautomorphicInverseProperty[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if a loop [3XQ[103X has the antiautomorphic inverse property.[133X
+  
+  [33X[0;0YA  loop  [22XQ[122X  has  the [13Xantiautomorphic inverse property[113X if [22X(xy)^λ=y^λ x^λ[122X, or,
+  equivalently, [22X(xy)^ρ = y^ρ x^ρ[122X holds for every [22Xx[122X, [22Xy[122X in [22XQ[122X.[133X
+  
+  [33X[0;0YSee  Appendix  [14XB[114X for implications implemented in [5XLOOPS[105X among various inverse
+  properties.[133X
+  
+  
+  [1X7.3 [33X[0;0YSome Properties of Quasigroups[133X[101X
+  
+  [1X7.3-1 IsSemisymmetric[101X
+  
+  [33X[1;0Y[29X[2XIsSemisymmetric[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a semisymmetric quasigroup.[133X
+  
+  [33X[0;0YA  quasigroup  [22XQ[122X is [13Xsemisymmetric[113X if [22X(xy)x=y[122X, or, equivalently [22Xx(yx)=y[122X holds
+  for every [22Xx[122X, [22Xy[122X in [22XQ[122X.[133X
+  
+  [1X7.3-2 IsTotallySymmetric[101X
+  
+  [33X[1;0Y[29X[2XIsTotallySymmetric[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a totally symmetric quasigroup.[133X
+  
+  [33X[0;0YA  commutative semisymmetric quasigroup is called [13Xtotally symmetric[113X. Totally
+  symmetric quasigroups are precisely the quasigroups satisfying [22Xxy=xbackslash
+  y = x/y[122X.[133X
+  
+  [1X7.3-3 IsIdempotent[101X
+  
+  [33X[1;0Y[29X[2XIsIdempotent[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an idempotent quasigroup.[133X
+  
+  [33X[0;0YA quasigroup is [13Xidempotent[113X if it satisfies [22Xx^2=x[122X.[133X
+  
+  [1X7.3-4 IsSteinerQuasigroup[101X
+  
+  [33X[1;0Y[29X[2XIsSteinerQuasigroup[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a Steiner quasigroup.[133X
+  
+  [33X[0;0YA totally symmetric idempotent quasigroup is called a [13XSteiner quasigroup[113X.[133X
+  
+  [1X7.3-5 IsUnipotent[101X
+  
+  [33X[0;0YA quasigroup [22XQ[122X is [13Xunipotent[113X if it satisfies [22Xx^2=y^2[122X for every [22Xx[122X, [22Xy[122X in [22XQ[122X.[133X
+  
+  [33X[1;0Y[29X[2XIsUnipotent[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a unipotent quasigroup.[133X
+  
+  
+  [1X7.3-6 [33X[0;0YIsLeftDistributive, IsRightDistributive, IsDistributive[133X[101X
+  
+  [33X[1;0Y[29X[2XIsLeftDistributive[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsRightDistributive[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsDistributive[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  [3XQ[103X  is  a  left  distributive  quasigroup,  resp. a right
+            distributive quasigroup, resp. a distributive quasigroup.[133X
+  
+  [33X[0;0YA  quasigroup  is  [13Xleft distributive[113X if it satisfies [22Xx(yz) = (xy)(xz)[122X, [13Xright
+  distributive[113X  if  it  satisfies  [22X(xy)z = (xz)(yz)[122X, and [13Xdistributive[113X if it is
+  both left distributive and right distributive.[133X
+  
+  [33X[0;0Y[12XRemark:[112X In order to be compatible with [5XGAP[105Xs terminology, we also support the
+  synonyms  [10XIsLDistributive[110X  and  [10XIsRDistributive[110X  of  [10XIsLeftDistributive[110X  and
+  [10XIsRightDistributive[110X, respectively.[133X
+  
+  
+  [1X7.3-7 [33X[0;0YIsEntropic and IsMedial[133X[101X
+  
+  [33X[1;0Y[29X[2XIsEntropic[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsMedial[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an entropic (aka medial) quasigroup.[133X
+  
+  [33X[0;0YA  quasigroup  is [13Xentropic[113X or [13Xmedial[113X if it satisfies the identity [22X(xy)(uv) =
+  (xu)(yv)[122X.[133X
+  
+  
+  [1X7.4 [33X[0;0YLoops of Bol Moufang Type[133X[101X
+  
+  [33X[0;0YFollowing  [Fen69]  and  [PV05],  a  variety  of  loops  is  said  to  be of
+  [13XBol-Moufang  type[113X if it is defined by a single [13Xidentity of Bol-Moufang type[113X,
+  i.e.,  by  an  identity  that  contains  the same 3 variables on both sides,
+  exactly  one  of the variables occurs twice on both sides, and the variables
+  occur in the same order on both sides.[133X
+  
+  [33X[0;0YIt  is  proved in [PV05] that there are 13 varieties of nonassociative loops
+  of Bol-Moufang type. These are:[133X
+  
+  [30X    [33X[0;6Y[13Xleft alternative loops[113X defined by [22Xx(xy) = (xx)y[122X,[133X
+  
+  [30X    [33X[0;6Y[13Xright alternative loops[113X defined by [22Xx(yy) = (xy)y[122X,[133X
+  
+  [30X    [33X[0;6Y[13Xleft nuclear square loops[113X defined by [22X(xx)(yz) = ((xx)y)z[122X,[133X
+  
+  [30X    [33X[0;6Y[13Xmiddle nuclear square loops[113Xdefined by [22Xx((yy)z) = (x(yy))z[122X,[133X
+  
+  [30X    [33X[0;6Y[13Xright nuclear square loops[113X defined by [22Xx(y(zz)) = (xy)(zz)[122X,[133X
+  
+  [30X    [33X[0;6Y[13Xflexible loops[113X defined by [22Xx(yx) = (xy)x[122X,[133X
+  
+  [30X    [33X[0;6Y[13Xleft   Bol   loops[113X   defined  by  [22Xx(y(xz))  =  (x(yx))z[122X,  always  left
+        alternative,[133X
+  
+  [30X    [33X[0;6Y[13Xright   Bol  loops[113X  defined  by  [22Xx((yz)y)  =  ((xy)z)y[122X,  always  right
+        alternative,[133X
+  
+  [30X    [33X[0;6Y[13XLC loops[113X defined by [22X(xx)(yz) = (x(xy))z[122X, always left alternative, left
+        nuclear square and middle nuclear square,[133X
+  
+  [30X    [33X[0;6Y[13XRC  loops[113X  defined  by  [22Xx((yz)z) = (xy)(zz)[122X, always right alternative,
+        right nuclear square and middle nuclear square,[133X
+  
+  [30X    [33X[0;6Y[13XMoufang  loops[113X  defined  by [22X(xy)(zx) = (x(yz))x[122X, always flexible, left
+        Bol and right Bol,[133X
+  
+  [30X    [33X[0;6Y[13XC loops[113X defined by [22Xx(y(yz)) = ((xy)y)z[122X, always LC and RC,[133X
+  
+  [30X    [33X[0;6Y[13Xextra loops[113X defined by [22Xx(y(zx)) = ((xy)z)x[122X, always Moufang and C.[133X
+  
+  [33X[0;0YNote  that  although  some of the defining identities are not of Bol-Moufang
+  type,  they  are  equivalent  to  a  Bol-Moufang  identity.  Moreover,  many
+  varieties  of  loops  of  Bol-Moufang  type can be defined by one of several
+  equivalent identities of Bol-Moufang type.[133X
+  
+  [33X[0;0YThere  are  also  several  varieties related to loops of Bol-Moufang type. A
+  loop  is  said  to  be  [13Xalternative[113X if it is both left alternative and right
+  alternative.  A  loop is [13Xnuclear square[113X if it is left nuclear square, middle
+  nuclear square and right nuclear square.[133X
+  
+  [1X7.4-1 IsExtraLoop[101X
+  
+  [33X[1;0Y[29X[2XIsExtraLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an extra loop.[133X
+  
+  [1X7.4-2 IsMoufangLoop[101X
+  
+  [33X[1;0Y[29X[2XIsMoufangLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a Moufang loop.[133X
+  
+  [1X7.4-3 IsCLoop[101X
+  
+  [33X[1;0Y[29X[2XIsCLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a C loop.[133X
+  
+  [1X7.4-4 IsLeftBolLoop[101X
+  
+  [33X[1;0Y[29X[2XIsLeftBolLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a left Bol loop.[133X
+  
+  [1X7.4-5 IsRightBolLoop[101X
+  
+  [33X[1;0Y[29X[2XIsRightBolLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a right Bol loop.[133X
+  
+  [1X7.4-6 IsLCLoop[101X
+  
+  [33X[1;0Y[29X[2XIsLCLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an LC loop.[133X
+  
+  [1X7.4-7 IsRCLoop[101X
+  
+  [33X[1;0Y[29X[2XIsRCLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an RC loop.[133X
+  
+  [1X7.4-8 IsLeftNuclearSquareLoop[101X
+  
+  [33X[1;0Y[29X[2XIsLeftNuclearSquareLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a left nuclear square loop.[133X
+  
+  [1X7.4-9 IsMiddleNuclearSquareLoop[101X
+  
+  [33X[1;0Y[29X[2XIsMiddleNuclearSquareLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a middle nuclear square loop.[133X
+  
+  [1X7.4-10 IsRightNuclearSquareLoop[101X
+  
+  [33X[1;0Y[29X[2XIsRightNuclearSquareLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a right nuclear square loop.[133X
+  
+  [1X7.4-11 IsNuclearSquareLoop[101X
+  
+  [33X[1;0Y[29X[2XIsNuclearSquareLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a nuclear square loop.[133X
+  
+  [1X7.4-12 IsFlexible[101X
+  
+  [33X[1;0Y[29X[2XIsFlexible[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a flexible quasigroup.[133X
+  
+  [1X7.4-13 IsLeftAlternative[101X
+  
+  [33X[1;0Y[29X[2XIsLeftAlternative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a left alternative quasigroup.[133X
+  
+  [1X7.4-14 IsRightAlternative[101X
+  
+  [33X[1;0Y[29X[2XIsRightAlternative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a right alternative quasigroup.[133X
+  
+  [1X7.4-15 IsAlternative[101X
+  
+  [33X[1;0Y[29X[2XIsAlternative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an alternative quasigroup.[133X
+  
+  [33X[0;0YWhile  listing  the  varieties  of  loops  of Bol-Moufang type, we have also
+  listed  all  inclusions among them. These inclusions are built into [5XLOOPS[105X as
+  filters.[133X
+  
+  [33X[0;0YThe  following trivial example shows some of the implications and the naming
+  conventions of [5XLOOPS[105X at work:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XL := LoopByCayleyTable( [ [ 1, 2 ], [ 2, 1 ] ] );[127X[104X
+    [4X[28X<loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27X[ IsLeftBolLoop( L ), L ][127X[104X
+    [4X[28X[ true, <left Bol loop of order 2> ][128X[104X
+    [4X[25Xgap>[125X [27X[ HasIsLeftAlternativeLoop( L ), IsLeftAlternativeLoop( L ) ];[127X[104X
+    [4X[28X[ true, true ][128X[104X
+    [4X[25Xgap>[125X [27X[ HasIsRightBolLoop( L ), IsRightBolLoop( L ) ];[127X[104X
+    [4X[28X[ false, true ][128X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
+    [4X[28X<Moufang loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27X[ IsAssociative( L ), L ];[127X[104X
+    [4X[28X[ true, <associative loop of order 2> ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  analogous  terminology  for  quasigroups  of  Bol-Moufang  type  is not
+  standard  yet, and hence is not supported in [5XLOOPS[105X except for the situations
+  explicitly noted above.[133X
+  
+  
+  [1X7.5 [33X[0;0YPower Alternative Loops[133X[101X
+  
+  [33X[0;0YA  loop  is  [13Xleft power alternative[113X if it is power associative and satisfies
+  [22Xx^n(x^m  y) = x^n+my[122X for all elements [22Xx[122X, [22Xy[122X and all integers [22Xm[122X, [22Xn[122X. Similarly,
+  a  loop  is [13Xright power alternative[113X if it is power associative and satisfies
+  [22X(x  y^n)y^m  = xy^n+m[122X for all elements [22Xx[122X, [22Xy[122X and all integers [22Xm[122X, [22Xn[122X. A loop is
+  [13Xpower  alternative[113X  if  it  is  both  left power alternative and right power
+  alternative.[133X
+  
+  [33X[0;0YLeft  power alternative loops are left alternative and have the left inverse
+  property. Left Bol loops and LC loops are left power alternative.[133X
+  
+  
+  [1X7.5-1 [33X[0;0YIsLeftPowerAlternative, IsRightPowerAlternative and IsPowerAlternative[133X[101X
+  
+  [33X[1;0Y[29X[2XIsLeftPowerAlternative[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsRightPowerAlternative[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsPowerAlternative[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  [3XQ[103X  is a left power alternative loop, resp. a right power
+            alternative loop, resp. a power alternative loop.[133X
+  
+  
+  [1X7.6 [33X[0;0YConjugacy Closed Loops and Related Properties[133X[101X
+  
+  [33X[0;0YA  loop  [22XQ[122X  is [13Xleft conjugacy closed[113X if the set of left translations of [22XQ[122X is
+  closed under conjugation (by itself). Similarly, a loop [22XQ[122X is [13Xright conjugacy
+  closed[113X  if the set of right translations of [22XQ[122X is closed under conjugation. A
+  loop  is  [13Xconjugacy  closed[113X  if  it  is both left conjugacy closed and right
+  conjugacy  closed.  It is common to refer to these loops as LCC, RCC, and CC
+  loops, respectively.[133X
+  
+  [33X[0;0YThe equivalence LCC [22X+[122X RCC [22X=[122X CC is built into [5XLOOPS[105X.[133X
+  
+  [1X7.6-1 IsLCCLoop[101X
+  
+  [33X[1;0Y[29X[2XIsLCCLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsLeftConjugacyClosedLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a left conjugacy closed loop.[133X
+  
+  [1X7.6-2 IsRCCLoop[101X
+  
+  [33X[1;0Y[29X[2XIsRCCLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsRightConjugacyClosedLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a right conjugacy closed loop.[133X
+  
+  [1X7.6-3 IsCCLoop[101X
+  
+  [33X[1;0Y[29X[2XIsCCLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsConjugacyClosedLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a conjugacy closed loop.[133X
+  
+  [1X7.6-4 IsOsbornLoop[101X
+  
+  [33X[1;0Y[29X[2XIsOsbornLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an Osborn loop.[133X
+  
+  [33X[0;0YA loop is [13XOsborn[113X if it satisfies [22Xx(yz⋅ x)=(x^λbackslash y)(zx)[122X. Both Moufang
+  loops and CC loops are Osborn.[133X
+  
+  
+  [1X7.7 [33X[0;0YAutomorphic Loops[133X[101X
+  
+  [33X[0;0YA  loop  [22XQ[122X  whose  all  left  (resp. middle, resp. right) inner mappings are
+  automorphisms  of  [22XQ[122X  is  known  as  a  [13Xleft  automorphic loop[113X (resp. [13Xmiddle
+  automorphic loop[113X, resp. [13Xright automorphic loop[113X).[133X
+  
+  [33X[0;0YA loop [22XQ[122X is an [13Xautomorphic loop[113X if all inner mappings of [22XQ[122X are automorphisms
+  of [22XQ[122X.[133X
+  
+  [33X[0;0YAutomorphic  loops are also known as [13XA loops[113X, and similar terminology exists
+  for left, right and middle automorphic loops.[133X
+  
+  [33X[0;0YThe following results hold for automorphic loops:[133X
+  
+  [30X    [33X[0;6Yautomorphic loops are power associative [BP56][133X
+  
+  [30X    [33X[0;6Yin  an  automorphic  loop  [22XQ[122X  we  have  [22XNuc(Q) = Nuc_λ(Q) = Nuc_ρ(Q)le
+        Nuc_μ(Q)[122X and all nuclei are normal [BP56][133X
+  
+  [30X    [33X[0;6Ya  loop  that  is left automorphic and right automorphic satisfies the
+        anti-automorphic inverse property and is automorphic [JKNV11][133X
+  
+  [30X    [33X[0;6Ydiassociative automorphic loops are Moufang [KKP02][133X
+  
+  [30X    [33X[0;6Yautomorphic loops of odd order are solvable [KKPV16][133X
+  
+  [30X    [33X[0;6Yfinite commutative automorphic loops are solvable [GKN14][133X
+  
+  [30X    [33X[0;6Ycommutative  automorphic  loops of order [22Xp[122X, [22X2p[122X, [22X4p[122X, [22Xp^2[122X, [22X2p^2[122X, [22X4p^2[122X ([22Xp[122X
+        an odd prime) are abelian groups [Voj15][133X
+  
+  [30X    [33X[0;6Ycommutative  automorphic  loops of odd prime power order are centrally
+        nilpotent [JKV12][133X
+  
+  [30X    [33X[0;6Yfor  any  prime  [22Xp[122X, there are [22X7[122X commutative automorphic loops of order
+        [22Xp^3[122X up to isomorphism [DBGV12][133X
+  
+  [33X[0;0YSee the built-in filters and the survey [Voj15] for additional properties of
+  automorphic loops.[133X
+  
+  [1X7.7-1 IsLeftAutomorphicLoop[101X
+  
+  [33X[1;0Y[29X[2XIsLeftAutomorphicLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsLeftALoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a left automorphic loop.[133X
+  
+  [1X7.7-2 IsMiddleAutomorphicLoop[101X
+  
+  [33X[1;0Y[29X[2XIsMiddleAutomorphicLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsMiddleALoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a middle automorphic loop.[133X
+  
+  [1X7.7-3 IsRightAutomorphicLoop[101X
+  
+  [33X[1;0Y[29X[2XIsRightAutomorphicLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsRightALoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a right automorphic loop.[133X
+  
+  [1X7.7-4 IsAutomorphicLoop[101X
+  
+  [33X[1;0Y[29X[2XIsAutomorphicLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsALoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is an automorphic loop.[133X
+  
+  [33X[0;0Y[12XRemark:[112X Be careful not to confuse [10XIsALoop[110X and [10XIsLoop[110X.[133X
+  
+  
+  [1X7.8 [33X[0;0YAdditonal Varieties of Loops[133X[101X
+  
+  [1X7.8-1 IsCodeLoop[101X
+  
+  [33X[1;0Y[29X[2XIsCodeLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a code loop.[133X
+  
+  [33X[0;0YA  [13Xcode  loop[113X  is  a Moufang 2-loop with a Frattini subloop of order 1 or 2.
+  Code loops are extra and conjugacy closed.[133X
+  
+  [1X7.8-2 IsSteinerLoop[101X
+  
+  [33X[1;0Y[29X[2XIsSteinerLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a Steiner loop.[133X
+  
+  [33X[0;0YA  [13XSteiner loop[113X is an inverse property loop of exponent 2. Steiner loops are
+  commutative.[133X
+  
+  
+  [1X7.8-3 [33X[0;0YIsLeftBruckLoop and IsLeftKLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XIsLeftBruckLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsLeftKLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a left Bruck loop (aka left K loop).[133X
+  
+  [33X[0;0YA  left  Bol  loop  with the automorphic inverse property is known as a [13Xleft
+  Bruck loop[113X or a [13Xleft K loop[113X.[133X
+  
+  
+  [1X7.8-4 [33X[0;0YIsRightBruckLoop and IsRightKLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XIsRightBruckLoop[102X( [3XQ[103X ) [32X property[133X
+  [33X[1;0Y[29X[2XIsRightKLoop[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a right Bruck loop (aka right K loop).[133X
+  
+  [33X[0;0YA  right  Bol loop with the automorphic inverse property is known as a [13Xright
+  Bruck loop[113X or a [13Xright K loop[113X.[133X
+  

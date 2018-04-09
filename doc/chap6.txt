@@ -1,0 +1,553 @@
+  
+  [1X6 [33X[0;0YMethods Based on Permutation Groups[133X[101X
+  
+  [33X[0;0YMost  calculations  in  the  [5XLOOPS[105X  package  are delegated to groups, taking
+  advantage of the various permutations and permutation groups associated with
+  quasigroups. This chapter explains in detail how the permutations associated
+  with  a  quasigroup  are  calculated, and it also describes some of the core
+  methods of [5XLOOPS[105X based on permutations. Additional core methods can be found
+  in Chapter [14X7[114X.[133X
+  
+  
+  [1X6.1 [33X[0;0YParent of a Quasigroup[133X[101X
+  
+  [33X[0;0YLet  [22XQ[122X  be a quasigroup and [22XS[122X a subquasigroup of [22XQ[122X. Since the multiplication
+  in  [22XS[122X  coincides with the multiplication in [22XQ[122X, it is reasonable not to store
+  the multiplication table of [22XS[122X. However, the quasigroup [22XS[122X then must know that
+  it is a subquasigroup of [22XQ[122X.[133X
+  
+  [1X6.1-1 Parent[101X
+  
+  [33X[1;0Y[29X[2XParent[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe parent quasigroup of the quasigroup [3XQ[103X.[133X
+  
+  [33X[0;0YWhen  [3XQ[103X  is  not  created  as  a  subquasigroup  of  another quasigroup, the
+  attribute  [10XParent([3XQ[103X[10X)[110X  is set to [3XQ[103X. When [3XQ[103X is created as a subquasigroup of a
+  quasigroup  [3XH[103X,  we  set  [10XParent([3XQ[103X[10X)[110X  equal  to  [10XParent([3XH[103X[10X)[110X.  Thus,  in effect,
+  [10XParent([3XQ[103X[10X)[110X is the largest quasigroup from which [3XQ[103X has been created.[133X
+  
+  [1X6.1-2 Position[101X
+  
+  [33X[1;0Y[29X[2XPosition[102X( [3XQ[103X, [3Xx[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe position of [3Xx[103X among the elements of [3XQ[103X.[133X
+  
+  [33X[0;0YLet  [3XQ[103X  be a quasigroup with parent [3XP[103X, where [3XP[103X is some [22Xn[122X-element quasigroup.
+  Let [3Xx[103X be an element of [3XQ[103X. Then [10X[3Xx[103X[10X![1][110X is the position of [3Xx[103X among the elements
+  of [3XP[103X, i.e., [10X[3Xx[103X[10X![1] = Position(Elements([3XP[103X[10X),[3Xx[103X[10X)[110X.[133X
+  
+  [33X[0;0YWhile  referring  to  elements  of  [3XQ[103X  by  their  positions, the user should
+  understand whether the positions are meant among the elements of [3XQ[103X, or among
+  the  elements  of  the  parent  [3XP[103X  of [3XQ[103X. Since it requires no calculation to
+  obtain  [10X[3Xx[103X[10X![1][110X,  we  always  use  the  position  of  an element in its parent
+  quasigroup in [5XLOOPS[105X. In this way, many attributes of a quasigroup, including
+  its Cayley table, are permanently tied to its parent.[133X
+  
+  [33X[0;0YIt  is  now clear why we have not insisted that Cayley tables of quasigroups
+  must have entries covering the entire interval [22X1[122X, [22Xdots[122X, [22Xn[122X for some [22Xn[122X.[133X
+  
+  [1X6.1-3 PosInParent[101X
+  
+  [33X[1;0Y[29X[2XPosInParent[102X( [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XS[103X is a list of quasigroup elements (not necessarily from the
+            same  quasigroup),  returns the corresponding list of positions of
+            elements of [3XS[103X in the corresponding parent, i.e., [10XPosInParent([3XS[103X[10X)[i]
+            = [3XS[103X[10X[i]![1] = Position(Parent([3XS[103X[10X[i]),[3XS[103X[10X[i])[110X.[133X
+  
+  [33X[0;0YQuasigroups  with the same parent can be compared as follows. Assume that [22XA[122X,
+  [22XB[122X  are  two  quasigroups with common parent [22XQ[122X. Let [22XG_A[122X, [22XG_B[122X be the canonical
+  generating   sets   of  [22XA[122X  and  [22XB[122X,  respectively,  obtained  by  the  method
+  [10XGeneratorsSmallest[110X  (see  Section  [14X5.5[114X).  Then  we define [22XA<B[122X if and only if
+  [22XG_A<G_B[122X lexicographically.[133X
+  
+  
+  [1X6.2 [33X[0;0YSubquasigroups and Subloops[133X[101X
+  
+  [1X6.2-1 Subquasigroup[101X
+  
+  [33X[1;0Y[29X[2XSubquasigroup[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XS[103X  is a subset of elements or indices of a quasigroup (resp.
+            loop)  [3XQ[103X,  returns the smallest subquasigroup (resp. subloop) of [3XQ[103X
+            containing [3XS[103X.[133X
+  
+  [33X[0;0YWe allow [3XS[103X to be a list of elements of [3XQ[103X, or a list of integers representing
+  the  positions  of  the  respective elements in the parent quasigroup (resp.
+  loop) of [3XQ[103X.[133X
+  
+  [33X[0;0YIf  [3XS[103X  is  empty,  [10XSubquasigroup([3XQ[103X[10X,[3XS[103X[10X)[110X  returns  the  empty  set  if  [3XQ[103X  is a
+  quasigroup, and it returns the one-element subloop of [3XQ[103X if [3XQ[103X is a loop.[133X
+  
+  [33X[0;0Y[12XRemark:[112X  The  empty  set  is sometimes considered to be a subquasigroup of [3XQ[103X
+  (although not in [5XLOOPS[105X). The above convention is useful for handling certain
+  situations,  for  instance  when the user calls [10XCenter([3XQ[103X[10X)[110X for a quasigroup [3XQ[103X
+  with empty center.[133X
+  
+  [1X6.2-2 Subloop[101X
+  
+  [33X[1;0Y[29X[2XSubloop[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  
+  [33X[0;0YThis  is  an  analog of [10XSubquasigroup([3XQ[103X[10X,[3XS[103X[10X)[110X that can be used only when [3XQ[103X is a
+  loop.   Since   there   is  no  difference  in  the  outcome  while  calling
+  [10XSubquasigroup([3XQ[103X[10X,[3XS[103X[10X)[110X  or  [10XSubloop([3XQ[103X[10X,[3XS[103X[10X)[110X  when [3XQ[103X is a loop, it is safe to always
+  call [10XSubquasigroup([3XQ[103X[10X,[3XS[103X[10X)[110X, whether [3XQ[103X is a loop or not.[133X
+  
+  
+  [1X6.2-3 [33X[0;0YIsSubquasigroup and IsSubloop[133X[101X
+  
+  [33X[1;0Y[29X[2XIsSubquasigroup[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XIsSubloop[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  [3XS[103X  is  a  subquasigroup  (resp. subloop) of a quasigroup
+            (resp. loop) [3XQ[103X, [10Xfalse[110X otherwise. In other words, returns [10Xtrue[110X if [3XS[103X
+            and  [3XQ[103X are quasigroups (resp. loops) with the same parent and [3XS[103X is
+            a subset of [3XQ[103X.[133X
+  
+  [1X6.2-4 AllSubquasigroups[101X
+  
+  [33X[1;0Y[29X[2XAllSubquasigroups[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA list of all subquasigroups of a loop [3XQ[103X.[133X
+  
+  [1X6.2-5 AllSubloops[101X
+  
+  [33X[1;0Y[29X[2XAllSubloops[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA list of all subloops of a loop [3XQ[103X.[133X
+  
+  [1X6.2-6 RightCosets[101X
+  
+  [33X[1;0Y[29X[2XRightCosets[102X( [3XQ[103X, [3XS[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YIf [3XS[103X is a subloop of [3XQ[103X, returns a list of all right cosets of [3XS[103X in
+            [3XQ[103X.[133X
+  
+  [33X[0;0YThe  coset  [3XS[103X is listed first, and the elements of each coset are ordered in
+  the  same  way  as  the  elements  of  [3XS[103X,  i.e.,  if [3XS[103X[22X= [s_1,dots,s_m][122X, then
+  [3XS[103X[22Xx=[s_1x,dots,s_mx][122X.[133X
+  
+  [1X6.2-7 RightTransversal[101X
+  
+  [33X[1;0Y[29X[2XRightTransversal[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA  right  transversal  of a subloop [3XS[103X in a loop [3XQ[103X. The transversal
+            consists  of  the  list  of  first  elements from the right cosets
+            obtained by [10XRightCosets([3XQ[103X[10X,[3XS[103X[10X)[110X.[133X
+  
+  [33X[0;0YWhen  [3XS[103X is a subloop of [3XQ[103X, the right transversal of [3XS[103X with respect to [3XQ[103X is a
+  subset of [3XQ[103X containing one element from each right coset of [3XS[103X in [3XQ[103X.[133X
+  
+  
+  [1X6.3 [33X[0;0YTranslations and Sections[133X[101X
+  
+  [33X[0;0YWhen  [22Xx[122X  is  an  element  of  a  quasigroup [22XQ[122X, the left translation [22XL_x[122X is a
+  permutation of [22XQ[122X. In [5XLOOPS[105X, all permutations associated with quasigroups and
+  their  elements  are  permutations  in  the  sense  of  [5XGAP[105X,  i.e., they are
+  bijections  of some interval [22X1[122X, [22Xdots[122X, [22Xn[122X. Moreover, following our convention,
+  the  numerical  entries  of  the  permutations  point to the positions among
+  elements of the parent of [22XQ[122X, not among elements of [22XQ[122X.[133X
+  
+  
+  [1X6.3-1 [33X[0;0YLeftTranslation and RightTranslation[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftTranslation[102X( [3XQ[103X, [3Xx[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightTranslation[102X( [3XQ[103X, [3Xx[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YIf [3Xx[103X is an element of a quasigroup [3XQ[103X, returns the left translation
+            (resp. right translation) by [3Xx[103X in [3XQ[103X.[133X
+  
+  
+  [1X6.3-2 [33X[0;0YLeftSection and RightSection[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftSection[102X( [3XQ[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightSection[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe left section (resp. right section) of a quasigroup [3XQ[103X.[133X
+  
+  [33X[0;0YHere  is  an  example  illustrating  the  main features of the subquasigroup
+  construction and the relationship between a quasigroup and its parent.[133X
+  
+  [33X[0;0YNote  how  the Cayley table of a subquasigroup is created only upon explicit
+  demand.  Also  note  that  changing the names of elements of a subquasigroup
+  (subloop)  automatically  changes  the  names  of the elements of the parent
+  subquasigroup (subloop). This is because the elements are shared.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );[127X[104X
+    [4X[28X<loop of order 3>[128X[104X
+    [4X[25Xgap>[125X [27X[ Parent( S ) = M, Elements( S ), PosInParent( S ) ];[127X[104X
+    [4X[28X[ true, [ l1, l3, l5], [ 1, 3, 5 ] ][128X[104X
+    [4X[25Xgap>[125X [27XHasCayleyTable( S );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XSetLoopElmName( S, "s" );; Elements( S ); Elements( M );[127X[104X
+    [4X[28X[ s1, s3, s5 ][128X[104X
+    [4X[28X[ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ][128X[104X
+    [4X[25Xgap>[125X [27XCayleyTable( S );[127X[104X
+    [4X[28X[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ][128X[104X
+    [4X[25Xgap>[125X [27XLeftSection( S );[127X[104X
+    [4X[28X[ (), (1,3,5), (1,5,3) ][128X[104X
+    [4X[25Xgap>[125X [27X[ HasCayleyTable( S ), Parent( S ) = M ];[127X[104X
+    [4X[28X[ true, true ][128X[104X
+    [4X[25Xgap>[125X [27XL := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );[127X[104X
+    [4X[28X[ l1, l2, l3 ][128X[104X
+    [4X[25Xgap>[125X [27X[ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];[127X[104X
+    [4X[28X[ true, true, false ][128X[104X
+    [4X[25Xgap>[125X [27XLeftSection( L );[127X[104X
+    [4X[28X[ (), (1,2,3), (1,3,2) ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X6.4 [33X[0;0YMultiplication Groups[133X[101X
+  
+  
+  [1X6.4-1       [33X[0;0YLeftMutliplicationGroup,       RightMultiplicationGroup      and[101X
+  [1XMultiplicationGroup[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftMultiplicationGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XRightMultiplicationGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XMultiplicationGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  left  multiplication group, right multiplication group, resp.
+            multiplication group of a quasigroup [3XQ[103X.[133X
+  
+  
+  [1X6.4-2  [33X[0;0YRelativeLeftMultiplicationGroup, RelativeRightMultiplicationGroup and[101X
+  [1XRelativeMultiplicationGroup[133X[101X
+  
+  [33X[1;0Y[29X[2XRelativeLeftMultiplicationGroup[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRelativeRightMultiplicationGroup[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRelativeMultiplicationGroup[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe   relative  left  multiplication  group,  the  relative  right
+            multiplication group, resp. the relative multiplication group of a
+            quasigroup [3XQ[103X with respect to a subquasigroup [3XS[103X of [3XQ[103X.[133X
+  
+  [33X[0;0YLet  [22XS[122X  be  a  subquasigroup  of  a  quasigroup  [22XQ[122X.  Then  the [13Xrelative left
+  multiplication group[113X of [22XQ[122X with respect to [22XS[122X is the group [22X⟨ L(x)|x∈ S⟩[122X, where
+  [22XL(x)[122X  is  the left translation by [22Xx[122X in [22XQ[122X restricted to [22XS[122X. The [13Xrelative right
+  multiplication  group[113X  and  the  [13Xrelative  multiplication  group[113X are defined
+  analogously.[133X
+  
+  
+  [1X6.5 [33X[0;0YInner Mapping Groups[133X[101X
+  
+  [33X[0;0YBy a result of Bruck, the left inner mapping group of a loop is generated by
+  all  [13Xleft inner mappings[113X [22XL(x,y) = L_yx^-1L_yL_x[122X, and the right inner mapping
+  group is generated by all [13Xright inner mappings[113X [22XR(x,y) = R_xy^-1R_yR_x[122X.[133X
+  
+  [33X[0;0YIn analogy with group theory, we define the [13Xconjugations[113X or the [13Xmiddle inner
+  mappings[113X  as  [22XT(x)  = L_x^-1R_x[122X. The [13Xmiddle inner mapping grroup[113X is then the
+  group generated by all conjugations.[133X
+  
+  
+  [1X6.5-1 [33X[0;0YLeftInnerMapping, RightInnerMapping, MiddleInnerMapping[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftInnerMapping[102X( [3XQ[103X, [3Xx[103X, [3Xy[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XRightInnerMapping[102X( [3XQ[103X, [3Xx[103X, [3Xy[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XMiddleInnerMapping[102X( [3XQ[103X, [3Xx[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe  left  inner  mapping  [22XL([122X[3Xx[103X,[3Xy[103X[22X)[122X, the right inner mapping [22XR([122X[3Xx[103X,[3Xy[103X[22X)[122X,
+            resp. the middle inner mapping [22XT([122X[3Xx[103X[22X)[122X of a loop [3XQ[103X.[133X
+  
+  
+  [1X6.5-2 [33X[0;0YLeftInnerMappingGroup, RightInnerMappingGroup, MiddleInnerMappingGroup[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftInnerMappingGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XRightInnerMappingGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XMiddleInnerMappingGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  left  inner  mapping  group, right inner mapping group, resp.
+            middle inner mapping group of a loop [3XQ[103X.[133X
+  
+  [1X6.5-3 InnerMappingGroup[101X
+  
+  [33X[1;0Y[29X[2XInnerMappingGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe inner mapping group of a loop [3XQ[103X.[133X
+  
+  [33X[0;0YHere is an example for multiplication groups and inner mapping groups:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := MoufangLoop(12,1);[127X[104X
+    [4X[28X<Moufang loop 12/1>[128X[104X
+    [4X[25Xgap>[125X [27XLeftSection(M)[2];[127X[104X
+    [4X[28X(1,2)(3,4)(5,6)(7,8)(9,12)(10,11)[128X[104X
+    [4X[25Xgap>[125X [27XMlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);[127X[104X
+    [4X[28X<permutation group of size 2592 with 23 generators>[128X[104X
+    [4X[28XGroup([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])[128X[104X
+    [4X[25Xgap>[125X [27XSize(Inn);[127X[104X
+    [4X[28X216[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X6.6 [33X[0;0YNuclei, Commutant, Center, and Associator Subloop[133X[101X
+  
+  [33X[0;0YSee Section [14X2.3[114X for the relevant definitions.[133X
+  
+  
+  [1X6.6-1 [33X[0;0YLeftNucles, MiddleNucleus, and RightNucleus[133X[101X
+  
+  [33X[1;0Y[29X[2XLeftNucleus[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XMiddleNucleus[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XRightNucleus[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  left  nucleus,  middle  nucleus,  resp.  right  nucleus  of a
+            quasigroup [3XQ[103X.[133X
+  
+  
+  [1X6.6-2 [33X[0;0YNuc, NucleusOfQuasigroup and NucleusOfLoop[133X[101X
+  
+  [33X[1;0Y[29X[2XNuc[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XNucleusOfQuasigroup[102X( [3XQ[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XNucleusOfLoop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThese synonymous attributes return the nucleus of a quasigroup [3XQ[103X.[133X
+  
+  [33X[0;0YSince   all   nuclei   are   subquasigroups  of  [3XQ[103X,  they  are  returned  as
+  subquasigroups  (resp.  subloops).  When  [3XQ[103X is a loop then all nuclei are in
+  fact groups, and they are returned as associative loops.[133X
+  
+  [33X[0;0Y[12XRemark:[112X  The name [10XNucleus[110X is a global function of [5XGAP[105X with two variables. We
+  have   therefore  used  [10XNuc[110X  rather  than  [10XNucleus[110X  for  the  nucleus.  This
+  abbreviation is sometimes used in the literature, too.[133X
+  
+  [1X6.6-3 Commutant[101X
+  
+  [33X[1;0Y[29X[2XCommutant[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe commutant of a quasigroup [3XQ[103X.[133X
+  
+  [1X6.6-4 Center[101X
+  
+  [33X[1;0Y[29X[2XCenter[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe center of a quasigroup [3XQ[103X.[133X
+  
+  [33X[0;0YIf  [3XQ[103X is a loop, the center of [3XQ[103X is a subgroup of [3XQ[103X and it is returned as an
+  associative loop.[133X
+  
+  [1X6.6-5 AssociatorSubloop[101X
+  
+  [33X[1;0Y[29X[2XAssociatorSubloop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe associator subloop of a loop [3XQ[103X.[133X
+  
+  [33X[0;0YWe calculate the associator subloop of [3XQ[103X as the smallest normal subloop of [3XQ[103X
+  containing  all elements [22Xxbackslashα(x)[122X, where [22Xx[122X is an element of [3XQ[103X and [22Xα[122X is
+  a left inner mapping of [3XQ[103X.[133X
+  
+  
+  [1X6.7 [33X[0;0YNormal Subloops and Simple Loops[133X[101X
+  
+  [1X6.7-1 IsNormal[101X
+  
+  [33X[1;0Y[29X[2XIsNormal[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XS[103X is a normal subloop of a loop [3XQ[103X.[133X
+  
+  [33X[0;0YA  subloop  [22XS[122X  of  a  loop  [22XQ[122X  is  [13Xnormal[113X if it is invariant under all inner
+  mappings of [22XQ[122X.[133X
+  
+  [1X6.7-2 NormalClosure[101X
+  
+  [33X[1;0Y[29X[2XNormalClosure[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YThe normal closure of a subset [3XS[103X of a loop [3XQ[103X.[133X
+  
+  [33X[0;0YFor  a  subset  [22XS[122X  of a loop [22XQ[122X, the [13Xnormal closure[113X of [22XS[122X in [22XQ[122X is the smallest
+  normal subloop of [22XQ[122X containing [22XS[122X.[133X
+  
+  [1X6.7-3 IsSimple[101X
+  
+  [33X[1;0Y[29X[2XIsSimple[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a simple loop.[133X
+  
+  [33X[0;0YA loop [22XQ[122X is [13Xsimple[113X if [22X{1}[122X and [22XQ[122X are the only normal subloops of [22XQ[122X.[133X
+  
+  
+  [1X6.8 [33X[0;0YFactor Loops[133X[101X
+  
+  [1X6.8-1 FactorLoop[101X
+  
+  [33X[1;0Y[29X[2XFactorLoop[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XS[103X  is  a normal subloop of a loop [3XQ[103X, returns the factor loop
+            [3XQ[103X[22X/[122X[3XS[103X.[133X
+  
+  [1X6.8-2 NaturalHomomorphismByNormalSubloop[101X
+  
+  [33X[1;0Y[29X[2XNaturalHomomorphismByNormalSubloop[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XS[103X  is  a  normal  subloop  of  a loop [3XQ[103X, returns the natural
+            projection from [3XQ[103X onto [3XQ[103X[22X/[122X[3XS[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XM := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );[127X[104X
+    [4X[28X<loop of order 3>[128X[104X
+    [4X[25Xgap>[125X [27XIsNormal( M, S );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XF := FactorLoop( M, S );[127X[104X
+    [4X[28X<loop of order 4>[128X[104X
+    [4X[25Xgap>[125X [27XNaturalHomomorphismByNormalSubloop( M, S );[127X[104X
+    [4X[28XMappingByFunction( <loop of order 12>, <loop of order 4>,[128X[104X
+    [4X[28X    function( x ) ... end )[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X6.9 [33X[0;0YNilpotency and Central Series[133X[101X
+  
+  [33X[0;0YSee Section [14X2.4[114X for the relevant definitions.[133X
+  
+  [1X6.9-1 IsNilpotent[101X
+  
+  [33X[1;0Y[29X[2XIsNilpotent[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a nilpotent loop.[133X
+  
+  [1X6.9-2 NilpotencyClassOfLoop[101X
+  
+  [33X[1;0Y[29X[2XNilpotencyClassOfLoop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  nilpotency  class  of  a  loop  [3XQ[103X  if  [3XQ[103X  is  nilpotent, [10Xfail[110X
+            otherwise.[133X
+  
+  [1X6.9-3 IsStronglyNilpotent[101X
+  
+  [33X[1;0Y[29X[2XIsStronglyNilpotent[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a strongly nilpotent loop.[133X
+  
+  [33X[0;0YA  loop  [22XQ[122X  is  said to be [13Xstrongly nilpotent[113X if its multiplication group is
+  nilpotent.[133X
+  
+  [1X6.9-4 UpperCentralSeries[101X
+  
+  [33X[1;0Y[29X[2XUpperCentralSeries[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YWhen [3XQ[103X is a nilpotent loop, returns the upper central series of [3XQ[103X,
+            else returns [10Xfail[110X.[133X
+  
+  [1X6.9-5 LowerCentralSeries[101X
+  
+  [33X[1;0Y[29X[2XLowerCentralSeries[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YWhen [3XQ[103X is a nilpotent loop, returns the lower central series of [3XQ[103X,
+            else returns [10Xfail[110X.[133X
+  
+  [33X[0;0YThe [13Xlower central series[113X for loops is defined analogously to groups.[133X
+  
+  
+  [1X6.10 [33X[0;0YSolvability, Derived Series and Frattini Subloop[133X[101X
+  
+  [33X[0;0YSee Section [14X2.4[114X for definitions of solvability an derived subloop.[133X
+  
+  [1X6.10-1 IsSolvable[101X
+  
+  [33X[1;0Y[29X[2XIsSolvable[102X( [3XQ[103X ) [32X property[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X if [3XQ[103X is a solvable loop.[133X
+  
+  [1X6.10-2 DerivedSubloop[101X
+  
+  [33X[1;0Y[29X[2XDerivedSubloop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe derived subloop of a loop [3XQ[103X.[133X
+  
+  [1X6.10-3 DerivedLength[101X
+  
+  [33X[1;0Y[29X[2XDerivedLength[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YIf  [3XQ[103X  is  solvable, returns the derived length of [3XQ[103X, else returns
+            [10Xfail[110X.[133X
+  
+  
+  [1X6.10-4 [33X[0;0YFrattiniSubloop and FrattinifactorSize[133X[101X
+  
+  [33X[1;0Y[29X[2XFrattiniSubloop[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  Frattini  subloop  of  [3XQ[103X.  The method is implemented only for
+            strongly nilpotent loops.[133X
+  
+  [33X[0;0Y[13XFrattini subloop[113X of a loop [22XQ[122X is the intersection of maximal subloops of [22XQ[122X.[133X
+  
+  [1X6.10-5 FrattinifactorSize[101X
+  
+  [33X[1;0Y[29X[2XFrattinifactorSize[102X( [3XQ[103X ) [32X attribute[133X
+  
+  [1X6.11 [33X[0;0YIsomorphisms and Automorphisms[133X[101X
+  
+  [1X6.11-1 IsomorphismQuasigroups[101X
+  
+  [33X[1;0Y[29X[2XIsomorphismQuasigroups[102X( [3XQ[103X, [3XL[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YAn  isomorphism  from  a  quasigroup  [3XQ[103X  to  a quasigroup [3XL[103X if the
+            quasigroups are isomorphic, [10Xfail[110X otherwise.[133X
+  
+  [33X[0;0YIf  an  isomorphism exists, it is returned as a permutation [22Xf[122X of [22X1,dots,|[122X[3XQ[103X[22X|[122X,
+  where  [22Xi^f=j[122X  means that the [22Xi[122Xth element of [3XQ[103X is mapped onto the [22Xj[122Xth element
+  of  [3XL[103X. Note that this convention is used even if the underlying sets of [3XQ[103X, [3XL[103X
+  are not indexed by consecutive integers.[133X
+  
+  [1X6.11-2 IsomorphismLoops[101X
+  
+  [33X[1;0Y[29X[2XIsomorphismLoops[102X( [3XQ[103X, [3XL[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YAn  isomorphism  from  a  loop  [3XQ[103X  to  a  loop  [3XL[103X if the loops are
+            isomorphic,  [10Xfail[110X  otherwise,  with  the  same  convention  as  in
+            [10XIsomorphismQuasigroups[110X.[133X
+  
+  [1X6.11-3 QuasigroupsUpToIsomorphism[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupsUpToIsomorphism[102X( [3Xls[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YGiven a list [3Xls[103X of quasigroups, returns a sublist of [3Xls[103X consisting
+            of representatives of isomorphism classes of quasigroups from [3Xls[103X.[133X
+  
+  [1X6.11-4 LoopsUpToIsomorphism[101X
+  
+  [33X[1;0Y[29X[2XLoopsUpToIsomorphism[102X( [3Xls[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YGiven  a  list  [3Xls[103X of loops, returns a sublist of [3Xls[103X consisting of
+            representatives of isomorphism classes of loops from [3Xls[103X.[133X
+  
+  [1X6.11-5 AutomorphismGroup[101X
+  
+  [33X[1;0Y[29X[2XAutomorphismGroup[102X( [3XQ[103X ) [32X attribute[133X
+  [6XReturns:[106X  [33X[0;10YThe  automorphism  group of a loop or quasigroups [3XQ[103X, with the same
+            convention on permutations as in [10XIsomorphismQuasigroups[110X.[133X
+  
+  [33X[0;0Y[12XRemark:[112X  Since  two isomorphisms differ by an automorphism, all isomorphisms
+  from  [3XQ[103X  to  [3XL[103X can be obtained by a combination of [10XIsomorphismLoops([3XQ[103X[10X,[3XL[103X[10X)[110X (or
+  [10XIsomorphismQuasigroups([3XQ[103X[10X,[3XL[103X[10X)[110X) and [10XAutomorphismGroup([3XL[103X[10X)[110X.[133X
+  
+  [33X[0;0YWhile  dealing  with  Cayley tables, it is often useful to rename or reorder
+  the  elements  of the underlying quasigroup without changing the isomorphism
+  type of the quasigroups. [5XLOOPS[105X contains several functions for this purpose.[133X
+  
+  [1X6.11-6 IsomorphicCopyByPerm[101X
+  
+  [33X[1;0Y[29X[2XIsomorphicCopyByPerm[102X( [3XQ[103X, [3Xf[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XQ[103X  is  a  quasigroup  and  [3Xf[103X is a permutation of [22X1,dots,|[122X[3XQ[103X[22X|[122X,
+            returns   a   quasigroup  defined  on  the  same  set  as  [3XQ[103X  with
+            multiplication  [22X*[122X  defined  by [22Xx*y =[122X[3Xf[103X[22X([122X[3Xf[103X[22X^-1(x)[122X[3Xf[103X[22X^-1(y))[122X. When [3XQ[103X is a
+            declared  loop,  a  loop  is  returned.  Consequently, when [3XQ[103X is a
+            declared  loop  and [3Xf[103X[22X(1) = kne 1[122X, then [3Xf[103X is first replaced with [3Xf[103X[22X∘
+            (1,k)[122X, to make sure that the resulting Cayley table is normalized.[133X
+  
+  [1X6.11-7 IsomorphicCopyByNormalSubloop[101X
+  
+  [33X[1;0Y[29X[2XIsomorphicCopyByNormalSubloop[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen [3XS[103X is a normal subloop of a loop [3XQ[103X, returns an isomorphic copy
+            of  [3XQ[103X  in  which  the  elements are ordered according to the right
+            cosets  of  [3XS[103X. In particular, the Cayley table of [3XS[103X will appear in
+            the top left corner of the Cayley table of the resulting loop.[133X
+  
+  [33X[0;0YIn order to speed up the search for isomorphisms and automorphisms, we first
+  calculate some loop invariants preserved under isomorphisms, and then we use
+  these  invariants  to  partition  the loop into blocks of elements preserved
+  under isomorphisms. The following two operations are used in the search.[133X
+  
+  [1X6.11-8 Discriminator[101X
+  
+  [33X[1;0Y[29X[2XDiscriminator[102X( [3XQ[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YA data structure with isomorphism invariants of a loop [3XQ[103X.[133X
+  
+  [33X[0;0YSee  [Voj06]  or  the  file  [11Xiso.gi[111X  for  more  details.  The  format of the
+  discriminator  has  been  changed  from  version  3.2.0  up  to  accommodate
+  isomorphism searches for quasigroups.[133X
+  
+  [33X[0;0YIf two loops have different discriminators, they are not isomorphic. If they
+  have identical discriminators, they may or may not be isomorphic.[133X
+  
+  [1X6.11-9 AreEqualDiscriminators[101X
+  
+  [33X[1;0Y[29X[2XAreEqualDiscriminators[102X( [3XD1[103X, [3XD2[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  [3XD1[103X,  [3XD2[103X  are  equal  discriminators  for the purposes of
+            isomorphism searches.[133X
+  
+  
+  [1X6.12 [33X[0;0YIsotopisms[133X[101X
+  
+  [33X[0;0YAt the moment, [5XLOOPS[105X contains only slow methods for testing if two loops are
+  isotopic.  The method works as follows: It is well known that if a loop [22XK[122X is
+  isotopic  to  a loop [22XL[122X then there exist a principal loop isotope [22XP[122X of [22XK[122X such
+  that  [22XP[122X is isomorphic to [22XL[122X. The algorithm first finds all principal isotopes
+  of [22XK[122X, then filters them up to isomorphism, and then checks if any of them is
+  isomorphic to [22XL[122X. This is rather slow already for small orders.[133X
+  
+  [1X6.12-1 IsotopismLoops[101X
+  
+  [33X[1;0Y[29X[2XIsotopismLoops[102X( [3XK[103X, [3XL[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10Y[10Xfail[110X  if [3XK[103X, [3XL[103X are not isotopic loops, else it returns an isotopism
+            as a triple of bijections on [22X1,dots,|[122X[3XK[103X[22X|[122X.[133X
+  
+  [1X6.12-2 LoopsUpToIsotopism[101X
+  
+  [33X[1;0Y[29X[2XLoopsUpToIsotopism[102X( [3Xls[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YGiven  a  list  [3Xls[103X of loops, returns a sublist of [3Xls[103X consisting of
+            representatives of isotopism classes of loops from [3Xls[103X.[133X
+  

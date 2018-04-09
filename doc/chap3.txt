@@ -1,0 +1,167 @@
+  
+  [1X3 [33X[0;0YHow the Package Works[133X[101X
+  
+  [33X[0;0YThe package consists of three complementary components:[133X
+  
+  [30X    [33X[0;6Ythe  core  algorithms for quasigroup theoretical notions (see Chapters
+        [14X4[114X, [14X5[114X, [14X6[114X and [14X7[114X),[133X
+  
+  [30X    [33X[0;6Yalgorithms  for  specific varieties of loops, mostly for Moufang loops
+        (see Chapter [14X8[114X),[133X
+  
+  [30X    [33X[0;6Ythe library of small loops (see Chapter [14X9[114X).[133X
+  
+  [33X[0;0YAlthough  we  do  not explain the algorithms in detail here, we describe the
+  general  philosophy  so  that  users  can  anticipate  the  capabilities and
+  behavior of [5XLOOPS[105X.[133X
+  
+  
+  [1X3.1 [33X[0;0YRepresenting Quasigroups[133X[101X
+  
+  [33X[0;0YSince  permutation  representation  in  the  usual  sense  is impossible for
+  nonassociative   structures,   and   since   the  theory  of  nonassociative
+  presentations  is  not well understood, we resorted to multiplication tables
+  to  represent  quasigroups  in  [5XGAP[105X.  (In  order  to  save storage space, we
+  sometimes use one multiplication table to represent several quasigroups, for
+  instance  when  a  quasigroup  is a subquasigroup of another quasigroup. See
+  Section [14X4.1[114X for more details.)[133X
+  
+  [33X[0;0YConsequently, the package is intended primarily for quasigroups and loops of
+  small order, say up to 1000.[133X
+  
+  [33X[0;0YThe  [5XGAP[105X  categories  [10XIsQuasigroupElement[110X,  [10XIsLoopElement[110X,  [10XIsQuasigroup[110X and
+  [10XIsLoop[110X are declared in [5XLOOPS[105X as follows:[133X
+  
+  DeclareCategory( "IsQuasigroupElement", IsMultiplicativeElement );
+  DeclareRepresentation( "IsQuasigroupElmRep",
+      IsPositionalObjectRep and IsMultiplicativeElement, [1] );
+  DeclareCategory( "IsLoopElement",
+      IsQuasigroupElement and IsMultiplicativeElementWithInverse );
+  DeclareRepresentation( "IsLoopElmRep",
+      IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
+  ## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
+  DeclareCategory( "IsLatin", IsObject );
+  DeclareCategory( "IsQuasigroup", IsMagma and IsLatin );
+  DeclareCategory( "IsLoop", IsQuasigroup and
+      IsMultiplicativeElementWithInverseCollection);
+  
+  
+  [1X3.2 [33X[0;0YConversions between magmas, quasigroups, loops and groups[133X[101X
+  
+  [33X[0;0YWhether  an  object  is  considered  a magma, quasigroup, loop or group is a
+  matter  of  declaration  in  [5XLOOPS[105X. Loops are automatically quasigroups, and
+  both  groups  and  quasigroups  are  automatically  magmas. All standard [5XGAP[105X
+  commands for magmas are therefore available for quasigroups and loops.[133X
+  
+  [33X[0;0YIn  [5XGAP[105X,  functions  of  the  type  [10XAsSomething([3XX[103X[10X)[110X convert the domain [3XX[103X into
+  [10XSomething[110X,  if  possible,  without  changing  the  underlying  domain [3XX[103X. For
+  example,  if  [3XX[103X  is  declared  as  magma  but is associative and has neutral
+  element  and  inverses,  [10XAsGroup([3XX[103X[10X)[110X returns the corresponding group with the
+  underlying domain [3XX[103X.[133X
+  
+  [33X[0;0YWe have opted for a more general kind of conversions in [5XLOOPS[105X (starting with
+  version  2.1.0),  using functions of the type [10XIntoSomething([3XX[103X[10X)[110X. The two main
+  features that distinguish [10XIntoSomething[110X from [10XAsSomething[110X are:[133X
+  
+  [30X    [33X[0;6YThe  function  [10XIntoSomething([3XX[103X[10X)[110X  does  not necessarily return the same
+        domain  as  [3XX[103X.  The  reason  is  that  [3XX[103X can be a group, for instance,
+        defined on one of many possible domains, while [10XIntoLoop([3XX[103X[10X)[110X must result
+        in  a loop, and hence be defined on a subset of some interval [22X1[122X, [22Xdots[122X,
+        [22Xn[122X (see Section [14X6.1[114X).[133X
+  
+  [30X    [33X[0;6YIn  some  special  situations, the function [10XIntoSomething([3XX[103X[10X)[110X allows to
+        convert  [3XX[103X  into  [10XSomething[110X  even  though  [3XX[103X  does  not  have  all the
+        properties of [10XSomething[110X. For instance, every quasigroup is isotopic to
+        a  loop, so it makes sense to allow the conversion [10XIntoLoop([3XQ[103X[10X)[110X even if
+        the quasigroup [3XQ[103X does not posses a neutral element.[133X
+  
+  [33X[0;0YDetails of all conversions in [5XLOOPS[105X can be found in Section [14X4.10[114X.[133X
+  
+  
+  [1X3.3 [33X[0;0YCalculating with Quasigroups[133X[101X
+  
+  [33X[0;0YAlthough  the  quasigroups  are  ultimately  represented  by  multiplication
+  tables,  the  algorithms  are  efficient because nearly all calculations are
+  delegated  to  groups.  The  connection  between  quasigroups  and groups is
+  facilitated  via translations (see Section [14X2.2[114X), and we illustrate it with a
+  few examples:[133X
+  
+  [33X[0;0Y[12XExample:[112X  This example shows how properties of quasigroups can be translated
+  into  properties  of  translations  in  a  straightforward  way.  Let [22XQ[122X be a
+  quasigroup.  We  ask  if [22XQ[122X is associative. We can either test if [22X(xy)z=x(yz)[122X
+  for  every  [22Xx[122X,  [22Xy[122X, [22Xz[122X in [22XQ[122X, or we can ask if [22XL_xy=L_xL_y[122X for every [22Xx[122X, [22Xy[122X in [22XQ[122X.
+  Note that since [22XL_xy[122X, [22XL_x[122X and [22XL_y[122X are elements of a permutation group, we do
+  not  have  to  refer  directly  to  the  multiplication  table once the left
+  translations of [22XQ[122X are known.[133X
+  
+  [33X[0;0Y[12XExample:[112X  This  example shows how properties of loops can be translated into
+  properties  of  translations  in a way that requires some theory. A [13Xleft Bol
+  loop[113X is a loop satisfying [22Xx(y(xz)) = (x(yx))z[122X. We claim (without proof) that
+  a  loop  [22XQ[122X  is  left  Bol if and only if [22XL_xL_yL_x[122X is a left translation for
+  every [22Xx[122X, [22Xy[122X in [22XQ[122X.[133X
+  
+  [33X[0;0Y[12XExample:[112X  This  example  shows  that  many properties of loops become purely
+  group-theoretical  once  they are expressed in terms of translations. A loop
+  is [13Xsimple[113X if it has no nontrivial congruences. It is possible to show that a
+  loop  is  simple  if  and  only  if  its multiplication group is a primitive
+  permutation group.[133X
+  
+  [33X[0;0YThe main idea of the package is therefore to:[133X
+  
+  [30X    [33X[0;6Ycalculate  the translations and the associated permutation groups when
+        they are needed,[133X
+  
+  [30X    [33X[0;6Ystore them as attributes,[133X
+  
+  [30X    [33X[0;6Yuse them in algorithms as often as possible.[133X
+  
+  
+  [1X3.4 [33X[0;0YNaming, Viewing and Printing Quasigroups and their Elements[133X[101X
+  
+  [33X[0;0Y[5XGAP[105X displays information about objects in two modes: the [10XView[110X mode (default,
+  short), and the [10XPrint[110X mode (longer). Moreover, when the name of an object is
+  set, the name is always shown, no matter which display mode is used.[133X
+  
+  [33X[0;0YOnly  loops contained in the libraries of [5XLOOPS[105X are named. For instance, the
+  loop  obtained  via  [10XMoufangLoop(32,4)[110X, the 4th Moufang loop of order 32, is
+  named "Moufang loop 32/4'' and is shown as [10X<Moufang loop 32/4>[110X.[133X
+  
+  [33X[0;0YA  generic  quasigroup  of  order [22Xn[122X is displayed as [10X<quasigroup of order n>[110X.
+  Similarly, a loop of order [22Xn[122X appears as [10X<loop of order n>[110X.[133X
+  
+  [33X[0;0YThe  displayed information of a generic loop is enhanced if more information
+  about  the loop becomes available. For instance, when it is established that
+  a loop of order 12 has the left alternative property, the loop will be shown
+  as  [10X<left  alternative  loop  of  order  12>[110X  until  a  stronger property is
+  obtained.  Which  property is diplayed is governed by the filters built into
+  [5XLOOPS[105X (see Appendix [14XB[114X).[133X
+  
+  
+  [1X3.4-1 [33X[0;0YSetQuasigroupElmName and SetLoopElmName[133X[101X
+  
+  [33X[1;0Y[29X[2XSetQuasigroupElmName[102X( [3XQ[103X, [3Xname[103X ) [32X function[133X
+  [33X[1;0Y[29X[2XSetLoopElmName[102X( [3XQ[103X, [3Xname[103X ) [32X function[133X
+  
+  [33X[0;0YThe  above  functions  change  the  names of elements of a quasigroup (resp.
+  loop) [3XQ[103X to [3Xname[103X.[133X
+  
+  [33X[0;0YBy  default,  elements  of  a quasigroup appear as [10Xqi[110X and elements of a loop
+  appear  as  [10Xli[110X  in  both  display  modes, where [10Xi[110X is a positive integer. The
+  neutral element of a loop is always indexed by 1.[133X
+  
+  [33X[0;0YFor  quasigroups  and loops in the [10XPrint[110X mode, we display the multiplication
+  table (if it is known), otherwise we display the elements.[133X
+  
+  [33X[0;0YIn the following example, [10XL[110X is a loop with two elements.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
+    [4X[28X<loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27XPrint( L );[127X[104X
+    [4X[28X<loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]>[128X[104X
+    [4X[25Xgap>[125X [27XElements( L );[127X[104X
+    [4X[28X[ l1, l2 ][128X[104X
+    [4X[25Xgap>[125X [27XSetLoopElmName( L, "loop_element" );; Elements( L );[127X[104X
+    [4X[28X[ loop_element1, loop_element2 ][128X[104X
+  [4X[32X[104X
+  

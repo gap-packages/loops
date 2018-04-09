@@ -1,48 +1,36 @@
-name: GitHubPagesForGAP
-version: 0.2
-date: 2017-02-04
+name: loops
+version: 3.4.0
+date: 2017-10-27
 description: |
-    A GitHub Pages generator for GAP packages
+    Computing with quasigroups and loops in GAP
 
 authors:
-    - name: Max Horn
-      url: http://www.quendi.de/math
-    - name: A. U. Thor
+    - name: Gabor Nagy
+      url: http://www.math.u-szeged.hu/~nagyg/
+    - name: Petr Vojtechovsky
+      url: http://www.math.du.edu/~petr/
 
 maintainers:
-    - name: Max Horn
-      url: http://www.quendi.de/math
-    - name: Jan Itor
+    - name: Gabor Nagy
+      url: http://www.math.u-szeged.hu/~nagyg/
+    - name: Petr Vojtechovsky
+      url: http://www.math.du.edu/~petr/
 
-GAP: ">=4.8.1"
+GAP: ">=4.7"
 
-needed-pkgs:
-    - name: "GAPDoc"
-      version: ">= 1.2"
-      url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
-    - name: "IO"
-      version: ">= 4.1"
-      url: "https://gap-packages.github.io/io"
-
-suggested-pkgs:
-    - name: "orb"
-      version: ">= 4.2"
-      url: "https://gap-packages.github.io/orb"
-
-www: https://gap-system.github.io/GitHubPagesForGAP/
-readme: README.md
-packageinfo: https://gap-system.github.io/GitHubPagesForGAP/PackageInfo.g
-github: https://github.com/gap-system/GitHubPagesForGAP
+www: http://www.math.du.edu/loops
+readme: README.loops
+packageinfo: http://www.math.du.edu/loops/PackageInfo.g
 
 downloads:
+    - name: -win.zip
+      url: http://www.math.du.edu/loops/loops-3.4.0-win.zip
     - name: .tar.gz
-      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.gz
-    - name: .tar.bz2
-      url: https://github.com/gap-system/GitHubPagesForGAP/releases/download/v0.2/GitHubPagesForGAP-0.2.tar.bz2
+      url: http://www.math.du.edu/loops/loops-3.4.0.tar.gz
 
 abstract: |
-    This is a pseudo package that contains no actual  <span class="pkgname">GAP</span> code. Instead, it is a template for other  GAP packages that allows to quickly setup GitHub Pages.
+    The LOOPS package provides researchers in nonassociative algebra with a computational tool that integrates standard notions of loop theory with libraries of loops and group-theoretical algorithms of GAP. The package also expands GAP toward nonassociative structures.
 
-status: other
-doc-html: doc/chap0.html
+status: accepted
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
