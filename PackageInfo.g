@@ -3,8 +3,6 @@ PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
 Version := "3.4.0",
 Date := "27/10/2017",
-ArchiveURL := "http://www.math.du.edu/loops/loops-3.4.0",
-ArchiveFormats := "-win.zip .tar.gz",
 
 Persons := [
   rec( 
@@ -35,24 +33,25 @@ Persons := [
                        "USA" ] ),
     Place         := "Denver",
     Institution   := "University of Denver"
-  )
+  ),
 ],
 
-##  Status information. Currently the following cases are recognized:
-##    "accepted"      for successfully refereed packages
-##    "deposited"     for packages for which the GAP developers agreed 
-##                    to distribute them with the core GAP system
-##    "dev"           for development versions of packages 
-##    "other"         for all other packages
-##
 Status := "accepted",
 CommunicatedBy := "Leonard Soicher (QMUL)",
 AcceptDate := "05/2015",
 
-README_URL := 
-  "http://www.math.du.edu/loops/README.loops",
-PackageInfoURL := 
-  "http://www.math.du.edu/loops/PackageInfo.g",
+PackageWWWHome  := "https://gap-packages.github.io/loops/",
+README_URL      := Concatenation( ~.PackageWWWHome, "README" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/gap-packages/loops",
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/loops-", ~.Version ),
+ArchiveFormats := ".tar.gz",
 
 AbstractHTML := Concatenation( 
 "The LOOPS package provides researchers in nonassociative algebra ",
@@ -60,9 +59,7 @@ AbstractHTML := Concatenation(
 "of loop theory with libraries of loops and group-theoretical ",
 "algorithms of GAP. The package also expands GAP toward ",
 "nonassociative structures."
-  ),
-
-PackageWWWHome := "http://www.math.du.edu/loops",
+),
                
 PackageDoc := rec(
   BookName  := "loops",
