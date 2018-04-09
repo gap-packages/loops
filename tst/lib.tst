@@ -6,11 +6,9 @@
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
-
 gap> START_TEST("LOOPS, lib: testing all libraries except Moufang");
 
 # INTERESTING LOOPS
-
 gap> DisplayLibraryInfo( "interesting" );
 The library contains a few interesting loops.
 ------
@@ -35,7 +33,6 @@ gap> for i in [1..t] do
 > od;
 
 # LEFT/RIGHT BOL LOOPS
-
 gap> DisplayLibraryInfo( "left Bol" );
 The library contains all nonassociative left Bol loops of order less than 17
 and all nonassociative left Bol loops of order p*q, where p>q>2 are primes.
@@ -65,11 +62,10 @@ gap> RightBolLoop( 8, 1 );
 <right Bol loop 8/1>
 
 # STEINER LOOPS
-
 gap> DisplayLibraryInfo( "Steiner" );
 The library contains all nonassociative Steiner loops 
 of order less or equal to 16. It also contains the 
-associative Steiner loops of order 4 and 8. 
+associative Steiner loops of order 4 and 8.
 ------
 Extent of the library:
    1 loop of order 4
@@ -92,9 +88,8 @@ gap> for i in [1..t] do
 > od;
 
 # NILPOTENT LOOPS
-
 gap> DisplayLibraryInfo( "nilpotent" );
-The library contains all nonassociative nilpotent loops
+The library contains all nonassociative nilpotent loops 
 of order less than 12.
 ------
 Extent of the library:
@@ -103,12 +98,10 @@ Extent of the library:
    8 loops of order 9
    1043 loops of order 10
 true
-
 gap> NilpotentLoop( 10, 1000 );
 <nilpotent loop 10/1000>
 
 # PAIGE LOOPS
-
 gap> DisplayLibraryInfo( "Paige" );
 The library contains the smallest nonassociative finite 
 simple Moufang loop.
@@ -116,7 +109,6 @@ simple Moufang loop.
 Extent of the library:
    1 loop of order 120
 true
-
 gap> PaigeLoop( 2 );
 <Paige loop 120/1>
 
@@ -142,18 +134,15 @@ Extent of the library:
    151971 loops of order 26
    152701 loops of order 27
 true
-
 gap> RCCLoop(6,1); RCCLoop(16,6317); RightConjugacyClosedLoop(27,152701);
 <RCC loop 6/1>
 <RCC loop 16/6317>
 <RCC loop 27/152701>
-
 gap> LCCLoop(6,3); LCCLoop(25,119);
 <LCC loop 6/3>
 <LCC loop 25/119>
 
 # CC LOOPS
-
 gap> DisplayLibraryInfo("CC");
 The library contains all CC loops of order
 2<=2^k<=64, 3<=3^k<=81, 5<=5^k<=125, 7<=7^k<=343,
@@ -185,19 +174,16 @@ Extent of the library:
    3 loops of order p^2 for every prime p>7,
    1 loop of order 2*p for every odd prime p
 true
-
 gap> CCLoop(25,1); CCLoop(49,2); CCLoop(121,3); CCLoop(14,1);
 <CC loop 25/1>
 <CC loop 49/2>
 <CC loop 121/3>
 <CC loop 14/1>
-
 gap> CCLoop(16,28); ConjugacyClosedLoop(27,55);
 <CC loop 16/28>
 <CC loop 27/55>
 
 # SMALL LOOPS
-
 gap> DisplayLibraryInfo("small");
 The library contains all nonassociative loops of order less than 7.
 ------
@@ -205,13 +191,11 @@ Extent of the library:
    5 loops of order 5
    107 loops of order 6
 true
-
 gap> SmallLoop( 5, 3 ); SmallLoop( 6, 12 );
 <small loop 5/3>
 <small loop 6/12>
 
 # ITP SMALL LOOPS
-
 gap> DisplayLibraryInfo("itp small");
 The library contains all nonassociative loops of order less than 7 up to isoto\
 pism.
@@ -220,15 +204,13 @@ Extent of the library:
    1 loop of order 5
    20 loops of order 6
 true
-
 gap> ItpSmallLoop( 5, 1 ); ItpSmallLoop( 6, 14 );
 <small loop 5/1>
 <small loop 6/42>
 
 # CODE LOOPS
-
 gap> DisplayLibraryInfo("code");
-The library contains all nonassociative even code loops
+The library contains all nonassociative even code loops 
 of order less than 65.
 ------
 Extent of the library:
@@ -236,14 +218,12 @@ Extent of the library:
    16 loops of order 32
    80 loops of order 64
 true
-
 gap> CodeLoop( 16, 3 );
 <Moufang loop 16/3>
 gap> CodeLoop( 64, 80 );
 <Moufang loop 64/4247>
 
 # AUTOMORPHIC LOOPS
-
 gap> DisplayLibraryInfo("automorphic");
 The library contains:
  - all nonassociative automorphic loops of order less than 16,
@@ -261,18 +241,14 @@ Extent of the library:
    7 loops of order 27
    72 loops of order 81
 true
-
 gap> AutomorphicLoop(15,2);
 <automorphic loop 15/2>
-
 gap> AutomorphicLoop(27,1);
 <automorphic loop 27/1>
-
 gap> AutomorphicLoop(81,10);
 <automorphic loop 81/10>
 
 # RIGHT BRUCK LOOPS
-
 gap> DisplayLibraryInfo("right Bruck");
 The library contains all right Bruck loops of orders 3, 9, 27 and 81.
 ------
@@ -282,10 +258,8 @@ Extent of the library:
    7 loops of order 27
    72 loops of order 81
 true
-
 gap> RightBruckLoop(81,3);
 <right Bruck loop 81/3>
 
-
-
+#
 gap> STOP_TEST( "lib.tst", 10000000 );

@@ -6,11 +6,9 @@
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
-
 gap> START_TEST("LOOPS, core_methods: testing core methods");
 
 # TESTING VIEW AND PRINT MODE, AND LATIN SQUARE FUNCTIONS
-
 gap> T := [ [ 2, 1 ], [ 1, 2 ] ];;
 gap> IsQuasigroupTable( T );
 true
@@ -28,7 +26,6 @@ gap> L.1;
 l1
 
 # TESTING MORE CONVERSION FUNCTIONS
-
 gap> G := IntoGroup( Q );
 Group([ (), (1,2) ])
 gap> G := IntoGroup( L );
@@ -45,7 +42,6 @@ gap> CanonicalCopy( QuasigroupByCayleyTable( [[2,3],[3,2]] ) );
 <quasigroup of order 2>
 
 # TESTING DIRECT PRODUCTS AND OPPOSITES
-
 gap> L := MoufangLoop( 12, 1 );;
 gap> DirectProduct( L );
 <Moufang loop 12/1>
@@ -64,7 +60,6 @@ gap> OppositeLoop( L );
 <loop of order 12>
 
 # TESTING BASIC ATTRIBUTES
-
 gap> One( L );
 l1
 gap> Size( L );
@@ -77,7 +72,6 @@ gap> Opposite( L );
 <loop of order 12>
 
 # TESTING BASIC ARITHMETIC OPERATIONS
-
 gap> eL := Elements( L );;
 gap> eL[ 2 ]*eL[ 3 ]*eL[ 7 ] = (eL[ 2 ]*eL[ 3 ])* eL[ 7 ];
 true
@@ -95,7 +89,6 @@ gap> Commutator( eL[ 2 ], eL[ 3 ] );
 l5
 
 # TESTING GENERATORS
-
 gap> GeneratorsOfLoop( L );
 [ l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12 ]
 gap> GeneratorsSmallest( L );
@@ -104,20 +97,19 @@ gap> SmallGeneratingSet( L );
 [ l2, l3, l7 ]
 
 # TESTING SECTIONS AND TRANSLATIONS
-
 gap> LeftSection( L );
-[ (), (1,2)(3,4)(5,6)(7,8)(9,12)(10,11), (1,3,5)(2,6,4)(7,9,11)(8,10,12),
-  (1,4)(2,5)(3,6)(7,10)(8,9)(11,12), (1,5,3)(2,4,6)(7,11,9)(8,12,10),
-  (1,6)(2,3)(4,5)(7,12)(8,11)(9,10), (1,7)(2,8)(3,11)(4,10)(5,9)(6,12),
-  (1,8)(2,7)(3,12)(4,9)(5,10)(6,11), (1,9)(2,12)(3,7)(4,8)(5,11)(6,10),
-  (1,10)(2,11)(3,8)(4,7)(5,12)(6,9), (1,11)(2,10)(3,9)(4,12)(5,7)(6,8),
+[ (), (1,2)(3,4)(5,6)(7,8)(9,12)(10,11), (1,3,5)(2,6,4)(7,9,11)(8,10,12), 
+  (1,4)(2,5)(3,6)(7,10)(8,9)(11,12), (1,5,3)(2,4,6)(7,11,9)(8,12,10), 
+  (1,6)(2,3)(4,5)(7,12)(8,11)(9,10), (1,7)(2,8)(3,11)(4,10)(5,9)(6,12), 
+  (1,8)(2,7)(3,12)(4,9)(5,10)(6,11), (1,9)(2,12)(3,7)(4,8)(5,11)(6,10), 
+  (1,10)(2,11)(3,8)(4,7)(5,12)(6,9), (1,11)(2,10)(3,9)(4,12)(5,7)(6,8), 
   (1,12)(2,9)(3,10)(4,11)(5,8)(6,7) ]
 gap> RightSection( L );
-[ (), (1,2)(3,6)(4,5)(7,8)(9,12)(10,11), (1,3,5)(2,4,6)(7,11,9)(8,12,10),
-  (1,4)(2,3)(5,6)(7,10)(8,9)(11,12), (1,5,3)(2,6,4)(7,9,11)(8,10,12),
-  (1,6)(2,5)(3,4)(7,12)(8,11)(9,10), (1,7)(2,8)(3,9)(4,10)(5,11)(6,12),
-  (1,8)(2,7)(3,10)(4,9)(5,12)(6,11), (1,9)(2,12)(3,11)(4,8)(5,7)(6,10),
-  (1,10)(2,11)(3,12)(4,7)(5,8)(6,9), (1,11)(2,10)(3,7)(4,12)(5,9)(6,8),
+[ (), (1,2)(3,6)(4,5)(7,8)(9,12)(10,11), (1,3,5)(2,4,6)(7,11,9)(8,12,10), 
+  (1,4)(2,3)(5,6)(7,10)(8,9)(11,12), (1,5,3)(2,6,4)(7,9,11)(8,10,12), 
+  (1,6)(2,5)(3,4)(7,12)(8,11)(9,10), (1,7)(2,8)(3,9)(4,10)(5,11)(6,12), 
+  (1,8)(2,7)(3,10)(4,9)(5,12)(6,11), (1,9)(2,12)(3,11)(4,8)(5,7)(6,10), 
+  (1,10)(2,11)(3,12)(4,7)(5,8)(6,9), (1,11)(2,10)(3,7)(4,12)(5,9)(6,8), 
   (1,12)(2,9)(3,8)(4,11)(5,10)(6,7) ]
 gap> LeftTranslation( L, eL[ 3 ] );
 (1,3,5)(2,6,4)(7,9,11)(8,10,12)
@@ -125,7 +117,6 @@ gap> RightTranslation( L, eL[ 3 ] );
 (1,3,5)(2,4,6)(7,11,9)(8,12,10)
 
 # TESTING MULTIPLICATION GROUPS AND INNER MAPPING GROUPS
-
 gap> LeftMultiplicationGroup( L );
 <permutation group with 12 generators>
 gap> RightMultiplicationGroup( L );
@@ -153,7 +144,6 @@ gap> CayleyTableByPerms( LeftSection( S ) );
 [ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
 
 # TESTING LOOP BY RIGHT FOLDER 
-
 gap> LOOPS_Shift := function( p )
 >       local ls;
 >       ls := ListPerm( p );
@@ -174,7 +164,6 @@ gap> QuasigroupByRightFolder( G, H, T );
 <quasigroup of order 60>
 
 # TESTING RANDOM QUASIGROUPS AND LOOPS
-
 gap> RandomQuasigroup( 10 );
 <quasigroup of order 10>
 gap> RandomQuasigroup( 10, 100 );
@@ -189,7 +178,6 @@ gap> RandomNilpotentLoop( [2, CyclicGroup(3), 6] );
 <loop of order 36>
 
 # TESTING SUBQUASIGROUPS AND SUBLOOPS
-
 gap> L := MoufangLoop( 32, 5 );;
 gap> Length( AllSubloops( L ) );
 90
@@ -204,9 +192,9 @@ gap> PosInParent( S );
 gap> IsSubloop( L, S );
 true
 gap> CayleyTable( S );
-[ [ 1, 2, 5, 8, 22, 25, 29, 31 ], [ 2, 5, 8, 1, 31, 22, 25, 29 ],
-  [ 5, 8, 1, 2, 29, 31, 22, 25 ], [ 8, 1, 2, 5, 25, 29, 31, 22 ],
-  [ 22, 25, 29, 31, 1, 2, 5, 8 ], [ 25, 29, 31, 22, 8, 1, 2, 5 ],
+[ [ 1, 2, 5, 8, 22, 25, 29, 31 ], [ 2, 5, 8, 1, 31, 22, 25, 29 ], 
+  [ 5, 8, 1, 2, 29, 31, 22, 25 ], [ 8, 1, 2, 5, 25, 29, 31, 22 ], 
+  [ 22, 25, 29, 31, 1, 2, 5, 8 ], [ 25, 29, 31, 22, 8, 1, 2, 5 ], 
   [ 29, 31, 22, 25, 5, 8, 1, 2 ], [ 31, 22, 25, 29, 2, 5, 8, 1 ] ]
 gap> LeftTranslation( S, Elements( S )[ 2 ] );  
 (1,2,5,8)(22,31,29,25)
@@ -222,7 +210,6 @@ gap> AllSubquasigroups( QuasigroupByCayleyTable( [[2,1],[1,2]] ) );
 [ <quasigroup of order 2>, <quasigroup of order 1> ]
 
 # TESTING NUCLEUS, COMMUTANT, CENTER
-
 gap> LeftNucleus( L ) = NucleusOfLoop( L );
 true
 gap> MiddleNucleus( L ) = RightNucleus( L );
@@ -235,7 +222,6 @@ gap> AssociatorSubloop( L );
 <loop of order 2>
 
 # TESTING COMMUTATIVITY AND GENERALIZATIONS
-
 gap> IsAssociative( L );
 false
 gap> IsCommutative( L );
@@ -248,7 +234,6 @@ gap> IsDiassociative( L );
 true
 
 # TESTING INVERSE PROPERTIES
-
 gap> B := LeftBolLoop( 8, 1 );;
 gap> HasLeftInverseProperty( B );
 true
@@ -264,7 +249,6 @@ gap> HasAntiautomorphicInverseProperty( B );
 false
 
 # TESTING PROPERTIES OF QUASIGROUPS
-
 gap> IsSemisymmetric( Q );
 true
 gap> IsTotallySymmetric( Q );
@@ -289,7 +273,6 @@ gap> IsMedial( Q );
 true
 
 # TESTING LOOPS OF BOL-MOUFANG TYPE
-
 gap> L := DirectProduct( MoufangLoop( 12, 1 ), Group( (1,2)(3,4), (1,3)(2,4) ) );
 <loop of order 48>
 gap> IsLeftAlternative( L );
@@ -326,7 +309,6 @@ gap> IsExtraLoop( L );
 false
 
 # TESTING CONJUGACY CLOSED LOOPS
-
 gap> IsLCCLoop( L ); IsLeftConjugacyClosedLoop( L );
 false
 false
@@ -338,7 +320,6 @@ false
 false
 
 # TESTING BRUCK AND STEINER LOOPS
-
 gap> IsLeftBruckLoop( B );
 true
 gap> IsRightBruckLoop( B );
@@ -351,7 +332,6 @@ gap> IsSteinerLoop( B );
 false
 
 # TESTING A-LOOPS
-
 gap> IsLeftALoop( B );
 true
 gap> IsRightALoop( B );
@@ -362,7 +342,6 @@ gap> IsALoop( B );
 false
 
 # TESTING NORMALITY
-
 gap> L := MoufangLoop( 32, 27 );;
 gap> S := Subloop( L, [ L.3, L.4 ] );;
 gap> IsNormal( L, S );
@@ -370,7 +349,7 @@ true
 gap> FactorLoop( L, S );
 <loop of order 4>
 gap> NaturalHomomorphismByNormalSubloop( L, S );
-MappingByFunction( <Moufang loop 32/27>, <loop of order
+MappingByFunction( <Moufang loop 32/27>, <loop of order 
 4>, function( x ) ... end )
 gap> S := Subloop( L, [ Elements( L )[ 7 ] ] );;
 gap> IsNormal( L, S );
@@ -379,22 +358,20 @@ gap> NormalClosure( L, S );
 <loop of order 8>
 
 # TESTING NILPOTENCY (MORE TESTING IN FILE nilpot.tst)
-
 gap> IsNilpotent( L );
 true
 gap> IsStronglyNilpotent( L );
 true
 gap> UpperCentralSeries( L );
-[ <loop of order 32>, <loop of order 4>, <loop of order 2>,
+[ <loop of order 32>, <loop of order 4>, <loop of order 2>, 
   <associative loop of order 1> ]
 gap> LowerCentralSeries( L );
-[ <Moufang loop 32/27>, <loop of order 4>, <loop of order 2>,
+[ <Moufang loop 32/27>, <loop of order 4>, <loop of order 2>, 
   <associative loop of order 1> ]
 gap> NilpotencyClassOfLoop( L );
 3
 
 # TESTING SOLVABILITY
-
 gap> IsSolvable( L );
 true
 gap> DerivedSubloop( L );
@@ -406,4 +383,5 @@ gap> FrattiniSubloop( L );
 gap> FrattinifactorSize( L );
 8
 
+#
 gap> STOP_TEST( "core_methods.tst", 10000000 );

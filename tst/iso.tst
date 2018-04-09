@@ -6,7 +6,6 @@
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
-
 gap> START_TEST("LOOPS, iso: testing isomorphisms");
 
 # TESTING DISCIMINATOR
@@ -14,7 +13,6 @@ gap> Length( Discriminator( MoufangLoop( 12, 1 ) )[ 1 ] );
 3
 
 # TESTING AUTOMORPHISM GROUPS
-
 gap> AutomorphismGroup( MoufangLoop( 12, 1 ) );
 <permutation group with 14 generators>
 gap> AutomorphismGroup( MoufangLoop( 64, 1235 ) );
@@ -30,7 +28,6 @@ gap> AutomorphismGroup( Q );
 Group([ (1,2,3), (1,3,2) ])
 
 # TESTING ISOMORPHISMS
-
 gap> Q := DirectProduct( MoufangLoop( 32, 5 ) );;
 gap> Qp := IsomorphicCopyByPerm( Q, (2,3,4)(17,20) );;
 gap> Qq := LoopIsomorph( Q, (2,3,4)(17,20) );;
@@ -49,8 +46,8 @@ gap> Length( QuasigroupsUpToIsomorphism( [Q,Q2] ) );
 2
 
 # TESTING ISOTOPISMS
-
 gap> IsotopismLoops( SmallLoop( 5, 1 ), SmallLoop( 5, 4 ) );    
 [ (3,4,5), (1,2), (1,2) ]
 
+#
 gap> STOP_TEST( "iso.tst", 10000000 );

@@ -6,11 +6,9 @@
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
 ##
-
 gap> START_TEST("LOOPS, nilpot: nilpotency and triality group");
 
 # GENERAL NILPOTENCY
-
 gap> L := LoopByCayleyTable( 
 > [ [ 1, 2, 3, 4, 5, 6, 7, 8 ], [ 2, 1, 4, 3, 6, 5, 8, 7 ], 
 >   [ 3, 4, 1, 2, 7, 8, 5, 6 ], [ 4, 6, 2, 8, 1, 7, 3, 5 ], 
@@ -31,7 +29,6 @@ gap> IsomorphismLoops(L,LeftBolLoop(8,2));
 (3,8,4,6,5,7)
 
 # NILPOTENCY FOR MOUFANG LOOPS
-
 gap> L:=MoufangLoop(24,1);
 <Moufang loop 24/1>
 gap> Center(L);
@@ -46,7 +43,6 @@ gap> Center(L);
 <associative loop of order 2>
 
 # TRIALITY GROUPS
-
 gap> tr:=TrialityPermGroup(L);;
 gap> [ 33^tr.rho, 33^tr.sigma ];
 [ 65, 1 ]
@@ -62,4 +58,5 @@ gap> TrialityPermGroup(PSL(2,5));;
 gap> Size(last.group);
 216000
 
+#
 gap> STOP_TEST( "nilpot.tst", 10000000 );
