@@ -39,7 +39,7 @@ both html and pdf:
 
 Have <Package>GAP 4.8</Package> or newer installed on your computer.
 
-<P/>If you do not see the subfolder <File>pkg/loops</File> in the main directory of &GAP; then download the &LOOPS; package from the distribution website <URL>http://www.math.du.edu/loops</URL> and unpack the downloaded file into the <File>pkg</File> subfolder.
+<P/>If you do not see the subfolder <File>pkg/loops</File> in the main directory of &GAP; then download the &LOOPS; package from the distribution website <URL>https://gap-packages.github.io/loops/</URL> and unpack the downloaded file into the <File>pkg</File> subfolder.
 
 <P/>The package &LOOPS; can then be loaded to &GAP; anytime by calling <Code>LoadPackage("loops");</Code>.
 

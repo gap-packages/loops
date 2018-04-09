@@ -27,14 +27,14 @@ are provided.
 Distribution webpage:
 ---------------------
 
-http://www.math.du.edu/loops
+https://gap-packages.github.io/loops/
 
 
 
 Installation:
 -------------
 
-1) install GAP version 4.7 or newer 
+1) install GAP version 4.8 or newer
 
 2) go to the LOOPS distribution webpage and download the package
 
