@@ -2252,7 +2252,6 @@ Below is a list of all relevant files forming the <Package>LOOPS</Package> packa
 <Br/><File>doc/*.*</File> (all documentation files)
 <Br/><File>doc/loops.xml</File> (the main documentation file for GAPDoc)
 <Br/><File>doc/loops.bib</File> (the main bibliography file for documentation)
-<Br/><File>gap/banner.g</File> (banner of LOOPS)
 <Br/><File>gap/bol_core_methods.gd .gi</File> (core methods for Bol loops)
 <Br/><File>gap/classes.gd .gi</File> (properties of quasigroups and loops)
 <Br/><File>gap/convert.gd .gi</File> (methods for data conversion and compression)
