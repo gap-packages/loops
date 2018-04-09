@@ -2231,7 +2231,7 @@ gap> LibraryLoop( "itp small", 6, 14 );
 <Appendix Label="Apx:Files"> <Heading>Files</Heading>
 
 Below is a list of all relevant files forming the <Package>LOOPS</Package> package. Some technical files are not included. A typical user will not need to know any of this information. All paths are relative to the <File>pkg/loops</File> folder.
-<Br/><Br/><File>../README.loops</File> (installation and usage instructions)
+<Br/><Br/><File>README</File> (installation and usage instructions)
 <Br/><File>init.g</File> (declarations)
 <Br/><File>PackageInfo.g</File> (loading info for GAP 4.4)
 <Br/><File>read.g</File> (implementations)
