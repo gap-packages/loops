@@ -74,18 +74,14 @@ PackageDoc := rec(
   Autoload  := true     # only for the documentation, TEMPORARILY TURNED OFF
 ),
 
-
 Dependencies := rec(
-  GAP := ">=4.4",
+  GAP := ">=4.7",
   NeededOtherPackages := [],
   SuggestedOtherPackages := [],
   ExternalConditions := []
 ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := "This version of LOOPS is ready for GAP 4.8.\n",
-
-Autoload := false,  # false for deposited packages
 TestFile := "tst/testall.g",
 Keywords := ["loop", "quasigroup", "latin square", 
     "multiplication group", "inner mapping group",
