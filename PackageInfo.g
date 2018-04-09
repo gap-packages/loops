@@ -94,7 +94,7 @@ AutoDoc := rec(
 &copyright; 2005-2017 Gábor P. Nagy and Petr Vojtěchovský.<P/>
 The &LOOPS; package is free software;
 you can redistribute it and/or modify it under the terms of the
-<URL Text="GNU General Public License">http://www.fsf.org/licenses/gpl.html</URL>
+<URL Text="GNU General Public License">https://www.fsf.org/licenses/gpl.html</URL>
 as published by the Free Software Foundation; either version 2 of the License,
 or (at your option) any later version.
 """,
