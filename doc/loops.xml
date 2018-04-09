@@ -16,12 +16,6 @@ both html and pdf:
 
 -->
 
-<!-- Working around GAPDoc bugs:
-
-* To fix a bug with <Example>: GAPDoc is adding an extra "end of line" character before </span> in the <Example> environment, whenever the line starts with "gap>". To remove these extra line breaks, it is necessary to go into the relevant html files and delete the extra line breaks. Do this only at the very end, since any additional processing of the XML file will reintroduce the extra line breaks.
-
--->
-
 <#Include SYSTEM "title.xml">
 
 <TableOfContents/>
@@ -301,16 +295,16 @@ group-theoretical once they are expressed in terms of translations. A loop is <I
 
 <Br/><P/>In the following example, <Code>L</Code> is a loop with two elements.
 
-<Example>
+<Example><![CDATA[
 gap> L;
-&lt;loop of order 2>
+<loop of order 2>
 gap> Print( L );
-&lt;loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]>
+<loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]>
 gap> Elements( L );
 [ l1, l2 ]
 gap> SetLoopElmName( L, "loop_element" );; Elements( L );
 [ loop_element1, loop_element2 ]
-</Example>
+]]></Example>
 
 </Section>
 
@@ -395,16 +389,16 @@ Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <
 </Description>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> ct := CanonicalCayleyTable( [[5,3],[3,5]] );
 [ [ 2, 1 ], [ 1, 2 ] ]
 gap> NormalizedQuasigroupTable( ct );
 [ [ 1, 2 ], [ 2, 1 ] ]
 gap> LoopByCayleyTable( last );
-&lt;loop of order 2>
+<loop of order 2>
 gap> [ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];
 [ true, false ]
-</Example>
+]]></Example>
 
 </Section>
 
@@ -519,7 +513,7 @@ Typing a large multiplication table manually is tedious and error-prone. We have
 These are the dual operations to <Code>QuasigroupByLeftSection</Code> and <Code>LoopByLeftSection</Code>.</Description>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;
 gap> ls := LeftSection( S );
 [ (), (1,3,5), (1,5,3) ]
@@ -527,7 +521,7 @@ gap> CayleyTableByPerms( ls );
 [ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
 gap> CayleyTable( LoopByLeftSection( ls ) );
 [ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ]
-</Example>
+]]></Example>
 
 </Section>
 
@@ -552,12 +546,12 @@ Let <M>G</M> be a group, <M>H</M> a subgroup of <M>G</M>, and <M>T</M> a right t
 
 <Br/><P/>Here is a simple example in which <M>T</M> is actually the right section of the resulting loop.
 
-<Example>
+<Example><![CDATA[
 gap> T := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;
 gap> G := Group( T );; H := Stabilizer( G, 1 );;
 gap> LoopByRightFolder( G, H, T );
-&lt;loop of order 5>
-</Example>
+<loop of order 5>
+]]></Example>
 
 </Section>
 
@@ -589,17 +583,17 @@ a nuclear extension of <M>K</M> by <M>F</M> if and only if there is a cocycle <M
 
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> F := IntoLoop( Group( (1,2) ) );
-&lt;loop of order 2>
+<loop of order 2>
 gap> K := DirectProduct( F, F );;
 gap> phi := [ (), (2,3) ];;
 gap> theta := [ [ 1, 1 ], [ 1, 3 ] ];;
 gap> LoopByExtension( K, F, phi, theta );
-&lt;loop of order 8>
+<loop of order 8>
 gap> IsAssociative( last );
 false
-</Example>
+]]></Example>
 
 </Section>
 
@@ -809,7 +803,7 @@ Powers of elements are generally not well-defined in quasigroups. For magmas and
 <Returns>The left inverse, right inverse and inverse, respectively, of the quasigroup element <Arg>x</Arg>.</Returns>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> CayleyTable( Q );
 [ [ 1, 2, 3, 4, 5 ],
   [ 2, 1, 4, 5, 3 ],
@@ -820,7 +814,7 @@ gap> elms := Elements( Q );
 gap> [ l1, l2, l3, l4, l5 ];
 gap> [ LeftInverse( elms[3] ), RightInverse( elms[3] ), Inverse( elms[3] ) ];
 [ l5, l4, fail ]
-</Example>
+]]></Example>
 
 </Section>
 
@@ -992,9 +986,9 @@ When <M>x</M> is an element of a quasigroup <M>Q</M>, the left translation <M>L_
 
 <P/>Note how the Cayley table of a subquasigroup is created only upon explicit demand. Also note that changing the names of elements of a subquasigroup (subloop) automatically changes the names of the elements of the parent subquasigroup (subloop). This is because the elements are shared.
 
-<Example>
+<Example><![CDATA[
 gap> M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );
-&lt;loop of order 3>
+<loop of order 3>
 gap> [ Parent( S ) = M, Elements( S ), PosInParent( S ) ];
 [ true, [ l1, l3, l5], [ 1, 3, 5 ] ]
 gap> HasCayleyTable( S );
@@ -1014,7 +1008,7 @@ gap> [ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];
 [ true, true, false ]
 gap> LeftSection( L );
 [ (), (1,2,3), (1,3,2) ]
-</Example>
+]]></Example>
 
 </Section>
 
@@ -1075,17 +1069,17 @@ L_x^{-1}R_x</M>. The <Index Subkey="middle">inner mapping group</Index><Emph>mid
 
 <P/>Here is an example for multiplication groups and inner mapping groups:
 
-<Example>
+<Example><![CDATA[
 gap> M := MoufangLoop(12,1);
-&lt;Moufang loop 12/1>
+<Moufang loop 12/1>
 gap> LeftSection(M)[2];
 (1,2)(3,4)(5,6)(7,8)(9,12)(10,11)
 gap> Mlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);
-&lt;permutation group of size 2592 with 23 generators>
+<permutation group of size 2592 with 23 generators>
 Group([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])
 gap> Size(Inn);
 216
-</Example>
+]]></Example>
 
 </Section>
 
@@ -1173,17 +1167,17 @@ See Section <Ref Sect="Sec:SubquasigroupsAndSubloops"/> for the relevant definit
 <Returns>When <Arg>S</Arg> is a normal subloop of a loop <Arg>Q</Arg>, returns the natural projection from <Arg>Q</Arg> onto <Arg>Q</Arg><M>/</M><Arg>S</Arg>.</Returns>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );
-&lt;loop of order 3>
+<loop of order 3>
 gap> IsNormal( M, S );
 true
 gap> F := FactorLoop( M, S );
-&lt;loop of order 4>
+<loop of order 4>
 gap> NaturalHomomorphismByNormalSubloop( M, S );
-MappingByFunction( &lt;loop of order 12>, &lt;loop of order 4>,
+MappingByFunction( <loop of order 12>, <loop of order 4>,
     function( x ) ... end )
-</Example>
+]]></Example>
 
 </Section>
 
@@ -1592,20 +1586,20 @@ is both left alternative and right alternative. A loop is <Emph>nuclear square</
 <Br/><P/>The following trivial example shows some of the implications and the naming
 conventions of <Package>LOOPS</Package> at work:
 
-<Example>
+<Example><![CDATA[
 gap> L := LoopByCayleyTable( [ [ 1, 2 ], [ 2, 1 ] ] );
-&lt;loop of order 2>
+<loop of order 2>
 gap> [ IsLeftBolLoop( L ), L ]
-[ true, &lt;left Bol loop of order 2> ]
+[ true, <left Bol loop of order 2> ]
 gap> [ HasIsLeftAlternativeLoop( L ), IsLeftAlternativeLoop( L ) ];
 [ true, true ]
 gap> [ HasIsRightBolLoop( L ), IsRightBolLoop( L ) ];
 [ false, true ]
 gap> L;
-&lt;Moufang loop of order 2>
+<Moufang loop of order 2>
 gap> [ IsAssociative( L ), L ];
-[ true, &lt;associative loop of order 2> ]
-</Example>
+[ true, <associative loop of order 2> ]
+]]></Example>
 
 <P/>The analogous terminology for quasigroups of Bol-Moufang type is not standard yet, and hence is not supported in <Package>LOOPS</Package> except for the situations explicitly noted above.
 
@@ -1871,14 +1865,14 @@ It is difficult to determine which groups can occur as multiplication groups of 
 <Returns>One loop (given as a section) whose multiplication group is equal to the transitive permutation group <Arg>G</Arg>.</Returns>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> g:=PGL(3,3);
 Group([ (6,7)(8,11)(9,13)(10,12), (1,2,5,7,13,3,8,6,10,9,12,4,11) ])
 gap> a:=AllLoopTablesInGroup(g,3,0);; Size(a);
 56
 gap> a:=AllLoopsWithMltGroup(g,3,0);; Size(a);
 52
-</Example>
+]]></Example>
 
 </Section>
 
@@ -2011,7 +2005,7 @@ The library named <Emph>code</Emph> contains all nonassociative code loops of or
 
 Here is how the libary named <Emph>Steiner</Emph> is described within <Package>LOOPS</Package>:
 
-<Example>
+<Example><![CDATA[
 gap> DisplayLibraryInfo( "Steiner" );
 The library contains all nonassociative Steiner loops of order less or equal to 16.
 It also contains the associative Steiner loops of order 4 and 8.
@@ -2023,7 +2017,7 @@ Extent of the library:
    2 loops of order 14
    80 loops of order 16
 true
-</Example>
+]]></Example>
 
 <P/>Our labeling of Steiner loops of order 16 coincides with the labeling of Steiner triple systems of order 15 in <Cite Key="CoRo"/>.
 
@@ -2174,14 +2168,14 @@ In general, given a library named <Emph>libname</Emph>, the corresponding librar
 <Returns>The <Arg>m</Arg>th small loop of order <Arg>n</Arg> up to isotopism in the library.</Returns>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> SmallLoop( 6, 14 );
-&lt;small loop 6/14>
+<small loop 6/14>
 gap> ItpSmallLoop( 6, 14 );
-&lt;small loop 6/42>
+<small loop 6/42>
 gap> LibraryLoop( "itp small", 6, 14 );
-&lt;small loop 6/42>
-</Example>
+<small loop 6/42>
+]]></Example>
 
 <P/>Note that loops up to isotopism form a subset of the corresponding library of loops up to isomorphism. For instance, the above example shows that the 14th small loop of order 6 up to isotopism is in fact the 42nd small loop of order 6 up to isomorphism.
 
