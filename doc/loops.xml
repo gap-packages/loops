@@ -26,12 +26,12 @@ both html and pdf:
 
 <Chapter Label="Chap:Introduction"> <Heading>Introduction</Heading>
 
-<Package>LOOPS</Package> is a package for <Package>GAP4</Package> whose purpose is to:
+&LOOPS; is a package for <Package>GAP4</Package> whose purpose is to:
         <List>
                 <Item>provide researchers in nonassociative algebra with a powerful computational tool concerning finite loops and quasigroups,</Item>
                 <Item>extend &GAP; toward the realm of nonassociative structures.</Item>
         </List>
-<Package>LOOPS</Package> has been accepted as an official package of &GAP; in May 2015.
+&LOOPS; has been accepted as an official package of &GAP; in May 2015.
 
 <!-- Section: Installation -->
 
@@ -39,11 +39,11 @@ both html and pdf:
 
 Have <Package>GAP 4.8</Package> or newer installed on your computer.
 
-<P/>If you do not see the subfolder <File>pkg/loops</File> in the main directory of &GAP; then download the <Package>LOOPS</Package> package from the distribution website <URL>http://www.math.du.edu/loops</URL> and unpack the downloaded file into the <File>pkg</File> subfolder.
+<P/>If you do not see the subfolder <File>pkg/loops</File> in the main directory of &GAP; then download the &LOOPS; package from the distribution website <URL>http://www.math.du.edu/loops</URL> and unpack the downloaded file into the <File>pkg</File> subfolder.
 
-<P/>The package <Package>LOOPS</Package> can then be loaded to &GAP; anytime by calling <Code>LoadPackage("loops");</Code>.
+<P/>The package &LOOPS; can then be loaded to &GAP; anytime by calling <Code>LoadPackage("loops");</Code>.
 
-<P/>If you wish to load <Package>LOOPS</Package> automatically while starting &GAP;, start &GAP;, execute the following commands,
+<P/>If you wish to load &LOOPS; automatically while starting &GAP;, start &GAP;, execute the following commands,
 <Verb>
 gap> pref := UserPreference( "PackagesToLoad " );;
 gap> Add( pref, "loops" );;
@@ -62,9 +62,9 @@ The documentation has been prepared with the &GAPDoc; package and is therefore a
 
 <P/>The preferred format of the documentation is html with MathJax turned on.
 
-<P/>All formats of the documentation can be found in the <File>doc</File> folder of <Package>LOOPS</Package>. You can also download the documentation from the <Package>LOOPS</Package> distribution website.
+<P/>All formats of the documentation can be found in the <File>doc</File> folder of &LOOPS;. You can also download the documentation from the &LOOPS; distribution website.
 
-<P/>The inline &GAP; help is available upon installing <Package>LOOPS</Package> and can be accessed in the usual way, i.e., upon typing <Code>?command</Code>, &GAP; displays the section of the <Package>LOOPS</Package> manual containing information about <Code>command</Code>.
+<P/>The inline &GAP; help is available upon installing &LOOPS; and can be accessed in the usual way, i.e., upon typing <Code>?command</Code>, &GAP; displays the section of the &LOOPS; manual containing information about <Code>command</Code>.
 
 </Section>
 
@@ -72,7 +72,7 @@ The documentation has been prepared with the &GAPDoc; package and is therefore a
 
 <Section Label="Sec:TestFiles"> <Heading>Test Files</Heading>
 
-Test files conforming to &GAP; standards are provided for <Package>LOOPS</Package> and can be found in the folder <File>tst</File>. The command <Code>ReadPackage("loops","tst/testall.g")</Code> runs all tests for <Package>LOOPS</Package>.
+Test files conforming to &GAP; standards are provided for &LOOPS; and can be found in the folder <File>tst</File>. The command <Code>ReadPackage("loops","tst/testall.g")</Code> runs all tests for &LOOPS;.
 
 </Section>
 
@@ -80,7 +80,7 @@ Test files conforming to &GAP; standards are provided for <Package>LOOPS</Packag
 
 <Section Label="Sec:MemoryManagement"> <Heading>Memory Management</Heading>
 
-Some libraries of loops are loaded only upon explicit demand and can occupy a lot of memory. For instance, the library or RCC loops occupies close to 100 MB of memory when fully loaded. The command <Code>LOOPS_FreeMemory();</Code> will attempt to free memory by unbinding on-demand library data loaded by <Package>LOOPS</Package>.
+Some libraries of loops are loaded only upon explicit demand and can occupy a lot of memory. For instance, the library or RCC loops occupies close to 100 MB of memory when fully loaded. The command <Code>LOOPS_FreeMemory();</Code> will attempt to free memory by unbinding on-demand library data loaded by &LOOPS;.
 
 </Section>
 
@@ -88,7 +88,7 @@ Some libraries of loops are loaded only upon explicit demand and can occupy a lo
 
 <Section Label="Sec:Feedback"> <Heading>Feedback</Heading>
 
-We welcome all comments and suggestions on <Package>LOOPS</Package>, especially those concerning the future development of the package. You can contact us by e-mail.
+We welcome all comments and suggestions on &LOOPS;, especially those concerning the future development of the package. You can contact us by e-mail.
 
 </Section>
 
@@ -199,7 +199,7 @@ The package consists of three complementary components:
         <Item>algorithms for specific varieties of loops, mostly for Moufang loops (see Chapter <Ref Chap="Chap:SpecificMethods"/>),</Item>
         <Item>the library of small loops (see Chapter <Ref Chap="Chap:LibrariesOfLoops"/>).</Item>
 </List>
-Although we do not explain the algorithms in detail here, we describe the general philosophy so that users can anticipate the capabilities and behavior of <Package>LOOPS</Package>.
+Although we do not explain the algorithms in detail here, we describe the general philosophy so that users can anticipate the capabilities and behavior of &LOOPS;.
 
 <!-- Section:  Representing quasigroups -->
 
@@ -209,7 +209,7 @@ Since permutation representation in the usual sense is impossible for nonassocia
 
 <P/>Consequently, the package is intended primarily for quasigroups and loops of small order, say up to 1000.
 
-<P/>The &GAP; categories <Index>IsQuasigroupElement</Index><Code>IsQuasigroupElement</Code>, <Index>IsLoopElement</Index><Code>IsLoopElement</Code>, <Index>IsQuasigroup</Index><Code>IsQuasigroup</Code> and <Index>IsLoop</Index><Code>IsLoop</Code> are declared in <Package>LOOPS</Package> as follows:
+<P/>The &GAP; categories <Index>IsQuasigroupElement</Index><Code>IsQuasigroupElement</Code>, <Index>IsLoopElement</Index><Code>IsLoopElement</Code>, <Index>IsQuasigroup</Index><Code>IsQuasigroup</Code> and <Index>IsLoop</Index><Code>IsLoop</Code> are declared in &LOOPS; as follows:
 
 <Verb>
 DeclareCategory( "IsQuasigroupElement", IsMultiplicativeElement );
@@ -232,16 +232,16 @@ DeclareCategory( "IsLoop", IsQuasigroup and
 
 <Section Label="Sec:ConversionsEtc"> <Heading>Conversions between magmas, quasigroups, loops and groups</Heading>
 
-Whether an object is considered a magma, quasigroup, loop or group is a matter of declaration in <Package>LOOPS</Package>. Loops are automatically quasigroups, and both groups and quasigroups are automatically magmas. All standard &GAP; commands for magmas are therefore available for quasigroups and loops.
+Whether an object is considered a magma, quasigroup, loop or group is a matter of declaration in &LOOPS;. Loops are automatically quasigroups, and both groups and quasigroups are automatically magmas. All standard &GAP; commands for magmas are therefore available for quasigroups and loops.
 
 <P/>In &GAP;, functions of the type <Code>AsSomething(<Arg>X</Arg>)</Code> convert the domain <Arg>X</Arg> into <Code>Something</Code>, if possible, without changing the underlying domain <Arg>X</Arg>. For example, if <Arg>X</Arg> is declared as magma but is associative and has neutral element and inverses, <Code>AsGroup(<Arg>X</Arg>)</Code> returns the corresponding group with the underlying domain <Arg>X</Arg>.
 
-<P/>We have opted for a more general kind of conversions in <Package>LOOPS</Package> (starting with version 2.1.0), using functions of the type <Code>IntoSomething(<Arg>X</Arg>)</Code>. The two main features that distinguish <Code>IntoSomething</Code> from <Code>AsSomething</Code> are:
+<P/>We have opted for a more general kind of conversions in &LOOPS; (starting with version 2.1.0), using functions of the type <Code>IntoSomething(<Arg>X</Arg>)</Code>. The two main features that distinguish <Code>IntoSomething</Code> from <Code>AsSomething</Code> are:
 <List>
         <Item>The function <Code>IntoSomething(<Arg>X</Arg>)</Code> does not necessarily return the same    domain as <Arg>X</Arg>. The reason is that <Arg>X</Arg> can be a group, for instance, defined on one of many possible domains, while <Code>IntoLoop(<Arg>X</Arg>)</Code> must result in a loop, and hence be defined on a subset of some interval <M>1</M>, <M>\dots</M>, <M>n</M> (see Section <Ref Sect="Sec:ParentOfAQuasigroup"/>).</Item>
         <Item>In some special situations, the function <Code>IntoSomething(<Arg>X</Arg>)</Code> allows to    convert <Arg>X</Arg> into <Code>Something</Code> even though <Arg>X</Arg> does not have all the properties  of <Code>Something</Code>. For instance, every quasigroup is isotopic to a loop, so it makes sense to allow the conversion <Code>IntoLoop(<Arg>Q</Arg>)</Code> even if the quasigroup <Arg>Q</Arg> does not posses a neutral element.</Item>
 </List>
-Details of all conversions in <Package>LOOPS</Package> can be found in Section <Ref Sect="Sec:Conversions"/>.
+Details of all conversions in &LOOPS; can be found in Section <Ref Sect="Sec:Conversions"/>.
 
 </Section>
 
@@ -274,11 +274,11 @@ group-theoretical once they are expressed in terms of translations. A loop is <I
 
 &GAP; displays information about objects in two modes: the <Code>View</Code> mode (default, short), and the <Code>Print</Code> mode (longer). Moreover, when the name of an object is set, the name is always shown, no matter which display mode is used.
 
-<P/>Only loops contained in the libraries of <Package>LOOPS</Package> are named. For instance, the loop obtained via <Code>MoufangLoop(32,4)</Code>, the 4th Moufang loop of order 32, is named "Moufang loop 32/4'' and is shown as <Code>&lt;Moufang loop 32/4&gt;</Code>.
+<P/>Only loops contained in the libraries of &LOOPS; are named. For instance, the loop obtained via <Code>MoufangLoop(32,4)</Code>, the 4th Moufang loop of order 32, is named "Moufang loop 32/4'' and is shown as <Code>&lt;Moufang loop 32/4&gt;</Code>.
 
 <P/>A generic quasigroup of order <M>n</M> is displayed as <Code>&lt;quasigroup of order n&gt;</Code>. Similarly, a loop of order <M>n</M> appears as <Code>&lt;loop of order n&gt;</Code>.
 
-<P/>The displayed information of a generic loop is enhanced if more information about the loop becomes available. For instance, when it is established that a loop of order 12 has the left alternative property, the loop will be shown as <Code>&lt;left alternative loop of order 12&gt;</Code> until a stronger property is obtained. Which property is diplayed is governed by the filters built into <Package>LOOPS</Package> (see Appendix <Ref Appendix="Apx:Filters"/>).
+<P/>The displayed information of a generic loop is enhanced if more information about the loop becomes available. For instance, when it is established that a loop of order 12 has the left alternative property, the loop will be shown as <Code>&lt;left alternative loop of order 12&gt;</Code> until a stronger property is obtained. Which property is diplayed is governed by the filters built into &LOOPS; (see Appendix <Ref Appendix="Apx:Filters"/>).
 
 <ManSection><Heading>SetQuasigroupElmName and SetLoopElmName</Heading>
 
@@ -314,7 +314,7 @@ gap> SetLoopElmName( L, "loop_element" );; Elements( L );
 
 <Chapter Label="Chap:CreatingQuasigroupsAndLoops"> <Heading>Creating Quasigroups and Loops</Heading>
 
-In this chapter we describe several ways in which quasigroups and loops can be created in <Package>LOOPS</Package>.
+In this chapter we describe several ways in which quasigroups and loops can be created in &LOOPS;.
 
 <!-- Section:  About Cayley Tables -->
 
@@ -324,7 +324,7 @@ Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <
 
 <P/>A Cayley table is a <Index>quasigroup table</Index><Emph>quasigroup table</Emph> if it is a <Index>latin square</Index>latin square, i.e., if every entry <M>x_i</M> appears in every column and every row exactly once.
 
-<P/>An unfortunate feature of multiplication tables in practice is that they are often not bordered, that is, it is up to the reader to figure out what is meant. Throughout this manual and in <Package>LOOPS</Package>, we therefore make the following assumption: <Emph>All distinct entries in a quasigroup table must be positive integers, say <M>x_1 &lt; x_2 &lt; \cdots &lt; x_n</M>, and if no border is specified, we assume that the table is bordered by <M>x_1</M>, <M>\dots</M>, <M>x_n</M>, in this order.</Emph> Note that we do not assume that the distinct entries <M>x_1</M>, <M>\dots</M>, <M>x_n</M> form the interval <M>1</M>, <M>\dots</M>, <M>n</M>. The significance of this observation will become clear in Chapter <Ref Chap="Chap:MethodsBasedOnPermutationGroups"/>.
+<P/>An unfortunate feature of multiplication tables in practice is that they are often not bordered, that is, it is up to the reader to figure out what is meant. Throughout this manual and in &LOOPS;, we therefore make the following assumption: <Emph>All distinct entries in a quasigroup table must be positive integers, say <M>x_1 &lt; x_2 &lt; \cdots &lt; x_n</M>, and if no border is specified, we assume that the table is bordered by <M>x_1</M>, <M>\dots</M>, <M>x_n</M>, in this order.</Emph> Note that we do not assume that the distinct entries <M>x_1</M>, <M>\dots</M>, <M>x_n</M> form the interval <M>1</M>, <M>\dots</M>, <M>n</M>. The significance of this observation will become clear in Chapter <Ref Chap="Chap:MethodsBasedOnPermutationGroups"/>.
 
 <P/>Finally, we say that a quasigroup table is a <Index>loop table</Index><Emph>loop table</Emph> if the first row and the first column are the same, and if the entries in the first row are ordered in an ascending fashion.
 
@@ -406,7 +406,7 @@ gap> [ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];
 
 <Section Label="Sec:CreatingQuasigroupsAndLoopsFromAFile"> <Heading>Creating Quasigroups and Loops from a File</Heading>
 
-Typing a large multiplication table manually is tedious and error-prone. We have therefore included a general method in <Package>LOOPS</Package> that reads multiplication tables of quasigroups from a file.
+Typing a large multiplication table manually is tedious and error-prone. We have therefore included a general method in &LOOPS; that reads multiplication tables of quasigroups from a file.
 
 <P/>Instead of writing a separate algorithm for each common format, our algorithm relies on the user to provide a bit of information about the input file. Here is an outline of the algorithm, with file named <Arg>filename</Arg> and a string <Arg>del</Arg> as input (in essence, the characters of <Arg>del</Arg> will be ignored while reading the file):
 <List>
@@ -638,9 +638,9 @@ An algorithm is said to select a latin square of order <M>n</M> <Emph>at random<
 
 <Section Label="Sec:Conversions"> <Heading>Conversions</Heading>
 
-<Package>LOOPS</Package> contains methods that convert between magmas, quasigroups, loops and groups, provided such conversions are possible. Each of the conversion methods <Code>IntoQuasigroup</Code>, <Code>IntoLoop</Code> and <Code>IntoGroup</Code> returns <Code>fail</Code> if the requested conversion is not possible.
+&LOOPS; contains methods that convert between magmas, quasigroups, loops and groups, provided such conversions are possible. Each of the conversion methods <Code>IntoQuasigroup</Code>, <Code>IntoLoop</Code> and <Code>IntoGroup</Code> returns <Code>fail</Code> if the requested conversion is not possible.
 
-<Br/><P/><B>Remark:</B> Up to version 2.0.0 of <Package>LOOPS</Package>, we supported <Code>AsQuasigroup</Code>, <Code>AsLoop</Code> and <Code>AsGroup</Code> in place of <Code>IntoQuasigroup</Code>, <Code>IntoLoop</Code> and <Code>IntoGroup</Code>, respectively. We have changed the terminology starting with version 2.1.0 in order to comply with &GAP; naming rules for <Code>AsSomething</Code>, as explained in Chapter <Ref Chap="Chap:HowThePackageWorks"/>. Finally, the method <Code>AsGroup</Code> is a core method of &GAP; that returns an fp group if its argument is an associative loop.
+<Br/><P/><B>Remark:</B> Up to version 2.0.0 of &LOOPS;, we supported <Code>AsQuasigroup</Code>, <Code>AsLoop</Code> and <Code>AsGroup</Code> in place of <Code>IntoQuasigroup</Code>, <Code>IntoLoop</Code> and <Code>IntoGroup</Code>, respectively. We have changed the terminology starting with version 2.1.0 in order to comply with &GAP; naming rules for <Code>AsSomething</Code>, as explained in Chapter <Ref Chap="Chap:HowThePackageWorks"/>. Finally, the method <Code>AsGroup</Code> is a core method of &GAP; that returns an fp group if its argument is an associative loop.
 
 <ManSection>
 
@@ -652,7 +652,7 @@ An algorithm is said to select a latin square of order <M>n</M> <Emph>at random<
 <ManSection>
 <Oper Name="PrincipalLoopIsotope" Arg="M, f, g"/>
 
-<Returns>An isomorphic copy of the principal isotope <M>(</M><Arg>M</Arg>,<M>\circ)</M> via the transposition <M>(1</M>,<Arg>f</Arg><M>\cdot</M><Arg>g</Arg><M>)</M>. An isomorphic copy is returned rather than <M>(</M><Arg>M</Arg>,<M>\circ)</M> because in <Package>LOOPS</Package> all loops have to have neutral element labeled as <M>1</M>.</Returns>
+<Returns>An isomorphic copy of the principal isotope <M>(</M><Arg>M</Arg>,<M>\circ)</M> via the transposition <M>(1</M>,<Arg>f</Arg><M>\cdot</M><Arg>g</Arg><M>)</M>. An isomorphic copy is returned rather than <M>(</M><Arg>M</Arg>,<M>\circ)</M> because in &LOOPS; all loops have to have neutral element labeled as <M>1</M>.</Returns>
 
 <Description>Given a quasigroup <M>M</M> and two of its elements <M>f</M>, <M>g</M>, the principal loop isotope <M>x\circ y = R_g^{-1}(x)\cdot L_f^{-1}(y)</M> turns <M>(M,\circ)</M> into a loop with neutral element <M>f\cdot g</M> (see Section <Ref Sect="Sec:HomomorphismsAndHomotopisms"/>).</Description>
 </ManSection>
@@ -711,7 +711,7 @@ When <M>Q</M> is a quasigroup with multiplication <M>\cdot</M>, the <Index>oppos
 
 <Chapter Label="Chap:BasicMethodsAndAttributes"> <Heading>Basic Methods And Attributes</Heading>
 
-In this chapter we describe the basic core methods and attributes of the <Package>LOOPS</Package> package.
+In this chapter we describe the basic core methods and attributes of the &LOOPS; package.
 
 <!-- Section:  Basic Attributes -->
 
@@ -790,7 +790,7 @@ Each quasigroup element in &GAP; knows to which quasigroup it belongs. It is the
 
 <Section Label="Sec:PowersAndInverses"> <Heading>Powers and Inverses</Heading>
 
-Powers of elements are generally not well-defined in quasigroups. For magmas and a positive integral exponent, &GAP; calculates powers in the following way: <M>x^1=x</M>, <M>x^{2k}=(x^k)\cdot(x^k)</M> and <M>x^{2k+1}=(x^{2k})\cdot x</M>. One can easily see that this returns <M>x^k</M> in about <M>\log_2(k)</M> steps. For <Package>LOOPS</Package>, we have decided to keep this method, but the user should be aware that the method is sound only in power associative quasigroups.
+Powers of elements are generally not well-defined in quasigroups. For magmas and a positive integral exponent, &GAP; calculates powers in the following way: <M>x^1=x</M>, <M>x^{2k}=(x^k)\cdot(x^k)</M> and <M>x^{2k+1}=(x^{2k})\cdot x</M>. One can easily see that this returns <M>x^k</M> in about <M>\log_2(k)</M> steps. For &LOOPS;, we have decided to keep this method, but the user should be aware that the method is sound only in power associative quasigroups.
 
 <P/>Let <M>x</M> be an element of a loop <M>Q</M> with neutral element <M>1</M>. Then the <Emph>left inverse</Emph><Index Subkey="left">inverse</Index> <M>x^\lambda</M> of <M>x</M> is the unique element of <M>Q</M> satisfying <M>x^\lambda x=1</M>. Similarly, the <Emph>right inverse</Emph><Index Subkey="right">inverse</Index> <M>x^\rho</M> satisfies <M>xx^\rho=1</M>. If <M>x^\lambda=x^\rho</M>, we call <M>x^{-1}=x^\lambda=x^\rho</M> the <Emph>inverse</Emph><Index>inverse</Index> of <M>x</M>.
 
@@ -868,7 +868,7 @@ See Section <Ref Sect="Sec:AssociatorsAndCommutators"/> for definitions of assoc
 
 <Chapter Label="Chap:MethodsBasedOnPermutationGroups"> <Heading>Methods Based on Permutation Groups</Heading>
 
-Most calculations in the <Package>LOOPS</Package> package are delegated to groups, taking advantage of the various permutations and permutation groups associated with quasigroups. This chapter explains in detail how the permutations associated with a quasigroup are calculated, and it also describes some of the core methods of <Package>LOOPS</Package> based on permutations. Additional core methods can be found in Chapter <Ref Chap="Chap:TestingPropertiesOfQuasigroupsAndLoops"/>.
+Most calculations in the &LOOPS; package are delegated to groups, taking advantage of the various permutations and permutation groups associated with quasigroups. This chapter explains in detail how the permutations associated with a quasigroup are calculated, and it also describes some of the core methods of &LOOPS; based on permutations. Additional core methods can be found in Chapter <Ref Chap="Chap:TestingPropertiesOfQuasigroupsAndLoops"/>.
 
 <!-- Section:  Parent of a Quasigroup -->
 
@@ -891,7 +891,7 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 
 <P/>Let <Arg>Q</Arg> be a quasigroup with parent <Arg>P</Arg>, where <Arg>P</Arg> is some <M>n</M>-element quasigroup. Let <Arg>x</Arg> be an element of <Arg>Q</Arg>. Then <Code><Arg>x</Arg>![1]</Code> is the position of <Arg>x</Arg> among the elements of <Arg>P</Arg>, i.e., <Code><Arg>x</Arg>![1] = Position(Elements(<Arg>P</Arg>),<Arg>x</Arg>)</Code>.
 
-<P/>While referring to elements of <Arg>Q</Arg> by their positions, the user should understand whether the positions are meant among the elements of <Arg>Q</Arg>, or among the elements of the parent <Arg>P</Arg> of <Arg>Q</Arg>. Since it requires no calculation to obtain <Code><Arg>x</Arg>![1]</Code>, we always use the position of an element in its parent quasigroup in <Package>LOOPS</Package>. In this way, many attributes of a quasigroup, including its Cayley table, are permanently tied to its parent.
+<P/>While referring to elements of <Arg>Q</Arg> by their positions, the user should understand whether the positions are meant among the elements of <Arg>Q</Arg>, or among the elements of the parent <Arg>P</Arg> of <Arg>Q</Arg>. Since it requires no calculation to obtain <Code><Arg>x</Arg>![1]</Code>, we always use the position of an element in its parent quasigroup in &LOOPS;. In this way, many attributes of a quasigroup, including its Cayley table, are permanently tied to its parent.
 
 <P/>It is now clear why we have not insisted that Cayley tables of quasigroups must have entries covering the entire interval <M>1</M>, <M>\dots</M>, <M>n</M> for some <M>n</M>.
 
@@ -918,7 +918,7 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 
 <P/>If <Arg>S</Arg> is empty, <Code>Subquasigroup(<Arg>Q</Arg>,<Arg>S</Arg>)</Code> returns the empty set if <Arg>Q</Arg> is a quasigroup, and it returns the one-element subloop of <Arg>Q</Arg> if <Arg>Q</Arg> is a loop.
 
-<P/><B>Remark:</B> The empty set is sometimes considered to be a subquasigroup of <Arg>Q</Arg> (although not in <Package>LOOPS</Package>). The above convention is useful for handling certain situations, for instance when the user calls <Code>Center(<Arg>Q</Arg>)</Code> for a quasigroup <Arg>Q</Arg> with empty center.</Description>
+<P/><B>Remark:</B> The empty set is sometimes considered to be a subquasigroup of <Arg>Q</Arg> (although not in &LOOPS;). The above convention is useful for handling certain situations, for instance when the user calls <Code>Center(<Arg>Q</Arg>)</Code> for a quasigroup <Arg>Q</Arg> with empty center.</Description>
 </ManSection>
 
 <ManSection>
@@ -966,7 +966,7 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 
 <Section Label="Sec:TranslationsAndSections"> <Heading>Translations and Sections</Heading>
 
-When <M>x</M> is an element of a quasigroup <M>Q</M>, the left translation <M>L_x</M> is a permutation of <M>Q</M>. In <Package>LOOPS</Package>, all permutations associated with quasigroups and their elements are permutations in the sense of &GAP;, i.e., they are bijections of some interval <M>1</M>, <M>\dots</M>, <M>n</M>. Moreover, following our convention, the numerical entries of the permutations point to the positions among elements of the parent of <M>Q</M>, not among elements of <M>Q</M>.
+When <M>x</M> is an element of a quasigroup <M>Q</M>, the left translation <M>L_x</M> is a permutation of <M>Q</M>. In &LOOPS;, all permutations associated with quasigroups and their elements are permutations in the sense of &GAP;, i.e., they are bijections of some interval <M>1</M>, <M>\dots</M>, <M>n</M>. Moreover, following our convention, the numerical entries of the permutations point to the positions among elements of the parent of <M>Q</M>, not among elements of <M>Q</M>.
 
 <ManSection>
 <Heading>LeftTranslation and RightTranslation</Heading>
@@ -1283,7 +1283,7 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvab
 
 <P/><B>Remark:</B> Since two isomorphisms differ by an automorphism, all isomorphisms from <Arg>Q</Arg> to <Arg>L</Arg> can be obtained by a combination of <Code>IsomorphismLoops(<Arg>Q</Arg>,<Arg>L</Arg>)</Code> (or  <Code>IsomorphismQuasigroups(<Arg>Q</Arg>,<Arg>L</Arg>)</Code>) and <Code>AutomorphismGroup(<Arg>L</Arg>)</Code>.
 
-<Br/><P/>While dealing with Cayley tables, it is often useful to rename or reorder the elements of the underlying quasigroup without changing the isomorphism type of the quasigroups. <Package>LOOPS</Package> contains several functions for this purpose.
+<Br/><P/>While dealing with Cayley tables, it is often useful to rename or reorder the elements of the underlying quasigroup without changing the isomorphism type of the quasigroups. &LOOPS; contains several functions for this purpose.
 
 <ManSection>
 <Oper Name="QuasigroupIsomorph" Arg="Q, f"/>
@@ -1327,7 +1327,7 @@ have identical discriminators, they may or may not be isomorphic.
 
 <Section Label="Sec:Isotopism"> <Heading>Isotopisms</Heading>
 
-At the moment, <Package>LOOPS</Package> contains only slow methods for testing if two loops are isotopic. The method works as follows: It is well known that if a loop <M>K</M> is isotopic to a loop <M>L</M> then there exist a principal loop isotope <M>P</M> of <M>K</M> such that <M>P</M> is isomorphic to <M>L</M>. The algorithm first finds all principal isotopes of <M>K</M>, then filters them up to isomorphism, and then checks if any of them is isomorphic to <M>L</M>. This is rather slow already for small orders.
+At the moment, &LOOPS; contains only slow methods for testing if two loops are isotopic. The method works as follows: It is well known that if a loop <M>K</M> is isotopic to a loop <M>L</M> then there exist a principal loop isotope <M>P</M> of <M>K</M> such that <M>P</M> is isomorphic to <M>L</M>. The algorithm first finds all principal isotopes of <M>K</M>, then filters them up to isomorphism, and then checks if any of them is isomorphic to <M>L</M>. This is rather slow already for small orders.
 
 <ManSection>
 <Oper Name="IsotopismLoops" Arg="K, L"/>
@@ -1376,7 +1376,7 @@ Although loops are quasigroups, it is often the case in the literature that a pr
 <ManSection>
 <Prop Name="IsDiassociative" Arg="Q"/>
 <Returns><Code>true</Code> if <Arg>Q</Arg> is a diassociative quasigroup.</Returns>
-<Description>A quasigroup <M>Q</M> is said to be <Emph>diassociative</Emph><Index Subkey="diassociative">quasigroup</Index><Index>diassociative quasigroup</Index> if any two elements of <M>Q</M> generate an associative quasigroup, that is, a group. Note that a diassociative quasigroup is necessarily a loop, but it need not be so declared in <Package>LOOPS</Package>.</Description>
+<Description>A quasigroup <M>Q</M> is said to be <Emph>diassociative</Emph><Index Subkey="diassociative">quasigroup</Index><Index>diassociative quasigroup</Index> if any two elements of <M>Q</M> generate an associative quasigroup, that is, a group. Note that a diassociative quasigroup is necessarily a loop, but it need not be so declared in &LOOPS;.</Description>
 </ManSection>
 
 </Section>
@@ -1420,7 +1420,7 @@ For an element <M>x</M> of a loop <M>Q</M>, the <Emph>left inverse</Emph><Index 
 <Description>A loop <M>Q</M> has the <Emph>antiautomorphic inverse property</Emph><Index>antiautomorphic inverse property</Index><Index Subkey="antiautomorphic">inverse property</Index> if <M>(xy)^\lambda=y^\lambda x^\lambda</M>, or, equivalently, <M>(xy)^\rho = y^\rho x^\rho</M> holds for every <M>x</M>, <M>y</M> in <M>Q</M>.<Br/></Description>
 </ManSection>
 
-<P/>See Appendix <Ref Appendix="Apx:Filters"/> for implications implemented in <Package>LOOPS</Package> among various inverse properties.
+<P/>See Appendix <Ref Appendix="Apx:Filters"/> for implications implemented in &LOOPS; among various inverse properties.
 
 </Section>
 
@@ -1581,10 +1581,10 @@ is both left alternative and right alternative. A loop is <Emph>nuclear square</
 <Returns><Code>true</Code> if <Arg>Q</Arg> is an alternative quasigroup.<Br/></Returns>
 </ManSection>
 
-<P/>While listing the varieties of loops of Bol-Moufang type, we have also listed all inclusions among them. These inclusions are built into <Package>LOOPS</Package> as filters.
+<P/>While listing the varieties of loops of Bol-Moufang type, we have also listed all inclusions among them. These inclusions are built into &LOOPS; as filters.
 
 <Br/><P/>The following trivial example shows some of the implications and the naming
-conventions of <Package>LOOPS</Package> at work:
+conventions of &LOOPS; at work:
 
 <Example><![CDATA[
 gap> L := LoopByCayleyTable( [ [ 1, 2 ], [ 2, 1 ] ] );
@@ -1601,7 +1601,7 @@ gap> [ IsAssociative( L ), L ];
 [ true, <associative loop of order 2> ]
 ]]></Example>
 
-<P/>The analogous terminology for quasigroups of Bol-Moufang type is not standard yet, and hence is not supported in <Package>LOOPS</Package> except for the situations explicitly noted above.
+<P/>The analogous terminology for quasigroups of Bol-Moufang type is not standard yet, and hence is not supported in &LOOPS; except for the situations explicitly noted above.
 
 </Section>
 
@@ -1629,7 +1629,7 @@ A loop is <Emph>left power alternative</Emph><Index Subkey="left">power alternat
 
 A loop <M>Q</M> is <Emph>left conjugacy closed</Emph><Index Subkey="left">conjugacy closed loop</Index><Index Subkey="left conjugacy closed">loop</Index> if the set of left translations of <M>Q</M> is closed under conjugation (by itself). Similarly, a loop <M>Q</M> is <Emph>right conjugacy closed</Emph><Index Subkey="right">conjugacy closed loop</Index><Index Subkey="right conjugacy closed">loop</Index> if the set of right translations of <M>Q</M> is closed under conjugation. A loop is <Emph>conjugacy closed</Emph><Index>conjugacy closed loop</Index><Index Subkey="conjugacy closed">loop</Index> if it is both left conjugacy closed and right conjugacy closed. It is common to refer to these loops as LCC, RCC, and CC loops, respectively.
 
-<P/>The equivalence LCC <M>+</M> RCC <M>=</M> CC is built into <Package>LOOPS</Package>.
+<P/>The equivalence LCC <M>+</M> RCC <M>=</M> CC is built into &LOOPS;.
 
 <ManSection>
 <Prop Name="IsLCCLoop" Arg="Q"/>
@@ -1750,7 +1750,7 @@ See the built-in filters and the survey <Cite Key="VoQRS"/> for additional prope
 
 <Chapter Label="Chap:SpecificMethods"> <Heading>Specific Methods</Heading>
 
-This chapter describes methods of <Package>LOOPS</Package> that apply to specific classes of loops, mostly Bol and Moufang loops.
+This chapter describes methods of &LOOPS; that apply to specific classes of loops, mostly Bol and Moufang loops.
 
 <!-- Section:  Core Methods for Bol Loops -->
 
@@ -1782,7 +1782,7 @@ This chapter describes methods of <Package>LOOPS</Package> that apply to specifi
 
 <Section Label="Sec:MoufangModifications"> <Heading>Moufang Modifications</Heading>
 
-Dr&#225;pal <Cite Key="DrapalCD"/> described two prominent families of extensions of Moufang loops. It turns out that these extensions suffice to obtain all nonassociative Moufang loops of order at most 64 if one starts with so-called Chein loops. We call the two constructions <Emph>Moufang modifications</Emph><Index Subkey="Moufang">modification</Index>. The library of Moufang loops included in <Package>LOOPS</Package> is based on Moufang modifications. See <Cite Key="DrVo"/> for details.
+Dr&#225;pal <Cite Key="DrapalCD"/> described two prominent families of extensions of Moufang loops. It turns out that these extensions suffice to obtain all nonassociative Moufang loops of order at most 64 if one starts with so-called Chein loops. We call the two constructions <Emph>Moufang modifications</Emph><Index Subkey="Moufang">modification</Index>. The library of Moufang loops included in &LOOPS; is based on Moufang modifications. See <Cite Key="DrVo"/> for details.
 
 <ManSection>
 <Func Name="LoopByCyclicModification" Arg="Q, S, a, h"/>
@@ -1882,7 +1882,7 @@ gap> a:=AllLoopsWithMltGroup(g,3,0);; Size(a);
 
 <Chapter Label="Chap:LibrariesOfLoops"> <Heading>Libraries of Loops</Heading>
 
-Libraries of small loops form an integral part of <Package>LOOPS</Package>. The loops are stored in libraries up to isomorphism and, sometimes, up to isotopism.
+Libraries of small loops form an integral part of &LOOPS;. The loops are stored in libraries up to isomorphism and, sometimes, up to isotopism.
 
 <!-- Section:  A Typical Library -->
 
@@ -2003,7 +2003,7 @@ The library named <Emph>code</Emph> contains all nonassociative code loops of or
 
 <Section Label="Sec:SteinerLoops"> <Heading>Steiner Loops</Heading>
 
-Here is how the libary named <Emph>Steiner</Emph> is described within <Package>LOOPS</Package>:
+Here is how the libary named <Emph>Steiner</Emph> is described within &LOOPS;:
 
 <Example><![CDATA[
 gap> DisplayLibraryInfo( "Steiner" );
@@ -2034,7 +2034,7 @@ true
 
 The library named <Emph>RCC</Emph> contains all nonassocitive right conjugacy closed loops of order <M>n\le 27</M> up to isomorphism. The data for the library was generated by Katharina Artic <Cite Key="Artic"/> who can also provide additional data for all right conjugacy closed loops of order <M>n\le 31</M>.
 
-<P/>Let <M>Q</M> be a right conjugacy closed loop, <M>G</M> its right multiplication group and <M>T</M> its right section. Then <M>\langle T\rangle = G</M> is a transitive group, and <M>T</M> is a union of conjugacy classes of <M>G</M>. Every right conjugacy closed loop of order <M>n</M> can therefore be represented as a union of certain conjugacy classes of a transitive group of degree <M>n</M>. This is how right conjugacy closed loops of order less than <M>28</M> are represented in <Package>LOOPS</Package>.
+<P/>Let <M>Q</M> be a right conjugacy closed loop, <M>G</M> its right multiplication group and <M>T</M> its right section. Then <M>\langle T\rangle = G</M> is a transitive group, and <M>T</M> is a union of conjugacy classes of <M>G</M>. Every right conjugacy closed loop of order <M>n</M> can therefore be represented as a union of certain conjugacy classes of a transitive group of degree <M>n</M>. This is how right conjugacy closed loops of order less than <M>28</M> are represented in &LOOPS;.
 
 The following table summarizes the number of right conjugacy closed loops of a given order up to isomorphism:
 <Display>
@@ -2189,7 +2189,7 @@ gap> LibraryLoop( "itp small", 6, 14 );
 
 <Appendix Label="Apx:Files"> <Heading>Files</Heading>
 
-Below is a list of all relevant files forming the <Package>LOOPS</Package> package. Some technical files are not included. A typical user will not need to know any of this information. All paths are relative to the <File>pkg/loops</File> folder.
+Below is a list of all relevant files forming the &LOOPS; package. Some technical files are not included. A typical user will not need to know any of this information. All paths are relative to the <File>pkg/loops</File> folder.
 <Br/><Br/><File>README</File> (installation and usage instructions)
 <Br/><File>init.g</File> (declarations)
 <Br/><File>PackageInfo.g</File> (loading info for GAP 4.4)
@@ -2238,9 +2238,9 @@ Below is a list of all relevant files forming the <Package>LOOPS</Package> packa
 
 <Appendix Label="Apx:Filters"> <Heading>Filters</Heading>
 
-Many implications among properties of loops are built directly into <Package>LOOPS</Package>. A sizeable portion of these properties are of trivial character or are based on definitions (e.g., alternative loops <M>=</M> left alternative loops <M>+</M> right alternative loops). The remaining implications are theorems.
+Many implications among properties of loops are built directly into &LOOPS;. A sizeable portion of these properties are of trivial character or are based on definitions (e.g., alternative loops <M>=</M> left alternative loops <M>+</M> right alternative loops). The remaining implications are theorems.
 
-<P/>All filters of <Package>LOOPS</Package> are summarized below, using the <Package>GAP</Package> convention that the property on the left is implied by the property (properties) on the right.
+<P/>All filters of &LOOPS; are summarized below, using the <Package>GAP</Package> convention that the property on the left is implied by the property (properties) on the right.
 <Br/><Br/>
 <Code>( IsExtraLoop, IsAssociative and IsLoop )</Code>
 <Br/><Code>( IsExtraLoop, IsCodeLoop )</Code>
