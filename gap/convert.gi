@@ -2,7 +2,6 @@
 ##
 #W  convert.gi      Conversions, encoding and decoding [loops]
 ##  
-#H  @(#)$Id: convert.gi, v 3.0.0 2015/06/02 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

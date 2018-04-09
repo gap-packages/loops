@@ -2,7 +2,6 @@
 ##
 #W  examples.gd           Examples [loops]
 ##  
-#H  @(#)$Id: examples.gd, v 3.4.0 2015/09/23 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

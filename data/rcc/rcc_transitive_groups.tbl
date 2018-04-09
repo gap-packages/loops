@@ -3,7 +3,6 @@
 #W  rcc_transitive_groups.tbl       Transitive groups for small RCC loops
 ##                                  K. Artic / G. P. Nagy / P. Vojtechovsky
 ##  
-#H  @(#)$Id: rcc_transitive_groups.tbl, v 2.2.1 2015/05/27 gap Exp $
 ##  
 #Y  Copyright (C)  2015,  K. Artic (RWTH Aachen, Germany)
 #Y                        G. P. Nagy (University of Szeged, Hungary),  

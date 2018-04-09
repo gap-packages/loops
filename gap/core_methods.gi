@@ -2,7 +2,6 @@
 ##
 #W  core_methods.gi Most common structural methods [loops]
 ##
-#H  @(#)$Id: core_methods.gi, v 3.3.0 2016/09/21 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)

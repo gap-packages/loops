@@ -2,7 +2,6 @@
 ##
 #W  quasigroups.gd  Representing, creating and displaying quasigroups [loops]
 ##
-#H  @(#)$Id: quasigroups.gd, v 3.4.0 2017/10/17 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)

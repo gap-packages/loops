@@ -2,7 +2,6 @@
 ##
 #W  nilpot.tst   Testing nilpotency              G. P. Nagy / P. Vojtechovsky
 ##
-#H  @(#)$Id: nilpot.tst, v 3.2.0 2015/11/22 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)

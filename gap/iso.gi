@@ -2,7 +2,6 @@
 ##
 #W  iso.gi  Isomorphisms and isotopisms [loops]
 ##  
-#H  @(#)$Id: iso.gi, v 3.4.0 2017/08/24 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

@@ -2,7 +2,6 @@
 ##
 #W  memory.gi                                       Memory management [loops]
 ##  
-#H  @(#)$Id: memory.gi, v 3.4.0 2016/11/4 gap Exp $
 ##  
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),  
 #Y                        P. Vojtechovsky (University of Denver, USA)

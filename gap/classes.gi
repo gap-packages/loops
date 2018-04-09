@@ -2,7 +2,6 @@
 ##
 #W  classes.gi  Testing properties/varieties [loops]
 ##
-#H  @(#)$Id: classes.gi, v 3.4.0 2017/10/26 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)

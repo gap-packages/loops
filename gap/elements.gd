@@ -2,7 +2,6 @@
 ##
 #W  elements.gd  Elements and basic arithmetic operations [loops]
 ##
-#H  @(#)$Id: quasigroups.gd, v 2.0.0 2008/01/21 gap Exp $
 ##
 #Y  Copyright (C)  2004,  G. P. Nagy (University of Szeged, Hungary),
 #Y                        P. Vojtechovsky (University of Denver, USA)
