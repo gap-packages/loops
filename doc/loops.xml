@@ -43,7 +43,7 @@ both html and pdf:
 
 <Body>
 
-<!-- CHAPTER Introduction +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER Introduction -->
 
 <Chapter Label="Chap:Introduction"> <Heading>Introduction</Heading>
 
@@ -54,7 +54,7 @@ both html and pdf:
         </List>
 <Package>LOOPS</Package> has been accepted as an official package of &GAP; in May 2015.
 
-<!-- Section: License ------------------------------------------------------------------------------------ -->
+<!-- Section: License -->
 
 <Section Label="Sec:License"> <Heading>License</Heading>
 
@@ -62,7 +62,7 @@ both html and pdf:
 
 </Section>
 
-<!-- Section: Installation -------------------------------------------------------------------------------- -->
+<!-- Section: Installation -->
 
 <Section Label="Sec:Installation"> <Heading>Installation</Heading>
 
@@ -83,7 +83,7 @@ quit &GAP; and restart it.
 
 </Section>
 
-<!-- Section: Documentation ----------------------------------------------------------------------------- -->
+<!-- Section: Documentation -->
 
 <Section Label="Sec:Documentation"> <Heading>Documentation</Heading>
 
@@ -97,7 +97,7 @@ The documentation has been prepared with the &GAPDoc; package and is therefore a
 
 </Section>
 
-<!-- Section: Test Files ---------------------------------------------------------------------------------- -->
+<!-- Section: Test Files -->
 
 <Section Label="Sec:TestFiles"> <Heading>Test Files</Heading>
 
@@ -105,7 +105,7 @@ Test files conforming to &GAP; standards are provided for <Package>LOOPS</Packag
 
 </Section>
 
-<!-- Section: Memory Management ----------------------------------------------------------------------- -->
+<!-- Section: Memory Management -->
 
 <Section Label="Sec:MemoryManagement"> <Heading>Memory Management</Heading>
 
@@ -113,7 +113,7 @@ Some libraries of loops are loaded only upon explicit demand and can occupy a lo
 
 </Section>
 
-<!-- Section: Feedback ---------------------------------------------------------------------------------- -->
+<!-- Section: Feedback -->
 
 <Section Label="Sec:Feedback"> <Heading>Feedback</Heading>
 
@@ -121,7 +121,7 @@ We welcome all comments and suggestions on <Package>LOOPS</Package>, especially 
 
 </Section>
 
-<!-- Section: Acknowledgment --------------------------------------------------------------------------- -->
+<!-- Section: Acknowledgment -->
 
 <Section Label="Sec:Acknowledgment"> <Heading>Acknowledgment</Heading>
 
@@ -135,13 +135,13 @@ We thank the following people for sending us remarks and comments, and for sugge
 
 </Chapter>
 
-<!-- CHAPTER Mathematical Background +++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER Mathematical Background -->
 
 <Chapter Label="Chap:MathematicalBackground"> <Heading>Mathematical Background</Heading>
 
 We assume that you are familiar with the theory of quasigroups and loops, for instance with the textbook of Bruck <Cite Key="Br"/> or Pflugfelder <Cite Key="Pf"/>. Nevertheless, we did include definitions and results in this manual in order to unify terminology and improve legibility of the text. Some general concepts of quasigroups and loops can be found in this chapter. More special concepts are defined throughout the text as needed.
 
-<!-- Section: Quasigroups and loops ---------------------------------------------------------------------- -->
+<!-- Section: Quasigroups and loops -->
 
 <Section Label="Sec:QuasigroupsAndLoops"> <Heading>Quasigroups and Loops</Heading>
 
@@ -159,7 +159,7 @@ A set with one binary operation (denoted <M>\cdot</M> here) is called <Index>gro
 
 </Section>
 
-<!-- Section: Translations ------------------------------------------------------------------------------- -->
+<!-- Section: Translations -->
 
 <Section Label="Sec:Translations"> <Heading>Translations</Heading>
 
@@ -175,7 +175,7 @@ Given an element <M>x</M> of a quasigroup <M>Q</M>, we can associative two permu
 
 </Section>
 
-<!-- Section:  Subquasigroups and subloops -------------------------------------------------------------- -->
+<!-- Section:  Subquasigroups and subloops -->
 
 <Section Label="Sec:SubquasigroupsAndSubloops"> <Heading>Subquasigroups and Subloops</Heading>
 
@@ -189,7 +189,7 @@ A nonempty subset <M>S</M> of a quasigroup <M>Q</M> is a <Index>subquasigroup</I
 
 </Section>
 
-<!-- Section:  Nilpotence and solvability ------------------------------------------------------------------ -->
+<!-- Section:  Nilpotence and solvability -->
 
 <Section Label="Sec:NilpotenceAndSolvability"> <Heading>Nilpotence and Solvability</Heading>
 
@@ -199,7 +199,7 @@ For a loop <M>Q</M> define <M>Z_0(Q) = 1</M> and let <M>Z_{i+1}(Q)</M> be the pr
 
 </Section>
 
-<!-- Section:  Commutators and Associators -------------------------------------------------------------- -->
+<!-- Section:  Commutators and Associators -->
 
 <Section Label="Sec:AssociatorsAndCommutators"> <Heading>Associators and Commutators</Heading>
 
@@ -211,7 +211,7 @@ Let <M>Q</M> be a quasigroup and let <M>x</M>, <M>y</M>, <M>z</M> be elements of
 
 </Section>
 
-<!-- Section:  Homomorphisms and Homotopisms ---------------------------------------------------------- -->
+<!-- Section:  Homomorphisms and Homotopisms -->
 
 <Section Label="Sec:HomomorphismsAndHomotopisms"> <Heading>Homomorphism and Homotopisms</Heading>
 
@@ -230,7 +230,7 @@ Let <M>(K,\cdot)</M> be a quasigroup, and let <M>f</M>, <M>g</M> be elements of 
 
 </Chapter>
 
-<!-- CHAPTER: How the Package Works ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: How the Package Works -->
 
 <Chapter Label="Chap:HowThePackageWorks"> <Heading>How the Package Works</Heading>
 
@@ -242,7 +242,7 @@ The package consists of three complementary components:
 </List>
 Although we do not explain the algorithms in detail here, we describe the general philosophy so that users can anticipate the capabilities and behavior of <Package>LOOPS</Package>.
 
-<!-- Section:  Representing quasigroups ------------------------------------------------------------------ -->
+<!-- Section:  Representing quasigroups -->
 
 <Section Label="Sec:RepresentingQuasigroups"> <Heading>Representing Quasigroups</Heading>
 
@@ -269,7 +269,7 @@ DeclareCategory( "IsLoop", IsQuasigroup and
 
 </Section>
 
-<!-- Section:  Conversions between magmas, quasigroups, loops and groups -------------------------------- -->
+<!-- Section:  Conversions between magmas, quasigroups, loops and groups -->
 
 <Section Label="Sec:ConversionsEtc"> <Heading>Conversions between magmas, quasigroups, loops and groups</Heading>
 
@@ -286,7 +286,7 @@ Details of all conversions in <Package>LOOPS</Package> can be found in Section <
 
 </Section>
 
-<!-- Section:  Calculating with Quasigroups --------------------------------------------------------------- -->
+<!-- Section:  Calculating with Quasigroups -->
 
 <Section Label="Sec:CalculationWithQuasigroups"> <Heading>Calculating with Quasigroups</Heading>
 
@@ -309,7 +309,7 @@ group-theoretical once they are expressed in terms of translations. A loop is <I
 
 </Section>
 
-<!-- Section:  Naming, Viewing and Printing Quasigroups and their Elements --------------------------------- -->
+<!-- Section:  Naming, Viewing and Printing Quasigroups and their Elements -->
 
 <Section Label="Sec:NamingEtc"> <Heading>Naming, Viewing and Printing Quasigroups and their Elements</Heading>
 
@@ -351,13 +351,13 @@ gap> SetLoopElmName( L, "loop_element" );; Elements( L );
 
 </Chapter>
 
-<!-- CHAPTER: Creating Quasigroups and Loops ++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: Creating Quasigroups and Loops -->
 
 <Chapter Label="Chap:CreatingQuasigroupsAndLoops"> <Heading>Creating Quasigroups and Loops</Heading>
 
 In this chapter we describe several ways in which quasigroups and loops can be created in <Package>LOOPS</Package>.
 
-<!-- Section:  About Cayley Tables ----------------------------------------------------------------------- -->
+<!-- Section:  About Cayley Tables -->
 
 <Section Label="Sec:AboutCayleyTables"> <Heading>About Cayley Tables</Heading>
 
@@ -371,7 +371,7 @@ Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <
 
 </Section>
 
-<!-- Section:  Testing Cayley Tables --------------------------------------------------------------------- -->
+<!-- Section:  Testing Cayley Tables -->
 
 <Section Label="Sec:TestingCayleyTables"> <Heading>Testing Cayley Tables</Heading>
 
@@ -393,7 +393,7 @@ Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <
 
 </Section>
 
-<!-- Section:  Canonical and Normalized Cayley Tables ---------------------------------------------------- -->
+<!-- Section:  Canonical and Normalized Cayley Tables -->
 
 <Section Label="Sec:CanonicalAndNormalizedCayleyTables"> <Heading>Canonical and Normalized Cayley Tables</Heading>
 
@@ -417,7 +417,7 @@ Let <M>X=\{x_1,\dots,x_n\}</M> be a set and <M>\cdot</M> a binary operation on <
 
 </Section>
 
-<!-- Section:  Creating Quasigroups and Loops From Cayley Tables ----------------------------------------- -->
+<!-- Section:  Creating Quasigroups and Loops From Cayley Tables -->
 
 <Section Label="Sec:CreatingQuasigroupsAndLoopsFromCayleyTables"> <Heading>Creating Quasigroups and Loops From Cayley Tables</Heading>
 
@@ -443,7 +443,7 @@ gap> [ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];
 
 </Section>
 
-<!-- Section:  Creating Quasigroups and Loops from a File ------------------------------------------------- -->
+<!-- Section:  Creating Quasigroups and Loops from a File -->
 
 <Section Label="Sec:CreatingQuasigroupsAndLoopsFromAFile"> <Heading>Creating Quasigroups and Loops from a File</Heading>
 
@@ -521,7 +521,7 @@ Typing a large multiplication table manually is tedious and error-prone. We have
 
 </Section>
 
-<!-- Section:  Creating Quasigroups and Loops From Sections ---------------------------------------------- -->
+<!-- Section:  Creating Quasigroups and Loops From Sections -->
 
 <Section Label="Sec:CreatingQuasigroupsAndLoopsFromSections"> <Heading>Creating Quasigroups and Loops From Sections</Heading>
 
@@ -566,7 +566,7 @@ gap> CayleyTable( LoopByLeftSection( ls ) );
 
 </Section>
 
-<!-- Section:  Creating Quasigroups and Loops from Folders ------------------------------------------------ -->
+<!-- Section:  Creating Quasigroups and Loops from Folders -->
 
 <Section Label="Sec:CreatingQuasigroupsAndLoopsFromFolders"> <Heading>Creating Quasigroups and Loops From Folders</Heading>
 
@@ -596,7 +596,7 @@ gap> LoopByRightFolder( G, H, T );
 
 </Section>
 
-<!-- Section:  Creating Quasigroups and Loops by Nuclear Extensions  -------------------------------------- -->
+<!-- Section:  Creating Quasigroups and Loops by Nuclear Extensions  -->
 
 <Section Label="Sec:CreatingQuasigroupsAndLoopsByNuclearExtensions"> <Heading>Creating Quasigroups and Loops By Nuclear Extensions</Heading>
 
@@ -638,7 +638,7 @@ false
 
 </Section>
 
-<!-- Section:  Random Quasigroups and Loops ------------------------------------------------------------ -->
+<!-- Section:  Random Quasigroups and Loops -->
 
 <Section Label="Sec:RandomQuasigroupsAndLoops"> <Heading>Random Quasigroups and Loops</Heading>
 
@@ -675,7 +675,7 @@ An algorithm is said to select a latin square of order <M>n</M> <Emph>at random<
 
 </Section>
 
-<!-- Section:  Conversions ------------------------------------------------------------------------------- -->
+<!-- Section:  Conversions -->
 
 <Section Label="Sec:Conversions"> <Heading>Conversions</Heading>
 
@@ -715,7 +715,7 @@ An algorithm is said to select a latin square of order <M>n</M> <Emph>at random<
 
 </Section>
 
-<!-- Section:  Products of Loops ------------------------------------------------------------------------- -->
+<!-- Section:  Products of Loops -->
 
 <Section Label="Sec:ProductsOfLoops"> <Heading>Products of Quasigroups and Loops</Heading>
 
@@ -728,7 +728,7 @@ An algorithm is said to select a latin square of order <M>n</M> <Emph>at random<
 
 </Section>
 
-<!-- Section:  Opposite Quasigroups and Loops ----------------------------------------------------------- -->
+<!-- Section:  Opposite Quasigroups and Loops -->
 
 <Section Label="Sec:OppositeQuasigroupsAndLoops"> <Heading>Opposite Quasigroups and Loops</Heading>
 
@@ -748,13 +748,13 @@ When <M>Q</M> is a quasigroup with multiplication <M>\cdot</M>, the <Index>oppos
 
 </Chapter>
 
-<!-- CHAPTER: Basic Methods and Attributes ++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: Basic Methods and Attributes -->
 
 <Chapter Label="Chap:BasicMethodsAndAttributes"> <Heading>Basic Methods And Attributes</Heading>
 
 In this chapter we describe the basic core methods and attributes of the <Package>LOOPS</Package> package.
 
-<!-- Section:  Basic Attributes --------------------------------------------------------------------------- -->
+<!-- Section:  Basic Attributes -->
 
 <Section Label="Sec:BasicAttributes"> <Heading>Basic Attributes</Heading>
 
@@ -793,7 +793,7 @@ with the standard function for magmas <Code>MultiplicativeNeutralElement(<Arg>Q<
 
 </Section>
 
-<!-- Section:  Basic Arithmetic Operations ---------------------------------------------------------------- -->
+<!-- Section:  Basic Arithmetic Operations -->
 
 <Section Label="Sec:BasicArithemticOperations"> <Heading>Basic Arithmetic Operations</Heading>
 
@@ -827,7 +827,7 @@ Each quasigroup element in &GAP; knows to which quasigroup it belongs. It is the
 
 </Section>
 
-<!-- Section:  Powers and Inverses ----------------------------------------------------------------------- -->
+<!-- Section:  Powers and Inverses -->
 
 <Section Label="Sec:PowersAndInverses"> <Heading>Powers and Inverses</Heading>
 
@@ -859,7 +859,7 @@ gap> [ LeftInverse( elms[3] ), RightInverse( elms[3] ), Inverse( elms[3] ) ];
 
 </Section>
 
-<!-- Section:  Associators and Commutators -------------------------------------------------------------- -->
+<!-- Section:  Associators and Commutators -->
 
 <Section Label="Sec:AssociatorsAndCommutators2"> <Heading>Associators and Commutators</Heading>
 
@@ -877,7 +877,7 @@ See Section <Ref Sect="Sec:AssociatorsAndCommutators"/> for definitions of assoc
 
 </Section>
 
-<!-- Section:  Generators -------------------------------------------------------------------------------- -->
+<!-- Section:  Generators -->
 
 <Section Label="Sec:Generators"> <Heading>Generators</Heading>
 
@@ -905,13 +905,13 @@ See Section <Ref Sect="Sec:AssociatorsAndCommutators"/> for definitions of assoc
 
 </Chapter>
 
-<!-- CHAPTER: Methods Based on Permutation Groups +++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: Methods Based on Permutation Groups -->
 
 <Chapter Label="Chap:MethodsBasedOnPermutationGroups"> <Heading>Methods Based on Permutation Groups</Heading>
 
 Most calculations in the <Package>LOOPS</Package> package are delegated to groups, taking advantage of the various permutations and permutation groups associated with quasigroups. This chapter explains in detail how the permutations associated with a quasigroup are calculated, and it also describes some of the core methods of <Package>LOOPS</Package> based on permutations. Additional core methods can be found in Chapter <Ref Chap="Chap:TestingPropertiesOfQuasigroupsAndLoops"/>.
 
-<!-- Section:  Parent of a Quasigroup -------------------------------------------------------------------- -->
+<!-- Section:  Parent of a Quasigroup -->
 
 <Section Label="Sec:ParentOfAQuasigroup"> <Heading>Parent of a Quasigroup</Heading>
 
@@ -947,7 +947,7 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 
 </Section>
 
-<!-- Section:  Subquasigroups and Subloops -------------------------------------------------------------- -->
+<!-- Section:  Subquasigroups and Subloops -->
 
 <Section Label="Sec:SubquasigroupsAndSubloops2"> <Heading>Subquasigroups and Subloops</Heading>
 
@@ -1003,7 +1003,7 @@ Let <M>Q</M> be a quasigroup and <M>S</M> a subquasigroup of <M>Q</M>. Since the
 
 </Section>
 
-<!-- Section:  Translations and Sections ------------------------------------------------------------------ -->
+<!-- Section:  Translations and Sections -->
 
 <Section Label="Sec:TranslationsAndSections"> <Heading>Translations and Sections</Heading>
 
@@ -1053,7 +1053,7 @@ gap> LeftSection( L );
 
 </Section>
 
-<!-- Section:  Multiplication Groups ----------------------------------------------------------------------- -->
+<!-- Section:  Multiplication Groups -->
 
 <Section Label="Sec:MultiplicationGroups"> <Heading>Multiplication Groups</Heading>
 
@@ -1078,7 +1078,7 @@ gap> LeftSection( L );
 
 </Section>
 
-<!-- Section:  Inner Mapping Groups ---------------------------------------------------------------------- -->
+<!-- Section:  Inner Mapping Groups -->
 
 <Section Label="Sec:InnerMappingGroups"> <Heading>Inner Mapping Groups</Heading>
 
@@ -1124,7 +1124,7 @@ gap> Size(Inn);
 
 </Section>
 
-<!-- Section:  Nuclei, Commutant, Center, and Associator Subloop ----------------------------------------- -->
+<!-- Section:  Nuclei, Commutant, Center, and Associator Subloop -->
 
 <Section Label="Sec:NucleiEtal"> <Heading>Nuclei, Commutant, Center, and Associator Subloop</Heading>
 
@@ -1170,7 +1170,7 @@ See Section <Ref Sect="Sec:SubquasigroupsAndSubloops"/> for the relevant definit
 
 </Section>
 
-<!-- Section:  Normal Subloops and Simple Loops ---------------------------------------------------------- -->
+<!-- Section:  Normal Subloops and Simple Loops -->
 
 <Section Label="Sec:NormalSubloopsAndSimpleLoops"> <Heading>Normal Subloops and Simple Loops</Heading>
 
@@ -1194,7 +1194,7 @@ See Section <Ref Sect="Sec:SubquasigroupsAndSubloops"/> for the relevant definit
 
 </Section>
 
-<!-- Section:  Factor Loops ------------------------------------------------------------------------------ -->
+<!-- Section:  Factor Loops -->
 
 <Section Label="Sec:FactorLoops"> <Heading>Factor Loops</Heading>
 
@@ -1222,7 +1222,7 @@ MappingByFunction( &lt;loop of order 12>, &lt;loop of order 4>,
 
 </Section>
 
-<!-- Section:  Nilpotency and Central Series -------------------------------------------------------------- -->
+<!-- Section:  Nilpotency and Central Series -->
 
 <Section Label="Sec:NilpotencyAndCentralSeries"> <Heading>Nilpotency and Central Series</Heading>
 
@@ -1257,7 +1257,7 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for the relevant definiti
 
 </Section>
 
-<!-- Section:  Solvability, Derived Series and Frattini Subloop ---------------------------------------------- -->
+<!-- Section:  Solvability, Derived Series and Frattini Subloop -->
 
 <Section Label="Sec:SolvabilityEtc"> <Heading>Solvability, Derived Series and Frattini Subloop</Heading>
 
@@ -1292,7 +1292,7 @@ See Section <Ref Sect="Sec:NilpotenceAndSolvability"/> for definitions of solvab
 </Section>
 
 
-<!-- Section:  Isomorphisms and Automorphisms ----------------------------------------------------------- -->
+<!-- Section:  Isomorphisms and Automorphisms -->
 
 <Section Label="Sec:IsomorphismsAndAutomorphisms"> <Heading>Isomorphisms and Automorphisms</Heading>
 
@@ -1364,7 +1364,7 @@ have identical discriminators, they may or may not be isomorphic.
 
 </Section>
 
-<!-- Section:  Isotopisms  ------------------------------------------------------------------------------- -->
+<!-- Section:  Isotopisms  -->
 
 <Section Label="Sec:Isotopism"> <Heading>Isotopisms</Heading>
 
@@ -1384,7 +1384,7 @@ At the moment, <Package>LOOPS</Package> contains only slow methods for testing i
 
 </Chapter>
 
-<!-- CHAPTER: Testing Properties of Quasigroups and Loops +++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: Testing Properties of Quasigroups and Loops -->
 
 <Chapter Label="Chap:TestingPropertiesOfQuasigroupsAndLoops"> <Heading>Testing Properties of Quasigroups and Loops</Heading>
 
@@ -1394,7 +1394,7 @@ Although loops are quasigroups, it is often the case in the literature that a pr
 
 <P/>On the other hand, some properties coincide for quasigroups and loops and we therefore do not include <Code>Loop</Code>, <Code>Quasigroup</Code> as part of the name of the property, e.g., <Code>IsCommutative</Code>.
 
-<!-- Section:  Associativity, Commutativity and Generalizations -------------------------------------------- -->
+<!-- Section:  Associativity, Commutativity and Generalizations -->
 
 <Section Label="Sec:AssociativityCommutativityAndGeneralizations"> <Heading>Associativity, Commutativity and Generalizations</Heading>
 
@@ -1422,7 +1422,7 @@ Although loops are quasigroups, it is often the case in the literature that a pr
 
 </Section>
 
-<!-- Section:  Inverse Properties ------------------------------------------------------------------------- -->
+<!-- Section:  Inverse Properties -->
 
 <Section Label="Sec:InverseProperties"> <Heading>Inverse Propeties</Heading>
 
@@ -1465,7 +1465,7 @@ For an element <M>x</M> of a loop <M>Q</M>, the <Emph>left inverse</Emph><Index 
 
 </Section>
 
-<!-- Section:  Some Properties of Quasigroups ------------------------------------------------------------ -->
+<!-- Section:  Some Properties of Quasigroups -->
 
 <Section Label="Sec:SomePropertiesOfQuasigroups"> <Heading>Some Properties of Quasigroups</Heading>
 
@@ -1519,7 +1519,7 @@ For an element <M>x</M> of a loop <M>Q</M>, the <Emph>left inverse</Emph><Index 
 
 </Section>
 
-<!-- Section:  Loops of Bol-Moufang Type ---------------------------------------------------------------- -->
+<!-- Section:  Loops of Bol-Moufang Type -->
 
 <Section Label="Sec:LoopsOfBolMoufangType"> <Heading>Loops of Bol Moufang Type</Heading>
 
@@ -1646,7 +1646,7 @@ gap> [ IsAssociative( L ), L ];
 
 </Section>
 
-<!-- Section:  Power Alternative Loops ------------------------------------------------------------------- -->
+<!-- Section:  Power Alternative Loops -->
 
 <Section Label="Sec:PowerAlternativeLoops"> <Heading>Power Alternative Loops</Heading>
 
@@ -1664,7 +1664,7 @@ A loop is <Emph>left power alternative</Emph><Index Subkey="left">power alternat
 
 </Section>
 
-<!-- Section:  Conjugacy Closed Loops and Related Properties --------------------------------------------- -->
+<!-- Section:  Conjugacy Closed Loops and Related Properties -->
 
 <Section Label="Sec:ConjugacyClosedEtc"> <Heading>Conjugacy Closed Loops and Related Properties</Heading>
 
@@ -1698,7 +1698,7 @@ A loop <M>Q</M> is <Emph>left conjugacy closed</Emph><Index Subkey="left">conjug
 
 </Section>
 
-<!-- Section:  Automorphic Loops ------------------------------------------------------------------------ -->
+<!-- Section:  Automorphic Loops -->
 
 <Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
 
@@ -1751,7 +1751,7 @@ See the built-in filters and the survey <Cite Key="VoQRS"/> for additional prope
 
 </Section>
 
-<!-- Section:  Additional Varieties of Loops --------------------------------------------------------------- -->
+<!-- Section:  Additional Varieties of Loops -->
 
 <Section Label="Sec:AdditionalVarietiesOfLoops"> <Heading>Additonal Varieties of Loops</Heading>
 
@@ -1787,13 +1787,13 @@ See the built-in filters and the survey <Cite Key="VoQRS"/> for additional prope
 
 </Chapter>
 
-<!-- CHAPTER: Specific Methods +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: Specific Methods -->
 
 <Chapter Label="Chap:SpecificMethods"> <Heading>Specific Methods</Heading>
 
 This chapter describes methods of <Package>LOOPS</Package> that apply to specific classes of loops, mostly Bol and Moufang loops.
 
-<!-- Section:  Core Methods for Bol Loops ---------------------------------------------------------------- -->
+<!-- Section:  Core Methods for Bol Loops -->
 
 <Section Label="Sec:CoreMethodsForBolLoops"> <Heading>Core Methods for Bol Loops</Heading>
 
@@ -1819,7 +1819,7 @@ This chapter describes methods of <Package>LOOPS</Package> that apply to specifi
 
 </Section>
 
-<!-- Section:  Moufang Modifications --------------------------------------------------------------------- -->
+<!-- Section:  Moufang Modifications -->
 
 <Section Label="Sec:MoufangModifications"> <Heading>Moufang Modifications</Heading>
 
@@ -1846,7 +1846,7 @@ defined as in the cyclic case. Let <M>\beta</M>, <M>\gamma</M> be two involution
 
 </Section>
 
-<!-- Section:  Triality for Moufang Loops ------------------------------------------------------------------ -->
+<!-- Section:  Triality for Moufang Loops -->
 
 <Section Label="Sec:TrialityForMoufangLoops"> <Heading>Triality for Moufang Loops</Heading>
 
@@ -1866,7 +1866,7 @@ Let <M>G</M> be a group and <M>\sigma</M>, <M>\rho</M> be automorphisms of <M>G<
 
 </Section>
 
-<!-- Section:  Realizing Groups and Multiplication Groups of Loops ------------------------------------------ -->
+<!-- Section:  Realizing Groups and Multiplication Groups of Loops -->
 
 <Section Label="Sec:RealizingGroupsEtc"> <Heading>Realizing Groups as Multiplication Groups of Loops</Heading>
 
@@ -1919,13 +1919,13 @@ gap> a:=AllLoopsWithMltGroup(g,3,0);; Size(a);
 
 </Chapter>
 
-<!-- CHAPTER: Libraries of Loops +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- CHAPTER: Libraries of Loops -->
 
 <Chapter Label="Chap:LibrariesOfLoops"> <Heading>Libraries of Loops</Heading>
 
 Libraries of small loops form an integral part of <Package>LOOPS</Package>. The loops are stored in libraries up to isomorphism and, sometimes, up to isotopism.
 
-<!-- Section:  A Typical Library -------------------------------------------------------------------------- -->
+<!-- Section:  A Typical Library -->
 
 <Section Label="Sec:ATypicalLibrary"> <Heading>A Typical Library</Heading>
 
@@ -1960,7 +1960,7 @@ The format of <Code>LOOPS_my_library_data[3]</Code> depends heavily on the parti
 
 </Section>
 
-<!-- Section:  Left Bol Loops and Right Bol Loops ---------------------------------------------------------- -->
+<!-- Section:  Left Bol Loops and Right Bol Loops -->
 
 <Section Label="Sec:LeftBolLoopsEtc"> <Heading>Left Bol Loops and Right Bol Loops</Heading>
 
@@ -1982,7 +1982,7 @@ The library named <Emph>left Bol</Emph> contains all nonassociative left Bol loo
 
 </Section>
 
-<!-- Section:  Left Bruck Loops and Right Bruck Loops --------------------------------------------------- -->
+<!-- Section:  Left Bruck Loops and Right Bruck Loops -->
 
 <Section Label="Sec:BruckLoops"> <Heading>Left Bruck Loops and Right Bruck Loops</Heading>
 
@@ -2002,7 +2002,7 @@ The emmerging library named <Emph>left Bruck</Emph> contains all left Bruck loop
 
 </Section>
 
-<!-- Section:  Moufang Loops ---------------------------------------------------------------------------- -->
+<!-- Section:  Moufang Loops -->
 
 <Section Label="Sec:MoufangLoops"> <Heading>Moufang Loops</Heading>
 
@@ -2027,7 +2027,7 @@ The library named <Emph>Moufang</Emph> contains all nonassociative Moufang loops
 
 </Section>
 
-<!-- Section:  Code Loops ------------------------------------------------------------------------------- -->
+<!-- Section:  Code Loops -->
 
 <Section Label="Sec:CodeLoops"> <Heading>Code Loops</Heading>
 
@@ -2040,7 +2040,7 @@ The library named <Emph>code</Emph> contains all nonassociative code loops of or
 
 </Section>
 
-<!-- Section:  Steiner Loops ----------------------------------------------------------------------------- -->
+<!-- Section:  Steiner Loops -->
 
 <Section Label="Sec:SteinerLoops"> <Heading>Steiner Loops</Heading>
 
@@ -2069,7 +2069,7 @@ true
 
 </Section>
 
-<!-- Section:  Conjugacy Closed Loops ------------------------------------------------------------------- -->
+<!-- Section:  Conjugacy Closed Loops -->
 
 <Section Label="Sec:ConjugacyClosedLoops"> <Heading>Conjugacy Closed Loops</Heading>
 
@@ -2123,7 +2123,7 @@ The following table summarizes the number of right conjugacy closed loops of a g
 
 </Section>
 
-<!-- Section:  Small Loops ------------------------------------------------------------------------------- -->
+<!-- Section:  Small Loops -->
 
 <Section Label="Sec:SmallLoops"> <Heading>Small Loops</Heading>
 
@@ -2136,7 +2136,7 @@ The library named <Emph>small</Emph> contains all nonassociative loops of order 
 
 </Section>
 
-<!-- Section:  Paige Loops ------------------------------------------------------------------------------- -->
+<!-- Section:  Paige Loops -->
 
 <Section Label="Sec:PaigeLoops"> <Heading>Paige Loops</Heading>
 
@@ -2151,7 +2151,7 @@ The library named <Emph>small</Emph> contains all nonassociative loops of order 
 
 </Section>
 
-<!-- Section:  Nilpotent Loops ---------------------------------------------------------------------------- -->
+<!-- Section:  Nilpotent Loops -->
 
 <Section Label="Sec:NilpotentLoops"> <Heading>Nilpotent Loops</Heading>
 
@@ -2168,7 +2168,7 @@ are 2623755 nilpotent loops of order 12, and 123794003928541545927226368 nilpote
 
 </Section>
 
-<!-- Section:  Automorphic Loops ------------------------------------------------------------------------ -->
+<!-- Section:  Automorphic Loops -->
 
 <Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
 
@@ -2183,7 +2183,7 @@ The library named <Emph>automorphic</Emph> contains all nonassociative automorph
 
 </Section>
 
-<!-- Section:  Interesting Loops -------------------------------------------------------------------------- -->
+<!-- Section:  Interesting Loops -->
 
 <Section Label="Sec:InterestingLoops"> <Heading>Interesting Loops</Heading>
 
@@ -2196,7 +2196,7 @@ The library named <Emph>interesting</Emph> contains some loops that are illustra
 
 </Section>
 
-<!-- Section:  Libraries of Loops up to Isotopism ---------------------------------------------------------- -->
+<!-- Section:  Libraries of Loops up to Isotopism -->
 
 <Section Label="Sec:LibrariesOfLoopsUpToIsotopism"> <Heading>Libraries of Loops Up To Isotopism</Heading>
 
@@ -2226,7 +2226,7 @@ gap> LibraryLoop( "itp small", 6, 14 );
 
 </Body>
 
-<!-- APPENDIX: Files ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- APPENDIX: Files -->
 
 <Appendix Label="Apx:Files"> <Heading>Files</Heading>
 
@@ -2276,7 +2276,7 @@ Below is a list of all relevant files forming the <Package>LOOPS</Package> packa
 
 </Appendix>
 
-<!-- APPENDIX: Filters ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- APPENDIX: Filters -->
 
 <Appendix Label="Apx:Filters"> <Heading>Filters</Heading>
 
