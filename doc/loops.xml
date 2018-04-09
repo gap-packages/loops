@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+[<!ENTITY LOOPS "<Package>LOOPS</Package>">] >
 
 <Book Name="Loops">
-
-<!-- Read the file pkg/loops/etc/gapdoc.txt for instructions on how to produce the documentation. -->
 
 <!-- Typesetting rules for this document that produce acceptable outcome in
 both html and pdf:
@@ -23,21 +22,7 @@ both html and pdf:
 
 -->
 
-<TitlePage>
-        <Title>The <Package>LOOPS</Package> Package</Title>
-        <Version>Version 3.4.0</Version>
-        <Subtitle>Computing with quasigroups and loops in &GAP;</Subtitle>
-        <Author>G&#225;bor P. Nagy
-                <Email>nagyg@math.u-szeged.hu</Email>
-                <Address>Department of Mathematics, University of Szeged</Address>
-        </Author>
-        <Author>Petr Vojt&#283;chovsk&#253;
-                <Email>petr@math.du.edu</Email>
-                <Address>Department of Mathematics, University of Denver</Address>
-        </Author>
-        <Copyright>&copyright; 2017 G&#225;bor P. Nagy and Petr Vojt&#283;chovsk&#253;.
-        </Copyright>
-</TitlePage>
+<#Include SYSTEM "title.xml">
 
 <TableOfContents/>
 
@@ -53,14 +38,6 @@ both html and pdf:
                 <Item>extend &GAP; toward the realm of nonassociative structures.</Item>
         </List>
 <Package>LOOPS</Package> has been accepted as an official package of &GAP; in May 2015.
-
-<!-- Section: License -->
-
-<Section Label="Sec:License"> <Heading>License</Heading>
-
-<Package>LOOPS</Package> is free software. You can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
-
-</Section>
 
 <!-- Section: Installation -->
 
@@ -118,18 +95,6 @@ Some libraries of loops are loaded only upon explicit demand and can occupy a lo
 <Section Label="Sec:Feedback"> <Heading>Feedback</Heading>
 
 We welcome all comments and suggestions on <Package>LOOPS</Package>, especially those concerning the future development of the package. You can contact us by e-mail.
-
-</Section>
-
-<!-- Section: Acknowledgment -->
-
-<Section Label="Sec:Acknowledgment"> <Heading>Acknowledgment</Heading>
-
-We thank the following people for sending us remarks and comments, and for suggesting new functionality of the package: Muniru Asiru, Bjoern Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Graham Ellis, Steve Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov, Frank L&#252;beck, Jonathan D.H. Smith, David Stanovsk&#253; and Glen Whitney. 
-
-<P/>The library of Moufang loops of order 243 was generated from data provided by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy closed loops of order less than 28 was generated from data provided by Katharina Artic. The library of right Bruck loops of order 27, 81 was obtained jointly with Izabella Stuhl.
-
-<P/>G&#225;bor P. Nagy was supported by OTKA grants F042959 and T043758, and Petr Vojt&#283;chovsk&#253; was supported by the 2006 and 2016 University of Denver PROF grants and the Simons Foundation Collaboration Grant 210176.
 
 </Section>
 
