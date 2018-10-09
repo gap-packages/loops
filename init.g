@@ -20,6 +20,11 @@ ReadPackage( "loops", "gap/random.gd");         # random loops
 ReadPackage( "loops", "gap/mlt_search.gd");     # realizing groups as multiplication groups of loops
 
 #############################################################################
+##  METHODS FOR DUAL 3-NETS AND ISOSTROPHISMS
+##  -------------------------------------------------------------------------
+ReadPackage( "loops", "gap/dualnets.gd" );          # most common methods for Bol loops
+
+#############################################################################
 ##  METHODS FOR BOL AND MOUFANG LOOPS
 ##  -------------------------------------------------------------------------
 ReadPackage( "loops", "gap/bol_core_methods.gd");       # most common methods for Bol loops

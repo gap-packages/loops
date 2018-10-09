@@ -1,0 +1,220 @@
+<!-- CHAPTER Isotopisms and isostrophism +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- <Chapter Label="Chap:Isotopisms"> <Heading>Isotopisms and Isostrophism</Heading> -->
+
+<List>
+<Mark>Isotopism, isostrophism and conjugacy of quasigroups</Mark>
+<Item>
+<P/>Let <M>(Q,\cdot)</M> and <M>(R,\circ)</M> be quasigroups. An <B>isostrophism</B> from <M>Q</M> to <M>R</M> is a quadruple <M>(\sigma,\alpha_1,\alpha_2,\alpha_3)</M>, where <M>\alpha_1,\alpha_2,\alpha_3</M> are bijective maps from <M>Q</M> to <M>R</M> and <M>\sigma \in S_3</M> such that for all elements <M>x_1,x_2,x_3 \in Q</M> the following hold:
+<List>
+<Item><M>x_{1\sigma}\cdot x_{2\sigma}=x_{3\sigma}</M> if and only if <M>(x_1\alpha_1)\circ(x_2\alpha_2) = x_2\alpha_3</M>.</Item>
+</List>
+It is straightforward to see that being isostrophic is an equivalence relation. If <M>\sigma</M> is the identity then we speak of the <B>isotopism</B> <M>(\alpha_1,\alpha_2,\alpha_3)</M>. If the underlying sets <M>Q, R</M> are equal and <M>\alpha_1,\alpha_2,\alpha_3</M> are the identical maps than we say that the quasigroups <M>(Q,\cdot)</M> and <M>(Q,\circ)</M> are <M>\sigma</M><B>-conjugate</B>.
+</Item>
+<Mark>The group of autotopisms and autostrophisms</Mark>
+<Item>
+<P/>The isostrophisms and isotopisms of <M>(Q,\cdot)</M> onto itself are called <B>autostrophisms</B> and <B>autotopisms</B> of <M>Q</M>; they form the <B>autostrophism group</B> and the <B>autotopism group</B> of <M>Q</M>, respectively. Clearly, for any quasigroup, the autotopism group is a normal subgroup of the autostrophism group. 
+</Item>
+
+<Mark>3-net, dual 3-net and Latin square design</Mark>
+<Item>
+<P/>A <B>3-net</B> of order <M>n</M> is a finite <E>incidence structure</E> consisting of <E>points</E> and three pairwise disjoint classes of <E>lines,</E> each of size <M>n</M>, such that every point incident with two lines from distinct classes is incident with exactly one line from each of the three classes.
+
+<P/>A <B>Latin square design</B> is essentially a dual 3-net. More precesily, a Latin square design is a pair <M>(P,B)</M> where <M>P</M> is a set (points), <M>B</M> is a set of subsets of <M>P</M> (blocks) with the following properties:
+<Enum>
+<Item><M>P</M> is the disjoint union of three parts <M>\Lambda_1,\Lambda_2,\Lambda_3</M>.</Item>
+<Item>Every block <M>b\in B</M> contains exactly three points, meeting each of <M>\Lambda_1,\Lambda_2,\Lambda_3</M> exactly once.</Item>
+<Item>Any pair of points from different parts belong to exactly one block.</Item>
+</Enum>
+The <M>\Lambda_i</M>'s are called <E>parts</E> or <E>components</E> of the Latin square design. 
+</Item>
+<Mark>Equivalence of 3-nets, Latin square designs and quasigroups</Mark>
+<Item>
+<P/>For any quasigroup <M>(Q,\cdot)</M> one defines the associated 3-net with point set <M>P=Q \times Q</M> and line classes as set of subsets of <M>P</M>.
+<List>
+<Item><M>L_1 = \{\{(c,y) : y\in Q\} : c\in Q\}</M></Item>
+<Item><M>L_2 = \{\{(x,c) : x\in Q\} : c\in Q\}</M></Item>
+<Item><M>L_3 = \{\{(x,y) : x,y\in Q, x\cdot y=c\} : c\in Q\}</M></Item>
+</List>
+<P/>Notice that the elements of the line classes are labeled by elements of <M>Q</M> in a natural way: <M>X=c</M>, <M>Y=c</M>, <M>X\cdot Y=c</M>.
+<P/>In order to define the associated Latin square design of the quasigroup, one takes disjoint sets <M>\Lambda_1,\Lambda_2,\Lambda_3</M> of cardinality <M>|Q|</M> and labels the elements with elements of <M>Q</M>:
+<List>
+<Item><M>\Lambda_1=\{r_x : x\in Q\}</M></Item>
+<Item><M>\Lambda_2=\{c_x : x\in Q\}</M></Item>
+<Item><M>\Lambda_3=\{e_x : x\in Q\}</M></Item>
+</List>
+Then, <M>B</M> consists of the triples <M>\{r_x,c_y,e_{xy}\}</M> for <M>x,y\in Q</M>. 
+<P/>Conversely, let a Latin square design <M>(P=\{\Lambda_1,\Lambda_2,\Lambda_3\},B)</M> be given. The axioms imply that <M>|\Lambda_1|=|\Lambda_2|=|\Lambda_3|</M>. Take a set <M>Q</M> of the same cardinality and let <M>f_i:Q\to \Lambda_i (i=1,2,3)</M> be bijections. For any <M>x,y\in Q</M>, the points <M>xf_1, yf_2</M> are contained in a unique block <M>\{xf_1, yf_2, zf_3\}</M>. The operation <M>x\cdot y=z</M> is a well-defined quasigroup operation on <M>Q</M>. 
+<P/>In a similar (dual) manner, one obtaines the quasigroup which coordinatizes a given 3-net. 
+</Item>
+<Mark>Equivalence of collineations, design isomorphisms and isostrophisms</Mark>
+<Item>
+<P/>A collineation of a 3-net is a permutation of its points which preserves the lines; a collineation induces a permutation of the lines. An automorphism of a Latin square design is a permutation of its points which preserves the blocks; a design automorphism induces a permutation of the blocks. Collineations and design isomorphisms are linked by duality. In the sequel, we concentrate on the connection between design isomorphisms and isostrophisms.
+<P/>Let <M>(Q,\cdot)</M> and <M>(R,\circ)</M> be quasigroups and define the corresponding Latin square designs by the labelling maps <M>f_1,f_2,f_3</M> and <M>g_1,g_2,g_3</M>, respectively. Then, the blocks are 
+<List>
+<Item><M>B_Q=\{ \{ x_1f_1,x_2f_2,x_3f_3 \} : x_1 \cdot x_2 = x_3 \}</M></Item>
+<Item><M>B_R=\{ \{ y_1g_1,y_2g_2,y_3g_3 \} : y_1 \circ y_2 = y_3 \}</M></Item>
+</List>
+Let <M>(\sigma,\alpha_1,\alpha_2,\alpha_3)</M> be an isostrophism from <M>Q</M> to <M>R</M>. Define the map <M>\varphi</M> between the point sets of the designs by <M>x_{i\sigma}f_{i\sigma} \mapsto (x_i\alpha_i)g_i</M>. Then, <M>\varphi</M> maps blocks of <M>B_Q</M> to blocks of <M>B_R</M> by definition. 
+<P/>Conversely, assume that <M>\varphi</M> is a bijection of the point sets, inducing a bijection <M>B_Q\to B_R</M>. Two points lie in the same component <M>\Lambda_i</M> if and only if they are not contained in a common block. Hence, <M>\varphi</M> maps components to components. This means that there is a permutation <M>\sigma \in S_3</M> and there are bijections <M>\alpha_1,\alpha_2,\alpha_3: Q\to R</M> such that <M>\varphi</M> maps the point <M>x_{i\sigma}f_{i\sigma}</M> to <M>(x_i\alpha_i)g_i</M>. As <M>\varphi</M> preserves the blocks, <M>(\sigma,\alpha_1,\alpha_2,\alpha_3)</M> turns out to be an isostrophisms. 
+<P/>Finally, we remark that isotopisms correspond to design isomorphisms which preserve the ordering of the components. In particular, autotopisms correspond to component preserving designs automorphisms. 
+</Item>
+</List>
+
+<P/><B>Remarks.</B> For isostrophisms, we use the terminology of <URL>https://en.wikipedia.org/wiki/Quasigroup</URL>. In the literature, isostrophism is also called <E>paratopy</E> and conjugate quasigroups are called <E>parastrophes</E>. Latin square designs are a subclass of <E>transversal designs</E>.
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Section Label="Sec:IsoRep"> <Heading>Permutations Representation of Isotopisms and Isostrophisms</Heading>
+
+<P/>Let <M>(Q,\cdot)</M> be a quasigroup of order <M>n</M>. As a &GAP; object, the elements of <M>Q</M> are ordered, <M>Q=\{q_1,\ldots,q_n\}</M>. Hence, there are natural bijections 
+<List>
+<Item><M>f_1:Q\to \{1,\ldots,n\}</M></Item>
+<Item><M>f_2:Q\to \{n+1,\ldots,2n\}</M></Item>
+<Item><M>f_3:Q\to \{2n+1,\ldots,3n\}</M></Item>
+</List>
+Similarly, the associated Latin square design <M>(P,B)</M> has a natural labelling by setting <M>P=\{1,\ldots,3n\}</M> and 
+<List>
+<Item><M>B=B_Q=\{\{i,n+j,2n+k\} : q_i \cdot q_j = q_k \}</M>.</Item>
+</List>
+
+<P/>Let <M>(\sigma,\alpha_1,\alpha_2,\alpha_3)</M> be an isostrophism from <M>(Q,\cdot)</M> to <M>(R,\circ)</M>. We use the naturally labeled associated Latin square designs to obtain an well-defined induced design isomorphism <M>\alpha^*:(P,B_Q)\to (P,B_R)</M>. Then, <M>\alpha^* \in S_{3n}</M> is permutation, preserving the partition <M>\{\{1,\ldots,n\}, \{n+1,\ldots,2n\}, \{2n+1,\ldots,3n\}\}</M>. 
+
+<P/>In the sequel, we will represent isostrophisms of quasigroups of order <M>n</M> by permutations preserving the partition <M>\{\{1,\ldots,n\}, \{n+1,\ldots,2n\}, \{2n+1,\ldots,3n\}\}</M>. Isotopisms will be represented by permutations preserving the sets <M>\{1,\ldots,n\}</M>, <M>\{n+1,\ldots,2n\}</M>, <M>\{2n+1,\ldots,3n\}</M>.
+
+<ManSection><Heading>Tests for permutations</Heading>
+<Oper Name="IsIsotopismPerm" Arg="p, n"/>
+<Oper Name="IsIsostrophismPerm" Arg="p, n"/>
+<Returns>True if the permutation <A>p</A> preserves the sets <M>\{1,\ldots,n\}</M>, <M>\{n+1,\ldots,2n\}</M>, <M>\{2n+1,\ldots,3n\}</M>, or, the partition <M>\{\{1,\ldots,n\}, \{n+1,\ldots,2n\}, \{2n+1,\ldots,3n\}\}</M>, respectively.</Returns>
+</ManSection>
+
+<ManSection><Heading>Actions on a quasigroup</Heading>
+<Oper Name="OnQuasigroupsByIsomorphism" Arg="Q, p"/>
+<Oper Name="OnQuasigroupsByIsotopism" Arg="Q, p"/>
+<Oper Name="OnQuasigroupsByIsostrophism" Arg="Q, p"/>
+<Oper Name="OnQuasigroupsByConjugation" Arg="Q, p"/>
+<Returns>A new quasigroup <M>R</M> whose operation is defined such that <A>p</A> defines an apropriate mapping <M>Q\to R</M>. If <A>Q</A> has order <M>n</M>, then <A>p</A> acts on <M>\{1, \ldots,n\}</M> for an isomorphism, on <M>\{1, \ldots,3n\}</M> for an isotopism or isostrophism, and on <M>\{1,2,3\}</M> for a conjugation.</Returns>
+</ManSection>
+
+<ManSection><Heading>Computing isotopisms and isostrophisms</Heading>
+<Oper Name="IsotopismQuasigroups" Arg="Q, R"/>
+<Oper Name="IsostrophismQuasigroups" Arg="Q, R"/>
+<Returns>An isotopism or isostrophism form <A>Q</A> to <A>R</A> if such exists; otherwise it returns <C>fail</C>.</Returns>
+</ManSection>
+
+<ManSection><Heading>Quasigroups up to isotopisms and isostrophisms</Heading>
+<Oper Name="QuasigroupsUpToIsotopism" Arg="ls[, s]"/>
+<Oper Name="QuasigroupsUpToIsostrophism" Arg="ls[, s]"/>
+<Returns>A sublist of <A>ls</A> consisting of representatives of isotopism/isostrophism classes of quasigroups from <A>ls</A>, if no second argument is given, or if the second argument is the string <C>sublist</C>. If the second argument is the string <C>indices</C>, then the functions return the list of list of indices of the equivalence classes.
+</Returns>
+</ManSection>
+
+</Section>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Section Label="Sec:IsoGroups"> <Heading>Groups, Colorings and Canonical Labellings</Heading>
+
+<ManSection><Heading>Computing groups of isotopisms and isostrophisms</Heading>
+<Attr Name="AutotopismGroup" Arg="Q"/>
+<Attr Name="AutostrophismGroup" Arg="Q"/>
+<Returns>The group of all autotopisms or autostrophisms of the quasigroup <A>Q</A>.</Returns>
+</ManSection>
+
+<ManSection><Heading>Under the hood</Heading>
+<Attr Name="CanonicalIsotopeLabelling" Arg="Q"/>
+<Attr Name="CanonicalIsostropheLabelling" Arg="Q"/>
+<Attr Name="CanonicalIsotopeColoring" Arg="Q"/>
+<Attr Name="CanonicalIsostropheColoring" Arg="Q"/>
+<Filt Name="IsQuasigroupForNiceColoring" Arg="Q"/>
+<Description>
+We reduce the problem of isotopisms and isostrophisms to graph isomorphism problem by assigning a directed graph <M>\Gamma</M> to the quasigroup <A>Q</A>. In fact, <M>\Gamma</M> ist the point-line digraph of the Latin square design, corresponding to <A>Q</A>. The graph automorphisms and isomorphisms are computed by the &GAP; package <Package>Digraphs</Package>. The canonical labelling of the underlying digraph is stored as an attribute of the quasigroup, it can be used in a very effective way to compute isotopisms and isostrophisms between quasigroups. The computation can be speed up by using colorings of the vertices of <M>\Gamma</M>, which are invariant under the isotopism or isostrophism groups. 
+<P/>We use a trick which assigns the cycle structure of a permutation to each block of the Latin square design. This turns out to be very effective for random-like quasigroups. Of course, it has no impact if the isotopism group acts transitively on the blocks. 
+<P/>The computation of the nice coloring takes <M>c|Q|^3</M> steps, hence it takes quite long for large quasigroups. The nice coloring is always computed for quasigroups of order at most 50. For larger quasigroups, one can make &GAP; to compute the nice coloring by setting <Code>true</Code> the filter <C>IsQuasigroupForNiceColoring</C>.
+</Description>
+</ManSection>
+
+</Section>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Section Label="Sec:IsoColl"> <Heading>Nets, Latin Square Designs and Collineations</Heading>
+
+<ManSection><Heading>3-nets, Latin square designs</Heading>
+<Oper Name="3NetOfQuasigroup" Arg="Q"/>
+<Oper Name="LatinSquareDesignOfQuasigroup" Arg="Q"/>
+<Oper Name="Dual3NetOfQuasigroup" Arg="Q"/>
+<Returns>The blocks of the corresponding incidence structure. <C>LatinSquareDesignOfQuasigroup</C> and <C>Dual3NetOfQuasigroup</C> are synonyms.</Returns>
+</ManSection>
+
+<ManSection><Heading>Collineations</Heading>
+<Attr Name="Dual3NetCollineationGroup" Arg="Q"/>
+<Attr Name="3NetCollineationGroup_OnPoints" Arg="Q"/>
+<Attr Name="3NetCollineationGroup_OnLines" Arg="Q"/>
+<Attr Name="3NetCollineationGroup_OnDirections" Arg="Q"/>
+<Returns>The groups of permutations preserving the blocks of the corresponding incidence structure.</Returns>
+</ManSection>
+
+</Section>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Section Label="Sec:SmallLoopIdentification"> <Heading>Identification of Small Loops; Denes-Keedwell Identification</Heading>
+
+<ManSection>
+<Attr Name="SmallLoopIdentification" Arg="Q"/>
+<Returns>A pair <M>[n,k]</M> of positive integers such that <M>|Q|=n</M> and <M>k</M> uniquely identifies <M>Q</M> up to isomorphism. Implemented only for loops of order up to 6.</Returns>
+<Description>Notice that the id number <M>k</M> is in accordance with the library of small loops. However, here we allow associative loops as argument; they have the highest id.</Description>
+</ManSection>
+
+<ManSection>
+<Attr Name="DenesKeedwellIdentification" Arg="Q"/>
+<Returns>A string of the form <Code>#n.x.1.y-sigma</Code>.</Returns>
+<Description>
+In (Denes-Keedwell, 2nd edition, Chapter 4) loops of order up to 6 are enumerated. They are indexed by a quadruple <Code>n.x.u.z</Code> of positive integers. <M>n</M> is the size of <M>Q</M>, the integer <M>x</M> determines the isostrophism class of <M>Q</M>. The integer <M>y</M> determines the isomorphism class of <M>Q</M> within its isotopy class.
+<P/><M>u</M> is supposed to determine the isotopism class of <M>Q</M>. However, it is always set to 1, and mentioned that <M>Q</M> is conjugate (parastrophe) to an element of with index <Code>n.x.1.y</Code>. In our terminology, the permutation <M>\sigma</M> is such that the <M>\sigma</M>-conjugate of the loop with Denes-Keedwell index <Code>n.x.1.y</Code> is isomorphic to <M>Q</M>. Notice that the <M>\sigma</M>-conjugate of a loop is not neccessarily a loop, thus one needs to take its principal loop isotope with respect to its first element. 
+<P/>The function <Code>DenesKeedwellIdentification</Code> can also be called with the argument <A>[n,k]</A>, then it returns the Denes-Keedwell identification of the loop with small loop identification <A>[n,k]</A>.
+</Description>
+</ManSection>
+
+</Section>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Section Label="Sec:IsoGlobalFunctions"> <Heading>Global Functions for Isotopisms, Isostrophism and Collineations (private)</Heading>
+
+The following global functions do not check their input for correctness and they are not meant for public usage. 
+
+<ManSection>
+<Func Name="DG4L_LatinSquare2LSDesign_NC" Arg="ls"/>
+<Returns>The blocks of the Latin square design corresponding to the Latin square <A>ls</A>. </Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="DG4L_LSDesign2LatinSquare_NC" Arg="bls"/>
+<Returns>The Latin square corresponding to the blocks <A>bls</A> of a Latin square design. The points of the design are <M>\{1,\ldots,3n\}</M> and the labeling of the components is the natural one. </Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="DG4L_LatinSquare2Digraph_NC" Arg="ls"/>
+<Returns>The bipartite directed graph corresponding to the (Latin square design of the) Latin square <A>ls</A>. </Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="DG4L_IsostrophismOnLatinSquare_NC" Arg="ct,p"/>
+<Returns>The Latin square obtained from <A>ls</A> under the row, column and entry transformations given by the permutation <A>p</A>. </Returns>
+</ManSection>
+
+<ManSection>
+<Func Name="DG4L_NiceColoring_NC" Arg="Q"/>
+<Returns>The list of length <M>|Q|^2</M>, which describes the nice coloring of the blocks of the Latin square design of the quasigroup <A>Q</A>. </Returns>
+</ManSection>
+
+</Section>
+

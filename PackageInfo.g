@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "3.4.0dev",
-Date := "27/10/2017",
+Version := "3.5.0",
+Date := "09/10/2018",
 
 Persons := [
   rec(
@@ -73,7 +73,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.8",
-  NeededOtherPackages := [],
+  NeededOtherPackages := [ [ "digraphs", ">=0.11" ] ],
   SuggestedOtherPackages := [],
   ExternalConditions := []
 ),

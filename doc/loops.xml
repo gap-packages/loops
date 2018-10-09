@@ -1878,6 +1878,14 @@ gap> a:=AllLoopsWithMltGroup(g,3,0);; Size(a);
 
 </Chapter>
 
+<!-- CHAPTER: Isotopisms and isostrophism +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<Chapter Label="Chap:Isotopisms"> <Heading>Isotopisms and Isostrophism</Heading>
+
+<#Include SYSTEM "dualnets.xml">
+
+</Chapter>
+
 <!-- CHAPTER: Libraries of Loops -->
 
 <Chapter Label="Chap:LibrariesOfLoops"> <Heading>Libraries of Loops</Heading>
