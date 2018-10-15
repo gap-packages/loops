@@ -29,7 +29,7 @@ function( Q )
 end);
 
 # implies
-InstallTrueMethod( IsExtraLoop, IsAssociative and IsLoop );
+# InstallTrueMethod( IsExtraLoop, IsAssociative and IsLoop );
 
 #############################################################################
 ##
@@ -68,7 +68,7 @@ function( Q )
 end );
 
 # implies
-InstallTrueMethod( HasTwosidedInverses, IsPowerAssociative and IsLoop );
+# InstallTrueMethod( HasTwosidedInverses, IsPowerAssociative and IsLoop );
 
 #############################################################################
 ##
@@ -96,8 +96,8 @@ function( Q )
 end );
 
 # implies
-InstallTrueMethod( IsPowerAlternative, IsDiassociative );
-InstallTrueMethod( IsFlexible, IsDiassociative );
+# InstallTrueMethod( IsPowerAlternative, IsDiassociative );
+# InstallTrueMethod( IsFlexible, IsDiassociative );
 
 #############################################################################
 ##  INVERSE PROPERTIES
@@ -190,24 +190,24 @@ function( L )
 end );
 
 # implies and is implied by (for inverse properties)
-InstallTrueMethod( HasAntiautomorphicInverseProperty, HasAutomorphicInverseProperty and IsCommutative );
-InstallTrueMethod( HasAutomorphicInverseProperty, HasAntiautomorphicInverseProperty and IsCommutative );
-InstallTrueMethod( HasLeftInverseProperty, HasInverseProperty );
-InstallTrueMethod( HasRightInverseProperty, HasInverseProperty );
-InstallTrueMethod( HasWeakInverseProperty, HasInverseProperty );
-InstallTrueMethod( HasAntiautomorphicInverseProperty, HasInverseProperty );
-InstallTrueMethod( HasTwosidedInverses, HasAntiautomorphicInverseProperty );
-InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and IsCommutative );
-InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and IsCommutative );
-InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasRightInverseProperty );
-InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasWeakInverseProperty );
-InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and HasWeakInverseProperty );
-InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasAntiautomorphicInverseProperty );
-InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and HasAntiautomorphicInverseProperty );
-InstallTrueMethod( HasInverseProperty, HasWeakInverseProperty and HasAntiautomorphicInverseProperty );
-InstallTrueMethod( HasTwosidedInverses, HasLeftInverseProperty );
-InstallTrueMethod( HasTwosidedInverses, HasRightInverseProperty );
-InstallTrueMethod( HasTwosidedInverses, IsFlexible and IsLoop );
+# InstallTrueMethod( HasAntiautomorphicInverseProperty, HasAutomorphicInverseProperty and IsCommutative );
+# InstallTrueMethod( HasAutomorphicInverseProperty, HasAntiautomorphicInverseProperty and IsCommutative );
+# InstallTrueMethod( HasLeftInverseProperty, HasInverseProperty );
+# InstallTrueMethod( HasRightInverseProperty, HasInverseProperty );
+# InstallTrueMethod( HasWeakInverseProperty, HasInverseProperty );
+# InstallTrueMethod( HasAntiautomorphicInverseProperty, HasInverseProperty );
+# InstallTrueMethod( HasTwosidedInverses, HasAntiautomorphicInverseProperty );
+# InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and IsCommutative );
+# InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and IsCommutative );
+# InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasRightInverseProperty );
+# InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasWeakInverseProperty );
+# InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and HasWeakInverseProperty );
+# InstallTrueMethod( HasInverseProperty, HasLeftInverseProperty and HasAntiautomorphicInverseProperty );
+# InstallTrueMethod( HasInverseProperty, HasRightInverseProperty and HasAntiautomorphicInverseProperty );
+# InstallTrueMethod( HasInverseProperty, HasWeakInverseProperty and HasAntiautomorphicInverseProperty );
+# InstallTrueMethod( HasTwosidedInverses, HasLeftInverseProperty );
+# InstallTrueMethod( HasTwosidedInverses, HasRightInverseProperty );
+# InstallTrueMethod( HasTwosidedInverses, IsFlexible and IsLoop );
 
 
 #############################################################################
@@ -348,13 +348,13 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsMoufangLoop, IsExtraLoop );
-InstallTrueMethod( IsCLoop, IsExtraLoop );
+# InstallTrueMethod( IsMoufangLoop, IsExtraLoop );
+# InstallTrueMethod( IsCLoop, IsExtraLoop );
 
 # is implied by
-InstallTrueMethod( IsExtraLoop, IsMoufangLoop and IsLeftNuclearSquareLoop );
-InstallTrueMethod( IsExtraLoop, IsMoufangLoop and IsMiddleNuclearSquareLoop );
-InstallTrueMethod( IsExtraLoop, IsMoufangLoop and IsRightNuclearSquareLoop );
+# InstallTrueMethod( IsExtraLoop, IsMoufangLoop and IsLeftNuclearSquareLoop );
+# InstallTrueMethod( IsExtraLoop, IsMoufangLoop and IsMiddleNuclearSquareLoop );
+# InstallTrueMethod( IsExtraLoop, IsMoufangLoop and IsRightNuclearSquareLoop );
 
 #############################################################################
 ##
@@ -369,12 +369,12 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftBolLoop, IsMoufangLoop );
-InstallTrueMethod( IsRightBolLoop, IsMoufangLoop );
-InstallTrueMethod( IsDiassociative, IsMoufangLoop );
+# InstallTrueMethod( IsLeftBolLoop, IsMoufangLoop );
+# InstallTrueMethod( IsRightBolLoop, IsMoufangLoop );
+# InstallTrueMethod( IsDiassociative, IsMoufangLoop );
 
 # is implied by
-InstallTrueMethod( IsMoufangLoop, IsLeftBolLoop and IsRightBolLoop );
+# InstallTrueMethod( IsMoufangLoop, IsLeftBolLoop and IsRightBolLoop );
 
 #############################################################################
 ##
@@ -389,12 +389,12 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLCLoop, IsCLoop );
-InstallTrueMethod( IsRCLoop, IsCLoop );
-InstallTrueMethod( IsDiassociative, IsCLoop and IsFlexible);
+# InstallTrueMethod( IsLCLoop, IsCLoop );
+# InstallTrueMethod( IsRCLoop, IsCLoop );
+# InstallTrueMethod( IsDiassociative, IsCLoop and IsFlexible);
 
 # is implied by
-InstallTrueMethod( IsCLoop, IsLCLoop and IsRCLoop );
+# InstallTrueMethod( IsCLoop, IsLCLoop and IsRCLoop );
 
 #############################################################################
 ##
@@ -410,8 +410,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsRightBolLoop, IsLeftBolLoop and IsCommutative );
-InstallTrueMethod( IsLeftPowerAlternative, IsLeftBolLoop );
+# InstallTrueMethod( IsRightBolLoop, IsLeftBolLoop and IsCommutative );
+# InstallTrueMethod( IsLeftPowerAlternative, IsLeftBolLoop );
 
 #############################################################################
 ##
@@ -427,8 +427,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftBolLoop, IsRightBolLoop and IsCommutative );
-InstallTrueMethod( IsRightPowerAlternative, IsRightBolLoop );
+# InstallTrueMethod( IsLeftBolLoop, IsRightBolLoop and IsCommutative );
+# InstallTrueMethod( IsRightPowerAlternative, IsRightBolLoop );
 
 #############################################################################
 ##
@@ -444,10 +444,10 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftPowerAlternative, IsLCLoop );
-InstallTrueMethod( IsLeftNuclearSquareLoop, IsLCLoop );
-InstallTrueMethod( IsMiddleNuclearSquareLoop, IsLCLoop );
-InstallTrueMethod( IsRCLoop, IsLCLoop and IsCommutative );
+# InstallTrueMethod( IsLeftPowerAlternative, IsLCLoop );
+# InstallTrueMethod( IsLeftNuclearSquareLoop, IsLCLoop );
+# InstallTrueMethod( IsMiddleNuclearSquareLoop, IsLCLoop );
+# InstallTrueMethod( IsRCLoop, IsLCLoop and IsCommutative );
 
 #############################################################################
 ##
@@ -463,10 +463,10 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsRightPowerAlternative, IsRCLoop );
-InstallTrueMethod( IsRightNuclearSquareLoop, IsRCLoop );
-InstallTrueMethod( IsMiddleNuclearSquareLoop, IsRCLoop );
-InstallTrueMethod( IsLCLoop, IsRCLoop and IsCommutative );
+# InstallTrueMethod( IsRightPowerAlternative, IsRCLoop );
+# InstallTrueMethod( IsRightNuclearSquareLoop, IsRCLoop );
+# InstallTrueMethod( IsMiddleNuclearSquareLoop, IsRCLoop );
+# InstallTrueMethod( IsLCLoop, IsRCLoop and IsCommutative );
 
 #############################################################################
 ##
@@ -481,7 +481,7 @@ function( L )
 end );
 
 #implies
-InstallTrueMethod( IsRightNuclearSquareLoop, IsLeftNuclearSquareLoop and IsCommutative );
+# InstallTrueMethod( IsRightNuclearSquareLoop, IsLeftNuclearSquareLoop and IsCommutative );
 
 #############################################################################
 ##
@@ -508,7 +508,7 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftNuclearSquareLoop, IsRightNuclearSquareLoop and IsCommutative );
+# InstallTrueMethod( IsLeftNuclearSquareLoop, IsRightNuclearSquareLoop and IsCommutative );
 
 #############################################################################
 ##
@@ -524,13 +524,13 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftNuclearSquareLoop, IsNuclearSquareLoop );
-InstallTrueMethod( IsRightNuclearSquareLoop, IsNuclearSquareLoop );
-InstallTrueMethod( IsMiddleNuclearSquareLoop, IsNuclearSquareLoop );
+# InstallTrueMethod( IsLeftNuclearSquareLoop, IsNuclearSquareLoop );
+# InstallTrueMethod( IsRightNuclearSquareLoop, IsNuclearSquareLoop );
+# InstallTrueMethod( IsMiddleNuclearSquareLoop, IsNuclearSquareLoop );
 
 # is implied by
-InstallTrueMethod( IsNuclearSquareLoop, IsLeftNuclearSquareLoop
-    and IsRightNuclearSquareLoop and IsMiddleNuclearSquareLoop );
+# InstallTrueMethod( IsNuclearSquareLoop, IsLeftNuclearSquareLoop
+#    and IsRightNuclearSquareLoop and IsMiddleNuclearSquareLoop );
 
 #############################################################################
 ##
@@ -548,7 +548,7 @@ function( Q )
 end );
 
 # is implied by
-InstallTrueMethod( IsFlexible, IsCommutative );
+# InstallTrueMethod( IsFlexible, IsCommutative );
 
 #############################################################################
 ##
@@ -566,7 +566,7 @@ function( Q )
 end );
 
 # implies
-InstallTrueMethod( IsRightAlternative, IsLeftAlternative and IsCommutative );
+# InstallTrueMethod( IsRightAlternative, IsLeftAlternative and IsCommutative );
 
 #############################################################################
 ##
@@ -584,7 +584,7 @@ function( Q )
 end );
 
 # implies
-InstallTrueMethod( IsLeftAlternative, IsRightAlternative and IsCommutative );
+# InstallTrueMethod( IsLeftAlternative, IsRightAlternative and IsCommutative );
 
 #############################################################################
 ##
@@ -599,11 +599,11 @@ function( Q )
 end );
 
 # implies
-InstallTrueMethod( IsLeftAlternative, IsAlternative );
-InstallTrueMethod( IsRightAlternative, IsAlternative );
+# InstallTrueMethod( IsLeftAlternative, IsAlternative );
+# InstallTrueMethod( IsRightAlternative, IsAlternative );
 
 # is implied by
-InstallTrueMethod( IsAlternative, IsLeftAlternative and IsRightAlternative );
+# InstallTrueMethod( IsAlternative, IsLeftAlternative and IsRightAlternative );
 
 #############################################################################
 ##  POWER ALTERNATIVE LOOPS
@@ -630,9 +630,9 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftAlternative, IsLeftPowerAlternative );
-InstallTrueMethod( HasLeftInverseProperty, IsLeftPowerAlternative );
-InstallTrueMethod( IsPowerAssociative, IsLeftPowerAlternative );
+# InstallTrueMethod( IsLeftAlternative, IsLeftPowerAlternative );
+# InstallTrueMethod( HasLeftInverseProperty, IsLeftPowerAlternative );
+# InstallTrueMethod( IsPowerAssociative, IsLeftPowerAlternative );
 
 #############################################################################
 ##
@@ -655,9 +655,9 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsRightAlternative, IsRightPowerAlternative );
-InstallTrueMethod( HasRightInverseProperty, IsRightPowerAlternative );
-InstallTrueMethod( IsPowerAssociative, IsRightPowerAlternative );
+# InstallTrueMethod( IsRightAlternative, IsRightPowerAlternative );
+# InstallTrueMethod( HasRightInverseProperty, IsRightPowerAlternative );
+# InstallTrueMethod( IsPowerAssociative, IsRightPowerAlternative );
 
 #############################################################################
 ##
@@ -672,8 +672,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLeftPowerAlternative, IsPowerAlternative );
-InstallTrueMethod( IsRightPowerAlternative, IsPowerAlternative );
+# InstallTrueMethod( IsLeftPowerAlternative, IsPowerAlternative );
+# InstallTrueMethod( IsRightPowerAlternative, IsPowerAlternative );
 
 #############################################################################
 ##  CC-LOOPS AND RELATED PROPERTIES
@@ -693,8 +693,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsAssociative, IsLCCLoop and IsCommutative );
-InstallTrueMethod( IsExtraLoop, IsLCCLoop and IsMoufangLoop );
+# InstallTrueMethod( IsAssociative, IsLCCLoop and IsCommutative );
+# InstallTrueMethod( IsExtraLoop, IsLCCLoop and IsMoufangLoop );
 
 #############################################################################
 ##
@@ -710,8 +710,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsAssociative, IsRCCLoop and IsCommutative );
-InstallTrueMethod( IsExtraLoop, IsRCCLoop and IsMoufangLoop );
+# InstallTrueMethod( IsAssociative, IsRCCLoop and IsCommutative );
+# InstallTrueMethod( IsExtraLoop, IsRCCLoop and IsMoufangLoop );
 
 #############################################################################
 ##
@@ -726,11 +726,11 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsLCCLoop, IsCCLoop );
-InstallTrueMethod( IsRCCLoop, IsCCLoop );
+# InstallTrueMethod( IsLCCLoop, IsCCLoop );
+# InstallTrueMethod( IsRCCLoop, IsCCLoop );
 
 # is implied by
-InstallTrueMethod( IsCCLoop, IsLCCLoop and IsRCCLoop );
+# InstallTrueMethod( IsCCLoop, IsLCCLoop and IsRCCLoop );
 
 #############################################################################
 ##
@@ -748,8 +748,8 @@ function( L )
 end );
 
 # is implied by
-InstallTrueMethod( IsOsbornLoop, IsMoufangLoop );
-InstallTrueMethod( IsOsbornLoop, IsCCLoop );
+# InstallTrueMethod( IsOsbornLoop, IsMoufangLoop );
+# InstallTrueMethod( IsOsbornLoop, IsCCLoop );
 
 #############################################################################
 ##  ADDITIONAL VARIETIES OF LOOPS
@@ -771,8 +771,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsExtraLoop, IsCodeLoop );
-InstallTrueMethod( IsCCLoop, IsCodeLoop );
+# InstallTrueMethod( IsExtraLoop, IsCodeLoop );
+# InstallTrueMethod( IsCCLoop, IsCodeLoop );
 
 #############################################################################
 ##
@@ -788,8 +788,8 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( IsCommutative, IsSteinerLoop );
-InstallTrueMethod( IsCLoop, IsSteinerLoop );
+# InstallTrueMethod( IsCommutative, IsSteinerLoop );
+# InstallTrueMethod( IsCLoop, IsSteinerLoop );
 
 #############################################################################
 ##
@@ -804,12 +804,12 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( HasAutomorphicInverseProperty, IsLeftBruckLoop );
-InstallTrueMethod( IsLeftBolLoop, IsLeftBruckLoop );
-InstallTrueMethod( IsRightBruckLoop, IsLeftBruckLoop and IsCommutative );
+# InstallTrueMethod( HasAutomorphicInverseProperty, IsLeftBruckLoop );
+# InstallTrueMethod( IsLeftBolLoop, IsLeftBruckLoop );
+# InstallTrueMethod( IsRightBruckLoop, IsLeftBruckLoop and IsCommutative );
 
 # is implied by
-InstallTrueMethod( IsLeftBruckLoop, IsLeftBolLoop and HasAutomorphicInverseProperty );
+# InstallTrueMethod( IsLeftBruckLoop, IsLeftBolLoop and HasAutomorphicInverseProperty );
 
 #############################################################################
 ##
@@ -824,12 +824,12 @@ function( L )
 end );
 
 # implies
-InstallTrueMethod( HasAutomorphicInverseProperty, IsRightBruckLoop );
-InstallTrueMethod( IsRightBolLoop, IsRightBruckLoop );
-InstallTrueMethod( IsLeftBruckLoop, IsRightBruckLoop and IsCommutative );
+# InstallTrueMethod( HasAutomorphicInverseProperty, IsRightBruckLoop );
+# InstallTrueMethod( IsRightBolLoop, IsRightBruckLoop );
+# InstallTrueMethod( IsLeftBruckLoop, IsRightBruckLoop and IsCommutative );
 
 # is implied by
-InstallTrueMethod( IsRightBruckLoop, IsRightBolLoop and HasAutomorphicInverseProperty );
+# InstallTrueMethod( IsRightBruckLoop, IsRightBolLoop and HasAutomorphicInverseProperty );
 
 #############################################################################
 ##
@@ -891,27 +891,27 @@ function( Q )
 end);
 
 # implies
-InstallTrueMethod( IsLeftALoop, IsALoop );
-InstallTrueMethod( IsRightALoop, IsALoop );
-InstallTrueMethod( IsMiddleALoop, IsALoop );
-InstallTrueMethod( IsLeftALoop, IsRightALoop and HasAntiautomorphicInverseProperty );
-InstallTrueMethod( IsRightALoop, IsLeftALoop and HasAntiautomorphicInverseProperty );
-InstallTrueMethod( IsFlexible, IsMiddleALoop );
-InstallTrueMethod( HasAntiautomorphicInverseProperty, IsFlexible and IsLeftALoop );
-InstallTrueMethod( HasAntiautomorphicInverseProperty, IsFlexible and IsRightALoop );
-InstallTrueMethod( IsMoufangLoop, IsALoop and IsLeftAlternative );
-InstallTrueMethod( IsMoufangLoop, IsALoop and IsRightAlternative );
-InstallTrueMethod( IsMoufangLoop, IsALoop and HasLeftInverseProperty );
-InstallTrueMethod( IsMoufangLoop, IsALoop and HasRightInverseProperty );
-InstallTrueMethod( IsMoufangLoop, IsALoop and HasWeakInverseProperty );
+# InstallTrueMethod( IsLeftALoop, IsALoop );
+# InstallTrueMethod( IsRightALoop, IsALoop );
+# InstallTrueMethod( IsMiddleALoop, IsALoop );
+# InstallTrueMethod( IsLeftALoop, IsRightALoop and HasAntiautomorphicInverseProperty );
+# InstallTrueMethod( IsRightALoop, IsLeftALoop and HasAntiautomorphicInverseProperty );
+# InstallTrueMethod( IsFlexible, IsMiddleALoop );
+# InstallTrueMethod( HasAntiautomorphicInverseProperty, IsFlexible and IsLeftALoop );
+# InstallTrueMethod( HasAntiautomorphicInverseProperty, IsFlexible and IsRightALoop );
+# InstallTrueMethod( IsMoufangLoop, IsALoop and IsLeftAlternative );
+# InstallTrueMethod( IsMoufangLoop, IsALoop and IsRightAlternative );
+# InstallTrueMethod( IsMoufangLoop, IsALoop and HasLeftInverseProperty );
+# InstallTrueMethod( IsMoufangLoop, IsALoop and HasRightInverseProperty );
+# InstallTrueMethod( IsMoufangLoop, IsALoop and HasWeakInverseProperty );
 
 # is implied by
-InstallTrueMethod( IsMiddleALoop, IsCommutative );
-InstallTrueMethod( IsLeftALoop, IsLeftBruckLoop );
-InstallTrueMethod( IsLeftALoop, IsLCCLoop );
-InstallTrueMethod( IsRightALoop, IsRightBruckLoop );
-InstallTrueMethod( IsRightALoop, IsRCCLoop );
-InstallTrueMethod( IsALoop, IsCommutative and IsMoufangLoop );
-InstallTrueMethod( IsALoop, IsLeftALoop and IsMiddleALoop );
-InstallTrueMethod( IsALoop, IsRightALoop and IsMiddleALoop );
-InstallTrueMethod( IsALoop, IsAssociative );
+# InstallTrueMethod( IsMiddleALoop, IsCommutative and IsLoop);
+# InstallTrueMethod( IsLeftALoop, IsLeftBruckLoop );
+# InstallTrueMethod( IsLeftALoop, IsLCCLoop );
+# InstallTrueMethod( IsRightALoop, IsRightBruckLoop );
+# InstallTrueMethod( IsRightALoop, IsRCCLoop );
+# InstallTrueMethod( IsALoop, IsCommutative and IsMoufangLoop );
+# InstallTrueMethod( IsALoop, IsLeftALoop and IsMiddleALoop );
+# InstallTrueMethod( IsALoop, IsRightALoop and IsMiddleALoop );
+# InstallTrueMethod( IsALoop, IsAssociative and IsLoop);
