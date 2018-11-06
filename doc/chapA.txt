@@ -4,7 +4,7 @@
   [33X[0;0YBelow  is  a  list  of  all  relevant  files forming the [5XLOOPS[105X package. Some
   technical  files  are not included. A typical user will not need to know any
   of this information. All paths are relative to the [11Xpkg/loops[111X folder.[133X
-  [33X[0;0Y[11X../README.loops[111X (installation and usage instructions)[133X
+  [33X[0;0Y[11XREADME[111X (installation and usage instructions)[133X
   [33X[0;0Y[11Xinit.g[111X (declarations)[133X
   [33X[0;0Y[11XPackageInfo.g[111X (loading info for GAP 4.4)[133X
   [33X[0;0Y[11Xread.g[111X (implementations)[133X
@@ -26,7 +26,6 @@
   [33X[0;0Y[11Xdoc/*.*[111X (all documentation files)[133X
   [33X[0;0Y[11Xdoc/loops.xml[111X (the main documentation file for GAPDoc)[133X
   [33X[0;0Y[11Xdoc/loops.bib[111X (the main bibliography file for documentation)[133X
-  [33X[0;0Y[11Xgap/banner.g[111X (banner of LOOPS)[133X
   [33X[0;0Y[11Xgap/bol_core_methods.gd .gi[111X (core methods for Bol loops)[133X
   [33X[0;0Y[11Xgap/classes.gd .gi[111X (properties of quasigroups and loops)[133X
   [33X[0;0Y[11Xgap/convert.gd .gi[111X (methods for data conversion and compression)[133X

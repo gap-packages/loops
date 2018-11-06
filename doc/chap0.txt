@@ -1,34 +1,77 @@
   
   
-                               [1XThe [5XLOOPS[105X Package[101X
+                              [1X The LOOPS Package [101X
   
   
-                  [1XComputing with quasigroups and loops in [5XGAP[105X[101X
+                 [1X Computing with quasigroups and loops in [5XGAP[105X [101X
   
   
-                                 Version 3.3.0
+                                     3.4.1
   
   
-                                 Gábor P. Nagy
+                                6 November 2018
+  
+  
+                                   Gábor Nagy
   
                                Petr Vojtěchovský
   
   
   
-  Gábor P. Nagy
+  Gábor Nagy
       Email:    [7Xmailto:nagyg@math.u-szeged.hu[107X
-      Address:  [33X[0;14YDepartment of Mathematics, University of Szeged[133X
+      Homepage: [7Xhttp://www.math.u-szeged.hu/~nagyg/[107X
+      Address:  [33X[0;14YBolyai Institute, University of Szeged[133X
+                [33X[0;14Y6725 Szeged, Aradi vertanuk tere 1[133X
+                [33X[0;14YHungary[133X
   
   
   Petr Vojtěchovský
       Email:    [7Xmailto:petr@math.du.edu[107X
+      Homepage: [7Xhttp://www.math.du.edu/~petr/[107X
       Address:  [33X[0;14YDepartment of Mathematics, University of Denver[133X
+                [33X[0;14Y2280 S. Vine Street[133X
+                [33X[0;14YDenver, CO 80208[133X
+                [33X[0;14YUSA[133X
   
   
   
   -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YThe  LOOPS  package  provides  researchers  in nonassociative algebra with a
+  computational  tool  that  integrates  standard  notions of loop theory with
+  libraries of loops and group-theoretical algorithms of GAP. The package also
+  expands GAP toward nonassociative structures.[133X
+  
+  
+  -------------------------------------------------------
   [1XCopyright[101X
-  [33X[0;0Y© 2016 Gábor P. Nagy and Petr Vojtěchovský.[133X
+  [33X[0;0Y© 2005-2017 Gábor P. Nagy and Petr Vojtěchovský.[133X
+  
+  [33X[0;0YThe [5XLOOPS[105X package is free software; you can redistribute it and/or modify it
+  under     the     terms     of    the    GNU    General    Public    License
+  ([7Xhttps://www.fsf.org/licenses/gpl.html[107X)  as  published  by the Free Software
+  Foundation;  either  version 2 of the License, or (at your option) any later
+  version.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YWe  thank  the following people for sending us remarks and comments, and for
+  suggesting  new  functionality of the package: Muniru Asiru, Bjoern Assmann,
+  Andreas  Distler,  Aleš  Drápal,  Graham  Ellis,  Steve  Flammia, Kenneth W.
+  Johnson, Michael K. Kinyon, Alexander Konovalov, Frank Lübeck, Jonathan D.H.
+  Smith, David Stanovský and Glen Whitney.[133X
+  
+  [33X[0;0YThe  library  of Moufang loops of order 243 was generated from data provided
+  by Michael C. Slattery and Ashley L. Zenisek. The library of right conjugacy
+  closed  loops  of  order  less  than  28 was generated from data provided by
+  Katharina  Artic.  The  library  of  right  Bruck  loops of order 27, 81 was
+  obtained jointly with Izabella Stuhl.[133X
+  
+  [33X[0;0YGábor  P.  Nagy  was  supported by OTKA grants F042959 and T043758, and Petr
+  Vojtěchovský  was  supported  by the 2006 and 2016 University of Denver PROF
+  grants and the Simons Foundation Collaboration Grant 210176.[133X
   
   
   -------------------------------------------------------
@@ -37,13 +80,11 @@
   [1XContents (Loops)[101X
   
   1 [33X[0;0YIntroduction[133X
-    1.1 [33X[0;0YLicense[133X
-    1.2 [33X[0;0YInstallation[133X
-    1.3 [33X[0;0YDocumentation[133X
-    1.4 [33X[0;0YTest Files[133X
-    1.5 [33X[0;0YMemory Management[133X
-    1.6 [33X[0;0YFeedback[133X
-    1.7 [33X[0;0YAcknowledgment[133X
+    1.1 [33X[0;0YInstallation[133X
+    1.2 [33X[0;0YDocumentation[133X
+    1.3 [33X[0;0YTest Files[133X
+    1.4 [33X[0;0YMemory Management[133X
+    1.5 [33X[0;0YFeedback[133X
   2 [33X[0;0YMathematical Background[133X
     2.1 [33X[0;0YQuasigroups and Loops[133X
     2.2 [33X[0;0YTranslations[133X
@@ -167,10 +208,12 @@
       6.11-3 QuasigroupsUpToIsomorphism
       6.11-4 LoopsUpToIsomorphism
       6.11-5 AutomorphismGroup
-      6.11-6 IsomorphicCopyByPerm
-      6.11-7 IsomorphicCopyByNormalSubloop
-      6.11-8 Discriminator
-      6.11-9 AreEqualDiscriminators
+      6.11-6 QuasigroupIsomorph
+      6.11-7 LoopIsomorph
+      6.11-8 IsomorphicCopyByPerm
+      6.11-9 IsomorphicCopyByNormalSubloop
+      6.11-10 Discriminator
+      6.11-11 AreEqualDiscriminators
     6.12 [33X[0;0YIsotopisms[133X
       6.12-1 IsotopismLoops
       6.12-2 LoopsUpToIsotopism
@@ -256,28 +299,31 @@
     9.2 [33X[0;0YLeft Bol Loops and Right Bol Loops[133X
       9.2-1 LeftBolLoop
       9.2-2 RightBolLoop
-    9.3 [33X[0;0YMoufang Loops[133X
-      9.3-1 MoufangLoop
-    9.4 [33X[0;0YCode Loops[133X
-      9.4-1 CodeLoop
-    9.5 [33X[0;0YSteiner Loops[133X
-      9.5-1 SteinerLoop
-    9.6 [33X[0;0YConjugacy Closed Loops[133X
-      9.6-1 [33X[0;0YRCCLoop and RightConjugacyClosedLoop[133X
-      9.6-2 [33X[0;0YLCCLoop and LeftConjugacyClosedLoop[133X
-      9.6-3 [33X[0;0YCCLoop and ConjugacyClosedLoop[133X
-    9.7 [33X[0;0YSmall Loops[133X
-      9.7-1 SmallLoop
-    9.8 [33X[0;0YPaige Loops[133X
-      9.8-1 PaigeLoop
-    9.9 [33X[0;0YNilpotent Loops[133X
-      9.9-1 NilpotentLoop
-    9.10 [33X[0;0YAutomorphic Loops[133X
-      9.10-1 AutomorphicLoop
-    9.11 [33X[0;0YInteresting Loops[133X
-      9.11-1 InterestingLoop
-    9.12 [33X[0;0YLibraries of Loops Up To Isotopism[133X
-      9.12-1 ItpSmallLoop
+    9.3 [33X[0;0YLeft Bruck Loops and Right Bruck Loops[133X
+      9.3-1 LeftBruckLoop
+      9.3-2 RightBruckLoop
+    9.4 [33X[0;0YMoufang Loops[133X
+      9.4-1 MoufangLoop
+    9.5 [33X[0;0YCode Loops[133X
+      9.5-1 CodeLoop
+    9.6 [33X[0;0YSteiner Loops[133X
+      9.6-1 SteinerLoop
+    9.7 [33X[0;0YConjugacy Closed Loops[133X
+      9.7-1 [33X[0;0YRCCLoop and RightConjugacyClosedLoop[133X
+      9.7-2 [33X[0;0YLCCLoop and LeftConjugacyClosedLoop[133X
+      9.7-3 [33X[0;0YCCLoop and ConjugacyClosedLoop[133X
+    9.8 [33X[0;0YSmall Loops[133X
+      9.8-1 SmallLoop
+    9.9 [33X[0;0YPaige Loops[133X
+      9.9-1 PaigeLoop
+    9.10 [33X[0;0YNilpotent Loops[133X
+      9.10-1 NilpotentLoop
+    9.11 [33X[0;0YAutomorphic Loops[133X
+      9.11-1 AutomorphicLoop
+    9.12 [33X[0;0YInteresting Loops[133X
+      9.12-1 InterestingLoop
+    9.13 [33X[0;0YLibraries of Loops Up To Isotopism[133X
+      9.13-1 ItpSmallLoop
   A [33X[0;0YFiles[133X
   B [33X[0;0YFilters[133X
   

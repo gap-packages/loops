@@ -189,13 +189,13 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ct := CanonicalCayleyTable( [[5,3],[3,5]] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ct := CanonicalCayleyTable( [[5,3],[3,5]] );</span>
 [ [ 2, 1 ], [ 1, 2 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalizedQuasigroupTable( ct );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NormalizedQuasigroupTable( ct );</span>
 [ [ 1, 2 ], [ 2, 1 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByCayleyTable( last );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByCayleyTable( last );</span>
 &lt;loop of order 2&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ IsQuasigroupTable( ct ), IsLoopTable( ct ) ];</span>
 [ true, false ]
 </pre></div>
 
@@ -330,12 +330,12 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ls := LeftSection( S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S := Subloop( MoufangLoop( 12, 1 ), [ 3 ] );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ls := LeftSection( S );</span>
 [ (), (1,3,5), (1,5,3) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTableByPerms( ls );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTableByPerms( ls );</span>
 [ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTable( LoopByLeftSection( ls ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTable( LoopByLeftSection( ls ) );</span>
 [ [ 1, 2, 3 ], [ 2, 3, 1 ], [ 3, 1, 2 ] ]
 </pre></div>
 
@@ -361,9 +361,9 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Group( T );; H := Stabilizer( G, 1 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByRightFolder( G, H, T );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">T := [ (), (1,2)(3,4,5), (1,3,5)(2,4), (1,4,3)(2,5), (1,5,4)(2,3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := Group( T );; H := Stabilizer( G, 1 );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByRightFolder( G, H, T );</span>
 &lt;loop of order 5&gt;
 </pre></div>
 
@@ -395,14 +395,14 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := IntoLoop( Group( (1,2) ) );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := IntoLoop( Group( (1,2) ) );</span>
 &lt;loop of order 2&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := DirectProduct( F, F );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := [ (), (2,3) ];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">theta := [ [ 1, 1 ], [ 1, 3 ] ];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByExtension( K, F, phi, theta );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">K := DirectProduct( F, F );;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">phi := [ (), (2,3) ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">theta := [ [ 1, 1 ], [ 1, 3 ] ];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LoopByExtension( K, F, phi, theta );</span>
 &lt;loop of order 8&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAssociative( last );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAssociative( last );</span>
 false
 </pre></div>
 

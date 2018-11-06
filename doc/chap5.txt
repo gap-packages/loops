@@ -115,16 +115,16 @@
             quasigroup element [3Xx[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XCayleyTable( Q );[127X[104X
-    [4X[28X[ [ 1, 2, 3, 4, 5 ],[128X[104X
-    [4X[28X  [ 2, 1, 4, 5, 3 ],[128X[104X
-    [4X[28X  [ 3, 4, 5, 1, 2 ],[128X[104X
-    [4X[28X  [ 4, 5, 2, 3, 1 ],[128X[104X
-    [4X[28X  [ 5, 3, 1, 2, 4 ] ][128X[104X
-    [4X[25Xgap>[125X [27Xelms := Elements( Q );[127X[104X
-    [4X[25Xgap>[125X [27X[ l1, l2, l3, l4, l5 ];[127X[104X
-    [4X[25Xgap>[125X [27X[ LeftInverse( elms[3] ), RightInverse( elms[3] ), Inverse( elms[3] ) ];[127X[104X
-    [4X[28X[ l5, l4, fail ][128X[104X
+    [4X[25Xgap>[125X [27XCayleyTable( Q );[127X[104X
+    [4X[28X[ [ 1, 2, 3, 4, 5 ],[128X[104X
+    [4X[28X  [ 2, 1, 4, 5, 3 ],[128X[104X
+    [4X[28X  [ 3, 4, 5, 1, 2 ],[128X[104X
+    [4X[28X  [ 4, 5, 2, 3, 1 ],[128X[104X
+    [4X[28X  [ 5, 3, 1, 2, 4 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xelms := Elements( Q );[127X[104X
+    [4X[25Xgap>[125X [27X[ l1, l2, l3, l4, l5 ];[127X[104X
+    [4X[25Xgap>[125X [27X[ LeftInverse( elms[3] ), RightInverse( elms[3] ), Inverse( elms[3] ) ];[127X[104X
+    [4X[28X[ l5, l4, fail ][128X[104X
   [4X[32X[104X
   
   

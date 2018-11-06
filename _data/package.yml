@@ -1,32 +1,30 @@
 name: loops
-version: 3.4.0
-date: 2017-10-27
+version: 3.4.1
+date: 2018-11-06
 description: |
     Computing with quasigroups and loops in GAP
 
 authors:
-    - name: Gabor Nagy
+    - name: Gábor Nagy
       url: http://www.math.u-szeged.hu/~nagyg/
-    - name: Petr Vojtechovsky
+    - name: Petr Vojtěchovský
       url: http://www.math.du.edu/~petr/
 
 maintainers:
-    - name: Gabor Nagy
+    - name: Gábor Nagy
       url: http://www.math.u-szeged.hu/~nagyg/
-    - name: Petr Vojtechovsky
+    - name: Petr Vojtěchovský
       url: http://www.math.du.edu/~petr/
 
-GAP: ">=4.7"
+GAP: ">=4.8"
 
-www: http://www.math.du.edu/loops
-readme: README.loops
-packageinfo: http://www.math.du.edu/loops/PackageInfo.g
+www: https://gap-packages.github.io/loops/
+readme: README
+packageinfo: https://gap-packages.github.io/loops/PackageInfo.g
 
 downloads:
-    - name: -win.zip
-      url: http://www.math.du.edu/loops/loops-3.4.0-win.zip
     - name: .tar.gz
-      url: http://www.math.du.edu/loops/loops-3.4.0.tar.gz
+      url: https://github.com/gap-packages/loops/releases/download/v3.4.1/loops-3.4.1.tar.gz
 
 abstract: |
     The LOOPS package provides researchers in nonassociative algebra with a computational tool that integrates standard notions of loop theory with libraries of loops and group-theoretical algorithms of GAP. The package also expands GAP toward nonassociative structures.

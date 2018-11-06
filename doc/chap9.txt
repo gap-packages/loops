@@ -78,12 +78,34 @@
   retrieved by calling [10XOpposite[110X on left Bol loops.[133X
   
   
-  [1X9.3 [33X[0;0YMoufang Loops[133X[101X
+  [1X9.3 [33X[0;0YLeft Bruck Loops and Right Bruck Loops[133X[101X
+  
+  [33X[0;0YThe  emmerging  library  named  [13Xleft  Bruck[113X contains all left Bruck loops of
+  orders [22X3[122X, [22X9[122X, [22X27[122X and [22X81[122X (there are [22X1[122X, [22X2[122X, [22X7[122X and [22X72[122X such loops, respectively).[133X
+  
+  [33X[0;0YFor  an  odd  prime [22Xp[122X, left Bruck loops of order [22Xp^k[122X are centrally nilpotent
+  and  hence central extensions of the cyclic group of order [22Xp[122X by a left Bruck
+  loop  of  order  [22Xp^k-1[122X. It is known that left Bruck loops of order [22Xp[122X and [22Xp^2[122X
+  are  abelian  groups;  we  have  included them in the library because of the
+  iterative nature of the construction of nilpotent loops.[133X
+  
+  [1X9.3-1 LeftBruckLoop[101X
+  
+  [33X[1;0Y[29X[2XLeftBruckLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth left Bruck loop of order [3Xn[103X in the library.[133X
+  
+  [1X9.3-2 RightBruckLoop[101X
+  
+  [33X[1;0Y[29X[2XRightBruckLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth right Bruck loop of order [3Xn[103X in the library.[133X
+  
+  
+  [1X9.4 [33X[0;0YMoufang Loops[133X[101X
   
   [33X[0;0YThe library named [13XMoufang[113X contains all nonassociative Moufang loops of order
   [22Xnle 64[122X and [22Xn∈{81,243}[122X.[133X
   
-  [1X9.3-1 MoufangLoop[101X
+  [1X9.4-1 MoufangLoop[101X
   
   [33X[1;0Y[29X[2XMoufangLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth Moufang loop of order [3Xn[103X in the library.[133X
@@ -107,47 +129,47 @@
   obtained as [10XMoufangLoop(16,3)[110X.[133X
   
   
-  [1X9.4 [33X[0;0YCode Loops[133X[101X
+  [1X9.5 [33X[0;0YCode Loops[133X[101X
   
   [33X[0;0YThe  library named [13Xcode[113X contains all nonassociative code loops of order less
   than 65. There are 5 such loops of order 16, 16 of order 32, and 80 of order
   64,  all  Moufang.  The  library  merely points to the corresponding Moufang
   loops. See [NV07] for a classification of small code loops.[133X
   
-  [1X9.4-1 CodeLoop[101X
+  [1X9.5-1 CodeLoop[101X
   
   [33X[1;0Y[29X[2XCodeLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth code loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.5 [33X[0;0YSteiner Loops[133X[101X
+  [1X9.6 [33X[0;0YSteiner Loops[133X[101X
   
   [33X[0;0YHere is how the libary named [13XSteiner[113X is described within [5XLOOPS[105X:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XDisplayLibraryInfo( "Steiner" );[127X[104X
-    [4X[28XThe library contains all nonassociative Steiner loops of order less or equal to 16.[128X[104X
-    [4X[28XIt also contains the associative Steiner loops of order 4 and 8.[128X[104X
-    [4X[28X------[128X[104X
-    [4X[28XExtent of the library:[128X[104X
-    [4X[28X   1 loop of order 4[128X[104X
-    [4X[28X   1 loop of order 8[128X[104X
-    [4X[28X   1 loop of order 10[128X[104X
-    [4X[28X   2 loops of order 14[128X[104X
-    [4X[28X   80 loops of order 16[128X[104X
-    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDisplayLibraryInfo( "Steiner" );[127X[104X
+    [4X[28XThe library contains all nonassociative Steiner loops of order less or equal to 16.[128X[104X
+    [4X[28XIt also contains the associative Steiner loops of order 4 and 8.[128X[104X
+    [4X[28X------[128X[104X
+    [4X[28XExtent of the library:[128X[104X
+    [4X[28X   1 loop of order 4[128X[104X
+    [4X[28X   1 loop of order 8[128X[104X
+    [4X[28X   1 loop of order 10[128X[104X
+    [4X[28X   2 loops of order 14[128X[104X
+    [4X[28X   80 loops of order 16[128X[104X
+    [4X[28Xtrue[128X[104X
   [4X[32X[104X
   
   [33X[0;0YOur  labeling  of  Steiner  loops of order 16 coincides with the labeling of
   Steiner triple systems of order 15 in [CR99].[133X
   
-  [1X9.5-1 SteinerLoop[101X
+  [1X9.6-1 SteinerLoop[101X
   
   [33X[1;0Y[29X[2XSteinerLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth Steiner loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.6 [33X[0;0YConjugacy Closed Loops[133X[101X
+  [1X9.7 [33X[0;0YConjugacy Closed Loops[133X[101X
   
   [33X[0;0YThe  library  named  [13XRCC[113X  contains  all nonassocitive right conjugacy closed
   loops  of  order  [22Xnle  27[122X  up  to  isomorphism. The data for the library was
@@ -171,14 +193,14 @@
   [124X
   
   
-  [1X9.6-1 [33X[0;0YRCCLoop and RightConjugacyClosedLoop[133X[101X
+  [1X9.7-1 [33X[0;0YRCCLoop and RightConjugacyClosedLoop[133X[101X
   
   [33X[1;0Y[29X[2XRCCLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [33X[1;0Y[29X[2XRightConjugacyClosedLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth right conjugacy closed loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.6-2 [33X[0;0YLCCLoop and LeftConjugacyClosedLoop[133X[101X
+  [1X9.7-2 [33X[0;0YLCCLoop and LeftConjugacyClosedLoop[133X[101X
   
   [33X[1;0Y[29X[2XLCCLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [33X[1;0Y[29X[2XLeftConjugacyClosedLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
@@ -188,8 +210,10 @@
   Left  conjugacy  closed loops are obtained from right conjugacy closed loops
   via [10XOpposite[110X.[133X
   
-  [33X[0;0YThe  library  named [13XCC[113X contains all nonassociative conjugacy closed loops of
-  order [22Xnle 27[122X and also of orders [22X2p[122X and [22Xp^2[122X for all primes [22Xp[122X.[133X
+  [33X[0;0YThe  library named [13XCC[113X contains all CC loops of order [22X2le 2^kle 64[122X, [22X3le 3^kle
+  81[122X,  [22X5le 5^kle 125[122X, [22X7le 7^kle 343[122X, all nonassociative CC loops of order less
+  than  28,  and  all  nonassociative CC loops of order [22Xp^2[122X and [22X2p[122X for any odd
+  prime [22Xp[122X.[133X
   
   [33X[0;0YBy  results  of  Kunen  [Kun00], for every odd prime [22Xp[122X there are precisely 3
   nonassociative conjugacy closed loops of order [22Xp^2[122X. Csörgő and Drápal [CD05]
@@ -215,25 +239,25 @@
   m + n )[122X.[133X
   
   
-  [1X9.6-3 [33X[0;0YCCLoop and ConjugacyClosedLoop[133X[101X
+  [1X9.7-3 [33X[0;0YCCLoop and ConjugacyClosedLoop[133X[101X
   
   [33X[1;0Y[29X[2XCCLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [33X[1;0Y[29X[2XConjugacyClosedLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth conjugacy closed loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.7 [33X[0;0YSmall Loops[133X[101X
+  [1X9.8 [33X[0;0YSmall Loops[133X[101X
   
   [33X[0;0YThe  library named [13Xsmall[113X contains all nonassociative loops of order 5 and 6.
   There are 5 and 107 such loops, respectively.[133X
   
-  [1X9.7-1 SmallLoop[101X
+  [1X9.8-1 SmallLoop[101X
   
   [33X[1;0Y[29X[2XSmallLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.8 [33X[0;0YPaige Loops[133X[101X
+  [1X9.9 [33X[0;0YPaige Loops[133X[101X
   
   [33X[0;0Y[13XPaige  loops[113X  are  nonassociative  finite  simple Moufang loops. By [Lie87],
   there is precisely one Paige loop for every finite field.[133X
@@ -241,14 +265,14 @@
   [33X[0;0YThe  library named [13XPaige[113X contains the smallest nonassociative simple Moufang
   loop.[133X
   
-  [1X9.8-1 PaigeLoop[101X
+  [1X9.9-1 PaigeLoop[101X
   
   [33X[1;0Y[29X[2XPaigeLoop[102X( [3Xq[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe  Paige loop constructed over the finite field of order [3Xq[103X. Only
             the case [10X[3Xq[103X[10X=2[110X is implemented.[133X
   
   
-  [1X9.9 [33X[0;0YNilpotent Loops[133X[101X
+  [1X9.10 [33X[0;0YNilpotent Loops[133X[101X
   
   [33X[0;0YThe  library  named [13Xnilpotent[113X contains all nonassociative nilpotent loops of
   order  less  than 12 up to isomorphism. There are 2 nonassociative nilpotent
@@ -258,30 +282,32 @@
   are  2623755  nilpotent  loops  of order 12, and 123794003928541545927226368
   nilpotent loops of order 22.[133X
   
-  [1X9.9-1 NilpotentLoop[101X
+  [1X9.10-1 NilpotentLoop[101X
   
   [33X[1;0Y[29X[2XNilpotentLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth nilpotent loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.10 [33X[0;0YAutomorphic Loops[133X[101X
+  [1X9.11 [33X[0;0YAutomorphic Loops[133X[101X
   
   [33X[0;0YThe  library named [13Xautomorphic[113X contains all nonassociative automorphic loops
   of  order less than 16 up to isomorphism (there is 1 such loop of order 6, 7
-  of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15),
-  all  commutative automorphic loops of order 3, 9, 27 and 81 (there are 1, 2,
-  7   and   72  such  loops,  respectively,  including  abelian  groups),  and
-  commutative  automorphic loops [22XQ[122X of order 243 possessing a central subloop [22XS[122X
-  of  order  3  such  that [22XQ/S[122X is not the elementary abelian group of order 81
-  (there are 118451 such loops).[133X
+  of  order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15)
+  and all commutative automorphic loops of order 3, 9, 27 and 81 (there are 1,
+  2, 7 and 72 such loops).[133X
   
-  [1X9.10-1 AutomorphicLoop[101X
+  [33X[0;0YIt  turns  out  that  commutative automorphic loops of order 3, 9, 27 and 81
+  (but  not  243) are in one-to-on correspondence with left Bruck loops of the
+  respective orders, see [Gre14], [SV17]. Only the left Bruck loops are stored
+  in the library.[133X
+  
+  [1X9.11-1 AutomorphicLoop[101X
   
   [33X[1;0Y[29X[2XAutomorphicLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth automorphic loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.11 [33X[0;0YInteresting Loops[133X[101X
+  [1X9.12 [33X[0;0YInteresting Loops[133X[101X
   
   [33X[0;0YThe  library  named [13Xinteresting[113X contains some loops that are illustrative in
   the  theory  of  loops. At this point, the library contains a nonassociative
@@ -290,31 +316,31 @@
   generalize  octonions),  and the unique nonassociative simple right Bol loop
   of order 96 and exponent 2.[133X
   
-  [1X9.11-1 InterestingLoop[101X
+  [1X9.12-1 InterestingLoop[101X
   
   [33X[1;0Y[29X[2XInterestingLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth interesting loop of order [3Xn[103X in the library.[133X
   
   
-  [1X9.12 [33X[0;0YLibraries of Loops Up To Isotopism[133X[101X
+  [1X9.13 [33X[0;0YLibraries of Loops Up To Isotopism[133X[101X
   
   [33X[0;0YFor  the  library  named  [13Xsmall[113X we also provide the corresponding library of
   loops  up  to  isotopism.  In  general,  given  a library named [13Xlibname[113X, the
   corresponding  library  of  loops  up to isotopism is named [13Xitp lib[113X, and the
   loops can be retrieved by the template [10XItpLibLoop(n,m)[110X.[133X
   
-  [1X9.12-1 ItpSmallLoop[101X
+  [1X9.13-1 ItpSmallLoop[101X
   
   [33X[1;0Y[29X[2XItpSmallLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth small loop of order [3Xn[103X up to isotopism in the library.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XSmallLoop( 6, 14 );[127X[104X
-    [4X[28X<small loop 6/14>[128X[104X
-    [4X[25Xgap>[125X [27XItpSmallLoop( 6, 14 );[127X[104X
-    [4X[28X<small loop 6/42>[128X[104X
-    [4X[25Xgap>[125X [27XLibraryLoop( "itp small", 6, 14 );[127X[104X
-    [4X[28X<small loop 6/42>[128X[104X
+    [4X[25Xgap>[125X [27XSmallLoop( 6, 14 );[127X[104X
+    [4X[28X<small loop 6/14>[128X[104X
+    [4X[25Xgap>[125X [27XItpSmallLoop( 6, 14 );[127X[104X
+    [4X[28X<small loop 6/42>[128X[104X
+    [4X[25Xgap>[125X [27XLibraryLoop( "itp small", 6, 14 );[127X[104X
+    [4X[28X<small loop 6/42>[128X[104X
   [4X[32X[104X
   
   [33X[0;0YNote  that  loops up to isotopism form a subset of the corresponding library

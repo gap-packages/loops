@@ -120,10 +120,12 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X82373C5479574F22">6.11-3 QuasigroupsUpToIsomorphism</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8308F38283C61B20">6.11-4 LoopsUpToIsomorphism</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X87677B0787B4461A">6.11-5 AutomorphismGroup</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85B3E22679FD8D81">6.11-6 IsomorphicCopyByPerm</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8121DE3A78795040">6.11-7 IsomorphicCopyByNormalSubloop</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7D09D8957E4A0973">6.11-8 Discriminator</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X812F0DEE7C896E18">6.11-9 AreEqualDiscriminators</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7A42812B7B027DD4">6.11-6 QuasigroupIsomorph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7BD1AC32851286EA">6.11-7 LoopIsomorph</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X85B3E22679FD8D81">6.11-8 IsomorphicCopyByPerm</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X8121DE3A78795040">6.11-9 IsomorphicCopyByNormalSubloop</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X7D09D8957E4A0973">6.11-10 Discriminator</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6_mj.html#X812F0DEE7C896E18">6.11-11 AreEqualDiscriminators</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6_mj.html#X7E996BDD81E594F9">6.12 <span class="Heading">Isotopisms</span></a>
 </span>
@@ -266,26 +268,26 @@
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );</span>
 &lt;loop of order 3&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Parent( S ) = M, Elements( S ), PosInParent( S ) ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Parent( S ) = M, Elements( S ), PosInParent( S ) ];</span>
 [ true, [ l1, l3, l5], [ 1, 3, 5 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasCayleyTable( S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">HasCayleyTable( S );</span>
 false
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetLoopElmName( S, "s" );; Elements( S ); Elements( M );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetLoopElmName( S, "s" );; Elements( S ); Elements( M );</span>
 [ s1, s3, s5 ]
 [ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTable( S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CayleyTable( S );</span>
 [ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftSection( S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftSection( S );</span>
 [ (), (1,3,5), (1,5,3) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ HasCayleyTable( S ), Parent( S ) = M ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ HasCayleyTable( S ), Parent( S ) = M ];</span>
 [ true, true ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );</span>
 [ l1, l2, l3 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];</span>
 [ true, true, false ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftSection( L );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftSection( L );</span>
 [ (), (1,2,3), (1,3,2) ]
 </pre></div>
 
@@ -350,14 +352,14 @@ false
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := MoufangLoop(12,1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := MoufangLoop(12,1);</span>
 &lt;Moufang loop 12/1&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftSection(M)[2];</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LeftSection(M)[2];</span>
 (1,2)(3,4)(5,6)(7,8)(9,12)(10,11)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Mlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Mlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);</span>
 &lt;permutation group of size 2592 with 23 generators&gt;
 Group([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(Inn);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Size(Inn);</span>
 216
 </pre></div>
 
@@ -465,13 +467,13 @@ Group([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );</span>
 &lt;loop of order 3&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormal( M, S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNormal( M, S );</span>
 true
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FactorLoop( M, S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F := FactorLoop( M, S );</span>
 &lt;loop of order 4&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NaturalHomomorphismByNormalSubloop( M, S );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NaturalHomomorphismByNormalSubloop( M, S );</span>
 MappingByFunction( &lt;loop of order 12&gt;, &lt;loop of order 4&gt;,
     function( x ) ... end )
 </pre></div>
@@ -607,16 +609,30 @@ MappingByFunction( &lt;loop of order 12&gt;, &lt;loop of order 4&gt;,
 
 <p>While dealing with Cayley tables, it is often useful to rename or reorder the elements of the underlying quasigroup without changing the isomorphism type of the quasigroups. <strong class="pkg">LOOPS</strong> contains several functions for this purpose.</p>
 
+<p><a id="X7A42812B7B027DD4" name="X7A42812B7B027DD4"></a></p>
+
+<h5>6.11-6 QuasigroupIsomorph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; QuasigroupIsomorph</code>( <var class="Arg">Q</var>, <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: When <var class="Arg">Q</var> is a quasigroup and <var class="Arg">f</var> is a permutation of <span class="SimpleMath">\(1,\dots,|\)</span><var class="Arg">Q</var><span class="SimpleMath">\(|\)</span>, returns the quasigroup defined on the same set as <var class="Arg">Q</var> with multiplication <span class="SimpleMath">\(*\)</span> defined by <span class="SimpleMath">\(x*y = \)</span><var class="Arg">f</var><span class="SimpleMath">\((\)</span><var class="Arg">f</var><span class="SimpleMath">\({}^{-1}(x)\)</span><var class="Arg">f</var><span class="SimpleMath">\({}^{-1}(y))\)</span>.</p>
+
+<p><a id="X7BD1AC32851286EA" name="X7BD1AC32851286EA"></a></p>
+
+<h5>6.11-7 LoopIsomorph</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LoopIsomorph</code>( <var class="Arg">Q</var>, <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Returns: When <var class="Arg">Q</var> is a loop and <var class="Arg">f</var> is a permutation of <span class="SimpleMath">\(1,\dots,|\)</span><var class="Arg">Q</var><span class="SimpleMath">\(|\)</span> fixing <span class="SimpleMath">\(1\)</span>, returns the loop defined on the same set as <var class="Arg">Q</var> with multiplication <span class="SimpleMath">\(*\)</span> defined by <span class="SimpleMath">\(x*y = \)</span><var class="Arg">f</var><span class="SimpleMath">\((\)</span><var class="Arg">f</var><span class="SimpleMath">\({}^{-1}(x)\)</span><var class="Arg">f</var><span class="SimpleMath">\({}^{-1}(y))\)</span>. If <var class="Arg">f</var><span class="SimpleMath">\((1)=c\ne 1\)</span>, the isomorphism <span class="SimpleMath">\((1,c)\)</span> is applied after <var class="Arg">f</var>.</p>
+
 <p><a id="X85B3E22679FD8D81" name="X85B3E22679FD8D81"></a></p>
 
-<h5>6.11-6 IsomorphicCopyByPerm</h5>
+<h5>6.11-8 IsomorphicCopyByPerm</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsomorphicCopyByPerm</code>( <var class="Arg">Q</var>, <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
-<p>Returns: When <var class="Arg">Q</var> is a quasigroup and <var class="Arg">f</var> is a permutation of <span class="SimpleMath">\(1,\dots,|\)</span><var class="Arg">Q</var><span class="SimpleMath">\(|\)</span>, returns a quasigroup defined on the same set as <var class="Arg">Q</var> with multiplication <span class="SimpleMath">\(*\)</span> defined by <span class="SimpleMath">\(x*y = \)</span><var class="Arg">f</var><span class="SimpleMath">\((\)</span><var class="Arg">f</var><span class="SimpleMath">\({}^{-1}(x)\)</span><var class="Arg">f</var><span class="SimpleMath">\({}^{-1}(y))\)</span>. When <var class="Arg">Q</var> is a declared loop, a loop is returned. Consequently, when <var class="Arg">Q</var> is a declared loop and <var class="Arg">f</var><span class="SimpleMath">\((1) = k\ne 1\)</span>, then <var class="Arg">f</var> is first replaced with <var class="Arg">f</var><span class="SimpleMath">\(\circ (1,k)\)</span>, to make sure that the resulting Cayley table is normalized.</p>
+<p>Returns: <code class="code">LoopIsomorphism(<var class="Arg">Q</var>,<var class="Arg">f</var>)</code> if <var class="Arg">Q</var> is a loop, and <code class="code">QuasigroupIsomorphism(<var class="Arg">Q</var>,<var class="Arg">f</var>)</code> if <var class="Arg">Q</var> is a quasigroup.</p>
 
 <p><a id="X8121DE3A78795040" name="X8121DE3A78795040"></a></p>
 
-<h5>6.11-7 IsomorphicCopyByNormalSubloop</h5>
+<h5>6.11-9 IsomorphicCopyByNormalSubloop</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsomorphicCopyByNormalSubloop</code>( <var class="Arg">Q</var>, <var class="Arg">S</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: When <var class="Arg">S</var> is a normal subloop of a loop <var class="Arg">Q</var>, returns an isomorphic copy of <var class="Arg">Q</var> in which the elements are ordered according to the right cosets of <var class="Arg">S</var>. In particular, the Cayley table of <var class="Arg">S</var> will appear in the top left corner of the Cayley table of the resulting loop.<br /></p>
@@ -625,7 +641,7 @@ MappingByFunction( &lt;loop of order 12&gt;, &lt;loop of order 4&gt;,
 
 <p><a id="X7D09D8957E4A0973" name="X7D09D8957E4A0973"></a></p>
 
-<h5>6.11-8 Discriminator</h5>
+<h5>6.11-10 Discriminator</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Discriminator</code>( <var class="Arg">Q</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: A data structure with isomorphism invariants of a loop <var class="Arg">Q</var>.</p>
@@ -636,7 +652,7 @@ MappingByFunction( &lt;loop of order 12&gt;, &lt;loop of order 4&gt;,
 
 <p><a id="X812F0DEE7C896E18" name="X812F0DEE7C896E18"></a></p>
 
-<h5>6.11-9 AreEqualDiscriminators</h5>
+<h5>6.11-11 AreEqualDiscriminators</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AreEqualDiscriminators</code>( <var class="Arg">D1</var>, <var class="Arg">D2</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Returns: <code class="code">true</code> if <var class="Arg">D1</var>, <var class="Arg">D2</var> are equal discriminators for the purposes of isomorphism searches.</p>

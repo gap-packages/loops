@@ -164,27 +164,27 @@
   subquasigroup (subloop). This is because the elements are shared.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XM := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );[127X[104X
-    [4X[28X<loop of order 3>[128X[104X
-    [4X[25Xgap>[125X [27X[ Parent( S ) = M, Elements( S ), PosInParent( S ) ];[127X[104X
-    [4X[28X[ true, [ l1, l3, l5], [ 1, 3, 5 ] ][128X[104X
-    [4X[25Xgap>[125X [27XHasCayleyTable( S );[127X[104X
-    [4X[28Xfalse[128X[104X
-    [4X[25Xgap>[125X [27XSetLoopElmName( S, "s" );; Elements( S ); Elements( M );[127X[104X
-    [4X[28X[ s1, s3, s5 ][128X[104X
-    [4X[28X[ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ][128X[104X
-    [4X[25Xgap>[125X [27XCayleyTable( S );[127X[104X
-    [4X[28X[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ][128X[104X
-    [4X[25Xgap>[125X [27XLeftSection( S );[127X[104X
-    [4X[28X[ (), (1,3,5), (1,5,3) ][128X[104X
-    [4X[25Xgap>[125X [27X[ HasCayleyTable( S ), Parent( S ) = M ];[127X[104X
-    [4X[28X[ true, true ][128X[104X
-    [4X[25Xgap>[125X [27XL := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );[127X[104X
-    [4X[28X[ l1, l2, l3 ][128X[104X
-    [4X[25Xgap>[125X [27X[ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];[127X[104X
-    [4X[28X[ true, true, false ][128X[104X
-    [4X[25Xgap>[125X [27XLeftSection( L );[127X[104X
-    [4X[28X[ (), (1,2,3), (1,3,2) ][128X[104X
+    [4X[25Xgap>[125X [27XM := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.5 ] );[127X[104X
+    [4X[28X<loop of order 3>[128X[104X
+    [4X[25Xgap>[125X [27X[ Parent( S ) = M, Elements( S ), PosInParent( S ) ];[127X[104X
+    [4X[28X[ true, [ l1, l3, l5], [ 1, 3, 5 ] ][128X[104X
+    [4X[25Xgap>[125X [27XHasCayleyTable( S );[127X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XSetLoopElmName( S, "s" );; Elements( S ); Elements( M );[127X[104X
+    [4X[28X[ s1, s3, s5 ][128X[104X
+    [4X[28X[ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ][128X[104X
+    [4X[25Xgap>[125X [27XCayleyTable( S );[127X[104X
+    [4X[28X[ [ 1, 3, 5 ], [ 3, 5, 1 ], [ 5, 1, 3 ] ][128X[104X
+    [4X[25Xgap>[125X [27XLeftSection( S );[127X[104X
+    [4X[28X[ (), (1,3,5), (1,5,3) ][128X[104X
+    [4X[25Xgap>[125X [27X[ HasCayleyTable( S ), Parent( S ) = M ];[127X[104X
+    [4X[28X[ true, true ][128X[104X
+    [4X[25Xgap>[125X [27XL := LoopByCayleyTable( CayleyTable( S ) );; Elements( L );[127X[104X
+    [4X[28X[ l1, l2, l3 ][128X[104X
+    [4X[25Xgap>[125X [27X[ Parent( L ) = L, IsSubloop( M, S ), IsSubloop( M, L ) ];[127X[104X
+    [4X[28X[ true, true, false ][128X[104X
+    [4X[25Xgap>[125X [27XLeftSection( L );[127X[104X
+    [4X[28X[ (), (1,2,3), (1,3,2) ][128X[104X
   [4X[32X[104X
   
   
@@ -254,15 +254,15 @@
   [33X[0;0YHere is an example for multiplication groups and inner mapping groups:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XM := MoufangLoop(12,1);[127X[104X
-    [4X[28X<Moufang loop 12/1>[128X[104X
-    [4X[25Xgap>[125X [27XLeftSection(M)[2];[127X[104X
-    [4X[28X(1,2)(3,4)(5,6)(7,8)(9,12)(10,11)[128X[104X
-    [4X[25Xgap>[125X [27XMlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);[127X[104X
-    [4X[28X<permutation group of size 2592 with 23 generators>[128X[104X
-    [4X[28XGroup([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])[128X[104X
-    [4X[25Xgap>[125X [27XSize(Inn);[127X[104X
-    [4X[28X216[128X[104X
+    [4X[25Xgap>[125X [27XM := MoufangLoop(12,1);[127X[104X
+    [4X[28X<Moufang loop 12/1>[128X[104X
+    [4X[25Xgap>[125X [27XLeftSection(M)[2];[127X[104X
+    [4X[28X(1,2)(3,4)(5,6)(7,8)(9,12)(10,11)[128X[104X
+    [4X[25Xgap>[125X [27XMlt := MultiplicationGroup(M); Inn := InnerMappingGroup(M);[127X[104X
+    [4X[28X<permutation group of size 2592 with 23 generators>[128X[104X
+    [4X[28XGroup([ (4,6)(7,11), (7,11)(8,10), (2,6,4)(7,9,11), (3,5)(9,11), (8,12,10) ])[128X[104X
+    [4X[25Xgap>[125X [27XSize(Inn);[127X[104X
+    [4X[28X216[128X[104X
   [4X[32X[104X
   
   
@@ -359,15 +359,15 @@
             projection from [3XQ[103X onto [3XQ[103X[22X/[122X[3XS[103X.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XM := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );[127X[104X
-    [4X[28X<loop of order 3>[128X[104X
-    [4X[25Xgap>[125X [27XIsNormal( M, S );[127X[104X
-    [4X[28Xtrue[128X[104X
-    [4X[25Xgap>[125X [27XF := FactorLoop( M, S );[127X[104X
-    [4X[28X<loop of order 4>[128X[104X
-    [4X[25Xgap>[125X [27XNaturalHomomorphismByNormalSubloop( M, S );[127X[104X
-    [4X[28XMappingByFunction( <loop of order 12>, <loop of order 4>,[128X[104X
-    [4X[28X    function( x ) ... end )[128X[104X
+    [4X[25Xgap>[125X [27XM := MoufangLoop( 12, 1 );; S := Subloop( M, [ M.3 ] );[127X[104X
+    [4X[28X<loop of order 3>[128X[104X
+    [4X[25Xgap>[125X [27XIsNormal( M, S );[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XF := FactorLoop( M, S );[127X[104X
+    [4X[28X<loop of order 4>[128X[104X
+    [4X[25Xgap>[125X [27XNaturalHomomorphismByNormalSubloop( M, S );[127X[104X
+    [4X[28XMappingByFunction( <loop of order 12>, <loop of order 4>,[128X[104X
+    [4X[28X    function( x ) ... end )[128X[104X
   [4X[32X[104X
   
   
@@ -488,17 +488,28 @@
   the  elements  of the underlying quasigroup without changing the isomorphism
   type of the quasigroups. [5XLOOPS[105X contains several functions for this purpose.[133X
   
-  [1X6.11-6 IsomorphicCopyByPerm[101X
+  [1X6.11-6 QuasigroupIsomorph[101X
+  
+  [33X[1;0Y[29X[2XQuasigroupIsomorph[102X( [3XQ[103X, [3Xf[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XQ[103X  is  a  quasigroup  and  [3Xf[103X is a permutation of [22X1,dots,|[122X[3XQ[103X[22X|[122X,
+            returns  the  quasigroup  defined  on  the  same  set  as  [3XQ[103X  with
+            multiplication [22X*[122X defined by [22Xx*y =[122X[3Xf[103X[22X([122X[3Xf[103X[22X^-1(x)[122X[3Xf[103X[22X^-1(y))[122X.[133X
+  
+  [1X6.11-7 LoopIsomorph[101X
+  
+  [33X[1;0Y[29X[2XLoopIsomorph[102X( [3XQ[103X, [3Xf[103X ) [32X operation[133X
+  [6XReturns:[106X  [33X[0;10YWhen  [3XQ[103X  is  a loop and [3Xf[103X is a permutation of [22X1,dots,|[122X[3XQ[103X[22X|[122X fixing [22X1[122X,
+            returns  the loop defined on the same set as [3XQ[103X with multiplication
+            [22X*[122X   defined   by   [22Xx*y  =[122X[3Xf[103X[22X([122X[3Xf[103X[22X^-1(x)[122X[3Xf[103X[22X^-1(y))[122X.  If  [3Xf[103X[22X(1)=cne  1[122X,  the
+            isomorphism [22X(1,c)[122X is applied after [3Xf[103X.[133X
+  
+  [1X6.11-8 IsomorphicCopyByPerm[101X
   
   [33X[1;0Y[29X[2XIsomorphicCopyByPerm[102X( [3XQ[103X, [3Xf[103X ) [32X operation[133X
-  [6XReturns:[106X  [33X[0;10YWhen  [3XQ[103X  is  a  quasigroup  and  [3Xf[103X is a permutation of [22X1,dots,|[122X[3XQ[103X[22X|[122X,
-            returns   a   quasigroup  defined  on  the  same  set  as  [3XQ[103X  with
-            multiplication  [22X*[122X  defined  by [22Xx*y =[122X[3Xf[103X[22X([122X[3Xf[103X[22X^-1(x)[122X[3Xf[103X[22X^-1(y))[122X. When [3XQ[103X is a
-            declared  loop,  a  loop  is  returned.  Consequently, when [3XQ[103X is a
-            declared  loop  and [3Xf[103X[22X(1) = kne 1[122X, then [3Xf[103X is first replaced with [3Xf[103X[22X∘
-            (1,k)[122X, to make sure that the resulting Cayley table is normalized.[133X
+  [6XReturns:[106X  [33X[0;10Y[10XLoopIsomorphism([3XQ[103X[10X,[3Xf[103X[10X)[110X      if      [3XQ[103X     is     a     loop,     and
+            [10XQuasigroupIsomorphism([3XQ[103X[10X,[3Xf[103X[10X)[110X if [3XQ[103X is a quasigroup.[133X
   
-  [1X6.11-7 IsomorphicCopyByNormalSubloop[101X
+  [1X6.11-9 IsomorphicCopyByNormalSubloop[101X
   
   [33X[1;0Y[29X[2XIsomorphicCopyByNormalSubloop[102X( [3XQ[103X, [3XS[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YWhen [3XS[103X is a normal subloop of a loop [3XQ[103X, returns an isomorphic copy
@@ -511,7 +522,7 @@
   these  invariants  to  partition  the loop into blocks of elements preserved
   under isomorphisms. The following two operations are used in the search.[133X
   
-  [1X6.11-8 Discriminator[101X
+  [1X6.11-10 Discriminator[101X
   
   [33X[1;0Y[29X[2XDiscriminator[102X( [3XQ[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10YA data structure with isomorphism invariants of a loop [3XQ[103X.[133X
@@ -523,7 +534,7 @@
   [33X[0;0YIf two loops have different discriminators, they are not isomorphic. If they
   have identical discriminators, they may or may not be isomorphic.[133X
   
-  [1X6.11-9 AreEqualDiscriminators[101X
+  [1X6.11-11 AreEqualDiscriminators[101X
   
   [33X[1;0Y[29X[2XAreEqualDiscriminators[102X( [3XD1[103X, [3XD2[103X ) [32X operation[133X
   [6XReturns:[106X  [33X[0;10Y[10Xtrue[110X  if  [3XD1[103X,  [3XD2[103X  are  equal  discriminators  for the purposes of

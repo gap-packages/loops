@@ -11,7 +11,7 @@
       left 7.4 
       right 7.4 
   antiautomorphic inverse property 7.2-5 
-  [2XAreEqualDiscriminators[102X 6.11-9 
+  [2XAreEqualDiscriminators[102X 6.11-11 
   [2XAssociatedLeftBruckLoop[102X 8.1-1 
   [2XAssociatedRightBruckLoop[102X 8.1-1 
   associator 2.5 
@@ -23,7 +23,7 @@
       left 7.7 
       middle 7.7 
       right 7.7 
-  [2XAutomorphicLoop[102X 9.10-1 
+  [2XAutomorphicLoop[102X 9.11-1 
   [2XAutomorphismGroup[102X 6.11-5 
   Bol loop, left 3.3  7.4  8.1-1 
       right 7.4 
@@ -37,7 +37,7 @@
       canonical 4.3-1 
   [2XCayleyTable[102X 5.1-2 
   [2XCayleyTableByPerms[102X 4.6-1 
-  [2XCCLoop[102X 9.6-3 
+  [2XCCLoop[102X 9.7-3 
   center 2.3 
   [2XCenter[102X 6.6-4 
   central series, lower 6.9-5 
@@ -45,7 +45,7 @@
   Chein loop 8.2-3 
   cocycle 4.8 
   code loop 7.8-1 
-  [2XCodeLoop[102X 9.4-1 
+  [2XCodeLoop[102X 9.5-1 
   commutant 2.3 
   [2XCommutant[102X 6.6-3 
   commutator 2.5 
@@ -53,7 +53,7 @@
   conjugacy closed loop 7.6 
       left 7.6 
       right 7.6 
-  [2XConjugacyClosedLoop[102X 9.6-3 
+  [2XConjugacyClosedLoop[102X 9.7-3 
   conjugation 6.5 
   coset 6.2-6 
   derived series 2.4 
@@ -62,7 +62,7 @@
   [2XDerivedSubloop[102X 6.10-2 
   diassociative quasigroup 7.1-4 
   [2XDirectProduct[102X 4.11-1 
-  [2XDiscriminator[102X 6.11-8 
+  [2XDiscriminator[102X 6.11-10 
   [2XDisplayLibraryInfo[102X 9.1-3 
   distributive quasigroup 7.3-6 
       left 7.3-6 
@@ -72,8 +72,8 @@
   [2XElements[102X 5.1-1 
   entropic quasigroup 7.3-7 
   exact group factorization 8.1-2 
-  [2XExponent[102X 5.1-5 
   exponent 5.1-5 
+  [2XExponent[102X 5.1-5 
   extension 4.8 
       nuclear 4.8 
   extra loop 7.4 
@@ -109,7 +109,7 @@
       middle 6.5 
       right 2.2 
   [2XInnerMappingGroup[102X 6.5-3 
-  [2XInterestingLoop[102X 9.11-1 
+  [2XInterestingLoop[102X 9.12-1 
   [2XIntoGroup[102X 4.10-4 
   [2XIntoLoop[102X 4.10-3 
   [2XIntoQuasigroup[102X 4.10-1 
@@ -164,8 +164,8 @@
   [2XIsNilpotent[102X 6.9-1 
   [2XIsNormal[102X 6.7-1 
   [2XIsNuclearSquareLoop[102X 7.4-11 
-  [2XIsomorphicCopyByNormalSubloop[102X 6.11-7 
-  [2XIsomorphicCopyByPerm[102X 6.11-6 
+  [2XIsomorphicCopyByNormalSubloop[102X 6.11-9 
+  [2XIsomorphicCopyByPerm[102X 6.11-8 
   isomorphism 2.6 
   [2XIsomorphismLoops[102X 6.11-2 
   [2XIsomorphismQuasigroups[102X 6.11-1 
@@ -201,15 +201,16 @@
   [2XIsSubquasigroup[102X 6.2-3 
   [2XIsTotallySymmetric[102X 7.3-2 
   [2XIsUnipotent[102X 7.3-5 
-  [2XItpSmallLoop[102X 9.12-1 
+  [2XItpSmallLoop[102X 9.13-1 
   K loop, left 7.8-3 
       right 7.8-4 
   latin square 2.1  4.1 
       random 4.9 
   LC loop 7.4 
-  [2XLCCLoop[102X 9.6-2 
+  [2XLCCLoop[102X 9.7-2 
   [2XLeftBolLoop[102X 9.2-1 
-  [2XLeftConjugacyClosedLoop[102X 9.6-2 
+  [2XLeftBruckLoop[102X 9.3-1 
+  [2XLeftConjugacyClosedLoop[102X 9.7-2 
   [2XLeftDivision[102X 5.2-1  5.2-1  5.2-1 
   [2XLeftDivisionCayleyTable[102X 5.2-2 
   [2XLeftInnerMapping[102X 6.5-1 
@@ -220,6 +221,7 @@
   [2XLeftSection[102X 6.3-2 
   [2XLeftTranslation[102X 6.3-1 
   [2XLibraryLoop[102X 9.1-1 
+  License .-2 
   loop 2.1 
       alternative 7.4 
       associated left Bruck 8.1-1 
@@ -244,10 +246,10 @@
       Moufang 7.4 
       nilpotent 2.4  4.9-2 
       nuclear square 7.4 
-      octonion 9.3-1 
+      octonion 9.4-1 
       of Bol-Moufang type 7.4 
       Osborn 7.6-4 
-      Paige 9.8 
+      Paige 9.9 
       power alternative 7.5 
       power associative 5.1-5 
       RC 7.4 
@@ -259,7 +261,7 @@
       right K 7.8-4 
       right nuclear square 7.4 
       right power alternative 7.5 
-      sedenion 9.11 
+      sedenion 9.12 
       simple 3.3  6.7-3 
       solvable 2.4 
       Steiner 7.8-2 
@@ -274,6 +276,7 @@
   [2XLoopByRightFolder[102X 4.7-1 
   [2XLoopByRightSection[102X 4.6-3 
   [2XLoopFromFile[102X 4.5-1 
+  [2XLoopIsomorph[102X 6.11-7 
   [2XLoopMG2[102X 8.2-3 
   [2XLoopsUpToIsomorphism[102X 6.11-4 
   [2XLoopsUpToIsotopism[102X 6.12-2 
@@ -287,7 +290,7 @@
       dihedral 8.2-2 
       Moufang 8.2 
   Moufang loop 7.4 
-  [2XMoufangLoop[102X 9.3-1 
+  [2XMoufangLoop[102X 9.4-1 
   multiplication group 2.2 
       left 2.2 
       relative 6.4-2 
@@ -303,7 +306,7 @@
   [2XNilpotencyClassOfLoop[102X 6.9-2 
   nilpotent loop 2.4 
       strongly 6.9-3 
-  [2XNilpotentLoop[102X 9.9-1 
+  [2XNilpotentLoop[102X 9.10-1 
   normal closure 6.7-2 
   normal subloop 6.7-1 
   [2XNormalClosure[102X 6.7-2 
@@ -320,7 +323,7 @@
       right 2.3 
   [2XNucleusOfLoop[102X 6.6-2 
   [2XNucleusOfQuasigroup[102X 6.6-2 
-  octonion loop 9.3-1 
+  octonion loop 9.4-1 
   [2XOne[102X 5.1-3 
   [2XOneLoopTableInGroup[102X 8.4-3 
   [2XOneLoopWithMltGroup[102X 8.4-6 
@@ -330,8 +333,8 @@
   [2XOppositeLoop[102X 4.12-1 
   [2XOppositeQuasigroup[102X 4.12-1 
   Osborn loop 7.6-4 
-  Paige loop 9.8 
-  [2XPaigeLoop[102X 9.8-1 
+  Paige loop 9.9 
+  [2XPaigeLoop[102X 9.9-1 
   [2XParent[102X 6.1-1 
   [2XPosInParent[102X 6.1-3 
   [2XPosition[102X 6.1-2 
@@ -361,18 +364,20 @@
   [2XQuasigroupByRightFolder[102X 4.7-1 
   [2XQuasigroupByRightSection[102X 4.6-3 
   [2XQuasigroupFromFile[102X 4.5-1 
+  [2XQuasigroupIsomorph[102X 6.11-6 
   [2XQuasigroupsUpToIsomorphism[102X 6.11-3 
   [2XRandomLoop[102X 4.9-1 
   [2XRandomNilpotentLoop[102X 4.9-2 
   [2XRandomQuasigroup[102X 4.9-1 
   RC loop 7.4 
-  [2XRCCLoop[102X 9.6-1 
+  [2XRCCLoop[102X 9.7-1 
   [2XRelativeLeftMultiplicationGroup[102X 6.4-2 
   [2XRelativeMultiplicationGroup[102X 6.4-2 
   [2XRelativeRightMultiplicationGroup[102X 6.4-2 
   [2XRightBolLoop[102X 9.2-2 
   [2XRightBolLoopByExactGroupFactorization[102X 8.1-3 
-  [2XRightConjugacyClosedLoop[102X 9.6-1 
+  [2XRightBruckLoop[102X 9.3-2 
+  [2XRightConjugacyClosedLoop[102X 9.7-1 
   [2XRightCosets[102X 6.2-6 
   [2XRightDivision[102X 5.2-1  5.2-1  5.2-1 
   [2XRightDivisionCayleyTable[102X 5.2-2 
@@ -386,19 +391,19 @@
   [2XRightTransversal[102X 6.2-7 
   section, left 2.2 
       right 2.2 
-  sedenion loop 9.11 
+  sedenion loop 9.12 
   semisymmetric quasigroup 7.3-1 
   [2XSetLoopElmName[102X 3.4-1 
   [2XSetQuasigroupElmName[102X 3.4-1 
   simple loop 3.3  6.7-3 
   [2XSize[102X 5.1-4 
   [2XSmallGeneratingSet[102X 5.5-3 
-  [2XSmallLoop[102X 9.7-1 
+  [2XSmallLoop[102X 9.8-1 
   solvability class 2.4 
   solvable loop 2.4 
   Steiner loop 7.8-2 
   Steiner quasigroup 7.3-4 
-  [2XSteinerLoop[102X 9.5-1 
+  [2XSteinerLoop[102X 9.6-1 
   strongly nilpotent loop 6.9-3 
   subloop 2.3 
   [2XSubloop[102X 6.2-2 

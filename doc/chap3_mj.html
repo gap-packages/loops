@@ -81,8 +81,8 @@ DeclareCategory( "IsLoopElement",
 DeclareRepresentation( "IsLoopElmRep",
     IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
 ## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
-DeclareCategory( "IsLatin", IsObject );
-DeclareCategory( "IsQuasigroup", IsMagma and IsLatin );
+DeclareCategory( "IsLatinMagma", IsObject );
+DeclareCategory( "IsQuasigroup", IsMagma and IsLatinMagma );
 DeclareCategory( "IsLoop", IsQuasigroup and
     IsMultiplicativeElementWithInverseCollection);
 
@@ -163,13 +163,13 @@ DeclareCategory( "IsLoop", IsQuasigroup and
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L;</span>
 &lt;loop of order 2&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( L );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( L );</span>
 &lt;loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Elements( L );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Elements( L );</span>
 [ l1, l2 ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetLoopElmName( L, "loop_element" );; Elements( L );</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetLoopElmName( L, "loop_element" );; Elements( L );</span>
 [ loop_element1, loop_element2 ]
 </pre></div>
 

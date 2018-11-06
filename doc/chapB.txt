@@ -105,9 +105,6 @@
   [33X[0;0Y[10X( IsLeftAutomorphicLoop, IsAutomorphicLoop )[110X[133X
   [33X[0;0Y[10X( IsRightAutomorphicLoop, IsAutomorphicLoop )[110X[133X
   [33X[0;0Y[10X( IsMiddleAutomorphicLoop, IsAutomorphicLoop )[110X[133X
-  [33X[0;0Y[10X( IsMiddleAutomorphicLoop, IsCommutative )[110X[133X
-  [33X[0;0Y[10X( IsAutomorphicLoop, IsLeftAutomorphicLoop and IsCommutative )[110X[133X
-  [33X[0;0Y[10X( IsAutomorphicLoop, IsRightAutomorphicLoop and IsCommutative )[110X[133X
   [33X[0;0Y[10X(          IsLeftAutomorphicLoop,         IsRightAutomorphicLoop         and
   HasAntiautomorphicInverseProperty )[110X[133X
   [33X[0;0Y[10X(          IsRightAutomorphicLoop,         IsLeftAutomorphicLoop         and
@@ -120,9 +117,13 @@
   [33X[0;0Y[10X( IsMoufangLoop, IsAutomorphicLoop and HasLeftInverseProperty )[110X[133X
   [33X[0;0Y[10X( IsMoufangLoop, IsAutomorphicLoop and HasRightInverseProperty )[110X[133X
   [33X[0;0Y[10X( IsMoufangLoop, IsAutomorphicLoop and HasWeakInverseProperty )[110X[133X
+  [33X[0;0Y[10X( IsMiddleAutomorphicLoop, IsCommutative )[110X[133X
   [33X[0;0Y[10X( IsLeftAutomorphicLoop, IsLeftBruckLoop )[110X[133X
   [33X[0;0Y[10X( IsLeftAutomorphicLoop, IsLCCLoop )[110X[133X
   [33X[0;0Y[10X( IsRightAutomorphicLoop, IsRightBruckLoop )[110X[133X
   [33X[0;0Y[10X( IsRightAutomorphicLoop, IsRCCLoop )[110X[133X
   [33X[0;0Y[10X( IsAutomorphicLoop, IsCommutative and IsMoufangLoop )[110X[133X
+  [33X[0;0Y[10X( IsAutomorphicLoop, IsLeftAutomorphicLoop and IsMiddleAutomorphicLoop )[110X[133X
+  [33X[0;0Y[10X( IsAutomorphicLoop, IsRightAutomorphicLoop and IsMiddleAutomorphicLoop )[110X[133X
+  [33X[0;0Y[10X( IsAutomorphicLoop, IsAssociative )[110X[133X
   

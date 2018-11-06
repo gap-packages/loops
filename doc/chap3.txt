@@ -40,8 +40,8 @@
   DeclareRepresentation( "IsLoopElmRep",
       IsPositionalObjectRep and IsMultiplicativeElementWithInverse, [1] );
   ## latin (auxiliary category for GAP to tell apart IsMagma and IsQuasigroup)
-  DeclareCategory( "IsLatin", IsObject );
-  DeclareCategory( "IsQuasigroup", IsMagma and IsLatin );
+  DeclareCategory( "IsLatinMagma", IsObject );
+  DeclareCategory( "IsQuasigroup", IsMagma and IsLatinMagma );
   DeclareCategory( "IsLoop", IsQuasigroup and
       IsMultiplicativeElementWithInverseCollection);
   
@@ -155,13 +155,13 @@
   [33X[0;0YIn the following example, [10XL[110X is a loop with two elements.[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XL;[127X[104X
-    [4X[28X<loop of order 2>[128X[104X
-    [4X[25Xgap>[125X [27XPrint( L );[127X[104X
-    [4X[28X<loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]>[128X[104X
-    [4X[25Xgap>[125X [27XElements( L );[127X[104X
-    [4X[28X[ l1, l2 ][128X[104X
-    [4X[25Xgap>[125X [27XSetLoopElmName( L, "loop_element" );; Elements( L );[127X[104X
-    [4X[28X[ loop_element1, loop_element2 ][128X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
+    [4X[28X<loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27XPrint( L );[127X[104X
+    [4X[28X<loop with multiplication table [ [ 1,  2 ], [  2,  1 ] ]>[128X[104X
+    [4X[25Xgap>[125X [27XElements( L );[127X[104X
+    [4X[28X[ l1, l2 ][128X[104X
+    [4X[25Xgap>[125X [27XSetLoopElmName( L, "loop_element" );; Elements( L );[127X[104X
+    [4X[28X[ loop_element1, loop_element2 ][128X[104X
   [4X[32X[104X
   

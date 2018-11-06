@@ -303,18 +303,18 @@
   conventions of [5XLOOPS[105X at work:[133X
   
   [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27XL := LoopByCayleyTable( [ [ 1, 2 ], [ 2, 1 ] ] );[127X[104X
-    [4X[28X<loop of order 2>[128X[104X
-    [4X[25Xgap>[125X [27X[ IsLeftBolLoop( L ), L ][127X[104X
-    [4X[28X[ true, <left Bol loop of order 2> ][128X[104X
-    [4X[25Xgap>[125X [27X[ HasIsLeftAlternativeLoop( L ), IsLeftAlternativeLoop( L ) ];[127X[104X
-    [4X[28X[ true, true ][128X[104X
-    [4X[25Xgap>[125X [27X[ HasIsRightBolLoop( L ), IsRightBolLoop( L ) ];[127X[104X
-    [4X[28X[ false, true ][128X[104X
-    [4X[25Xgap>[125X [27XL;[127X[104X
-    [4X[28X<Moufang loop of order 2>[128X[104X
-    [4X[25Xgap>[125X [27X[ IsAssociative( L ), L ];[127X[104X
-    [4X[28X[ true, <associative loop of order 2> ][128X[104X
+    [4X[25Xgap>[125X [27XL := LoopByCayleyTable( [ [ 1, 2 ], [ 2, 1 ] ] );[127X[104X
+    [4X[28X<loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27X[ IsLeftBolLoop( L ), L ][127X[104X
+    [4X[28X[ true, <left Bol loop of order 2> ][128X[104X
+    [4X[25Xgap>[125X [27X[ HasIsLeftAlternativeLoop( L ), IsLeftAlternativeLoop( L ) ];[127X[104X
+    [4X[28X[ true, true ][128X[104X
+    [4X[25Xgap>[125X [27X[ HasIsRightBolLoop( L ), IsRightBolLoop( L ) ];[127X[104X
+    [4X[28X[ false, true ][128X[104X
+    [4X[25Xgap>[125X [27XL;[127X[104X
+    [4X[28X<Moufang loop of order 2>[128X[104X
+    [4X[25Xgap>[125X [27X[ IsAssociative( L ), L ];[127X[104X
+    [4X[28X[ true, <associative loop of order 2> ][128X[104X
   [4X[32X[104X
   
   [33X[0;0YThe  analogous  terminology  for  quasigroups  of  Bol-Moufang  type  is not
