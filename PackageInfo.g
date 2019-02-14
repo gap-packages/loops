@@ -2,7 +2,8 @@ SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
 Version := "3.4.1",
-Date := "06/11/2018",
+Date := "06/11/2018", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
