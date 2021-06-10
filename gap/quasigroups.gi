@@ -264,7 +264,9 @@ function( filename, replace_by_spaces)
     if input = fail then Error( "LOOPS: <1> is not a valid file name." ); fi;
 
     s := ReadAll( input );
-
+    
+    CloseStream(input);
+    
     # removing end-of-lines, etc.
     for i in [1..Length( s )] do
         if (s[ i ] = '\n') or (s[ i ] in replace_by_spaces) then
