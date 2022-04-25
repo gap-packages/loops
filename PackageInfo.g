@@ -103,7 +103,7 @@ or (at your option) any later version.
 We thank the following people for sending us remarks and comments, and
 for suggesting new functionality of the package: Muniru Asiru, Bjoern
 Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Graham Ellis, Steve
-Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov,
+Flammia, Kenneth W. Johnson, Michael K. Kinyon, Olexandr Konovalov,
 Frank L&#252;beck, Jonathan D.H. Smith, David Stanovsk&#253; and Glen
 Whitney.
 
