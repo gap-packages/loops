@@ -1,13 +1,14 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "3.4.1",
-Date := "06/11/2018",
+Version := "3.4.2",
+Date := "31/07/2022", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
     LastName      := "Nagy",
-    FirstNames    := "Gábor",
+    FirstNames    := "Gábor Péter",
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "nagyg@math.u-szeged.hu",
@@ -102,7 +103,7 @@ or (at your option) any later version.
 We thank the following people for sending us remarks and comments, and
 for suggesting new functionality of the package: Muniru Asiru, Bjoern
 Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Graham Ellis, Steve
-Flammia, Kenneth W. Johnson, Michael K. Kinyon, Alexander Konovalov,
+Flammia, Kenneth W. Johnson, Michael K. Kinyon, Olexandr Konovalov,
 Frank L&#252;beck, Jonathan D.H. Smith, David Stanovsk&#253; and Glen
 Whitney.
 

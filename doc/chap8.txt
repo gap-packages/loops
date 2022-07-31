@@ -47,8 +47,8 @@
   
   [1X8.2 [33X[0;0YMoufang Modifications[133X[101X
   
-  [33X[0;0YDrápal  [Dr{\a'a}03]  described  two  prominent  families  of  extensions of
-  Moufang  loops.  It  turns  out  that these extensions suffice to obtain all
+  [33X[0;0YDrápal  [Drá03]  described  two  prominent families of extensions of Moufang
+  loops.   It   turns   out  that  these  extensions  suffice  to  obtain  all
   nonassociative  Moufang  loops  of  order  at  most  64  if  one starts with
   so-called  Chein loops. We call the two constructions [13XMoufang modifications[113X.
   The  library  of  Moufang  loops  included  in  [5XLOOPS[105X  is  based  on Moufang

@@ -25,7 +25,7 @@
   [[20XDBGV12[120X] [16XDe Barros, D. A. S., Grishkov, A. and Vojtěchovský, P.[116X, [17XCommutative
   automorphic loops of order p^3[117X, [18XJ. Algebra Appl.[118X, [19X11[119X, 5 (2012), 1250100, 15.
   
-  [[20XDr{\a'a}03[120X]  [16XDrápal,  A.[116X,  [17XCyclic and dihedral constructions of even order[117X,
+  [[20XDrá03[120X]  [16XDrápal,  A.[116X,  [17XCyclic  and  dihedral  constructions  of  even order[117X,
   [18XComment. Math. Univ. Carolin.[118X, [19X44[119X, 4 (2003), 593–614.
   
   [[20XDV06[120X]  [16XDrápal, A. and Vojtěchovský, P.[116X, [17XMoufang loops that share associator

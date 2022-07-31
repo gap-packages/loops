@@ -6,19 +6,19 @@
                  [1X Computing with quasigroups and loops in [5XGAP[105X [101X
   
   
-                                     3.4.1
+                                     3.4.2
   
   
-                                6 November 2018
+                                  31 July 2022
   
   
-                                   Gábor Nagy
+                                Gábor Péter Nagy
   
                                Petr Vojtěchovský
   
   
   
-  Gábor Nagy
+  Gábor Péter Nagy
       Email:    [7Xmailto:nagyg@math.u-szeged.hu[107X
       Homepage: [7Xhttp://www.math.u-szeged.hu/~nagyg/[107X
       Address:  [33X[0;14YBolyai Institute, University of Szeged[133X
@@ -60,7 +60,7 @@
   [33X[0;0YWe  thank  the following people for sending us remarks and comments, and for
   suggesting  new  functionality of the package: Muniru Asiru, Bjoern Assmann,
   Andreas  Distler,  Aleš  Drápal,  Graham  Ellis,  Steve  Flammia, Kenneth W.
-  Johnson, Michael K. Kinyon, Alexander Konovalov, Frank Lübeck, Jonathan D.H.
+  Johnson,  Michael K. Kinyon, Olexandr Konovalov, Frank Lübeck, Jonathan D.H.
   Smith, David Stanovský and Glen Whitney.[133X
   
   [33X[0;0YThe  library  of Moufang loops of order 243 was generated from data provided
