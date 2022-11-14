@@ -17,7 +17,7 @@
 # One can speed up the search by setting the argument <depth> 
 # higher; the price is much higher memory consumption. 
 # 
-# <depth> is optimally choosen if in the permutation group <G>
+# <depth> is optimally chosen if in the permutation group <G>
 # there are "not many" permutations fixing <depth> elements. 
 # 
 # You can omit this argument, or set depth=2 with no harm. 

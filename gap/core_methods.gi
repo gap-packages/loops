@@ -15,7 +15,7 @@
 ##
 #A  GeneratorsOfQuasigroup( Q )
 ##
-##  Returns a subset of <Q> gnerating <Q>. In most circumstances,
+##  Returns a subset of <Q> generating <Q>. In most circumstances,
 ##  Elements( Q ) is returned.
 
 InstallMethod( GeneratorsOfQuasigroup, "for quasigroup",
@@ -991,7 +991,7 @@ end );
 ##
 #A  UpperCentralSeries( L )
 ##
-##  Returs the upper central series of the loop L. 
+##  Returns the upper central series of the loop L. 
 
 InstallOtherMethod( UpperCentralSeries, "for a loop",  
         [ IsLoop ], 
@@ -1011,7 +1011,7 @@ end);
 ##
 #A  LowerCentralSeries( L )
 ##
-##  Returs the lower central series of the loop L. 
+##  Returns the lower central series of the loop L. 
 
 InstallOtherMethod( LowerCentralSeries, "for a loop",  
         [ IsLoop ], 

@@ -15,7 +15,7 @@
 ##  
 #O  Discriminator( Q ) 
 ##    
-##  Returns the dicriminator of a quasigroup <Q>.
+##  Returns the discriminator of a quasigroup <Q>.
 ##  It is a list [ A, B ], where A is a list of the form
 ##  [ [I1,n1], [I2,n2],.. ], where the invariant Ii occurs ni times in Q,
 ##  and where B[i] is a subset of [1..Size(Q)] corresponding to elements of
@@ -145,7 +145,7 @@ function( Q )
     
     # note that it can be deduced from the invariants when an element is central, for instance 
 
-    # setting up the first part of the discriminator (invariants with the number of occurence)
+    # setting up the first part of the discriminator (invariants with the number of occurrence)
     A := Collected( I );
     P := Sortex( List( A, x -> x[2] ) ); # rare invariants will be listed first, but the set ordering of A is otherwise not disrupted
     A := Permuted( A, P );
@@ -206,7 +206,7 @@ end);
 ##  
 #O  AreEqualDicriminators( D, E ) 
 ##    
-##  Returns true if the invarinats of the two discriminators are the same,
+##  Returns true if the invariants of the two discriminators are the same,
 ##  including number of occurrences of each invariant.
   
 InstallMethod( AreEqualDiscriminators, "for two lists (discrimninators)",
@@ -288,7 +288,7 @@ end);
 ##  
 ##  Auxiliary.  
 ##  Given a partial map <f> from a quasigroup <L> to a quasigroup <M>,
-##  it attempts to extend <f> into an isomorphism betweem <L> and <M>.
+##  it attempts to extend <f> into an isomorphism between <L> and <M>.
 ##  <GenL>, <DisL> and <DisM> are precalculated and stand for:
 ##  efficient generators of <L>, invariant subsets of <L>, efficient generators
 ##  of <M>, respectively.
@@ -420,7 +420,7 @@ function( ls )
         return ls;
     fi;
     # making everything canonical
-    ls := ShallowCopy( ls ); # otherwise a side efect occurs in ls
+    ls := ShallowCopy( ls ); # otherwise a side effect occurs in ls
     for i in [1..Length(ls)] do
         if not Parent(ls[i]) = ls[i] then
             ls[i] := CanonicalCopy( ls[i] );

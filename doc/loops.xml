@@ -12,7 +12,7 @@ both html and pdf:
 
 * Inside <ManSection>, list all <Func .../> etc at the beginning, followed by optional <Returns></Returns>, and only then add remarks and other explanatory text within <Description>.
 
-* If there is additonal text after ManSection, insert <Br/> at the end of the last tag of the <ManSection>, e.g., <Br/></Description></ManSection>. (This has no effect in html.)
+* If there is additional text after ManSection, insert <Br/> at the end of the last tag of the <ManSection>, e.g., <Br/></Description></ManSection>. (This has no effect in html.)
 
 -->
 
@@ -278,7 +278,7 @@ group-theoretical once they are expressed in terms of translations. A loop is <I
 
 <P/>A generic quasigroup of order <M>n</M> is displayed as <Code>&lt;quasigroup of order n&gt;</Code>. Similarly, a loop of order <M>n</M> appears as <Code>&lt;loop of order n&gt;</Code>.
 
-<P/>The displayed information of a generic loop is enhanced if more information about the loop becomes available. For instance, when it is established that a loop of order 12 has the left alternative property, the loop will be shown as <Code>&lt;left alternative loop of order 12&gt;</Code> until a stronger property is obtained. Which property is diplayed is governed by the filters built into &LOOPS; (see Appendix <Ref Appendix="Apx:Filters"/>).
+<P/>The displayed information of a generic loop is enhanced if more information about the loop becomes available. For instance, when it is established that a loop of order 12 has the left alternative property, the loop will be shown as <Code>&lt;left alternative loop of order 12&gt;</Code> until a stronger property is obtained. Which property is displayed is governed by the filters built into &LOOPS; (see Appendix <Ref Appendix="Apx:Filters"/>).
 
 <ManSection><Heading>SetQuasigroupElmName and SetLoopElmName</Heading>
 
@@ -1383,7 +1383,7 @@ Although loops are quasigroups, it is often the case in the literature that a pr
 
 <!-- Section:  Inverse Properties -->
 
-<Section Label="Sec:InverseProperties"> <Heading>Inverse Propeties</Heading>
+<Section Label="Sec:InverseProperties"> <Heading>Inverse Properties</Heading>
 
 For an element <M>x</M> of a loop <M>Q</M>, the <Emph>left inverse</Emph><Index Subkey="left">inverse</Index> of <M>x</M> is the element <M>x^\lambda</M> of <M>Q</M> such that <M>x^\lambda \cdot x = 1</M>, while the <Emph>right inverse</Emph><Index Subkey="right">inverse</Index> of <M>x</M> is the element <M>x^\rho</M> of <M>Q</M> such that <M>x\cdot x^\rho = 1</M>.
 
@@ -1712,7 +1712,7 @@ See the built-in filters and the survey <Cite Key="VoQRS"/> for additional prope
 
 <!-- Section:  Additional Varieties of Loops -->
 
-<Section Label="Sec:AdditionalVarietiesOfLoops"> <Heading>Additonal Varieties of Loops</Heading>
+<Section Label="Sec:AdditionalVarietiesOfLoops"> <Heading>Additional Varieties of Loops</Heading>
 
 <ManSection>
 <Prop Name="IsCodeLoop" Arg="Q"/>
@@ -2003,7 +2003,7 @@ The library named <Emph>code</Emph> contains all nonassociative code loops of or
 
 <Section Label="Sec:SteinerLoops"> <Heading>Steiner Loops</Heading>
 
-Here is how the libary named <Emph>Steiner</Emph> is described within &LOOPS;:
+Here is how the library named <Emph>Steiner</Emph> is described within &LOOPS;:
 
 <Example><![CDATA[
 gap> DisplayLibraryInfo( "Steiner" );

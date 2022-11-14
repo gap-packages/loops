@@ -574,7 +574,7 @@ function( M )
     if M = fail then
         return fail;
     fi;
-    # quasigroup, not necesarily a loop
+    # quasigroup, not necessarily a loop
     e := MultiplicativeNeutralElement( M );
     if e = fail then # no neutral element, use principal isotope
         return PrincipalLoopIsotope( M, Elements( M )[ 1 ], Elements( M )[ 1 ] );
@@ -696,7 +696,7 @@ function( list, dummy )
         return quasigroup_list[ 1 ];
     fi;
     # at least 2 quasigroups and loops; we will not use recursion
-    # making all Cayley tables cannonical
+    # making all Cayley tables canonical
     for s in [1..n] do
         quasigroup_list[ s ] := QuasigroupByCayleyTable( CanonicalCayleyTable( CayleyTable( quasigroup_list[ s ] ) ) );
     od;

@@ -32,7 +32,7 @@ function( n, iter )
         return LoopByCayleyTable( [[1]] );
     fi;
 
-    # initializing funciton for proper and improper Latin squares
+    # initializing function for proper and improper Latin squares
     # the meaning of f(x,y,z)=1 is that there is symbol z in row x and column y
     f := List([1..n], i -> List([1..n], j -> 0*[1..n]));
     # cyclic group of order n on symbols [1..n]

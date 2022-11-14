@@ -887,7 +887,7 @@ InstallMethod( IsALoop, "for loop",
    [ IsLoop ],
 function( Q )
    return IsRightALoop(Q) and IsMiddleALoop(Q); 
-   # Theorem: rigth A-loop + middle A-loop implies left A-loop
+   # Theorem: right A-loop + middle A-loop implies left A-loop
 end);
 
 # implies

@@ -311,7 +311,7 @@ end);
 ##  Auxiliary function activating Steiner loops from the database.
 ##
 ##  The database LOOPS_steiner_data contains blocks of steiner triple systems.
-##  If the system is on k points, the poitns are labelled 0,...,k-1.
+##  If the system is on k points, the points are labelled 0,...,k-1.
 ##  The constructed Steiner loop has elements labelled 1,...,k+1=n
 
 InstallGlobalFunction( LOOPS_ActivateSteinerLoop,
