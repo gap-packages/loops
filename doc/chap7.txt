@@ -44,7 +44,7 @@
   quasigroup is necessarily a loop, but it need not be so declared in [5XLOOPS[105X.[133X
   
   
-  [1X7.2 [33X[0;0YInverse Propeties[133X[101X
+  [1X7.2 [33X[0;0YInverse Properties[133X[101X
   
   [33X[0;0YFor  an element [22Xx[122X of a loop [22XQ[122X, the [13Xleft inverse[113X of [22Xx[122X is the element [22Xx^λ[122X of [22XQ[122X
   such  that [22Xx^λ ⋅ x = 1[122X, while the [13Xright inverse[113X of [22Xx[122X is the element [22Xx^ρ[122X of [22XQ[122X
@@ -398,7 +398,7 @@
   
   [30X    [33X[0;6Yautomorphic loops are power associative [BP56][133X
   
-  [30X    [33X[0;6Yin  an  automorphic  loop  [22XQ[122X  we  have  [22XNuc(Q) = Nuc_λ(Q) = Nuc_ρ(Q)le
+  [30X    [33X[0;6Yin  an  automorphic  loop  [22XQ[122X  we  have  [22XNuc(Q)  = Nuc_λ(Q) = Nuc_ρ(Q)≤
         Nuc_μ(Q)[122X and all nuclei are normal [BP56][133X
   
   [30X    [33X[0;6Ya  loop  that  is left automorphic and right automorphic satisfies the
@@ -449,7 +449,7 @@
   [33X[0;0Y[12XRemark:[112X Be careful not to confuse [10XIsALoop[110X and [10XIsLoop[110X.[133X
   
   
-  [1X7.8 [33X[0;0YAdditonal Varieties of Loops[133X[101X
+  [1X7.8 [33X[0;0YAdditional Varieties of Loops[133X[101X
   
   [1X7.8-1 IsCodeLoop[101X
   

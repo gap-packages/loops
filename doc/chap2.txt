@@ -83,13 +83,13 @@
   
   [33X[0;0YFor  a  loop  [22XQ[122X  define  [22XZ_0(Q)  = 1[122X and let [22XZ_i+1(Q)[122X be the preimage of the
   center  of [22XQ/Z_i(Q)[122X in [22XQ[122X. A loop [22XQ[122X is [13Xnilpotent of class[113X [22Xn[122X if [22Xn[122X is the least
-  nonnegative  integer such that [22XZ_n(Q)=Q[122X. In such case [22XZ_0(Q)le Z_1(Q)le dots
-  le Z_n(Q)[122X is the [13Xupper central series[113X.[133X
+  nonnegative  integer such that [22XZ_n(Q)=Q[122X. In such case [22XZ_0(Q)≤ Z_1(Q)≤ dots ≤
+  Z_n(Q)[122X is the [13Xupper central series[113X.[133X
   
   [33X[0;0YThe  [13Xderived subloop[113X [22XQ'[122X of [22XQ[122X is the least normal subloop of [22XQ[122X such that [22XQ/Q'[122X
   is  a  commutative  group.  Define  [22XQ^(0)=Q[122X  and  let [22XQ^(i+1)[122X be the derived
   subloop  of  [22XQ^(i)[122X.  Then  [22XQ[122X  is  [13Xsolvable  of  class[113X  [22Xn[122X  if  [22Xn[122X is the least
-  nonnegative integer such that [22XQ^(n) = 1[122X. In such a case [22XQ^(0)ge Q^(1)ge ⋯ ge
+  nonnegative  integer  such  that [22XQ^(n) = 1[122X. In such a case [22XQ^(0)≥ Q^(1)≥ ⋯ ≥
   Q^(n)[122X is the [13Xderived series[113X of [22XQ[122X.[133X
   
   

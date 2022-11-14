@@ -275,7 +275,7 @@
   
   [33X[0;0YLet  [22XK[122X, [22XF[122X be loops. Then a loop [22XQ[122X is an [13Xextension[113X of [22XK[122X by [22XF[122X if [22XK[122X is a normal
   subloop  of  [22XQ[122X such that [22XQ/K[122X is isomorphic to [22XF[122X. An extension [22XQ[122X of [22XK[122X by [22XF[122X is
-  [13Xnuclear[113X if [22XK[122X is an abelian group and [22XKle N(Q)[122X.[133X
+  [13Xnuclear[113X if [22XK[122X is an abelian group and [22XK≤ N(Q)[122X.[133X
   
   [33X[0;0YA map [22Xθ:F× F-> K[122X is a [13Xcocycle[113X if [22Xθ(1,x) = θ(x,1) = 1[122X for every [22Xx∈ F[122X.[133X
   

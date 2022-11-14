@@ -66,7 +66,7 @@
   8901–8927.
   
   [[20XKNV15[120X] [16XKinyon, M. K., Nagy, G. P. and Vojtěchovský, P.[116X, [17XBol loops and Bruck
-  loops of order pq[117X, [18X[118X (2015), ((preprint)).
+  loops of order pq[117X, [18X[118X (2015), (preprint).
   
   [[20XKun00[120X]  [16XKunen,  K.[116X,  [17XThe  structure of conjugacy closed loops[117X, [18XTrans. Amer.
   Math. Soc.[118X, [19X352[119X, 6 (2000), 2889–2911.
@@ -75,7 +75,7 @@
   [18XMath. Proc. Cambridge Philos. Soc.[118X, [19X102[119X, 1 (1987), 33–47.
   
   [[20XMoo[120X]     [16XMoorhouse,     G.     E.[116X,    [17XBol    loops    of    small    order[117X,
-  ((https://www.uwyo.edu/moorhouse/pub/bol/)).
+  (https://www.uwyo.edu/moorhouse/pub/bol/).
   
   [[20XNV03[120X] [16XNagy, G. P. and Vojtěchovský, P.[116X, [17XOctonions, simple Moufang loops and
   triality[117X, [18XQuasigroups Related Systems[118X, [19X10[119X (2003), 65–94.
@@ -91,7 +91,7 @@
   
   [[20XSV17[120X]  [16XStuhl,  I.  and  Vojtěchovský,  P.[116X, [17XInvolutory latin quandles, Bruck
   loops  and  commutative automorphic loops of odd prime power order[117X, [18X[118X (2017),
-  ((preprint)).
+  (preprint).
   
   [[20XSZ12[120X]   [16XSlattery,   M.  and  Zenisek,  A.[116X,  [17XMoufang  loops  of  order  243[117X,
   [18XCommentationes Mathematicae Universitatis Carolinae[118X, [19X53[119X, 3 (2012), 423–428.

@@ -103,14 +103,14 @@
   [1X9.4 [33X[0;0YMoufang Loops[133X[101X
   
   [33X[0;0YThe library named [13XMoufang[113X contains all nonassociative Moufang loops of order
-  [22Xnle 64[122X and [22Xn∈{81,243}[122X.[133X
+  [22Xn≤ 64[122X and [22Xn∈{81,243}[122X.[133X
   
   [1X9.4-1 MoufangLoop[101X
   
   [33X[1;0Y[29X[2XMoufangLoop[102X( [3Xn[103X, [3Xm[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10YThe [3Xm[103Xth Moufang loop of order [3Xn[103X in the library.[133X
   
-  [33X[0;0YFor  [22Xnle  63[122X,  our  catalog  numbers  coincide with those of Goodaire et al.
+  [33X[0;0YFor  [22Xn≤  63[122X,  our  catalog  numbers  coincide  with those of Goodaire et al.
   [GMR99].  The classification of Moufang loops of order 64 and 81 was carried
   out  in [NV07]. The classification of Moufang loops of order 243 was carried
   out by Slattery and Zenisek [SZ12].[133X
@@ -144,7 +144,7 @@
   
   [1X9.6 [33X[0;0YSteiner Loops[133X[101X
   
-  [33X[0;0YHere is how the libary named [13XSteiner[113X is described within [5XLOOPS[105X:[133X
+  [33X[0;0YHere is how the library named [13XSteiner[113X is described within [5XLOOPS[105X:[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XDisplayLibraryInfo( "Steiner" );[127X[104X
@@ -172,9 +172,9 @@
   [1X9.7 [33X[0;0YConjugacy Closed Loops[133X[101X
   
   [33X[0;0YThe  library  named  [13XRCC[113X  contains  all nonassocitive right conjugacy closed
-  loops  of  order  [22Xnle  27[122X  up  to  isomorphism. The data for the library was
+  loops  of  order  [22Xn≤  27[122X  up  to  isomorphism.  The data for the library was
   generated  by  Katharina  Artic [Art15] who can also provide additional data
-  for all right conjugacy closed loops of order [22Xnle 31[122X.[133X
+  for all right conjugacy closed loops of order [22Xn≤ 31[122X.[133X
   
   [33X[0;0YLet [22XQ[122X be a right conjugacy closed loop, [22XG[122X its right multiplication group and
   [22XT[122X  its  right section. Then [22X⟨ T⟩ = G[122X is a transitive group, and [22XT[122X is a union
@@ -210,10 +210,9 @@
   Left  conjugacy  closed loops are obtained from right conjugacy closed loops
   via [10XOpposite[110X.[133X
   
-  [33X[0;0YThe  library named [13XCC[113X contains all CC loops of order [22X2le 2^kle 64[122X, [22X3le 3^kle
-  81[122X,  [22X5le 5^kle 125[122X, [22X7le 7^kle 343[122X, all nonassociative CC loops of order less
-  than  28,  and  all  nonassociative CC loops of order [22Xp^2[122X and [22X2p[122X for any odd
-  prime [22Xp[122X.[133X
+  [33X[0;0YThe  library named [13XCC[113X contains all CC loops of order [22X2≤ 2^k≤ 64[122X, [22X3≤ 3^k≤ 81[122X,
+  [22X5≤ 5^k≤ 125[122X, [22X7≤ 7^k≤ 343[122X, all nonassociative CC loops of order less than 28,
+  and all nonassociative CC loops of order [22Xp^2[122X and [22X2p[122X for any odd prime [22Xp[122X.[133X
   
   [33X[0;0YBy  results  of  Kunen  [Kun00], for every odd prime [22Xp[122X there are precisely 3
   nonassociative conjugacy closed loops of order [22Xp^2[122X. Csörgő and Drápal [CD05]

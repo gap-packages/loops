@@ -6,10 +6,10 @@
                  [1X Computing with quasigroups and loops in [5XGAP[105X [101X
   
   
-                                     3.4.2
+                                     3.4.3
   
   
-                                  31 July 2022
+                                14 November 2022
   
   
                                 Gábor Péter Nagy
@@ -223,7 +223,7 @@
       7.1-2 IsCommutative
       7.1-3 IsPowerAssociative
       7.1-4 IsDiassociative
-    7.2 [33X[0;0YInverse Propeties[133X
+    7.2 [33X[0;0YInverse Properties[133X
       7.2-1 [33X[0;0YHasLeftInverseProperty, HasRightInverseProperty and
       HasInverseProperty[133X
       7.2-2 HasTwosidedInverses
@@ -267,7 +267,7 @@
       7.7-2 IsMiddleAutomorphicLoop
       7.7-3 IsRightAutomorphicLoop
       7.7-4 IsAutomorphicLoop
-    7.8 [33X[0;0YAdditonal Varieties of Loops[133X
+    7.8 [33X[0;0YAdditional Varieties of Loops[133X
       7.8-1 IsCodeLoop
       7.8-2 IsSteinerLoop
       7.8-3 [33X[0;0YIsLeftBruckLoop and IsLeftKLoop[133X

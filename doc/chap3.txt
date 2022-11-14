@@ -133,7 +133,7 @@
   about  the loop becomes available. For instance, when it is established that
   a loop of order 12 has the left alternative property, the loop will be shown
   as  [10X<left  alternative  loop  of  order  12>[110X  until  a  stronger property is
-  obtained.  Which  property is diplayed is governed by the filters built into
+  obtained.  Which property is displayed is governed by the filters built into
   [5XLOOPS[105X (see Appendix [14XB[114X).[133X
   
   

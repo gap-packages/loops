@@ -74,7 +74,7 @@
             [3Xf[103X and [3Xh[103X as described below.[133X
   
   [33X[0;0YLet  [22XQ[122X be a Moufang loop with a normal subloop [22XS[122X such that [22XQ/S[122X is a dihedral
-  group of order [22X4m[122X, with [22Xmge 1[122X. Let [22XM[122X and [22Xσ[122X be defined as in the cyclic case.
+  group  of order [22X4m[122X, with [22Xm≥ 1[122X. Let [22XM[122X and [22Xσ[122X be defined as in the cyclic case.
   Let  [22Xβ[122X,  [22Xγ[122X  be  two  involutions  of  [22XQ/S[122X  such that [22Xα=βγ[122X generates a cyclic
   subgroup  of  [22XQ/S[122X  of  order [22X2m[122X. Let [22Xe∈β[122X and [22Xf∈γ[122X be arbitrary. Then [22XQ[122X can be
   written  as  a  disjoint  union  [22XQ=⋃_i∈ M(α^i∪ eα^i)[122X, and also [22XQ=⋃_i∈ M(α^i∪
