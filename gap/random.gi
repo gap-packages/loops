@@ -174,7 +174,7 @@ function( lst )
     fi;
     # central subloop
     if IsInt( n ) then # first argument is a positive integer
-        K := IntoLoop( Random( AllGroups( n, IsAbelian ) ) );
+        K := IntoLoop( Random( AllSmallGroups( n, IsAbelian ) ) );
     else # first argument is an abelian group
         K := IntoLoop( n );
     fi;

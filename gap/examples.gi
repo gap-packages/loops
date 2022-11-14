@@ -294,7 +294,7 @@ function( n, pos_n, m )
 
     # no parent; 
     if d[ 2 ]="G" then # loop of type MG2
-        G := AllGroups( d[ 3 ], IsCommutative, false)[ d[ 4 ] ];  #relies on GAP group libraries !!
+        G := AllSmallGroups( d[ 3 ], IsCommutative, false)[ d[ 4 ] ];  #relies on GAP group libraries !!
         return LoopMG2( G );
     fi;
     if d[ 2 ]="T" then # special loop (direct product of an old loop and a cyclic group)
