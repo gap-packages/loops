@@ -1,5 +1,6 @@
 name: loops
-version: 3.4.3
+version: "3.4.3"
+license: "GPL-2.0-or-later"
 date: 2022-11-14
 description: |
     Computing with quasigroups and loops in GAP
@@ -32,3 +33,34 @@ abstract: |
 status: accepted
 doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
+keywords: |
+    loop, quasigroup, latin square, multiplication group, inner mapping group, Moufang loop, Bol loop, conjugacy closed loop, automorphic loop, Steiner loop, triality, isomorphism of loops, isotopism of loops.
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>NV22</span>]   <b class='BibAuthor'>Nagy, G. P. and Vojtěchovský, P.</b>,
+     <i class='BibTitle'>loops, Computing with quasigroups and loops in GAP,
+             Version 3.4.3</i>
+     (<span class='BibYear'>2022</span>)<br />
+    (<span class='BibNote'>Refereed GAP package</span>),
+    <span class='BibHowpublished'><a href="https://gap-packages.github.io/loops/">https://gap-packages.github.io/loops/</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ loops3.4.3,
+      author =           {Nagy, G. P. and Vojt{\v e}chovsk{\a'y}, P.},
+      title =            {{loops},  Computing with quasigroups and loops in GAP,
+                          {V}ersion 3.4.3},
+      month =            {Nov},
+      year =             {2022},
+      note =             {Refereed GAP package},
+      howpublished =     {\href          {https://gap-packages.github.io/loops/}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {}{}{}\texttt{loops/}}},
+      keywords =         {loop;  quasigroup; latin square; multiplication group;
+                          inner mapping group; Moufang loop; Bol loop; conjugacy
+                          closed loop; automorphic loop; Steiner loop; triality;
+                          isomorphism of loops; isotopism of loops},
+      printedkey =       {NV22}
+    }
+
