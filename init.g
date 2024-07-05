@@ -36,8 +36,3 @@ ReadPackage( "loops", "gap/examples.gd");       # libraries of loops
 ##  MEMORY MANAGEMENT
 ##  -------------------------------------------------------------------------
 ReadPackage( "loops", "gap/memory.gd" );        # memory management
-
-#############################################################################
-##  HELP
-##  -------------------------------------------------------------------------
-ReadPackage( "loops", "etc/HBHforLOOPS.g");   # the handler functions for GAP's help system
