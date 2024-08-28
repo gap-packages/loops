@@ -450,7 +450,7 @@ end);
 InstallGlobalFunction( LOOPS_CayleyTableByRightFolder, 
 function( G, H, T )
     local act, nT, actT, i, p, ct;
-    # act = action of G on right cosest G/H
+    # act = action of G on right cosets G/H
     act := ActionHomomorphism( G, RightCosets( G, H ), OnRight );
     nT := Length( T );
     # actT = permutations on G/H induced by elements of T
