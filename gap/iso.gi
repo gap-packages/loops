@@ -170,7 +170,7 @@ end);
 ##  Given a quasigroup <Q> with discriminator <D>, it returns a list of
 ##  indices of generators of <Q> deemed best for an isomorphism filter.
 ##  It mimics the function SmallGeneratingSet, but it considers
-##  the elements in order determined by block size of the disciminator.
+##  the elements in order determined by block size of the discriminator.
 
 InstallGlobalFunction( LOOPS_EfficientGenerators,
 function( Q, D ) 
@@ -204,12 +204,12 @@ end);
 
 #############################################################################
 ##  
-#O  AreEqualDicriminators( D, E ) 
+#O  AreEqualDiscriminators( D, E ) 
 ##    
 ##  Returns true if the invariants of the two discriminators are the same,
 ##  including number of occurrences of each invariant.
   
-InstallMethod( AreEqualDiscriminators, "for two lists (discrimninators)",
+InstallMethod( AreEqualDiscriminators, "for two lists (discriminators)",
     [ IsList, IsList ],
 function( D, E )
       return D[ 1 ] = E[ 1 ];
@@ -231,7 +231,7 @@ end);
 ##  <L>, <M> are multiplication tables of quasigroups, <f> is a partial map
 ##  from a subset of elements of <L> to a subset of elements of <M>. 
 ##  This function attempts to extend <f> into a homomorphism of quasigroups by 
-##  extending the source of <f> into (the smallest possible) subqusigroup of <L>.
+##  extending the source of <f> into (the smallest possible) subquasigroup of <L>.
 
 InstallGlobalFunction( LOOPS_ExtendHomomorphismByClosingSource,
 function( f, L, M )
@@ -321,8 +321,8 @@ end);
 #O  IsomorphismQuasigroupsNC( L, GenL, DisL, M, DisM ) 
 ##    
 ##  Auxiliary. Given a quasigroup <L>, its efficient generators <GenL>, the 
-##  disciminator <DisL> of <L>, and another loop <M> with discriminator
-##  <DisM>, it returns an isomorophism from <L> onto <M>, or it fails.
+##  discriminator <DisL> of <L>, and another loop <M> with discriminator
+##  <DisM>, it returns an isomorphism from <L> onto <M>, or it fails.
 
 InstallGlobalFunction( IsomorphismQuasigroupsNC,
 function( L, GenL, DisL, M, DisM )
@@ -346,7 +346,7 @@ end);
 ##  
 #O  IsomorphismQuasigroups( L, M ) 
 ##
-##  If the quasigroups <L>, <M> are isomorophic, it returns an isomorphism
+##  If the quasigroups <L>, <M> are isomorphic, it returns an isomorphism
 ##  from <L> onto <M>. Fails otherwise.
 
 InstallMethod( IsomorphismQuasigroups, "for two quasigroups",
@@ -390,7 +390,7 @@ end);
 ##  
 #O  IsomorphismLoops( L, M ) 
 ##
-##  If the loops <L>, <M> are isomorophic, it returns an isomorphism
+##  If the loops <L>, <M> are isomorphic, it returns an isomorphism
 ##  from <L> onto <M>. Fails otherwise.
 
 InstallMethod( IsomorphismLoops, "for loops",
@@ -404,7 +404,7 @@ end);
 #O  QuasigroupsUpToIsomorphism( ls ) 
 ##
 ##  Given a list <ls> of quasigroups, returns a sublist of <ls> consisting
-##  of represenatives of isomorphism classes of <ls>.
+##  of representatives of isomorphism classes of <ls>.
 
 InstallMethod( QuasigroupsUpToIsomorphism, "for a list of quasigroups",
     [ IsList ],
@@ -451,7 +451,7 @@ end);
 #O  LoopsUpToIsomorphism( ls ) 
 ##
 ##  Given a list <ls> of loops, returns a sublist of <ls> consisting
-##  of represenatives of isomorphism classes of <ls>.
+##  of representatives of isomorphism classes of <ls>.
 
 InstallMethod( LoopsUpToIsomorphism, "for a list of loops",
     [ IsList ],
@@ -518,7 +518,7 @@ end);
 #O  IsomorphicCopyByNormalSubloop( L, S ) 
 ##
 ##  Given a loop <L> and its normal subloop <S>, it returns an isomorphic 
-##  copy of <L> with elements reordered according to right cosests of S
+##  copy of <L> with elements reordered according to right cosets of S
 
 InstallMethod( IsomorphicCopyByNormalSubloop, "for two loops",
     [ IsLoop, IsLoop ],
@@ -603,7 +603,7 @@ function( Q )
         A := LOOPS_AutomorphismsFixingSet( [ ], Q, GenQ, DisQ[2] );
     fi;
     
-    if IsEmpty( A ) then return Group( () ); fi; # no notrivial automorphism
+    if IsEmpty( A ) then return Group( () ); fi; # no nontrivial automorphism
     return Group( List( A, p -> SortingPerm( p ) ) );
 end);
 
@@ -671,7 +671,7 @@ end);
 #O  LoopsUpToIsotopism( ls ) 
 ##
 ##  Given a list <ls> of loops, returns a sublist of <ls> consisting
-##  of represenatives of isotopism classes of <ls>. VERY SLOW!
+##  of representatives of isotopism classes of <ls>. VERY SLOW!
 
 InstallMethod( LoopsUpToIsotopism, "for a list of loops",
     [ IsList ],

@@ -217,7 +217,7 @@ LOOPS_TableSearchNC:=function(g, ldepth, infolevel, task)
 	Info(LOOPS_SearchInfo, 1, "# ", LOOPS_SearchRuntime(time_start), " Search started."); 
 
 	Info(LOOPS_SearchInfo, 1, "# Collected the fixed point free elements." );
-	Info(LOOPS_SearchInfo, 1, "# Number of conjugugacy classes = ", Size(reps), "." );
+	Info(LOOPS_SearchInfo, 1, "# Number of conjugacy classes = ", Size(reps), "." );
 	Info(LOOPS_SearchInfo, 1, "# Number of fixed point free elements = ", Size(V), "." );
 
 	# hash tables
