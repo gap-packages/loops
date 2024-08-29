@@ -221,7 +221,7 @@
   [2XLeftSection[102X 6.3-2 
   [2XLeftTranslation[102X 6.3-1 
   [2XLibraryLoop[102X 9.1-1 
-  License .-2 
+  License 0.0-2 
   loop 2.1 
       alternative 7.4 
       associated left Bruck 8.1-1 

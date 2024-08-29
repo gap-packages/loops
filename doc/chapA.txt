@@ -45,5 +45,5 @@
   [33X[0;0Y[11Xtst/iso.tst[111X (test file for isomorphisms and automorphisms)[133X
   [33X[0;0Y[11Xtst/lib.tst[111X (test file for libraries of loops, except Moufang loops)[133X
   [33X[0;0Y[11Xtst/nilpot.tst[111X (test file for nilpotency and triality)[133X
-  [33X[0;0Y[11Xtst/testall.g[111X (batch for all tets files)[133X
+  [33X[0;0Y[11Xtst/testall.g[111X (batch for all test files)[133X
   

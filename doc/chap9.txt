@@ -80,7 +80,7 @@
   
   [1X9.3 [33X[0;0YLeft Bruck Loops and Right Bruck Loops[133X[101X
   
-  [33X[0;0YThe  emmerging  library  named  [13Xleft  Bruck[113X contains all left Bruck loops of
+  [33X[0;0YThe  emerging  library  named  [13Xleft  Bruck[113X  contains all left Bruck loops of
   orders [22X3[122X, [22X9[122X, [22X27[122X and [22X81[122X (there are [22X1[122X, [22X2[122X, [22X7[122X and [22X72[122X such loops, respectively).[133X
   
   [33X[0;0YFor  an  odd  prime [22Xp[122X, left Bruck loops of order [22Xp^k[122X are centrally nilpotent
@@ -171,7 +171,7 @@
   
   [1X9.7 [33X[0;0YConjugacy Closed Loops[133X[101X
   
-  [33X[0;0YThe  library  named  [13XRCC[113X  contains  all nonassocitive right conjugacy closed
+  [33X[0;0YThe  library  named  [13XRCC[113X  contains all nonassociative right conjugacy closed
   loops  of  order  [22Xn≤  27[122X  up  to  isomorphism.  The data for the library was
   generated  by  Katharina  Artic [Art15] who can also provide additional data
   for all right conjugacy closed loops of order [22Xn≤ 31[122X.[133X

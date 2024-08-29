@@ -6,10 +6,10 @@
                  [1X Computing with quasigroups and loops in [5XGAP[105X [101X
   
   
-                                     3.4.3
+                                     3.4.4
   
   
-                                14 November 2022
+                                 29 August 2024
   
   
                                 Gábor Péter Nagy
@@ -168,7 +168,7 @@
       6.3-1 [33X[0;0YLeftTranslation and RightTranslation[133X
       6.3-2 [33X[0;0YLeftSection and RightSection[133X
     6.4 [33X[0;0YMultiplication Groups[133X
-      6.4-1 [33X[0;0YLeftMutliplicationGroup, RightMultiplicationGroup and
+      6.4-1 [33X[0;0YLeftMultiplicationGroup, RightMultiplicationGroup and
       MultiplicationGroup[133X
       6.4-2 [33X[0;0YRelativeLeftMultiplicationGroup, RelativeRightMultiplicationGroup
       and RelativeMultiplicationGroup[133X
@@ -178,7 +178,7 @@
       MiddleInnerMappingGroup[133X
       6.5-3 InnerMappingGroup
     6.6 [33X[0;0YNuclei, Commutant, Center, and Associator Subloop[133X
-      6.6-1 [33X[0;0YLeftNucles, MiddleNucleus, and RightNucleus[133X
+      6.6-1 [33X[0;0YLeftNucleus, MiddleNucleus, and RightNucleus[133X
       6.6-2 [33X[0;0YNuc, NucleusOfQuasigroup and NucleusOfLoop[133X
       6.6-3 Commutant
       6.6-4 Center
