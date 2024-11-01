@@ -69,7 +69,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "The LOOPS Package: Loops and quasigroups for GAP",
-  Autoload  := true     # only for the documentation, TEMPORARILY TURNED OFF
 ),
 
 Dependencies := rec(
