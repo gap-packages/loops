@@ -73,7 +73,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.8",
-  NeededOtherPackages := [["SmallGrp", ">=1.0"],["TransGrp", ">=3.1"]],
+  NeededOtherPackages := [["SmallGrp", ">=1.0"]],
   SuggestedOtherPackages := [],
   ExternalConditions := []
 ),
