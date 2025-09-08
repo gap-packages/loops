@@ -369,10 +369,18 @@
     <name><first>Gábor P.</first><last>Nagy</last></name>
     <name><first>Petr</first><last>Vojtěchovský</last></name>
   </author>  
-  <title>Bol loops and Bruck loops of order <M>pq</M></title>
-  <journal></journal>
-  <year>2015</year>
-  <note>preprint</note>
+  <title>Bol loops and Bruck loops of order pq</title>
+  <journal>Journal of Algebra</journal>
+  <year>2017</year>
+  <volume>473</volume>
+  <pages>481-512</pages>
+  <issn>0021-8693</issn>
+  <keywords>Bol loop, Bruck loop, K-loop, Bol loop of order , Bruck loop of
+      order , Multiplication group, Nucleus, Dihedral group, Twisted subgroup,
+      Eigenvalue of a circulant matrix, Quadratic field extension</keywords>
+  <url>https://www.sciencedirect.com/science/article/pii/S0021869316304537</url>
+  <other type="doi">https://doi.org/10.1016/j.jalgebra.2016.11.023</other>
+  <other type="printedkey">KNV15</other>
 </article></entry>
 <entry id="Kun"><article>
   <author>
@@ -524,16 +532,20 @@
   <number>3</number>
   <pages>423–428</pages>
 </article></entry>
-<entry id="StuhlVojtechovsky"><article>
+<entry id="StuhlVojtechovsky"><misc>
   <author>
     <name><first>Izabella</first><last>Stuhl</last></name>
     <name><first>Petr</first><last>Vojtěchovský</last></name>
   </author>  
-  <title>Involutory latin quandles, Bruck loops and commutative automorphic loops of odd prime power order</title>
-  <journal></journal>
-  <year>2017</year>
-  <note>preprint</note>
-</article></entry>
+  <title>Enumeration of involutory latin quandles, Bruck loops and commutative
+      automorphic loops of odd prime power order</title>
+  <year>2019</year>
+  <url>https://arxiv.org/abs/1911.05005</url>
+  <other type="archiveprefix">arXiv</other>
+  <other type="eprint">1911.05005</other>
+  <other type="primaryclass">math.GR</other>
+  <other type="printedkey">SV17</other>
+</misc></entry>
 <entry id="Vo"><article>
   <author>
     <name><first>Petr</first><last>Vojtěchovský</last></name>

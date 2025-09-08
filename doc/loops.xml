@@ -767,10 +767,10 @@ Each quasigroup element in &GAP; knows to which quasigroup it belongs. It is the
 <Oper Name="RightDivision" Arg="x, y"/>
 <Returns>The left division <Arg>x</Arg><M>\backslash</M><Arg>y</Arg> (resp. the right division <Arg>x</Arg><M>/</M><Arg>y</Arg>) of two elements <Arg>x</Arg>, <Arg>y</Arg> of the same quasigroup.<Br/></Returns>
 
-<Oper Name="LeftDivision" Arg="S, x"/>
-<Oper Name="LeftDivision" Arg="x, S"/>
-<Oper Name="RightDivision" Arg="S, x"/>
-<Oper Name="RightDivision" Arg="x, S"/>
+<Oper Name="LeftDivision" Arg="S, x" Label="LeftDivBySet"/>
+<Oper Name="LeftDivision" Arg="x, S" Label="LeftDivOfSet"/>
+<Oper Name="RightDivision" Arg="S, x" Label="RightDivOfSet"/>
+<Oper Name="RightDivision" Arg="x, S" Label="RightDivBySet"/>
 <Returns>The list of elements obtained by performing the specified arithmetical operation elementwise using a list <Arg>S</Arg> of elements and an element <Arg>x</Arg>.<Br/></Returns>
 
 </ManSection>
@@ -2129,7 +2129,7 @@ are 2623755 nilpotent loops of order 12, and 123794003928541545927226368 nilpote
 
 <!-- Section:  Automorphic Loops -->
 
-<Section Label="Sec:AutomorphicLoops"> <Heading>Automorphic Loops</Heading>
+<Section Label="Sec:AutomorphicLoopsLib"> <Heading>Automorphic Loops</Heading>
 
 The library named <Emph>automorphic</Emph> contains all nonassociative automorphic loops of order less than 16 up to isomorphism (there is 1 such loop of order 6, 7 of order 8, 3 of order 10, 2 of order 12, 5 of order 14, and 2 of order 15) and all commutative automorphic loops of order 3, 9, 27 and 81 (there are 1, 2, 7 and 72 such loops).
 
