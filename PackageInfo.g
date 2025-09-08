@@ -1,8 +1,8 @@
 SetPackageInfo( rec(
 PackageName := "loops",
 Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "3.4.4",
-Date := "29/08/2024", # dd/mm/yyyy format
+Version := "3.4.5",
+Date := "08/09/2025", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -73,7 +73,7 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">=4.8",
-  NeededOtherPackages := [["SmallGrp", ">=1.0"]],
+  NeededOtherPackages := [["SmallGrp", ">=1.0"],["TransGrp", ">=3.1"]],
   SuggestedOtherPackages := [],
   ExternalConditions := []
 ),
