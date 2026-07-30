@@ -1,123 +1,103 @@
+#############################################################################
+##  
+##  Demo PackageInfo.g for the GitHubPagesForGAP
+##
+
 SetPackageInfo( rec(
-PackageName := "loops",
-Subtitle := "Computing with quasigroups and loops in GAP",
-Version := "3.4.4",
-Date := "29/08/2024", # dd/mm/yyyy format
-License := "GPL-2.0-or-later",
+
+PackageName := "GitHubPagesForGAP",
+
+Subtitle := "A GitHub Pages generator for GAP packages",
+Version := "0.4",
+Date := "10/04/2025", # dd/mm/yyyy format
+License := "0BSD",
 
 Persons := [
   rec(
-    LastName      := "Nagy",
-    FirstNames    := "Gábor Péter",
+    LastName      := "Horn",
+    FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "nagyg@math.u-szeged.hu",
-    WWWHome       := "http://www.math.u-szeged.hu/~nagyg/",
-    PostalAddress := Concatenation( [
-                       "Bolyai Institute, University of Szeged\n",
-                       "6725 Szeged, Aradi vertanuk tere 1\n",
-                       "Hungary" ] ),
-    Place         := "Szeged",
-    Institution   := "University of Szeged"
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
   ),
+
   rec(
-    LastName      := "Vojtěchovský",
-    FirstNames    := "Petr",
+    LastName      := "Thor",
+    FirstNames    := "A. U.",
     IsAuthor      := true,
+    IsMaintainer  := false,
+    #Email         := "author@example.com",
+  ),
+
+  rec(
+    LastName      := "Itor",
+    FirstNames    := "Jan",
+    IsAuthor      := false,
     IsMaintainer  := true,
-    Email         := "petr@math.du.edu",
-    WWWHome       := "http://www.math.du.edu/~petr/",
-    PostalAddress := Concatenation( [
-                       "Department of Mathematics, University of Denver\n",
-                       "2280 S. Vine Street\n",
-                       "Denver, CO 80208\n",
-                       "USA" ] ),
-    Place         := "Denver",
-    Institution   := "University of Denver"
+    #Email         := "janitor@example.com",
   ),
 ],
 
-Status := "accepted",
-CommunicatedBy := "Leonard Soicher (QMUL)",
-AcceptDate := "05/2015",
+Status := "other",
 
-PackageWWWHome  := "https://gap-packages.github.io/loops/",
-README_URL      := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-SourceRepository := rec(
-    Type := "git",
-    URL := "https://github.com/gap-packages/loops",
-),
-IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-ArchiveURL      := Concatenation( ~.SourceRepository.URL,
-                                 "/releases/download/v", ~.Version,
-                                 "/loops-", ~.Version ),
-ArchiveFormats := ".tar.gz",
+# The following are not strictly necessary in your own PackageInfo.g
+# (in the sense that update.g only looks at the usual fields
+# like PackageWWWHome, ArchiveURL etc.). But they are convenient
+# if you use exactly the scheme for your package website that we propose.
+GithubUser := "gap-system",
+GithubRepository := ~.PackageName,
+GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
-AbstractHTML := Concatenation(
-"The LOOPS package provides researchers in nonassociative algebra ",
-"with a computational tool that integrates standard notions ",
-"of loop theory with libraries of loops and group-theoretical ",
-"algorithms of GAP. The package also expands GAP toward ",
-"nonassociative structures."
-),
+PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+# The following assumes you are using the Github releases system. If not, adjust
+# it accordingly.
+ArchiveURL     := Concatenation(~.GithubWWW,
+                    "/releases/download/v", ~.Version, "/",
+                    ~.GithubRepository, "-", ~.Version),
+
+ArchiveFormats := ".tar.gz .tar.bz2",
+
+AbstractHTML := 
+  "This is a pseudo package that contains no actual\
+  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
+  GAP packages that allows to quickly setup GitHub Pages.",
 
 PackageDoc := rec(
-  BookName  := "loops",
+  BookName  := "GitHubPagesForGAP",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0_mj.html",
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "The LOOPS Package: Loops and quasigroups for GAP",
-  Autoload  := true     # only for the documentation, TEMPORARILY TURNED OFF
+  LongTitle := "A GitHub Pages generator for GAP packages",
 ),
 
+# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := ">=4.8",
-  NeededOtherPackages := [],
-  SuggestedOtherPackages := [],
+  GAP := ">=4.8.1",
+  NeededOtherPackages := [
+    ["GAPDoc", ">= 1.2"],
+    ["IO", ">= 4.1"],
+  ],
+  SuggestedOtherPackages := [["orb", ">= 4.2"]],
   ExternalConditions := []
 ),
 
 AvailabilityTest := ReturnTrue,
-TestFile := "tst/testall.g",
-Keywords := ["loop", "quasigroup", "latin square",
-    "multiplication group", "inner mapping group",
-    "Moufang loop", "Bol loop", "conjugacy closed loop", "automorphic loop", "Steiner loop",
-    "triality", "isomorphism of loops", "isotopism of loops"],
 
-AutoDoc := rec(
-    TitlePage := rec(
-        Title := "The LOOPS Package",
-        Abstract := ~.AbstractHTML,
-        Copyright := """
-<Index>License</Index>
-&copyright; 2005-2017 Gábor P. Nagy and Petr Vojtěchovský.<P/>
-The &LOOPS; package is free software;
-you can redistribute it and/or modify it under the terms of the
-<URL Text="GNU General Public License">https://www.fsf.org/licenses/gpl.html</URL>
-as published by the Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
-""",
-        Acknowledgements := """
-We thank the following people for sending us remarks and comments, and
-for suggesting new functionality of the package: Muniru Asiru, Bjoern
-Assmann, Andreas Distler, Ale&#353; Dr&#225;pal, Graham Ellis, Steve
-Flammia, Kenneth W. Johnson, Michael K. Kinyon, Olexandr Konovalov,
-Frank L&#252;beck, Jonathan D.H. Smith, David Stanovsk&#253; and Glen
-Whitney.
-
-<P/>The library of Moufang loops of order 243 was generated from data
-provided by Michael C. Slattery and Ashley L. Zenisek. The library of
-right conjugacy closed loops of order less than 28 was generated from
-data provided by Katharina Artic. The library of right Bruck loops of
-order 27, 81 was obtained jointly with Izabella Stuhl.
-
-<P/>Gábor P. Nagy was supported by OTKA grants F042959 and T043758, and
-Petr Vojtěchovský was supported by the 2006 and 2016 University of
-Denver PROF grants and the Simons Foundation Collaboration Grant 210176.
-""",
-    ),
-),
+Keywords := ["GitHub Pages", "GAP"]
 
 ));
+
+
